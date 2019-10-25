@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>command_line_ui &#8212; HVControl  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="advanced_tui" href="advanced_tui.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-command_line_ui">
+<span id="command-line-ui"></span><h1><a class="reference internal" href="#module-command_line_ui" title="command_line_ui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a><a class="headerlink" href="#module-command_line_ui" title="Permalink to this headline">¶</a></h1>
+<p>This module defines a simple command-line UI for HVCtl.</p>
+<dl class="class">
+<dt id="command_line_ui.Command">
+<em class="property">class </em><code class="sig-prename descclassname">command_line_ui.</code><code class="sig-name descname">Command</code><span class="sig-paren">(</span><em class="sig-param">names</em>, <em class="sig-param">function</em>, <em class="sig-param">args</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">namedtuple</span></code> to represent accepted commands.</p>
+<dl class="attribute">
+<dt id="command_line_ui.Command.names">
+<code class="sig-name descname">names</code><a class="headerlink" href="#command_line_ui.Command.names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of aliases the command can be called with.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="command_line_ui.Command.function">
+<code class="sig-name descname">function</code><a class="headerlink" href="#command_line_ui.Command.function" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the method called with the command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="command_line_ui.Command.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#command_line_ui.Command.args" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of arguments accepted by the command.
+E.g. [‘x’, ‘y’, ‘z=None’].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="command_line_ui.Command.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#command_line_ui.Command.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A description shown to the user.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="command_line_ui.CommandLineUI">
+<em class="property">class </em><code class="sig-prename descclassname">command_line_ui.</code><code class="sig-name descname">CommandLineUI</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple command-line UI.</p>
+<dl class="attribute">
+<dt id="command_line_ui.CommandLineUI.stopflag">
+<code class="sig-name descname">stopflag</code><a class="headerlink" href="#command_line_ui.CommandLineUI.stopflag" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">True</span></code> value of this flag tells the UI
+loop to stop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a new CommandLineUI.</p>
+<p>Args and kwargs are passed to <code class="xref py py-meth docutils literal notranslate"><span class="pre">API.__init__()</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="command_line_ui.CommandLineUI.commandlist">
+<code class="sig-name descname">commandlist</code><a class="headerlink" href="#command_line_ui.CommandLineUI.commandlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class attribute. A list of accepted commands
+(as <a class="reference internal" href="#command_line_ui.Command" title="command_line_ui.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code></a> objects).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="command_line_ui.CommandLineUI.commands">
+<code class="sig-name descname">commands</code><a class="headerlink" href="#command_line_ui.CommandLineUI.commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class attribute. A dict of accepted commands,
+with command names as keys and <a class="reference internal" href="#command_line_ui.Command" title="command_line_ui.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code></a> objects as values.
+Aliases for the same command are represented with different keys
+mapping to the same value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.halt">
+<code class="sig-name descname">halt</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.halt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call <code class="xref py py-meth docutils literal notranslate"><span class="pre">API.halt()</span></code> and stop the UI by setting
+<a class="reference internal" href="#command_line_ui.CommandLineUI.stopflag" title="command_line_ui.CommandLineUI.stopflag"><code class="xref py py-attr docutils literal notranslate"><span class="pre">stopflag</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.help">
+<code class="sig-name descname">help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a help message.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.input">
+<code class="sig-name descname">input</code><span class="sig-paren">(</span><em class="sig-param">prompt=''</em><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask the user for input.</p>
+<p>Works like the built-in <a class="reference internal" href="#command_line_ui.CommandLineUI.input" title="command_line_ui.CommandLineUI.input"><code class="xref py py-func docutils literal notranslate"><span class="pre">input()</span></code></a> function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.print">
+<code class="sig-name descname">print</code><span class="sig-paren">(</span><em class="sig-param">*objects</em>, <em class="sig-param">sep=' '</em>, <em class="sig-param">end='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print text to the UI.</p>
+<p>Works like the built-in <a class="reference internal" href="#command_line_ui.CommandLineUI.print" title="command_line_ui.CommandLineUI.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function, but without
+the <em>file</em> argument.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="command_line_ui.CommandLineUI.prompt">
+<code class="sig-name descname">prompt</code><em class="property"> = '&gt;&gt; '</em><a class="headerlink" href="#command_line_ui.CommandLineUI.prompt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class attribute. The prompt displayed before waiting for input.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the UI.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.run_command">
+<code class="sig-name descname">run_command</code><span class="sig-paren">(</span><em class="sig-param">line</em><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.run_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse <em>line</em> and run it as a command.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="command_line_ui.CommandLineUI.start_msg">
+<code class="sig-name descname">start_msg</code><em class="property"> = &quot;Welcome to HVCtl! Type 'help' for a list of commands.&quot;</em><a class="headerlink" href="#command_line_ui.CommandLineUI.start_msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class attribute. The message displayed when the UI is started.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="command_line_ui.CommandLineUI.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#command_line_ui.CommandLineUI.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the UI by setting <a class="reference internal" href="#command_line_ui.CommandLineUI.stopflag" title="command_line_ui.CommandLineUI.stopflag"><code class="xref py py-attr docutils literal notranslate"><span class="pre">stopflag</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">HVControl</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Modules</a><ul>
+      <li>Previous: <a href="advanced_tui.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Feliks Kivelä.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/command_line_ui.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

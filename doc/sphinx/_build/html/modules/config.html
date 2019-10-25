@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>config &#8212; HVControl  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="message" href="message.html" />
+    <link rel="prev" title="Modules" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-config">
+<span id="config"></span><h1><a class="reference internal" href="#module-config" title="config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a><a class="headerlink" href="#module-config" title="Permalink to this headline">¶</a></h1>
+<p>This module defines several constants based on the options defined
+in a configuration file.
+The configuration file should be named <code class="docutils literal notranslate"><span class="pre">'hv.conf'</span></code> and be located in
+the same directory as this module.</p>
+<dl class="attribute">
+<dt id="config.SERIAL_KWARGS">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">SERIAL_KWARGS</code><a class="headerlink" href="#config.SERIAL_KWARGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict of keyword arguments and values for creating a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code> object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="config.VOLTAGE_LIMIT">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">VOLTAGE_LIMIT</code><a class="headerlink" href="#config.VOLTAGE_LIMIT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The maximum value allowed for the voltage, in V.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="config.CURRENT_LIMT">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">CURRENT_LIMT</code><a class="headerlink" href="#config.CURRENT_LIMT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The maximum value allowed for the current, in mA.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="config.INT_MAX">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">INT_MAX</code><a class="headerlink" href="#config.INT_MAX" title="Permalink to this definition">¶</a></dt>
+<dd><p>The serial protocol uses 12-bit unsigned integers for the
+values of voltage and current.
+This is the maximum value of that integer, <code class="docutils literal notranslate"><span class="pre">4095</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="config.DELTA_U">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">DELTA_U</code><a class="headerlink" href="#config.DELTA_U" title="Permalink to this definition">¶</a></dt>
+<dd><p>The smallest amount by which the value of the voltage can be
+changed, in V.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="config.DELTA_I">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">DELTA_I</code><a class="headerlink" href="#config.DELTA_I" title="Permalink to this definition">¶</a></dt>
+<dd><p>The smallest amount by which the value of the current can be
+changed, in mA.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="config.main">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#config.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the configuration file and define the constants.
+This function is called automatically when the module is
+imported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If the configuration file cannot be found.</p></li>
+<li><p><strong>RuntimeError</strong> – If the configuration file is found but cannot be
+    parsed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">HVControl</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Modules</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Modules</a></li>
+      <li>Next: <a href="message.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Feliks Kivelä.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/config.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

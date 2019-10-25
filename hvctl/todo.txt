@@ -1,0 +1,6 @@
+TODO:
+-Current regulation changes to voltage regulation after 2*API.timestep
+-Add widgets to sphinx
+-Add vconnection to sphinx
+-More functionality to vhv
+-Testing

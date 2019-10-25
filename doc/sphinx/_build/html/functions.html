@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Functions &#8212; TurboCtl  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to TurboCtl’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="instruction.Message">
+<em class="property">class </em><code class="sig-prename descclassname">instruction.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#instruction.Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a message sent to or received from the HV
+generator.</p>
+<dl class="attribute">
+<dt id="instruction.Message.command_to_pattern">
+<code class="sig-name descname">command_to_pattern</code><em class="property"> = {'HV off': 'P6,{}\r', 'HV on': 'P5,{}\r', 'get current': 'a2{}\r', 'get voltage': 'a1{}\r', 'inhibit': 'P8,{}\r', 'mode': 'P7,{}\r', 'set current': 'd2,{}\r', 'set voltage': 'd1,{}\r', 'status': 'E{}\r'}</em><a class="headerlink" href="#instruction.Message.command_to_pattern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="instruction.Message.encoding">
+<code class="sig-name descname">encoding</code><em class="property"> = 'UTF-8'</em><a class="headerlink" href="#instruction.Message.encoding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="instruction.Message.from_bytes">
+<em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param">bytes_</em>, <em class="sig-param">is_answer=True</em><span class="sig-paren">)</span><a class="headerlink" href="#instruction.Message.from_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a message from a bytes object received through the
+serial connection.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="instruction.Message.pattern_to_command">
+<code class="sig-name descname">pattern_to_command</code><em class="property"> = {'E{}\r': 'status', 'P5,{}\r': 'HV on', 'P6,{}\r': 'HV off', 'P7,{}\r': 'mode', 'P8,{}\r': 'inhibit', 'a1{}\r': 'get voltage', 'a2{}\r': 'get current', 'd1,{}\r': 'set voltage', 'd2,{}\r': 'set current'}</em><a class="headerlink" href="#instruction.Message.pattern_to_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="instruction.Message.to_bytes">
+<code class="sig-name descname">to_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#instruction.Message.to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="instruction.Message.value">
+<em class="property">property </em><code class="sig-name descname">value</code><a class="headerlink" href="#instruction.Message.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">TurboCtl</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to TurboCtl’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Feliks Kivelä.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/functions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

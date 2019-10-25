@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""This is the main script used to run HVCtl."""
+
+import argparse
+import sys
+
+import config
+from api import Status
+from queuefile import QueueFile
+from command_line_ui import CommandLineUI
+from virtualHV import VirtualHV
+
+# The argparse module hepls with parsing command line arguments.
+# The -h option displays an automatically generated help message.
+parser = argparse.ArgumentParser(description='This script runs HVCtl')
+
+# Some options.
+parser.add_argument('-v', '--virtual', help='use a virtual HV PSU',
+                    action='store_true')
+parser.add_argument('-s', '--simple', help='use a simple command-line UI',
+                    action='store_true')
+
+args = parser.parse_args()
+
+serial_kwargs = config.SERIAL_KWARGS.copy()
+status = Status()
+
+if args.simple:
+    inputfile = sys.stdin
+    outputfile = sys.stdout
+else:
+    # If args.simple is specified, AdvancedTUI is not imported.
+    # This makes it possible to run the program without installing 
+    # urwid.
+    from advanced_tui import AdvancedTUI
+    inputfile = QueueFile(block=True)
+    outputfile = QueueFile()
+
+def run_ui_context():
+    """Run the UI within a 'with' block."""
+    with CommandLineUI(status=status,
+                       serial_kwargs=serial_kwargs, 
+                       poll=True, 
+                       verbose=True, 
+                       inputfile=inputfile, 
+                       outputfile=outputfile) as cli:
+        cli.run()
+
+def run_virtualhv_context():
+    """Run *run_ui_context*; use a VirtualHV if *args* specifies so."""
+    if args.virtual:    
+        with VirtualHV() as virtualhv:
+            serial_kwargs['port'] = virtualhv.port
+            run_ui_context()
+    else:
+        run_ui_context()
+
+# Use a CommandLineUI or a AdvancedTUI depending on *args*.
+if args.simple:
+    run = run_virtualhv_context
+else:
+    tui = AdvancedTUI(run_virtualhv_context, inputfile, outputfile)
+    def callback():
+        tui.display.set_text(str(status))
+    status.callback = callback
+    run = tui.run
+
+run()

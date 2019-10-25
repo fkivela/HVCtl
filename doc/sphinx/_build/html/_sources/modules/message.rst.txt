@@ -1,0 +1,12 @@
+:mod:`message`
+==============
+
+.. automodule:: message
+	
+   .. autodata:: COMMANDS
+	   
+.. autoclass:: Message  
+   :members: 
+   
+   .. automethod:: __init__
+   .. automethod:: __repr__

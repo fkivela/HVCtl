@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>message &#8212; HVControl  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="api" href="api.html" />
+    <link rel="prev" title="config" href="config.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-message">
+<span id="message"></span><h1><a class="reference internal" href="#module-message" title="message"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a><a class="headerlink" href="#module-message" title="Permalink to this headline">¶</a></h1>
+<p>This module defines the <a class="reference internal" href="#message.Message" title="message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> class for communicating with
+the HV generator.</p>
+<dl class="data">
+<dt id="message.COMMANDS">
+<code class="sig-prename descclassname">message.</code><code class="sig-name descname">COMMANDS</code><em class="property"> = ['set voltage', 'set current', 'get voltage', 'get current', 'HV on', 'HV off', 'mode', 'inhibit', 'status']</em><a class="headerlink" href="#message.COMMANDS" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of valid commands.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="message.Message">
+<em class="property">class </em><code class="sig-prename descclassname">message.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#message.Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a message sent to or received from the HV
+generator.</p>
+<dl class="attribute">
+<dt id="message.Message.command">
+<code class="sig-name descname">command</code><a class="headerlink" href="#message.Message.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>The command that is sent to the HV PSU, or the command
+to which <em>self</em> is an answer; e.g. <code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">voltage'</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'HV</span> <span class="pre">on'</span></code>.
+All valid commands are listed in
+<a class="reference internal" href="#message.COMMANDS" title="message.COMMANDS"><code class="xref py py-const docutils literal notranslate"><span class="pre">message.COMMANDS</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="message.Message.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#message.Message.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A value associated with the command, e.g. the value to
+which the voltage should be set.
+This should be left to <code class="docutils literal notranslate"><span class="pre">None</span></code> when sending getter
+or status commands.
+For current and voltage, <em>value</em> ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code>
+and <a class="reference internal" href="config.html#config.INT_MAX" title="config.INT_MAX"><code class="xref py py-const docutils literal notranslate"><span class="pre">config.INT_MAX</span></code></a>; the actual voltage or
+current value in V or mA can be computed by
+multiplying <em>value</em> with <a class="reference internal" href="config.html#config.DELTA_U" title="config.DELTA_U"><code class="xref py py-const docutils literal notranslate"><span class="pre">config.DELTA_U</span></code></a>
+or <a class="reference internal" href="config.html#config.DELTA_I" title="config.DELTA_I"><code class="xref py py-const docutils literal notranslate"><span class="pre">config.DELTA_I</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="message.Message.is_answer">
+<code class="sig-name descname">is_answer</code><a class="headerlink" href="#message.Message.is_answer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines whether <em>self</em> represents a message to the
+HV PSU or a response from it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="message.Message.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#message.Message.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new message and set its attributes to the values
+given as arguments.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="message.Message.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#message.Message.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string with the format
+<code class="docutils literal notranslate"><span class="pre">'ClassName(command=&lt;command&gt;,</span> <span class="pre">value=&lt;value&gt;,</span>
+<span class="pre">is_answer=&lt;value&gt;)'</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="message.Message.from_bytes">
+<em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param">bytes_</em>, <em class="sig-param">is_answer=True</em><span class="sig-paren">)</span><a class="headerlink" href="#message.Message.from_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new message from a bytes object received through
+the serial connection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="message.Message.to_bytes">
+<code class="sig-name descname">to_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#message.Message.to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <em>self</em> to a <code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code> object, which can then be
+sent to the HV PSU through the serial connection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<em class="property">property </em><code class="sig-name descname">value</code></dt>
+<dd><p>Get or set <a class="reference internal" href="#message.Message.value" title="message.Message.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If an attempt is made to set an invalid
+    <a class="reference internal" href="#message.Message.value" title="message.Message.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a>.
+    The range of valid values depends on <a class="reference internal" href="#message.Message.command" title="message.Message.command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">command</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">HVControl</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Modules</a><ul>
+      <li>Previous: <a href="config.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
+      <li>Next: <a href="api.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Feliks Kivelä.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/message.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
