@@ -213,6 +213,8 @@ class CommandLineUI:
         but uses :attr:`inputfile` and :attr:`outputfile` instead of 
         :attr:`sys.stdin` and :attr:`sys.stdout`.
         """
+        # `.input` instead of `input` makes Sphinx refer to the 
+        # built-in input instead of this method.
         self.print(prompt, end='')
         string = self.inputfile.readline()
         
