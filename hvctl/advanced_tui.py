@@ -78,8 +78,13 @@ class AdvancedTUI(urwid.WidgetWrap):
         
     def _callback(self, loop, user_data):
         """Update self.cli.cmdlines periodically so that it handles 
-        new output."""
+        new output.
+        This also updates self.cli.scrollbar, since printing new 
+        output may change its size or position.
+        """
         self.cli.cmdlines.update()
+        # _invalidate marks a widget for re-rendering.
+        self.cli.scrollbar._invalidate()
         self._loop.set_alarm_in(0.01, self._callback, user_data=None)
 
     def run(self):
