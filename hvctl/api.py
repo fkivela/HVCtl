@@ -1,11 +1,9 @@
 """This module defines a set of methods for controlling the HV 
 generator.
 """
-import sys
 import serial
 import time
 import threading
-import textwrap
 from dataclasses import dataclass
 
 import config
@@ -120,7 +118,7 @@ class API():
     Attributes:
         status (:class:`Status`):
             An object storing the current status of the HV PSU. 
-            Its attributes are updated every time the HV PSU send 
+            Its attributes are updated every time the HV PSU sends 
             back a reply.
             
         verbose (bool):
@@ -258,14 +256,26 @@ class API():
         self._send(Message('inhibit', value))
         
     def get_status(self):
-        """Ask HV status. A status message contains the values of 
-        all the attributes of :attr:`status` except voltage and 
-        current.
+        """Get HV status. 
+        
+        Returns: 
+            A dict with keys corresponding to the attributes of 
+            :attr:`status` except :attr:`Status.voltage` and 
+            :attr:`Status.current`. The values contain the values of 
+            those attributes as reported by the HV PSU. 
         """
-        # TODO: update docstring
         reply = self._send(Message('status'))
         
         statusdict = self._parse_status_bits(reply.value)
+        return statusdict
+    
+    def full_status(self):
+        """The same as :meth:`get_status`, but also includes 
+        :attr:`Status.voltage` and :attr:`Status.current`.
+        """
+        statusdict = self.get_status()
+        statusdict['voltage'] = self.get_voltage()
+        statusdict['current'] = self.get_current()
         return statusdict
         
     def halt(self):
@@ -297,14 +307,11 @@ class API():
             print(message, file=self.outputfile, flush=True)
                 
     def _poll(self):
-        """Send messages to the HV PSU at regular intervals."""
-        
-        cycle = [self.get_voltage, self.get_current, self.get_status]
-        i = 0
-        
+        """Update self.status continuously by calling 
+        self.full_status() at regular intervals.
+        """
         while not self._stop_flag.is_set():
-            cycle[i]()
-            i = (i + 1) % len(cycle)
+            self.full_status()
             time.sleep(self.timestep)
 
     def _set(self, name, unit, delta, limit, value):

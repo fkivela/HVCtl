@@ -51,6 +51,7 @@ class CommandLineUI:
         ('mode'      , []),
         ('inhibit'   , ['i']),
         ('status'    , ['s']),
+        ('fullstatus', ['fs']),
         ('exit'      , ['e', 'q', 'x']),
         ('help'      , ['h']),
         ('debug'     , ['d']),
@@ -155,8 +156,26 @@ class CommandLineUI:
                 
     def cmd_status(self):
         """Get HV status (excluding voltage and current)."""
+        
         statusdict = self.api.get_status()
-        status_str = '\n'.join([
+        string = self._status_str(statusdict)
+        self.print('Status:\n' + textwrap.indent(string, self.indent))
+        
+    def cmd_fullstatus(self):
+        """Get full HV status including voltage and current."""
+        
+        statusdict = self.api.full_status()
+        string = (f"Voltage: {statusdict['voltage']}\n"
+                  f"Current: {statusdict['current']}\n"
+                  + self._status_str(statusdict)
+                 ) 
+        self.print('Status:\n' + textwrap.indent(string, self.indent))
+        
+    def _status_str(self, statusdict):
+        """Return a formatted string displaying the data returned 
+        by API.get_status.
+        """
+        return '\n'.join([
             f'Regulation mode: {statusdict["regulation"]}',
             f'HV power: {"on" if statusdict["HV_on_status"] else "off"}',
             f'HV on command given: {statusdict["HV_on_command"]}',
@@ -165,7 +184,6 @@ class CommandLineUI:
             ('Fault(s) present' if statusdict["fault"] 
                                 else 'No faults present'),        
         ])
-        self.print('Status:\n' + textwrap.indent(status_str, self.indent))
         
     def cmd_help(self, value=None):
         """Disply a help message. 
