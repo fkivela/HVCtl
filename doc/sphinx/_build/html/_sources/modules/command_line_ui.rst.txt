@@ -10,8 +10,8 @@
    	.. automethod:: __init__
    	
    	.. 
-   		commandlist and commands are documented here manually, because autodoc 
-   		displays their values, which are very long.
+   		cmds_and_aliases is documented here manually to prevent autodoc 
+   		from displaying its value.
    		
    	.. attribute:: cmds_and_aliases
    	

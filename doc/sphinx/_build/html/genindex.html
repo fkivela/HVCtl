@@ -156,6 +156,8 @@
 </li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_exit">cmd_exit() (command_line_ui.CommandLineUI method)</a>
 </li>
+      <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_fullstatus">cmd_fullstatus() (command_line_ui.CommandLineUI method)</a>
+</li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_getcurrent">cmd_getcurrent() (command_line_ui.CommandLineUI method)</a>
 </li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_getvoltage">cmd_getvoltage() (command_line_ui.CommandLineUI method)</a>
@@ -170,10 +172,10 @@
 </li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_mode">cmd_mode() (command_line_ui.CommandLineUI method)</a>
 </li>
-      <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_setcurrent">cmd_setcurrent() (command_line_ui.CommandLineUI method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_setcurrent">cmd_setcurrent() (command_line_ui.CommandLineUI method)</a>
+</li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_setvoltage">cmd_setvoltage() (command_line_ui.CommandLineUI method)</a>
 </li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_status">cmd_status() (command_line_ui.CommandLineUI method)</a>
@@ -240,11 +242,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/api.html#api.Status.fault">fault (api.Status attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/queuefile.html#queuefile.QueueFile.flush">flush() (queuefile.QueueFile method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/message.html#message.Message.from_bytes">from_bytes() (message.Message class method)</a>
+</li>
+      <li><a href="modules/api.html#api.API.full_status">full_status() (api.API method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -310,12 +314,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/api.html#api.API.inputfile">inputfile (api.API attribute)</a>
-
-      <ul>
-        <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.inputfile">(command_line_ui.CommandLineUI attribute)</a>
+      <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.inputfile">inputfile (command_line_ui.CommandLineUI attribute)</a>
 </li>
-      </ul></li>
       <li><a href="modules/config.html#config.INT_MAX">INT_MAX (in module config)</a>
 </li>
       <li><a href="modules/api.html#api.Status.interlock">interlock (api.Status attribute)</a>
@@ -384,12 +384,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/api.html#api.API.outputfile">outputfile (api.API attribute)</a>
-
-      <ul>
-        <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.outputfile">(command_line_ui.CommandLineUI attribute)</a>
+      <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.outputfile">outputfile (command_line_ui.CommandLineUI attribute)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -442,10 +438,10 @@
 </li>
       <li><a href="modules/widgets.html#widgets.Position.relative">relative (widgets.Position attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#widgets.Position.relative">relative() (widgets.Position property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#widgets.ScrollableWidget.render">render() (widgets.ScrollableWidget method)</a>
 
       <ul>
@@ -455,6 +451,8 @@
       <li><a href="modules/advanced_tui.html#advanced_tui.AdvancedTUI.run">run() (advanced_tui.AdvancedTUI method)</a>
 
       <ul>
+        <li><a href="modules/api.html#api.API.run">(api.API method)</a>
+</li>
         <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.run">(command_line_ui.CommandLineUI method)</a>
 </li>
       </ul></li>
@@ -531,8 +529,6 @@
       <li><a href="modules/message.html#message.Message.value">value (message.Message attribute)</a>
 </li>
       <li><a href="modules/message.html#message.Message.value">value() (message.Message property)</a>
-</li>
-      <li><a href="modules/api.html#api.API.verbose">verbose (api.API attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>

@@ -99,21 +99,17 @@ class API():
     the HV PSU, after which messages can be sent to it by calling the 
     methods of the instance.
     
-    If an API is initialized with ``poll=True`` it will periodically 
-    send an automatic command to the HV PSU.
-    This prevents the HV PSU from switching to local mode, which it 
-    normally does after not receiving a command for 5 seconds.
+    If an API is initialized with ``poll=True`` it will automatically 
+    call :meth:`full_status` every :attr:`timestep` seconds.
+    This updates the data in :attr:`status` and prevents the HV PSU 
+    from switching to local mode, which it normally does after not 
+    receiving a command for 5 seconds.
     
-    The commands that are sent cycle between :meth:`get_voltage`, 
-    :meth:`get_current` and :meth:`status`.
-    They will print no messages even if :attr:`verbose` is ``False``, 
-    but will update the values of the attributes of the API.
-    The time period between commands is determined by :attr:`timestep`.
-
     The polling routine is run in a parallel thread, and should be 
-    closed by calling after the API is no lenger needed.
+    closed after the API is no lenger needed.
     This can be done by calling :meth:`halt` or running the API in a 
-    ``with`` bolck. Both methods also close the serial connection.
+    ``with`` bolck. Both of these closing methods also close the 
+    serial connection.
             
     Attributes:
         status (:class:`Status`):
@@ -121,23 +117,10 @@ class API():
             Its attributes are updated every time the HV PSU sends 
             back a reply.
             
-        verbose (bool):
-            If this is ``True``, methods will print messages 
-            explaining what they are doing whenever they are called. 
-            
         timestep (float):
             If *self* was initialized with ``poll=True``, this 
             determines the time (in seconds) between polling messages.
             The initial value is 1.
-            
-        inputfile:
-            A file-like object for receiving input. This isn't
-            directly used by this class (i.e. is only used by the 
-            :class:`CommandLineTUI` subclass), but is included for 
-            symmetry since :attr:`outputfile` is also defined here.
-            
-        outputfile:
-            A file-like object used for writing output.
     """
     
     def __init__(self, status, serial_kwargs=config.SERIAL_KWARGS, poll=True):
@@ -156,11 +139,12 @@ class API():
         The other arguments set initial values for the attributes of 
         this class.                 
         """        
-        self._connection = None
         self.status = status
-        self.serial_kwargs = serial_kwargs
-        self.poll = poll
         self.timestep = 1
+        
+        self._connection = None
+        self._serial_kwargs = serial_kwargs
+        self._polling_active = poll
         
         self._stop_flag = threading.Event()
         # *lock* prevents *_poll*-sent and user-sent messages from 
@@ -169,12 +153,20 @@ class API():
         self._thread = threading.Thread(target=self._poll, daemon=True)
         
     def run(self):
+        """Form a connection to the HV PSU and start polling 
+        (if *self* was initialized with ``poll=True``).
+        
+        This method sould be run inside a ``with`` block in order to 
+        ensue that the connection is properly closed and the polling 
+        stopped after the API is no longer needed or in the case 
+        that an error occurs.
+        """
         self._connection = serial.Serial(**self.serial_kwargs)       
-        if self.poll:
+        if self._polling_active:
             self._thread.start()
         
     def __enter__(self):
-        """Called upon enering a ``with`` block; returns *self*."""
+        """Called upon entering a ``with`` block; returns *self*."""
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
