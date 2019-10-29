@@ -1,6 +1,12 @@
 TODO:
+
+-remove poll cycle from api
+-scrollbar doesn't immediately refresh upon help
+
 -Current regulation changes to voltage regulation after 2*API.timestep
+-Update API docs
 -Add widgets to sphinx
 -Add vconnection to sphinx
 -More functionality to vhv
 -Testing
+-volts vs kilovolts?

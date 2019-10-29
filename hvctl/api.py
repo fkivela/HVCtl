@@ -142,8 +142,7 @@ class API():
             A file-like object used for writing output.
     """
     
-    def __init__(self, status, serial_kwargs=config.SERIAL_KWARGS, poll=True, 
-                 verbose=False, inputfile=sys.stdin, outputfile=sys.stdout):
+    def __init__(self, status, serial_kwargs=config.SERIAL_KWARGS, poll=True):
         """Create a new instance of this class and form a serial 
         connection to the HV PSU.
         
@@ -159,27 +158,21 @@ class API():
         The other arguments set initial values for the attributes of 
         this class.                 
         """        
-        self._connection = serial.Serial(**serial_kwargs)       
+        self._connection = None
         self.status = status
+        self.serial_kwargs = serial_kwargs
+        self.poll = poll
         self.timestep = 1
         
         self._stop_flag = threading.Event()
-        # *_verboselock* prevents changing the value of *verbose* in 
-        # the middle of a *_poll* iteration.
-        self._verboselock = threading.Lock()
-        # *_sendlock* prevents *_poll*-sent and user-sent messages from 
+        # *lock* prevents *_poll*-sent and user-sent messages from 
         # being sent at the same time. 
-        self._sendlock = threading.Lock()
+        self._lock = threading.Lock()
         self._thread = threading.Thread(target=self._poll, daemon=True)
         
-        # *verbose* must be initialized after *lock*, since its setter 
-        # accesses *lock*.
-        self.verbose = verbose
-        
-        self.inputfile = inputfile
-        self.outputfile = outputfile
-        
-        if poll:
+    def run(self):
+        self._connection = serial.Serial(**self.serial_kwargs)       
+        if self.poll:
             self._thread.start()
         
     def __enter__(self):
@@ -195,56 +188,44 @@ class API():
         
         Returns: The voltage value sent back by the HV PSU.
         """
-        self._set('voltage', 'V', config.DELTA_U, config.VOLTAGE_LIMIT, value)
+        return self._set('voltage', 'V', config.DELTA_U, config.VOLTAGE_LIMIT, 
+                         value)
     
     def set_current(self, value):
         """Set HV current to *value* (in mA).
         
         Returns: The current value sent back by the HV PSU.
         """
-        self._set('current', 'mA', config.DELTA_I, config.CURRENT_LIMIT, value)
+        return self._set('current', 'mA', config.DELTA_I, config.CURRENT_LIMIT, 
+                         value)
         
     def get_voltage(self):
         """Get HV voltage (in V).
         
         Returns: The voltage value sent by the HV PSU.
         """
-        self._get('voltage', 'V', config.DELTA_U)
+        return self._get('voltage', 'V', config.DELTA_U)
     
     def get_current(self):
-        """Get HV voltage (in V).
+        """Get HV current (in mA).
         
         Returns: 
             The current value sent back by the HV PSU.
         """
-        self._get('current', 'mA', config.DELTA_I)
+        return self._get('current', 'mA', config.DELTA_I)
         
     def HV_on(self):
         """Turn the HV on."""
-        
-        self._log('Turning HV on (1/2)')
         self._send(Message('HV on', 1))
-
         time.sleep(0.1) # Delay 100 ms
-
-        self._log('Turning HV on (2/2)')
         self._send(Message('HV on', 0))
-        
-        self._log('HV turned on')
         self.HV_on = True
         
     def HV_off(self):
-        """Turn the HV off."""
-        
-        self._log('Turning HV off (1/2)')
+        """Turn the HV off."""        
         self._send(Message('HV off', 1))
-
         time.sleep(0.1) # Delay 100 ms
-
-        self._log('Turning HV off (2/2)')
         self._send(Message('HV off', 0))
-        
-        self._log('HV turned off')
         self.HV_on = False
         
     def set_mode(self, mode):
@@ -256,20 +237,14 @@ class API():
                 
         Raises:
             ValueError: If *mode* is not a valid value.
-        """
-        
+        """        
         if mode in ['local', 'l', 1]:
             value = 1
-            name = 'local'
         elif mode in ['remote', 'r', 0]:
             value = 0
-            name = 'remote'
         else:
-            raise ValueError(f'invalid mode: {mode}')
-        
-        self._log(f'Activating {name} mode')
+            raise ValueError(f'invalid mode: {mode}')        
         self._send(Message('mode', value))
-        self._log(f'{name.capitalize()} mode activated')
 
     def set_inhibit(self, value):
         """Activate or deactivate HV inhibition.
@@ -280,29 +255,18 @@ class API():
                 inhibition is activated; otherwise it is deactivated.
         """
         value = bool(value)
-        self._log(f"{'Activating' if value else 'Deactivating'} HV inhibition")
         self._send(Message('inhibit', value))
-        self._log(f"HV inhibition {'activated' if value else 'deactivated'}")
         
     def get_status(self):
         """Ask HV status. A status message contains the values of 
         all the attributes of :attr:`status` except voltage and 
         current.
         """
-        self._log('Asking status')
+        # TODO: update docstring
         reply = self._send(Message('status'))
         
         statusdict = self._parse_status_bits(reply.value)
-        status_str = '\n'.join([
-            f'Regulation mode: {statusdict["regulation"]}',
-            f'HV power: {"on" if statusdict["HV_on_status"] else "off"}',
-            f'HV on command given: {statusdict["HV_on_command"]}',
-            f'HV off command given: {statusdict["HV_off_command"]}',
-            f'Interlock: {statusdict["interlock"]}',
-            ('Fault(s) present' if statusdict["fault"] 
-                                else 'No faults present'),        
-        ])
-        self._log('Status:\n' + textwrap.indent(status_str, '  '))
+        return statusdict
         
     def halt(self):
         """Close the connection.
@@ -321,7 +285,7 @@ class API():
         # A try block wouldn't work, since an extra "setting voltage"
         # message would be printed even if the connection is already 
         # closed.
-        if self._connection.is_open:
+        if self._connection and self._connection.is_open:
             self.set_voltage(0)
             self.set_current(0)
             self.HV_off()
@@ -331,20 +295,7 @@ class API():
         """Print *message* if :attr:`verbose` is ``True``."""
         if self.verbose:
             print(message, file=self.outputfile, flush=True)
-            
-    @property
-    def verbose(self):
-        return self._verbose
-
-    @verbose.setter
-    def verbose(self, value):
-        # Both the regular and the parallel thread can access the 
-        # verbose attribute, so a lock must be used to prevent 
-        # race conditions.
-        self._verboselock.acquire()
-        self._verbose = value
-        self._verboselock.release()
-    
+                
     def _poll(self):
         """Send messages to the HV PSU at regular intervals."""
         
@@ -352,32 +303,16 @@ class API():
         i = 0
         
         while not self._stop_flag.is_set():
-            # Set verbose to False to prevent messages from being 
-            # printed.
-            self._verboselock.acquire()
-            old = self._verbose
-            self._verbose = False
-            
             cycle[i]()
             i = (i + 1) % len(cycle)
-            
-            self._verbose = old
-            self._verboselock.release()
-            
             time.sleep(self.timestep)
 
     def _set(self, name, unit, delta, limit, value):
         """Set voltage or current."""
         self._check_value(value, limit)
         int_value = round(value / delta)
-        
-        self._log(f'Setting {name} to {delta*int_value} {unit}')    
-        
         answer = self._send(Message(f'set {name}', int_value))
         return_value = delta * answer.value
-        
-        self._log(f'{name.capitalize()} set to {return_value} {unit}')    
-        
         setattr(self, name, return_value)
         return return_value
     
@@ -397,20 +332,15 @@ class API():
                 f'*value* should be between 0 and {limit}; was {value}')
             
     def _get(self, name, unit, delta):
-        """Get voltage or current."""
-        self._log(f'Getting {name}')    
-        
+        """Get voltage or current."""        
         answer = self._send(Message(f'get {name}'))
         return_value = delta * answer.value
-        
-        self._log(f'{name.capitalize()} is {return_value} {unit}')    
-        
         setattr(self, name, return_value)
         return return_value
 
     def _send(self, query: Message) -> Message:
         """Send *query* to the HV PSU and return the reply."""
-        self._sendlock.acquire()
+        self._lock.acquire()
         self._connection.write(query.to_bytes())
         
         reply_bytes = self._connection.read_until(terminator=b'\r')
@@ -418,7 +348,7 @@ class API():
         
         self._check_reply(query, reply)
         self._update_status(reply)
-        self._sendlock.release()
+        self._lock.release()
         return reply
         
     def _update_status(self, reply: Message):

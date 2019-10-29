@@ -3,30 +3,20 @@
 
 .. automodule:: command_line_ui
 	   
-.. autoclass:: Command
-	   
 .. autoclass:: CommandLineUI
 	:members:
-	:exclude-members: commandlist, commands
-	
+	:exclude-members: cmds_and_aliases
    
    	.. automethod:: __init__
    	
    	.. 
    		commandlist and commands are documented here manually, because autodoc 
    		displays their values, which are very long.
+   		
+   	.. attribute:: cmds_and_aliases
    	
-   	.. attribute:: commandlist
-   	
-	   	Class attribute. A list of accepted commands 
-		(as :class:`Command` objects).
-   	
-   	.. attribute:: commands
-    
-		Class attribute. A dict of accepted commands, 
-		with command names as keys and :class:`Command` objects as values. 
-		Aliases for the same command are represented with different keys 
-		mapping to the same value.
-
-
-   
+   	   	Class attribute.
+		A list of two-index tuples.
+		The first index is of each tuple is the primary name of a command 
+		accepted by the UI,
+		and the second is a list of aliases for that command.

@@ -134,7 +134,7 @@ current regulation is being used.</p>
 
 <dl class="class">
 <dt id="api.API">
-<em class="property">class </em><code class="sig-prename descclassname">api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">status</em>, <em class="sig-param">serial_kwargs={'baudrate': 9600</em>, <em class="sig-param">'bytesize': 8</em>, <em class="sig-param">'dsrdtr': False</em>, <em class="sig-param">'exclusive': True</em>, <em class="sig-param">'parity': 'N'</em>, <em class="sig-param">'port': '/dev/ttyUSB0'</em>, <em class="sig-param">'rtscts': False</em>, <em class="sig-param">'stopbits': 1</em>, <em class="sig-param">'timeout': None</em>, <em class="sig-param">'xonxoff': False}</em>, <em class="sig-param">poll=True</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">inputfile=&lt;_io.TextIOWrapper name='&lt;stdin&gt;' mode='r' encoding='UTF-8'&gt;</em>, <em class="sig-param">outputfile=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='UTF-8'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#api.API" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">status</em>, <em class="sig-param">serial_kwargs={'baudrate': 9600</em>, <em class="sig-param">'bytesize': 8</em>, <em class="sig-param">'dsrdtr': False</em>, <em class="sig-param">'exclusive': True</em>, <em class="sig-param">'parity': 'N'</em>, <em class="sig-param">'port': '/dev/ttyUSB0'</em>, <em class="sig-param">'rtscts': False</em>, <em class="sig-param">'stopbits': 1</em>, <em class="sig-param">'timeout': None</em>, <em class="sig-param">'xonxoff': False}</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#api.API" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class defines an API for communicating with a
 Technix HV PSU.</p>
 <p>Creating an instance of this class forms a serial connection to
@@ -182,7 +182,8 @@ explaining what they are doing whenever they are called.</p>
 <dt id="api.API.timestep">
 <code class="sig-name descname">timestep</code><a class="headerlink" href="#api.API.timestep" title="Permalink to this definition">¶</a></dt>
 <dd><p>If <em>self</em> was initialized with <code class="docutils literal notranslate"><span class="pre">poll=True</span></code>, this
-determines the time (in seconds) between polling messages.</p>
+determines the time (in seconds) between polling messages.
+The initial value is 1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -207,7 +208,7 @@ symmetry since <a class="reference internal" href="#api.API.outputfile" title="a
 
 <dl class="method">
 <dt id="api.API.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">status</em>, <em class="sig-param">serial_kwargs={'baudrate': 9600</em>, <em class="sig-param">'bytesize': 8</em>, <em class="sig-param">'dsrdtr': False</em>, <em class="sig-param">'exclusive': True</em>, <em class="sig-param">'parity': 'N'</em>, <em class="sig-param">'port': '/dev/ttyUSB0'</em>, <em class="sig-param">'rtscts': False</em>, <em class="sig-param">'stopbits': 1</em>, <em class="sig-param">'timeout': None</em>, <em class="sig-param">'xonxoff': False}</em>, <em class="sig-param">poll=True</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">inputfile=&lt;_io.TextIOWrapper name='&lt;stdin&gt;' mode='r' encoding='UTF-8'&gt;</em>, <em class="sig-param">outputfile=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='UTF-8'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#api.API.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">status</em>, <em class="sig-param">serial_kwargs={'baudrate': 9600</em>, <em class="sig-param">'bytesize': 8</em>, <em class="sig-param">'dsrdtr': False</em>, <em class="sig-param">'exclusive': True</em>, <em class="sig-param">'parity': 'N'</em>, <em class="sig-param">'port': '/dev/ttyUSB0'</em>, <em class="sig-param">'rtscts': False</em>, <em class="sig-param">'stopbits': 1</em>, <em class="sig-param">'timeout': None</em>, <em class="sig-param">'xonxoff': False}</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#api.API.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance of this class and form a serial
 connection to the HV PSU.</p>
 <dl class="field-list simple">
@@ -251,7 +252,7 @@ this class.</p>
 <dl class="method">
 <dt id="api.API.get_current">
 <code class="sig-name descname">get_current</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#api.API.get_current" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get HV voltage (in V).</p>
+<dd><p>Get HV current (in mA).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>The current value sent back by the HV PSU.</p>
@@ -358,6 +359,7 @@ inhibition is activated; otherwise it is deactivated.</p>
 <li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
 </ul>
 </li>
 </ul>

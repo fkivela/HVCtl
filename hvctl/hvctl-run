@@ -22,9 +22,6 @@ parser.add_argument('-s', '--simple', help='use a simple command-line UI',
 
 args = parser.parse_args()
 
-serial_kwargs = config.SERIAL_KWARGS.copy()
-status = Status()
-
 if args.simple:
     inputfile = sys.stdin
     outputfile = sys.stdout
@@ -34,32 +31,24 @@ else:
     # urwid.
     from advanced_tui import AdvancedTUI
     inputfile = QueueFile(block=True)
-    outputfile = QueueFile()
+    outputfile = QueueFile()    
+    
+cmd_line_ui = CommandLineUI(config.SERIAL_KWARGS.copy(), inputfile, outputfile)
 
-def run_ui_context():
-    """Run the UI within a 'with' block."""
-    with CommandLineUI(status=status,
-                       serial_kwargs=serial_kwargs, 
-                       poll=True, 
-                       verbose=True, 
-                       inputfile=inputfile, 
-                       outputfile=outputfile) as cli:
-        cli.run()
-
-def run_virtualhv_context():
-    """Run *run_ui_context*; use a VirtualHV if *args* specifies so."""
+def run_script():
     if args.virtual:    
         with VirtualHV() as virtualhv:
-            serial_kwargs['port'] = virtualhv.port
-            run_ui_context()
+            cmd_line_ui.api.serial_kwargs['port'] = virtualhv.port
+            cmd_line_ui.run()
     else:
-        run_ui_context()
+        cmd_line_ui.run()
 
 # Use a CommandLineUI or a AdvancedTUI depending on *args*.
 if args.simple:
-    run = run_virtualhv_context
+    run = run_script
 else:
-    tui = AdvancedTUI(run_virtualhv_context, inputfile, outputfile)
+    tui = AdvancedTUI(run_script, inputfile, outputfile)
+    status = cmd_line_ui.api.status
     def callback():
         tui.display.set_text(str(status))
     status.callback = callback
