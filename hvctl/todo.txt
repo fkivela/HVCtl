@@ -1,7 +1,6 @@
 TODO:
 
 -scrollbar doesn't immediately refresh upon help
--Update API docs
 -Add widgets to sphinx
 -Add vconnection to sphinx
 -More functionality to vhv
