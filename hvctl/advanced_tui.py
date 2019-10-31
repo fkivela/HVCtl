@@ -85,7 +85,8 @@ class AdvancedTUI(urwid.WidgetWrap):
         self.cli.cmdlines.update()
         # _invalidate marks a widget for re-rendering.
         self.cli.scrollbar._invalidate()
-        self._loop.set_alarm_in(0.01, self._callback, user_data=None)
+        #self._loop.set_alarm_in(0.01, self._callback, user_data=None)
+        self._loop.set_alarm_in(2, self._callback, user_data=None)
 
     def run(self):
         """Start :attr:`script` and the UI loop in parallel threads."""

@@ -87,6 +87,7 @@ class Status:
             f'HV on command given: {self.HV_on_command}',
             f'HV off command given: {self.HV_off_command}',
             f'',
+            f'Mode: {self.mode}',
             f'Interlock: {self.interlock}',
             'Fault(s) present' if self.fault else 'No faults present',
         ])
@@ -236,7 +237,7 @@ class API():
             value = 0
         else:
             raise ValueError(f'invalid mode: {mode}')        
-        self._send(Message('mode', value))
+        self._send(Message('set mode', value))
 
     def set_inhibit(self, value):
         """Activate or deactivate HV inhibition.
@@ -247,7 +248,7 @@ class API():
                 inhibition is activated; otherwise it is deactivated.
         """
         value = bool(value)
-        self._send(Message('inhibit', value))
+        self._send(Message('set inhibit', value))
         
     def get_status(self):
         """Get HV status. 
@@ -258,7 +259,7 @@ class API():
             :attr:`Status.current`. The values contain the values of 
             those attributes as reported by the HV PSU. 
         """
-        reply = self._send(Message('status'))
+        reply = self._send(Message('get status'))
         
         statusdict = self._parse_status_bits(reply.value)
         return statusdict
@@ -368,13 +369,13 @@ class API():
         elif reply.command == 'HV off':
             self.status.HV_off_command = bool(reply.value)
             
-        elif reply.command == 'mode':
+        elif reply.command == 'set mode':
             self.status.mode = 'local' if reply.value else 'remote'
             
-        elif reply.command == 'inhibit':
+        elif reply.command == 'set inhibit':
             self.status.inhibit = bool(reply.value)
             
-        elif reply.command == 'status':
+        elif reply.command == 'get status':
             statusdict = self._parse_status_bits(reply.value)
             for name, value in statusdict.items():
                 setattr(self.status, name, value)
@@ -420,7 +421,7 @@ class API():
         
         # Getters and the status command don't include a value, but 
         # responses to them do.
-        if query.command in ['get voltage', 'get current', 'status']:
+        if query.command in ['get voltage', 'get current', 'get status']:
             return
         
         # For other commands, the return value should be the same that 

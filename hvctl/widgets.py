@@ -1,5 +1,6 @@
-"""This module uses the urwid library to create a TUI that contains a 
-scrollable command line interface and a screen above that."""
+"""This module uses the `urwid <http://urwid.org/>`_ library to create 
+a TUI that contains a scrollable command line interface and a screen 
+above that."""
 
 import urwid
 
@@ -530,7 +531,7 @@ class CLI(urwid.WidgetWrap):
             down.
     """
     def __init__(self, inputfile, outputfile):
-        """Initialize a new :class:`CommandLineInterface`."""
+        """Initialize a new :class:`CLI`."""
         self.position = Position(set())
         
         self.cmdlines = CommandLines(inputfile, outputfile)

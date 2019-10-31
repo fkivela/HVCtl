@@ -12,9 +12,9 @@ _COMMAND_TO_PATTERN = {
     'get current': 'a2{}\r',
     'HV on'      : 'P5,{}\r',
     'HV off'     : 'P6,{}\r',
-    'mode'       : 'P7,{}\r',
-    'inhibit'    : 'P8,{}\r',
-    'status'     : 'E{}\r'
+    'set mode'   : 'P7,{}\r',
+    'set inhibit': 'P8,{}\r',
+    'get status' : 'E{}\r'
 }
     
 _PATTERN_TO_COMMAND = {p: c for c, p 
@@ -61,7 +61,7 @@ class Message():
         try:
             self.pattern = _COMMAND_TO_PATTERN[command]
         except KeyError:
-            raise ValueError('invalid command: {command}')
+            raise ValueError(f'invalid command: {command}')
        
         self.command = command
         self.is_answer = is_answer
@@ -138,9 +138,9 @@ class Message():
             return self._check_setter_value
         if command in ['get voltage', 'get current']:
             return self._check_getter_value            
-        if command in ['HV on', 'HV off', 'mode', 'inhibit']:
+        if command in ['HV on', 'HV off', 'set mode', 'set inhibit']:
             return self._check_parameter_value
-        if command == 'status':
+        if command == 'get status':
             return self._check_status_value
         raise ValueError('invalid command: {command}')
 

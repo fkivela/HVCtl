@@ -1,8 +1,10 @@
 TODO:
 
--scrollbar doesn't immediately refresh upon help
--Add widgets to sphinx
--Add vconnection to sphinx
+-inhibit to inhibition?
+-HV PSU to HV generator etc?
 -More functionality to vhv
+-What is inhibition?
 -Testing
 -volts vs kilovolts?
+-pycache in .gitignore doesn't seem to work
+-command editing doesn't seem to work with -s

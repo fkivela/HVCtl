@@ -1,59 +1,87 @@
-"""This module defines the VirtualConnection class, which can be used 
-to simulate serial connections."""
+"""This module defines the :class:`VirtualConnection` class, 
+which can be used to simulate serial connections.
+"""
 
 import os
-import threading
 import pty
-import time
 import select
+import threading
+import time
         
 class VirtualConnection():
-    """A virtual serial connection.
+    """A virtual serial connection.    
     
-    Data can be sent through a VirtualConnection object by accessing 
-    the *user_end* and *virtual_end* attributes. *virtual_end* can be 
-    written to and read from with os.read and os.write. 
-    os.read doesn't seem to work with *user_end*, and the serial 
-    module should be used instead. The *port* attribute returns a 
-    device name which can be given to serial.Serial() as an argument.
+    Data can be sent through a :class:`VirtualConnection` object by 
+    accessing the :attr:`user_end` and :attr:`virtual_end` attributes. 
+    :attr:`virtual_end` can be written to and read from with 
+    :func:`os.read` and :func:`os.write`. 
+    :func:`os.read` doesn't seem to work with :attr:`user_end`, 
+    and the :mod:`serial` module should be used instead. 
+    :attr:`port` returns a device name which can be given to 
+    :func:`serial.Serial` as an argument.
     
-    A VirtualConnection object runs code in a parallel thread.
-    If a VC is not closed after the it is no longer needed, 
+    A :class:`VirtualConnection` object runs code in a parallel thread.
+    If a VC is not closed after it is no longer needed, 
     it may continue using resources needlessly.
-    A VC may be closed with
-    >> vc.close()
-    This stops the parallel thread, closes vc.user_end and 
-    vc.virtual_end, and frees their file descriptors.
+    A VC may be closed by calling :func:`close`; this stops the 
+    parallel thread, closes :attr:`user_end` and :attr:`virtual_end`, 
+    and frees their file descriptors.
     
-    If a VC is used with a "with" block in the following manner:
-    >> with VirtualConnection as vc:
-    >>     # code here
-    the VC will close automatically when the "with" block is exited.
+    If a VC is used with a ``with`` block in the following manner:
+
+    .. code-block:: python
+    
+        with VirtualConnection as vc:
+            # some code here
+        
+    the VC will close automatically when the ``with`` block is exited.
     
     It is possible for a VC to continue running even if there 
     are no accessible references to it. 
     This happens e.g. if a VC is 
-    defined in an IPython console and then deleted using "del vc".
-    This deletes the name "vc", but doesn't seem to garbage-collect 
+    defined in an IPython console and then deleted using ``del vc``.
+    This deletes the name ``vc``, but doesn't seem to garbage-collect 
     the object.
-    In this case, all running instances of the VirtualConnection class 
-    can be closed with
-    >> VirtualConnection.close_all()
+    In this case, all running instances of the 
+    :class:`VirtualConnection` class can be closed with
+    
+    >>> VirtualConnection.close_all()
+    
+    Attributes:
+        buffer_size:
+            The buffer size for the connection 
+            (how many bits are read at once).
+            
+        sleep_time:
+            How long (in seconds) the object waits after checking for 
+            input before doing it again.
+            
+        virtual_end:
+             A file-like object used by a simulated device to read 
+             and write data.
+            
+        user_end:
+            A file-like object used by the UI to read and write data.
+            
+        thread:
+            The parallel thread used to run a :class:`VirtualConnection`.
+            
+        running_instances:
+            Class attribute.
+            A set of all currently running instances of the 
+            :class:`VirtualConnection` class.
     """
     
     # Keep references to all running instances of this class.
     running_instances = set()
             
     def __init__(self, buffer_size=1024, sleep_time=0.01):
-        """Initialize a new VirtualConnection.
+        """Initialize a new :class:`VirtualConnection`.
         
         The new instance starts running automatically.
-        
-        Args:
-            buffer_size=1024: The buffer size for the connection 
-                (how many bits are read at once).
+        The arguments set initial values for :attr:`buffer_size` 
+        and :attr:`sleep_time`.
         """
-        
         self.buffer_size = buffer_size
         self.sleep_time = sleep_time
         master, slave = pty.openpty()
@@ -79,13 +107,13 @@ class VirtualConnection():
         self.thread.start()
         
     def __enter__(self):
-        """Called at the beginning of a "with" block; returns 
+        """Called at the beginning of a ``with`` block; returns 
         *self*.
         """
         return self
     
     def __exit__(self, type_, value, traceback):
-        """Called at the end of a "with" block; stops the parallel 
+        """Called at the end of a ``with`` block; stops the parallel 
         thread.
         """
         self.close()
@@ -122,14 +150,14 @@ class VirtualConnection():
             i.close()
         
     def is_running(self):
-        """Return True, IFF the parallel thread is running."""
+        """Return ``True`` IFF the parallel thread is running."""
         return self.thread.is_alive()
         
     @property
     def port(self):
-        """Returns a device name ('/dev/pts/...') that can be used as the 
-        *port* argument of serial.Serial."""
-        
+        """Return a device name (e.g. ``'/dev/pts/...'``) that can be 
+        used as the *port* argument when a :class:`serial.Serial` 
+        object is created."""
         return os.ttyname(self.user_end)
                     
     def _run(self):
@@ -168,8 +196,7 @@ class VirtualConnection():
             input_: A bytes-like object.
         
         Returns: 
-            *input_*. This is supposed to be redefined in subclasses.
-        """
-        
+            *input_*. This is supposed to be overridden by subclasses.
+        """        
         output = input_
         return output
