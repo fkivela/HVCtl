@@ -8,3 +8,4 @@ TODO:
 -volts vs kilovolts?
 -pycache in .gitignore doesn't seem to work
 -command editing doesn't seem to work with -s
+-hvctl to package; move hvctl-run

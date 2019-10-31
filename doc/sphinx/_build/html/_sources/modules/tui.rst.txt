@@ -1,9 +1,0 @@
-.. autoclass:: CommandLineTUI
-   :members: 
-   
-   .. automethod:: __init__
-
-.. autoclass:: AdvancedTUI
-   :members: 
-   
-   .. automethod:: __init__

@@ -5,7 +5,6 @@ import argparse
 import sys
 
 import config
-from api import Status
 from queuefile import QueueFile
 from command_line_ui import CommandLineUI
 from virtualhv import VirtualHV

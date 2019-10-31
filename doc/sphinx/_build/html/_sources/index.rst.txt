@@ -1,7 +1,7 @@
-Welcome to HVControl's documentation!
+Welcome to HVCtl's documentation!
 =====================================
 
-HVControl is a Linux controller for a Technix High Voltage Power Supply Unit (HV PSU).
+HVCtl is a Linux controller for a Technix High Voltage Power Supply Unit (HV PSU).
 
 .. toctree::
    :maxdepth: 2

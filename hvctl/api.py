@@ -129,21 +129,21 @@ class API():
             connection, but changing them while the connection is 
             alive has no effect.
             
-            poll (bool): 
-                Determines whether automatic polling should be used 
-                or not (see the class description for more details.)
-                Like :attr:`serial_args`, changing this while the 
-                connection is alive has no effect. 
+        poll (bool): 
+            Determines whether automatic polling should be used 
+            or not (see the class description for more details.)
+            Like :attr:`serial_args`, changing this while the 
+            connection is alive has no effect. 
     """
     
-    def __init__(self, status, serial_kwargs=config.SERIAL_KWARGS, poll=True):
+    def __init__(self, serial_kwargs=config.SERIAL_KWARGS, poll=True):
         """Create a new instance of this class and form a serial 
         connection to the HV PSU.
         
-        The arguments determine initial values for :attr:`status`, 
+        The arguments determine initial values for 
         :attr:`serial_kwargs` and :attr:`poll`.
         """        
-        self.status = status
+        self.status = Status()
         self.timestep = 1
         self.serial_kwargs = serial_kwargs
         self.poll = poll

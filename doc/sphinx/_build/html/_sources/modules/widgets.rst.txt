@@ -1,5 +1,5 @@
-:mod:`advanced_tui`
-===================
+:mod:`widgets`
+==============
 
 .. automodule:: widgets
 	   
@@ -36,4 +36,4 @@
 .. autoclass:: CLI
    :members: 
    
-    .. automethod:: __init__
+   .. automethod:: __init__

@@ -1,4 +1,0 @@
-Usage page
-=====
-
-usage docs here

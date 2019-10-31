@@ -1,5 +1,5 @@
 :mod:`queuefile`
-==============
+================
 
 .. automodule:: queuefile
 	   

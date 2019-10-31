@@ -1,5 +1,5 @@
 :mod:`advanced_tui`
-==============
+===================
 
 .. automodule:: advanced_tui
 	   

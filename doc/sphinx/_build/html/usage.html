@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Usage &#8212; HVControl  documentation</title>
+    <title>Usage &#8212; HVCtl  documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -34,7 +34,74 @@
             
   <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>HVControl may be launced in an interactive mode by running the script <code class="docutils literal notranslate"><span class="pre">main.py</span></code>. Alternatively, the HV PSU may be controlled programmatically by creating an instance of the <code class="docutils literal notranslate"><span class="pre">api.API</span></code> class and accessing its methods.</p>
+<p>HVCtl may be launched in an interactive mode by running the script <code class="docutils literal notranslate"><span class="pre">hvctl-run</span></code>.
+<code class="docutils literal notranslate"><span class="pre">hvctl-run</span></code> accepts the following command-line arguments:</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-s</span>, <span class="option">--simple</span></kbd></dt>
+<dd><p>Run HVCtl with a simple command-line interface.
+Running this UI doesn’t require installing <a class="reference internal" href="installation.html"><span class="doc">urwid</span></a>.
+If HVCtl is run without the -s argument, a slighlty more advanced UI will be used (see below for  an example).</p>
+</dd>
+<dt><kbd><span class="option">-v</span>, <span class="option">--virtual</span></kbd></dt>
+<dd><p>Run HVCtl with a virtual HV PSU.
+If this argument is included, instead of sending messages to a real HV PSU, HVCtl creates a simulated virtual one and sends messages to it.
+This makes it possible to test HVCtl easily without having to connect to a physical HV device.</p>
+</dd>
+</dl>
+<p>HVCtl also includes a scripting possibility. The HV PSU may be controlled programmatically by creating an instance of the <a class="reference internal" href="modules/api.html#api.API" title="api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">api.API</span></code></a> class and accessing its methods (see <a class="reference internal" href="modules/api.html#module-api" title="api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a> for details).</p>
+<p>Configuration settings for HVCtl, such as the port used for the serial connection, are located and documented in the file <code class="docutils literal notranslate"><span class="pre">hv.conf</span></code>.</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The following examples demonstrate voltage can be read and set using each of the user interfaces provided by HVCtl.</p>
+<p>In the first example, HVCtl is run in an interactive mode with the -s argument.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hvctl-run -s
+Welcome to HVCtl! Type &#39;help&#39; for a list of commands.
+&gt;&gt; getvoltage
+The voltage is -0.0 V
+&gt;&gt; setvoltage -5000
+Voltage set to -5006.1050061050055 V
+&gt;&gt; getvoltage
+The voltage is -5006.1050061050055 V
+&gt;&gt; exit
+</pre></div>
+</div>
+<p>In the second example, no -s argument is given, and HVCtl uses a more advanced UI. The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV PSU. The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Voltage: -0.00 V
+Current: 0.00 mA
+Regulation mode: voltage
+
+HV power: off
+HV on command given: False
+HV off command given: False
+
+Mode: remote
+Interlock: closed
+No faults present
+─────────────────────────────────────────────────────────
+Welcome to HVCtl! Type &#39;help&#39; for a list of commands.  ▲
+&gt;&gt; getvoltage                                          ██
+The voltage is -0.0 V                                  ██
+&gt;&gt; setvoltage -500                                     ██
+Voltage set to -488.40048840048837 V                   ██
+&gt;&gt; getvoltage                                          ██
+The voltage is -488.40048840048837 V                   ██
+&gt;&gt; exit                                                ██
+PRESS &#39;q&#39; TO EXIT                                      ▼
+</pre></div>
+</div>
+<p>The last example demonstrates using HVCtl programmatically with an <a class="reference internal" href="modules/api.html#api.API" title="api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object. The last call to <a class="reference internal" href="modules/api.html#api.API.halt" title="api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">api</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
+<span class="go">-0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">set_voltage</span><span class="p">(</span><span class="o">-</span><span class="mi">5000</span><span class="p">)</span>
+<span class="go">-5006.1050061050055</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
+<span class="go">-5006.1050061050055</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">halt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -44,7 +111,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">HVControl</a></h1>
+<h1 class="logo"><a href="index.html">HVCtl</a></h1>
 
 
 
@@ -57,7 +124,10 @@
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a></li>
 </ul>
 

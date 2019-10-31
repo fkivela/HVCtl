@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Index &#8212; HVControl  documentation</title>
+    <title>Index &#8212; HVCtl  documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -77,6 +77,10 @@
 </li>
         <li><a href="modules/queuefile.html#queuefile.QueueFile.__init__">(queuefile.QueueFile method)</a>
 </li>
+        <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.__init__">(virtualconnection.VirtualConnection method)</a>
+</li>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.__init__">(virtualhv.VirtualHV method)</a>
+</li>
         <li><a href="modules/widgets.html#widgets.CLI.__init__">(widgets.CLI method)</a>
 </li>
         <li><a href="modules/widgets.html#widgets.CommandHistory.__init__">(widgets.CommandHistory method)</a>
@@ -140,6 +144,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/queuefile.html#queuefile.QueueFile.block">block (queuefile.QueueFile attribute)</a>
 </li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.buffer_size">buffer_size (virtualconnection.VirtualConnection attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -151,6 +157,10 @@
       <li><a href="modules/advanced_tui.html#advanced_tui.AdvancedTUI.cli">cli (advanced_tui.AdvancedTUI attribute)</a>
 </li>
       <li><a href="modules/widgets.html#widgets.CLI">CLI (class in widgets)</a>
+</li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.close">close() (virtualconnection.VirtualConnection method)</a>
+</li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.close_all">close_all() (virtualconnection.VirtualConnection class method)</a>
 </li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.cmd_debug">cmd_debug() (command_line_ui.CommandLineUI method)</a>
 </li>
@@ -199,7 +209,11 @@
       <li><a href="modules/config.html#module-config">config (module)</a>
 </li>
       <li><a href="modules/api.html#api.Status.current">current (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.current">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
       <li><a href="modules/config.html#config.CURRENT_LIMT">CURRENT_LIMT (in module config)</a>
 </li>
   </ul></td>
@@ -241,11 +255,15 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/api.html#api.Status.fault">fault (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.fault">(virtualhv.VirtualHV attribute)</a>
 </li>
-      <li><a href="modules/queuefile.html#queuefile.QueueFile.flush">flush() (queuefile.QueueFile method)</a>
-</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/queuefile.html#queuefile.QueueFile.flush">flush() (queuefile.QueueFile method)</a>
+</li>
       <li><a href="modules/message.html#message.Message.from_bytes">from_bytes() (message.Message class method)</a>
 </li>
       <li><a href="modules/api.html#api.API.full_status">full_status() (api.API method)</a>
@@ -259,13 +277,25 @@
       <li><a href="modules/widgets.html#widgets.CommandHistory.get_command">get_command() (widgets.CommandHistory method)</a>
 </li>
       <li><a href="modules/api.html#api.API.get_current">get_current() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.get_current">(virtualhv.VirtualHV method)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/api.html#api.API.get_status">get_status() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.get_status">(virtualhv.VirtualHV method)</a>
 </li>
+      </ul></li>
       <li><a href="modules/api.html#api.API.get_voltage">get_voltage() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.get_voltage">(virtualhv.VirtualHV method)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -284,18 +314,38 @@
 </li>
       <li><a href="modules/widgets.html#widgets.CommandLines.history_up">history_up() (widgets.CommandLines method)</a>
 </li>
+      <li><a href="modules/api.html#api.API.HV_off">HV_off() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.HV_off">(virtualhv.VirtualHV method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/api.html#api.API.HV_off">HV_off() (api.API method)</a>
-</li>
       <li><a href="modules/api.html#api.Status.HV_off_command">HV_off_command (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.HV_off_command">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
       <li><a href="modules/api.html#api.API.HV_on">HV_on() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.HV_on">(virtualhv.VirtualHV method)</a>
 </li>
+      </ul></li>
       <li><a href="modules/api.html#api.Status.HV_on_command">HV_on_command (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.HV_on_command">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
       <li><a href="modules/api.html#api.Status.HV_on_status">HV_on_status (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.HV_on_status">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -307,7 +357,11 @@
       <li><a href="modules/widgets.html#widgets.CommandHistory.index">index (widgets.CommandHistory attribute)</a>
 </li>
       <li><a href="modules/api.html#api.Status.inhibit">inhibit (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.inhibit">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.input">input() (command_line_ui.CommandLineUI method)</a>
 </li>
       <li><a href="modules/widgets.html#widgets.CommandLines.input_queue">input_queue (widgets.CommandLines attribute)</a>
@@ -319,10 +373,16 @@
       <li><a href="modules/config.html#config.INT_MAX">INT_MAX (in module config)</a>
 </li>
       <li><a href="modules/api.html#api.Status.interlock">interlock (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.interlock">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.intro">intro (command_line_ui.CommandLineUI attribute)</a>
 </li>
       <li><a href="modules/message.html#message.Message.is_answer">is_answer (message.Message attribute)</a>
+</li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.is_running">is_running() (virtualconnection.VirtualConnection method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -360,10 +420,14 @@
 </li>
       <li><a href="modules/message.html#module-message">message (module)</a>
 </li>
+      <li><a href="modules/api.html#api.Status.mode">mode (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.mode">(virtualhv.VirtualHV attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/api.html#api.Status.mode">mode (api.Status attribute)</a>
-</li>
       <li><a href="modules/widgets.html#widgets.ScrollableWidget.mouse_event">mouse_event() (widgets.ScrollableWidget method)</a>
 
       <ul>
@@ -392,6 +456,10 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/api.html#api.API.poll">poll (api.API attribute)</a>
+</li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.port">port() (virtualconnection.VirtualConnection property)</a>
+</li>
       <li><a href="modules/widgets.html#widgets.Position">Position (class in widgets)</a>
 </li>
       <li><a href="modules/widgets.html#widgets.CLI.position">position (widgets.CLI attribute)</a>
@@ -408,6 +476,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.print">print() (command_line_ui.CommandLineUI method)</a>
 </li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.process">process() (virtualconnection.VirtualConnection method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.process">(virtualhv.VirtualHV method)</a>
+</li>
+      </ul></li>
       <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.prompt">prompt (command_line_ui.CommandLineUI attribute)</a>
 </li>
   </ul></td>
@@ -435,7 +509,11 @@
       <li><a href="modules/queuefile.html#queuefile.QueueFile.readline">readline() (queuefile.QueueFile method)</a>
 </li>
       <li><a href="modules/api.html#api.Status.regulation">regulation (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.regulation">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
       <li><a href="modules/widgets.html#widgets.Position.relative">relative (widgets.Position attribute)</a>
 </li>
       <li><a href="modules/widgets.html#widgets.Position.relative">relative() (widgets.Position property)</a>
@@ -456,6 +534,8 @@
         <li><a href="modules/command_line_ui.html#command_line_ui.CommandLineUI.run">(command_line_ui.CommandLineUI method)</a>
 </li>
       </ul></li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.running_instances">running_instances (virtualconnection.VirtualConnection attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -472,17 +552,37 @@
 </li>
       <li><a href="modules/widgets.html#widgets.ScrollButton">ScrollButton (class in widgets)</a>
 </li>
+      <li><a href="modules/api.html#api.API.serial_kwargs">serial_kwargs (api.API attribute)</a>
+</li>
       <li><a href="modules/config.html#config.SERIAL_KWARGS">SERIAL_KWARGS (in module config)</a>
 </li>
+      <li><a href="modules/api.html#api.API.set_current">set_current() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.set_current">(virtualhv.VirtualHV method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/api.html#api.API.set_current">set_current() (api.API method)</a>
-</li>
       <li><a href="modules/api.html#api.API.set_inhibit">set_inhibit() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.set_inhibit">(virtualhv.VirtualHV method)</a>
 </li>
+      </ul></li>
       <li><a href="modules/api.html#api.API.set_mode">set_mode() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.set_mode">(virtualhv.VirtualHV method)</a>
 </li>
+      </ul></li>
       <li><a href="modules/api.html#api.API.set_voltage">set_voltage() (api.API method)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.set_voltage">(virtualhv.VirtualHV method)</a>
+</li>
+      </ul></li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.sleep_time">sleep_time (virtualconnection.VirtualConnection attribute)</a>
 </li>
       <li><a href="modules/api.html#api.API.status">status (api.API attribute)</a>
 </li>
@@ -498,10 +598,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#widgets.CommandHistory.temp_history">temp_history (widgets.CommandHistory attribute)</a>
 </li>
-      <li><a href="modules/api.html#api.API.timestep">timestep (api.API attribute)</a>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.thread">thread (virtualconnection.VirtualConnection attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/api.html#api.API.timestep">timestep (api.API attribute)</a>
+</li>
       <li><a href="modules/message.html#message.Message.to_bytes">to_bytes() (message.Message method)</a>
 </li>
       <li><a href="modules/widgets.html#widgets.Position.total_rows">total_rows (widgets.Position attribute)</a>
@@ -514,11 +616,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#widgets.CommandHistory.up">up() (widgets.CommandHistory method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#widgets.CommandLines.update">update() (widgets.CommandLines method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#widgets.CommandHistory.update_command">update_command() (widgets.CommandHistory method)</a>
+</li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.user_end">user_end (virtualconnection.VirtualConnection attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -530,12 +634,26 @@
 </li>
       <li><a href="modules/message.html#message.Message.value">value() (message.Message property)</a>
 </li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection.virtual_end">virtual_end (virtualconnection.VirtualConnection attribute)</a>
+</li>
+      <li><a href="modules/virtualconnection.html#virtualconnection.VirtualConnection">VirtualConnection (class in virtualconnection)</a>
+</li>
+      <li><a href="modules/virtualconnection.html#module-virtualconnection">virtualconnection (module)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/virtualhv.html#virtualhv.VirtualHV">VirtualHV (class in virtualhv)</a>
+</li>
+      <li><a href="modules/virtualhv.html#module-virtualhv">virtualhv (module)</a>
+</li>
       <li><a href="modules/widgets.html#widgets.Position.visible_rows">visible_rows (widgets.Position attribute)</a>
 </li>
       <li><a href="modules/api.html#api.Status.voltage">voltage (api.Status attribute)</a>
+
+      <ul>
+        <li><a href="modules/virtualhv.html#virtualhv.VirtualHV.voltage">(virtualhv.VirtualHV attribute)</a>
 </li>
+      </ul></li>
       <li><a href="modules/config.html#config.VOLTAGE_LIMIT">VOLTAGE_LIMIT (in module config)</a>
 </li>
   </ul></td>
@@ -563,7 +681,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">HVControl</a></h1>
+<h1 class="logo"><a href="index.html">HVCtl</a></h1>
 
 
 

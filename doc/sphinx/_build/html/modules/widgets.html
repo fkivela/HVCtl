@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>advanced_tui &#8212; HVControl  documentation</title>
+    <title>widgets &#8212; HVCtl  documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="queuefile" href="queuefile.html" />
+    <link rel="next" title="command_line_ui" href="command_line_ui.html" />
     <link rel="prev" title="api" href="api.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -33,9 +33,10 @@
           <div class="body" role="main">
             
   <div class="section" id="module-widgets">
-<span id="advanced-tui"></span><h1><a class="reference internal" href="advanced_tui.html#module-advanced_tui" title="advanced_tui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a><a class="headerlink" href="#module-widgets" title="Permalink to this headline">¶</a></h1>
-<p>This module uses the urwid library to create a TUI that contains a
-scrollable command line interface and a screen above that.</p>
+<span id="widgets"></span><h1><a class="reference internal" href="#module-widgets" title="widgets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a><a class="headerlink" href="#module-widgets" title="Permalink to this headline">¶</a></h1>
+<p>This module uses the <a class="reference external" href="http://urwid.org/">urwid</a> library to create
+a TUI that contains a scrollable command line interface and a screen
+above that.</p>
 <dl class="class">
 <dt id="widgets.CommandHistory">
 <em class="property">class </em><code class="sig-prename descclassname">widgets.</code><code class="sig-name descname">CommandHistory</code><a class="headerlink" href="#widgets.CommandHistory" title="Permalink to this definition">¶</a></dt>
@@ -580,21 +581,19 @@ up.</p>
 <dl class="attribute">
 <dt id="widgets.CLI.arrow_down">
 <code class="sig-name descname">arrow_down</code><a class="headerlink" href="#widgets.CLI.arrow_down" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>An arrow button that can be clicked to scroll the screen
+<dd><p>An arrow button that can be clicked to scroll the screen
 down.</p>
 <dl class="field-list simple">
-<dt class="field-odd">type</dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ScrollArrow</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
+</dd></dl>
+
 <dl class="method">
 <dt id="widgets.CLI.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#widgets.CLI.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize a new <code class="xref py py-class docutils literal notranslate"><span class="pre">CommandLineInterface</span></code>.</p>
-</dd></dl>
-
+<dd><p>Initialize a new <a class="reference internal" href="#widgets.CLI" title="widgets.CLI"><code class="xref py py-class docutils literal notranslate"><span class="pre">CLI</span></code></a>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -608,7 +607,7 @@ down.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">HVControl</a></h1>
+<h1 class="logo"><a href="../index.html">HVCtl</a></h1>
 
 
 
@@ -626,10 +625,12 @@ down.</p>
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -640,7 +641,7 @@ down.</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Modules</a><ul>
       <li>Previous: <a href="api.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
-      <li>Next: <a href="queuefile.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
+      <li>Next: <a href="command_line_ui.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>
