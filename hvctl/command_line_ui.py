@@ -94,8 +94,7 @@ class CommandLineUI:
             serial_kwargs = config.SERIAL_KWARGS
         
         self.debug = False
-        self.api = api.API(api.Status(), 
-                           serial_kwargs=config.SERIAL_KWARGS, 
+        self.api = api.API(serial_kwargs=config.SERIAL_KWARGS, 
                            poll=True, 
         )
 
