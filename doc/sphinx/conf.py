@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('../../hvctl'))
 # -- Project information -----------------------------------------------------
 
 project = 'HVCtl'
-copyright = '2019, Feliks Kivelä'
+copyright = '2019, University of Helsinki Fusor Team'
 author = 'Feliks Kivelä'
 
 

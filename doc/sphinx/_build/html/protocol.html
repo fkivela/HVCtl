@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>RS232 Control protocol &#8212; HVCtl  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modules" href="modules/index.html" />
+    <link rel="prev" title="Usage" href="usage.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="rs232-control-protocol">
+<h1>RS232 Control protocol<a class="headerlink" href="#rs232-control-protocol" title="Permalink to this headline">¶</a></h1>
+<p>Communication with the HV PSU is based on question/answer pairs. Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13). CR is represented here as <code class="docutils literal notranslate"><span class="pre">\r</span></code>, which is how Python and C represent it.</p>
+<p>Command strings start with a letter denoting the given command, followed by one or more function parameters separated by commas.
+Answers copy the command string, and may append a return value to itse end (without a separating comma).</p>
+<p>The connection has the following specifications:</p>
+<ul class="simple">
+<li><p>1 start bit</p></li>
+<li><p>8 data bits</p></li>
+<li><p>1 stop bit</p></li>
+<li><p>No parity bit</p></li>
+<li><p>Full duplex mode</p></li>
+<li><p>Baud rate 9600</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the HV generator doesn’t receive any instructions for 5 seconds, it will automatically power off and enter local mode.</p>
+</div>
+<div class="section" id="list-of-commands-and-answers">
+<h2>List of commands and answers<a class="headerlink" href="#list-of-commands-and-answers" title="Permalink to this headline">¶</a></h2>
+<p>This section lists all commands recognized by the HV PSU and the answers to them.
+An <em>X</em> denotes a numerical value. This value is a 12-bit unsigned integer (i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>), linearly scaled to cover
+the whole voltage or current range of the PSU. For example, with a SR100kV-5kW device with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (ie. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to the maximum value of -100 kV.</p>
+<div class="section" id="set-output-voltage">
+<h3>1. Set output voltage<a class="headerlink" href="#set-output-voltage" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">d1,X\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">d1,X\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="set-output-current">
+<h3>2. Set output current<a class="headerlink" href="#set-output-current" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">d2,X\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">d2,X\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="get-output-voltage">
+<h3>3. Get output voltage<a class="headerlink" href="#get-output-voltage" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">a1\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">a1X\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="get-output-current">
+<h3>4. Get output current<a class="headerlink" href="#get-output-current" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">a2\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">a2X\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="turn-the-hv-on">
+<h3>5. Turn the HV on<a class="headerlink" href="#turn-the-hv-on" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P5,1\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P5,1\r</span></code></p>
+</dd>
+</dl>
+<p>Wait 100 ms after receiving the answer to the first command before sending the second command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P5,0\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P5,0\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="turn-the-hv-off">
+<h3>6. Turn the HV off<a class="headerlink" href="#turn-the-hv-off" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P6,1\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P6,1\r</span></code></p>
+</dd>
+</dl>
+<p>Wait 100 ms after receiving the answer to the first command before sending the second command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P6,0\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P6,0\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="switch-between-local-and-remote-mode">
+<h3>7. Switch between local and remote mode<a class="headerlink" href="#switch-between-local-and-remote-mode" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Switch to local mode</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P7,1\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P7,1\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Switch to remote mode</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P7,0\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P7,0\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="activate-or-deactivate-inhibition">
+<h3>8. Activate or deactivate inhibition<a class="headerlink" href="#activate-or-deactivate-inhibition" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Activate inhibition</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P8,1\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P8,1\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Deactivate inhibition</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P8,0\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P8,0\r</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="get-power-supply-status">
+<h3>9. Get power supply status<a class="headerlink" href="#get-power-supply-status" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Command</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">E\r</span></code></p>
+</dd>
+<dt class="field-even">Answer</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">EX\r</span></code>, <span class="math notranslate nohighlight">\(X \in \left[0, 255 \right]\)</span></p>
+</dd>
+</dl>
+<p>This command returns an 8-bit big-endian integer, with the bits being numbered in the following manner.
+MSB and LSB denote the most and least significant bits.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>8 (MSB)</p></td>
+<td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1 (LSB)</p></td>
+</tr>
+</tbody>
+</table>
+<p>The values of bits 5-8 correspond to the values set by the commands 5-8.
+Bits 1-4 are status bits whose values don’t directly correspond to a single command.
+The meanings of different bit values are presentted in the table below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 36%" />
+<col style="width: 15%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p>Bit</p></th>
+<th class="head" colspan="3"><p>Value</p></th>
+</tr>
+<tr class="row-even"><th class="head" colspan="2"><p>1</p></th>
+<th class="head"><p>0</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>8</p></td>
+<td colspan="2"><p>Inhibition active</p></td>
+<td><p>Inhibition idle</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td colspan="2"><p>Local mode</p></td>
+<td><p>Remote mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td colspan="2"><p>First HV off command (<code class="docutils literal notranslate"><span class="pre">P6,1\r</span></code>) given</p></td>
+<td><p>First HV off command not given</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td colspan="2"><p>First HV on command (<code class="docutils literal notranslate"><span class="pre">P5,1\r</span></code>) given</p></td>
+<td><p>First HV on command not given</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td colspan="2"><p>HV on</p></td>
+<td><p>HV off</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td colspan="2"><p>Interlock open</p></td>
+<td><p>Interlock closed</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td colspan="2"><p>Fault</p></td>
+<td><p>No fault</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td colspan="2"><p>Voltage regulation</p></td>
+<td><p>Current regulation</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">HVCtl</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">**Contents**:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RS232 Control protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#list-of-commands-and-answers">List of commands and answers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="usage.html" title="previous chapter">Usage</a></li>
+      <li>Next: <a href="modules/index.html" title="next chapter">Modules</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, University of Helsinki Fusor Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/protocol.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

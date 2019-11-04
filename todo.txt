@@ -1,5 +1,8 @@
 TODO:
 
+-Testing!
+-Proofreading!
+-list of commands and aliases to docs
 -inhibit to inhibition?
 -HV PSU to HV generator etc?
 -More functionality to vhv
