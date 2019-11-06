@@ -1,7 +1,7 @@
-:mod:`virtualhv`
-================
+:mod:`hvctl.virtualhv`
+======================
 
-.. automodule:: virtualhv
+.. automodule:: hvctl.virtualhv
 	   
 .. autoclass:: VirtualHV
    :show-inheritance:

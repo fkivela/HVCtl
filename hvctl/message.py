@@ -3,7 +3,7 @@ the HV generator."""
 
 import re
 
-from config import INT_MAX
+from . import config
 
 _COMMAND_TO_PATTERN = {
     'set voltage': 'd1,{}\r',
@@ -33,7 +33,7 @@ class Message():
             to which *self* is an answer; e.g. ``'set voltage'`` or 
             ``'HV on'``.
             All valid commands are listed in 
-            :const:`message.COMMANDS`.
+            :const:`~hvctl.message.COMMANDS`.
             
         value (int or None): 
             A value associated with the command, e.g. the value to 
@@ -41,10 +41,10 @@ class Message():
             This should be left to ``None`` when sending getter 
             or status commands.
             For current and voltage, *value* ranges between ``0`` 
-            and :const:`config.INT_MAX`; the actual voltage or 
+            and :const:`~hvctl.config.INT_MAX`; the actual voltage or 
             current value in V or mA can be computed by 
-            multiplying *value* with :const:`config.DELTA_U` 
-            or :const:`config.DELTA_I`.
+            multiplying *value* with :const:`~hvctl.config.DELTA_U` 
+            or :const:`~hvctl.config.DELTA_I`.
             
         is_answer (bool): 
             Determines whether *self* represents a message to the 
@@ -152,7 +152,7 @@ class Message():
             ValueError: If this is not the case.
         """
         
-        values = range(INT_MAX+1)
+        values = range(config.INT_MAX + 1)
         if not value in values:
             raise ValueError(f'*value* should be in {values}, was {value}')
     

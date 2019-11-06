@@ -11,7 +11,7 @@ HVCtl may be launched in an interactive mode by running the script ``hvctl-run``
 				If this argument is included, instead of sending messages to a real HV PSU, HVCtl creates a simulated virtual one and sends messages to it. 
 				This makes it possible to test HVCtl easily without having to connect to a physical HV device.
 
-HVCtl also includes a scripting possibility. The HV PSU may be controlled programmatically by creating an instance of the :class:`api.API` class and accessing its methods (see :mod:`api` for details).
+HVCtl also includes a scripting possibility. The HV PSU may be controlled programmatically by creating an instance of the :class:`hvctl.api.API` class and accessing its methods (see :mod:`hvctl.api` for details).
 
 Configuration settings for HVCtl, such as the port used for the serial connection, are located and documented in the file ``hv.conf``.
 
@@ -60,7 +60,7 @@ In the second example, no -s argument is given, and HVCtl uses a more advanced U
 	>> exit                                                ██
 	PRESS 'q' TO EXIT                                      ▼
 
-The last example demonstrates using HVCtl programmatically with an :class:`~api.API` object. The last call to :meth:`~api.API.halt()` closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.
+The last example demonstrates using HVCtl programmatically with an :class:`~hvctl.api.API` object. The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.
 
 >>> import api
 >>> apiobj = api.API()

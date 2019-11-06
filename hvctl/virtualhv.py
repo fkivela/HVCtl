@@ -1,7 +1,7 @@
 """This module defines the :class:`VirtualHV` class."""
 
-from message import Message
-from virtualconnection import VirtualConnection
+from .message import Message
+from .virtualconnection import VirtualConnection
 
 class VirtualHV(VirtualConnection):
     """A virtual high voltage generator.
@@ -64,7 +64,7 @@ class VirtualHV(VirtualConnection):
         """Initialize a new :class:`VirtualHV`.
         
         All arguments are passed to 
-        :meth:`virtualconnection.VirtualConnection.__init__`.
+        :meth:`hvctl.virtualconnection.VirtualConnection.__init__`.
         """
         super().__init__(*args)
         
@@ -240,11 +240,11 @@ class VirtualHV(VirtualConnection):
         Args:
             input_: 
                 A bytes-like object created by 
-                :func:`message.Message.to_bytes`.
+                :func:`hvctl.message.Message.to_bytes`.
         
         Returns:
             A :class:`bytes` object that can be passed to 
-            :func:`message.Message.from_bytes`.
+            :func:`hvctl.message.Message.from_bytes`.
             The return message will contain the same command as the 
             input message, but if the command changed a value of an 
             attribute of *self*, the new value will be included in the 

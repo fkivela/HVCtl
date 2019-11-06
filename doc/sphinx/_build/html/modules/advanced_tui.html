@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>advanced_tui &#8212; HVCtl  documentation</title>
+    <title>hvctl.advanced_tui &#8212; HVCtl  documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="queuefile" href="queuefile.html" />
-    <link rel="prev" title="command_line_ui" href="command_line_ui.html" />
+    <link rel="next" title="hvctl.queuefile" href="queuefile.html" />
+    <link rel="prev" title="hvctl.command_line_ui" href="command_line_ui.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,22 +33,23 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-advanced_tui">
-<span id="advanced-tui"></span><h1><a class="reference internal" href="#module-advanced_tui" title="advanced_tui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a><a class="headerlink" href="#module-advanced_tui" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-hvctl.advanced_tui">
+<span id="hvctl-advanced-tui"></span><h1><a class="reference internal" href="#module-hvctl.advanced_tui" title="hvctl.advanced_tui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.advanced_tui</span></code></a><a class="headerlink" href="#module-hvctl.advanced_tui" title="Permalink to this headline">¶</a></h1>
 <p>This module defines the AdvancedTUI class.</p>
 <p>This module uses <a class="reference external" href="http://urwid.org/">urwid</a>.
-If urwid isn’t installed, <a class="reference internal" href="command_line_ui.html#command_line_ui.CommandLineUI" title="command_line_ui.CommandLineUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">command_line_ui.CommandLineUI</span></code></a>
+If urwid isn’t installed,
+<a class="reference internal" href="command_line_ui.html#hvctl.command_line_ui.CommandLineUI" title="hvctl.command_line_ui.CommandLineUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandLineUI</span></code></a>
 provides a UI that can be run without it.</p>
 <dl class="class">
-<dt id="advanced_tui.AdvancedTUI">
-<em class="property">class </em><code class="sig-prename descclassname">advanced_tui.</code><code class="sig-name descname">AdvancedTUI</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#advanced_tui.AdvancedTUI" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.advanced_tui.AdvancedTUI">
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.advanced_tui.</code><code class="sig-name descname">AdvancedTUI</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI" title="Permalink to this definition">¶</a></dt>
 <dd><p>A text-based user interface combining a terminal-style
 command line interface and a text screen.</p>
 <dl class="attribute">
-<dt id="advanced_tui.AdvancedTUI.display">
-<code class="sig-name descname">display</code><a class="headerlink" href="#advanced_tui.AdvancedTUI.display" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.advanced_tui.AdvancedTUI.display">
+<code class="sig-name descname">display</code><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>A text field for presenting information to the user.
-Use <code class="xref py py-func docutils literal notranslate"><span class="pre">advanced_tui.display.set_text()</span></code> to change its
+Use <code class="xref py py-func docutils literal notranslate"><span class="pre">display.set_text()</span></code> to change its
 contents.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -58,8 +59,8 @@ contents.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="advanced_tui.AdvancedTUI.cli">
-<code class="sig-name descname">cli</code><a class="headerlink" href="#advanced_tui.AdvancedTUI.cli" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.advanced_tui.AdvancedTUI.cli">
+<code class="sig-name descname">cli</code><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.cli" title="Permalink to this definition">¶</a></dt>
 <dd><p>A command-line interface for issuing commands; located
 below the display.</p>
 <dl class="field-list simple">
@@ -70,14 +71,14 @@ below the display.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="advanced_tui.AdvancedTUI.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#advanced_tui.AdvancedTUI.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize a new <a class="reference internal" href="#advanced_tui.AdvancedTUI" title="advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a>.</p>
+<dt id="hvctl.advanced_tui.AdvancedTUI.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a new <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>script</strong> – The program controlled by the TUI.
-The program should start when <code class="xref py py-func docutils literal notranslate"><span class="pre">script()</span></code> is called.</p></li>
+<li><p><strong>script</strong> – An object that should run the program controlled by
+the TUI when called with <code class="docutils literal notranslate"><span class="pre">script()</span></code>.</p></li>
 <li><p><strong>inputfile</strong> – A file-like object where user input is sent.</p></li>
 <li><p><strong>outputfile</strong> – A file-like object where <code class="xref py py-attr docutils literal notranslate"><span class="pre">script</span></code> should print
 its output, if it is to be printed on the screen.</p></li>
@@ -87,17 +88,17 @@ its output, if it is to be printed on the screen.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="advanced_tui.AdvancedTUI.keypress">
-<code class="sig-name descname">keypress</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#advanced_tui.AdvancedTUI.keypress" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.advanced_tui.AdvancedTUI.keypress">
+<code class="sig-name descname">keypress</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.keypress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle key presses.</p>
-<p>Pressing ‘q’ after <code class="xref py py-func docutils literal notranslate"><span class="pre">script()</span></code> has returned exits the
-program.</p>
+<p>Pressing ‘q’ after the program has returned exits the
+UI.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="advanced_tui.AdvancedTUI.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#advanced_tui.AdvancedTUI.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start <code class="xref py py-attr docutils literal notranslate"><span class="pre">script</span></code> and the UI loop in parallel threads.</p>
+<dt id="hvctl.advanced_tui.AdvancedTUI.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the program and the UI loop in parallel threads.</p>
 </dd></dl>
 
 </dd></dl>
@@ -121,21 +122,20 @@ program.</p>
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">**Contents**:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.widgets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.command_line_ui</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.advanced_tui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.queuefile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualconnection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualhv</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -145,8 +145,8 @@ program.</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Modules</a><ul>
-      <li>Previous: <a href="command_line_ui.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
-      <li>Next: <a href="queuefile.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
+      <li>Previous: <a href="command_line_ui.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.command_line_ui</span></code></a></li>
+      <li>Next: <a href="queuefile.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.queuefile</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>

@@ -1,13 +1,14 @@
 """This module defines the AdvancedTUI class.
 
 This module uses `urwid <http://urwid.org/>`_.
-If urwid isn't installed, :class:`command_line_ui.CommandLineUI` 
+If urwid isn't installed, 
+:class:`~hvctl.command_line_ui.CommandLineUI` 
 provides a UI that can be run without it.
 """
 import threading
 import urwid
 
-import widgets        
+from . import widgets        
             
 class AdvancedTUI(urwid.WidgetWrap):
     """A text-based user interface combining a terminal-style 
@@ -16,7 +17,7 @@ class AdvancedTUI(urwid.WidgetWrap):
     Attributes:
         display (:class:`urwid.Text`):
             A text field for presenting information to the user.
-            Use :func:`advanced_tui.display.set_text` to change its 
+            Use :func:`display.set_text` to change its 
             contents.
         
         cli (:class:`CLI`):
@@ -29,8 +30,8 @@ class AdvancedTUI(urwid.WidgetWrap):
         
         Args:
             script:
-                The program controlled by the TUI.
-                The program should start when :func:`script` is called.
+                An object that should run the program controlled by 
+                the TUI when called with ``script()``.
             inputfile:
                 A file-like object where user input is sent.
             outputfile:
@@ -68,8 +69,8 @@ class AdvancedTUI(urwid.WidgetWrap):
     def keypress(self, size, key):
         """Handle key presses.
         
-        Pressing 'q' after :func:`script` has returned exits the 
-        program. 
+        Pressing 'q' after the program has returned exits the 
+        UI. 
         """
         if key == 'q' and self._script_finished:
             raise urwid.ExitMainLoop
@@ -89,6 +90,6 @@ class AdvancedTUI(urwid.WidgetWrap):
         self._loop.set_alarm_in(2, self._callback, user_data=None)
 
     def run(self):
-        """Start :attr:`script` and the UI loop in parallel threads."""
+        """Start the program and the UI loop in parallel threads."""
         self._thread.start()
         self._loop.run()

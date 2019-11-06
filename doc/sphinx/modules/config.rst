@@ -1,5 +1,5 @@
-:mod:`config`
-=============
+:mod:`hvctl.config`
+===================
 
-.. automodule:: config
+.. automodule:: hvctl.config
 	:members:

@@ -4,10 +4,10 @@
 import argparse
 import sys
 
-import config
-from queuefile import QueueFile
-from command_line_ui import CommandLineUI
-from virtualhv import VirtualHV
+from hvctl import config
+from hvctl.queuefile import QueueFile
+from hvctl.command_line_ui import CommandLineUI
+from hvctl.virtualhv import VirtualHV
 
 # The argparse module hepls with parsing command line arguments.
 # The -h option displays an automatically generated help message.
@@ -28,7 +28,7 @@ else:
     # If args.simple is specified, AdvancedTUI is not imported.
     # This makes it possible to run the program without installing 
     # urwid.
-    from advanced_tui import AdvancedTUI
+    from hvctl.advanced_tui import AdvancedTUI
     inputfile = QueueFile(block=True)
     outputfile = QueueFile()    
     

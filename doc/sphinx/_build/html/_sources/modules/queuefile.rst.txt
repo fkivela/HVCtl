@@ -1,7 +1,7 @@
-:mod:`queuefile`
-================
+:mod:`hvctl.queuefile`
+======================
 
-.. automodule:: queuefile
+.. automodule:: hvctl.queuefile
 	   
 .. autoclass:: QueueFile
    :members:    

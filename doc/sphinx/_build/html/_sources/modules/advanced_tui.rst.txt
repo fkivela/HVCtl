@@ -1,7 +1,7 @@
-:mod:`advanced_tui`
-===================
+:mod:`hvctl.advanced_tui`
+=========================
 
-.. automodule:: advanced_tui
+.. automodule:: hvctl.advanced_tui
 	   
 .. autoclass:: AdvancedTUI
    :members:    

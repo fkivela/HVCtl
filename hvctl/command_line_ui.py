@@ -7,8 +7,8 @@ import readline
 import sys
 import textwrap
 
-import api
-import config
+from . import api
+from . import config
 
 class CommandLineUI:
     """A simple command-line UI.
@@ -26,7 +26,8 @@ class CommandLineUI:
             See :meth:`cmd_debug` for details.
         
         api:
-            An :class:`api.API` object used to send commands to the HV PSU.                    
+            An :class:`~hvctl.api.API` object used to send commands '
+            'to the HV PSU.                    
     """
     
     intro = "Welcome to HVCtl! Type 'help' for a list of commands."
@@ -70,8 +71,8 @@ class CommandLineUI:
             serial_kwargs:
                 A dict of keyword arguments for forming a serial 
                 connection, passed to the initializer of :attr:`api`.
-                If this is ``None``, :attr:`config.SERIAL_KWARGS` 
-                is used.
+                If this is ``None``, 
+                :attr:`~hvctl.config.SERIAL_KWARGS` is used.
             inputfile:
                 The value of :attr:`inputfile`.
                 If this is ``None``, the value is :attr:`sys.stdin`.

@@ -1,7 +1,7 @@
-:mod:`api`
-==============
+:mod:`hvctl.api`
+================
 
-.. automodule:: api
+.. automodule:: hvctl.api
 	   
 .. autoclass:: Status  
    :members: 

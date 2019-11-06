@@ -1,7 +1,7 @@
-:mod:`command_line_ui`
-======================
+:mod:`hvctl.command_line_ui`
+============================
 
-.. automodule:: command_line_ui
+.. automodule:: hvctl.command_line_ui
 	   
 .. autoclass:: CommandLineUI
 	:members:

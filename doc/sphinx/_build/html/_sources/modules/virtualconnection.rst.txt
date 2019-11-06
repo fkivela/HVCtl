@@ -1,7 +1,7 @@
-:mod:`virtualconnection`
-========================
+:mod:`hvctl.virtualconnection`
+==============================
 
-.. automodule:: virtualconnection
+.. automodule:: hvctl.virtualconnection
 	   
 .. autoclass:: VirtualConnection
    :members: 

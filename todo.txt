@@ -2,13 +2,20 @@ TODO:
 
 -Testing!
 -Proofreading!
+-Better error messages when there is no connection
+-Add examples for the use of virtualhv
+-Document hvctl.__init__
+-Make api accept serial args as kwargs
+-Sending a message without connection, connecting, and then sending another message blocks
+-Update the examples
 -list of commands and aliases to docs
 -inhibit to inhibition?
 -HV PSU to HV generator etc?
 -More functionality to vhv
 -What is inhibition?
--Testing
 -volts vs kilovolts?
 -pycache in .gitignore doesn't seem to work
 -command editing doesn't seem to work with -s
 -hvctl to package; move hvctl-run
+-link to external docs
+-shorten the name of virtualconnection

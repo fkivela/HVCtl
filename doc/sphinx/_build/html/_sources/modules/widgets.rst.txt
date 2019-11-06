@@ -1,7 +1,7 @@
-:mod:`widgets`
-==============
+:mod:`hvctl.widgets`
+====================
 
-.. automodule:: widgets
+.. automodule:: hvctl.widgets
 	   
 .. autoclass:: CommandHistory
    :members: 

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>virtualconnection &#8212; HVCtl  documentation</title>
+    <title>hvctl.virtualconnection &#8212; HVCtl  documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="virtualhv" href="virtualhv.html" />
-    <link rel="prev" title="queuefile" href="queuefile.html" />
+    <link rel="next" title="hvctl.virtualhv" href="virtualhv.html" />
+    <link rel="prev" title="hvctl.queuefile" href="queuefile.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,27 +33,27 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-virtualconnection">
-<span id="virtualconnection"></span><h1><a class="reference internal" href="#module-virtualconnection" title="virtualconnection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a><a class="headerlink" href="#module-virtualconnection" title="Permalink to this headline">¶</a></h1>
-<p>This module defines the <a class="reference internal" href="#virtualconnection.VirtualConnection" title="virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> class,
+  <div class="section" id="module-hvctl.virtualconnection">
+<span id="hvctl-virtualconnection"></span><h1><a class="reference internal" href="#module-hvctl.virtualconnection" title="hvctl.virtualconnection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualconnection</span></code></a><a class="headerlink" href="#module-hvctl.virtualconnection" title="Permalink to this headline">¶</a></h1>
+<p>This module defines the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> class,
 which can be used to simulate serial connections.</p>
 <dl class="class">
-<dt id="virtualconnection.VirtualConnection">
-<em class="property">class </em><code class="sig-prename descclassname">virtualconnection.</code><code class="sig-name descname">VirtualConnection</code><span class="sig-paren">(</span><em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#virtualconnection.VirtualConnection" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection">
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualconnection.</code><code class="sig-name descname">VirtualConnection</code><span class="sig-paren">(</span><em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A virtual serial connection.</p>
-<p>Data can be sent through a <a class="reference internal" href="#virtualconnection.VirtualConnection" title="virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object by
-accessing the <a class="reference internal" href="#virtualconnection.VirtualConnection.user_end" title="virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#virtualconnection.VirtualConnection.virtual_end" title="virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a> attributes.
-<a class="reference internal" href="#virtualconnection.VirtualConnection.virtual_end" title="virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a> can be written to and read from with
+<p>Data can be sent through a <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object by
+accessing the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="hvctl.virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="hvctl.virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a> attributes.
+<a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="hvctl.virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a> can be written to and read from with
 <code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">os.write()</span></code>.
-<code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code> doesn’t seem to work with <a class="reference internal" href="#virtualconnection.VirtualConnection.user_end" title="virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code> doesn’t seem to work with <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="hvctl.virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a>,
 and the <code class="xref py py-mod docutils literal notranslate"><span class="pre">serial</span></code> module should be used instead.
-<a class="reference internal" href="#virtualconnection.VirtualConnection.port" title="virtualconnection.VirtualConnection.port"><code class="xref py py-attr docutils literal notranslate"><span class="pre">port</span></code></a> returns a device name which can be given to
+<a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.port" title="hvctl.virtualconnection.VirtualConnection.port"><code class="xref py py-attr docutils literal notranslate"><span class="pre">port</span></code></a> returns a device name which can be given to
 <code class="xref py py-func docutils literal notranslate"><span class="pre">serial.Serial()</span></code> as an argument.</p>
-<p>A <a class="reference internal" href="#virtualconnection.VirtualConnection" title="virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object runs code in a parallel thread.
+<p>A <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object runs code in a parallel thread.
 If a VC is not closed after it is no longer needed,
 it may continue using resources needlessly.
-A VC may be closed by calling <a class="reference internal" href="#virtualconnection.VirtualConnection.close" title="virtualconnection.VirtualConnection.close"><code class="xref py py-func docutils literal notranslate"><span class="pre">close()</span></code></a>; this stops the
-parallel thread, closes <a class="reference internal" href="#virtualconnection.VirtualConnection.user_end" title="virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#virtualconnection.VirtualConnection.virtual_end" title="virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a>,
+A VC may be closed by calling <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-func docutils literal notranslate"><span class="pre">close()</span></code></a>; this stops the
+parallel thread, closes <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="hvctl.virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="hvctl.virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a>,
 and frees their file descriptors.</p>
 <p>If a VC is used with a <code class="docutils literal notranslate"><span class="pre">with</span></code> block in the following manner:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">VirtualConnection</span> <span class="k">as</span> <span class="n">vc</span><span class="p">:</span>
@@ -68,93 +68,93 @@ defined in an IPython console and then deleted using <code class="docutils liter
 This deletes the name <code class="docutils literal notranslate"><span class="pre">vc</span></code>, but doesn’t seem to garbage-collect
 the object.
 In this case, all running instances of the
-<a class="reference internal" href="#virtualconnection.VirtualConnection" title="virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> class can be closed with</p>
+<a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> class can be closed with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VirtualConnection</span><span class="o">.</span><span class="n">close_all</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="attribute">
-<dt id="virtualconnection.VirtualConnection.buffer_size">
-<code class="sig-name descname">buffer_size</code><a class="headerlink" href="#virtualconnection.VirtualConnection.buffer_size" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.buffer_size">
+<code class="sig-name descname">buffer_size</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.buffer_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The buffer size for the connection
 (how many bits are read at once).</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="virtualconnection.VirtualConnection.sleep_time">
-<code class="sig-name descname">sleep_time</code><a class="headerlink" href="#virtualconnection.VirtualConnection.sleep_time" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.sleep_time">
+<code class="sig-name descname">sleep_time</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.sleep_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>How long (in seconds) the object waits after checking for
 input before doing it again.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="virtualconnection.VirtualConnection.virtual_end">
-<code class="sig-name descname">virtual_end</code><a class="headerlink" href="#virtualconnection.VirtualConnection.virtual_end" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.virtual_end">
+<code class="sig-name descname">virtual_end</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>A file-like object used by a simulated device to read
 and write data.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="virtualconnection.VirtualConnection.user_end">
-<code class="sig-name descname">user_end</code><a class="headerlink" href="#virtualconnection.VirtualConnection.user_end" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.user_end">
+<code class="sig-name descname">user_end</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>A file-like object used by the UI to read and write data.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="virtualconnection.VirtualConnection.thread">
-<code class="sig-name descname">thread</code><a class="headerlink" href="#virtualconnection.VirtualConnection.thread" title="Permalink to this definition">¶</a></dt>
-<dd><p>The parallel thread used to run a <a class="reference internal" href="#virtualconnection.VirtualConnection" title="virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>.</p>
+<dt id="hvctl.virtualconnection.VirtualConnection.thread">
+<code class="sig-name descname">thread</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.thread" title="Permalink to this definition">¶</a></dt>
+<dd><p>The parallel thread used to run a <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="virtualconnection.VirtualConnection.running_instances">
-<code class="sig-name descname">running_instances</code><a class="headerlink" href="#virtualconnection.VirtualConnection.running_instances" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.running_instances">
+<code class="sig-name descname">running_instances</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.running_instances" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class attribute.
 A set of all currently running instances of the
-<a class="reference internal" href="#virtualconnection.VirtualConnection" title="virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> class.</p>
+<a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> class.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="virtualconnection.VirtualConnection.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#virtualconnection.VirtualConnection.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize a new <a class="reference internal" href="#virtualconnection.VirtualConnection" title="virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>.</p>
+<dt id="hvctl.virtualconnection.VirtualConnection.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a new <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>.</p>
 <p>The new instance starts running automatically.
-The arguments set initial values for <a class="reference internal" href="#virtualconnection.VirtualConnection.buffer_size" title="virtualconnection.VirtualConnection.buffer_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">buffer_size</span></code></a>
-and <a class="reference internal" href="#virtualconnection.VirtualConnection.sleep_time" title="virtualconnection.VirtualConnection.sleep_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sleep_time</span></code></a>.</p>
+The arguments set initial values for <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.buffer_size" title="hvctl.virtualconnection.VirtualConnection.buffer_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">buffer_size</span></code></a>
+and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.sleep_time" title="hvctl.virtualconnection.VirtualConnection.sleep_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sleep_time</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="virtualconnection.VirtualConnection.close">
-<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#virtualconnection.VirtualConnection.close" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Stop the parallel thread and close the connection.</p>
 <p>This function returns only after the parallel thread has
 actually stopped.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="virtualconnection.VirtualConnection.close_all">
-<em class="property">classmethod </em><code class="sig-name descname">close_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#virtualconnection.VirtualConnection.close_all" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.close_all">
+<em class="property">classmethod </em><code class="sig-name descname">close_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.close_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close all running instances of this class.</p>
 <p>This function returns only after all parallel threads have
 actually stopped.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="virtualconnection.VirtualConnection.is_running">
-<code class="sig-name descname">is_running</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#virtualconnection.VirtualConnection.is_running" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.is_running">
+<code class="sig-name descname">is_running</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.is_running" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> IFF the parallel thread is running.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="virtualconnection.VirtualConnection.port">
-<em class="property">property </em><code class="sig-name descname">port</code><a class="headerlink" href="#virtualconnection.VirtualConnection.port" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.port">
+<em class="property">property </em><code class="sig-name descname">port</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.port" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a device name (e.g. <code class="docutils literal notranslate"><span class="pre">'/dev/pts/...'</span></code>) that can be
 used as the <em>port</em> argument when a <code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code>
 object is created.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="virtualconnection.VirtualConnection.process">
-<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">input_</em><span class="sig-paren">)</span><a class="headerlink" href="#virtualconnection.VirtualConnection.process" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualconnection.VirtualConnection.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">input_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Form output based on <em>input_</em>.</p>
 <p>By default, <em>input_</em> is simply mirrored back.
 This behaviour can be changed by redefining this function in
@@ -190,21 +190,20 @@ subcalsses.</p>
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">**Contents**:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.widgets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.command_line_ui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.advanced_tui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.queuefile</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualconnection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualhv</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -214,8 +213,8 @@ subcalsses.</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Modules</a><ul>
-      <li>Previous: <a href="queuefile.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
-      <li>Next: <a href="virtualhv.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+      <li>Previous: <a href="queuefile.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.queuefile</span></code></a></li>
+      <li>Next: <a href="virtualhv.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualhv</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>

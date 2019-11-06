@@ -49,7 +49,7 @@ If this argument is included, instead of sending messages to a real HV PSU, HVCt
 This makes it possible to test HVCtl easily without having to connect to a physical HV device.</p>
 </dd>
 </dl>
-<p>HVCtl also includes a scripting possibility. The HV PSU may be controlled programmatically by creating an instance of the <a class="reference internal" href="modules/api.html#api.API" title="api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">api.API</span></code></a> class and accessing its methods (see <a class="reference internal" href="modules/api.html#module-api" title="api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a> for details).</p>
+<p>HVCtl also includes a scripting possibility. The HV PSU may be controlled programmatically by creating an instance of the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">hvctl.api.API</span></code></a> class and accessing its methods (see <a class="reference internal" href="modules/api.html#module-hvctl.api" title="hvctl.api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.api</span></code></a> for details).</p>
 <p>Configuration settings for HVCtl, such as the port used for the serial connection, are located and documented in the file <code class="docutils literal notranslate"><span class="pre">hv.conf</span></code>.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -90,7 +90,7 @@ The voltage is -488.40048840048837 V                   ██
 PRESS &#39;q&#39; TO EXIT                                      ▼
 </pre></div>
 </div>
-<p>The last example demonstrates using HVCtl programmatically with an <a class="reference internal" href="modules/api.html#api.API" title="api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object. The last call to <a class="reference internal" href="modules/api.html#api.API.halt" title="api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.</p>
+<p>The last example demonstrates using HVCtl programmatically with an <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object. The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">api</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
@@ -122,7 +122,6 @@ PRESS &#39;q&#39; TO EXIT                                      ▼
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">**Contents**:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>

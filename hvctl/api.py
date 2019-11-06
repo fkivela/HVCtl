@@ -6,8 +6,8 @@ import time
 import threading
 from dataclasses import dataclass
 
-import config
-from message import Message
+from . import config
+from .message import Message
 
 @dataclass
 class Status:
@@ -132,7 +132,7 @@ class API():
         poll (bool): 
             Determines whether automatic polling should be used 
             or not (see the class description for more details.)
-            Like :attr:`serial_args`, changing this while the 
+            Like :attr:`serial_kwargs`, changing this while the 
             connection is alive has no effect. 
     """
     

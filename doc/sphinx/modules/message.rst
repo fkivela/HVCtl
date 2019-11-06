@@ -1,7 +1,7 @@
-:mod:`message`
-==============
+:mod:`hvctl.message`
+====================
 
-.. automodule:: message
+.. automodule:: hvctl.message
 	
    .. autodata:: COMMANDS
 	   

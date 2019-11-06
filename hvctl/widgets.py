@@ -31,7 +31,7 @@ class CommandLines(urwid.WidgetWrap):
     """
         
     def __init__(self, inputfile, outputfile):
-        """Initialize a new :class:`ScrollableLines` object.
+        """Initialize a new :class:`CommandLines` object.
         
         Args:
             process_command: 
@@ -479,7 +479,7 @@ class ScrollButton(urwid.WidgetWrap):
     """
     
     def __init__(self, symbol, step, position):
-        """Initialize a new ScrollArrow.
+        """Initialize a new :class:`ScrollButton`.
         
         Args:
             symbol (str): 
@@ -522,11 +522,11 @@ class CLI(urwid.WidgetWrap):
         scrollbar (:class:`ScrollBar`):
             A scroll bar.
             
-        arrow_up (:class:`ScrollArrow`):
+        arrow_up (:class:`ScrollButton`):
             An arrow button that can be clicked to scroll the screen 
             up.
             
-        arrow_down (:class:`ScrollArrow`):
+        arrow_down (:class:`ScrollButton`):
             An arrow button that can be clicked to scroll the screen 
             down.
     """
