@@ -3,6 +3,7 @@ TODO:
 update command_line_ui docs
 
 # Current:
+-advanced_ui is weirdly slow
 
 # Essentials:
 -Testing!
@@ -17,7 +18,6 @@ update command_line_ui docs
 -command_line_ui better run docstring
 -HV PSU to HV generator etc?
 -shorten the name of virtualconnection
--advanced_ui is weirdly slow
 -virtualconnection/hv inheritance -> composition
 -implement :ref:`name <actual_ref>`-syntax in docs
 -advancedui switches from 0.0 V to -0.0 V

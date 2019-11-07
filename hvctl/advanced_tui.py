@@ -41,20 +41,14 @@ class AdvancedTUI(urwid.WidgetWrap):
         self.display = urwid.Text('')
         self.cli = widgets.CLI(inputfile, outputfile)
         self._script_finished = False
-
-#        upper_half = urwid.Filler(self.display, 'top', top=0, bottom=0)
-#        divider = urwid.Filler(urwid.Divider('-'))
-#        lower_half = self.cli
-#        # Widget height can be specified as (h, widget). 
-#        #screen = urwid.Pile([(upper_half), (1, divider), lower_half])
-#        screen = urwid.Pile([('weight', 3, upper_half), ('weight', 1, divider), ('weight', 1, lower_half)])
         
         upper_half = self.display
         divider = urwid.Divider('─')
         lower_half = self.cli
         # 'pack' treats upper_half and divider as flow widgets and 
         # prevents the adding of padding to them. 
-        screen = urwid.Pile([('pack', upper_half), ('pack', divider), lower_half])
+        screen = urwid.Pile(
+                [('pack', upper_half), ('pack', divider), lower_half])
         super().__init__(screen)
         
         def run_script():
@@ -86,8 +80,7 @@ class AdvancedTUI(urwid.WidgetWrap):
         self.cli.cmdlines.update()
         # _invalidate marks a widget for re-rendering.
         self.cli.scrollbar._invalidate()
-        #self._loop.set_alarm_in(0.01, self._callback, user_data=None)
-        self._loop.set_alarm_in(2, self._callback, user_data=None)
+        self._loop.set_alarm_in(0.01, self._callback, user_data=None)
 
     def run(self):
         """Start the program and the UI loop in parallel threads."""
