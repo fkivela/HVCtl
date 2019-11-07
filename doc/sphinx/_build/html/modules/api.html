@@ -135,7 +135,7 @@ current regulation is being used.</p>
 
 <dl class="class">
 <dt id="hvctl.api.API">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">serial_kwargs={'baudrate': 9600</em>, <em class="sig-param">'bytesize': 8</em>, <em class="sig-param">'dsrdtr': False</em>, <em class="sig-param">'exclusive': True</em>, <em class="sig-param">'parity': 'N'</em>, <em class="sig-param">'port': '/dev/ttyUSB0'</em>, <em class="sig-param">'rtscts': False</em>, <em class="sig-param">'stopbits': 1</em>, <em class="sig-param">'timeout': None</em>, <em class="sig-param">'xonxoff': False}</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">poll=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class defines an API for communicating with a
 Technix HV PSU.</p>
 <p>Creating an instance of this class forms a serial connection to
@@ -177,41 +177,34 @@ The initial value is 1.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="hvctl.api.API.serial_kwargs">
-<code class="sig-name descname">serial_kwargs</code><a class="headerlink" href="#hvctl.api.API.serial_kwargs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Keyword arguments for creating a <code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code>
-object. These are used when <a class="reference internal" href="#hvctl.api.API.run" title="hvctl.api.API.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> creates a serial
-connection, but changing them while the connection is
-alive has no effect.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="hvctl.api.API.poll">
-<code class="sig-name descname">poll</code><a class="headerlink" href="#hvctl.api.API.poll" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines whether automatic polling should be used
-or not (see the class description for more details.)
-Like <a class="reference internal" href="#hvctl.api.API.serial_kwargs" title="hvctl.api.API.serial_kwargs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">serial_kwargs</span></code></a>, changing this while the
-connection is alive has no effect.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="method">
 <dt id="hvctl.api.API.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">serial_kwargs={'baudrate': 9600</em>, <em class="sig-param">'bytesize': 8</em>, <em class="sig-param">'dsrdtr': False</em>, <em class="sig-param">'exclusive': True</em>, <em class="sig-param">'parity': 'N'</em>, <em class="sig-param">'port': '/dev/ttyUSB0'</em>, <em class="sig-param">'rtscts': False</em>, <em class="sig-param">'stopbits': 1</em>, <em class="sig-param">'timeout': None</em>, <em class="sig-param">'xonxoff': False}</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">poll=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance of this class and form a serial
 connection to the HV PSU.</p>
-<p>The arguments determine initial values for
-<a class="reference internal" href="#hvctl.api.API.serial_kwargs" title="hvctl.api.API.serial_kwargs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">serial_kwargs</span></code></a> and <a class="reference internal" href="#hvctl.api.API.poll" title="hvctl.api.API.poll"><code class="xref py py-attr docutils literal notranslate"><span class="pre">poll</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>poll</strong> (<em>bool</em>) – Determines whether automatic polling should be used
+or not (see the class docstring for more details.)</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments for creating a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code> object.
+By default, the serial connection object is created
+with the values defined in
+<a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">hvctl.config.SERIAL_KWARGS</span></code></a> as keyword
+arguments.
+However, some or all of these default values can be
+overridden by giving new keyword arguments here.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If a keyword argument doesn’t match any of the keys
+    in <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">hvctl.config.SERIAL_KWARGS</span></code></a>.</p></li>
+<li><p><strong>serial.SerialException</strong> – If a serial connection cannot be formed.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">

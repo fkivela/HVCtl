@@ -8,6 +8,8 @@
 	:exclude-members: cmds_and_aliases
    
    	.. automethod:: __init__
+   	.. automethod:: __enter__
+   	.. automethod:: __exit__
    	
    	.. 
    		cmds_and_aliases is documented here manually to prevent autodoc 

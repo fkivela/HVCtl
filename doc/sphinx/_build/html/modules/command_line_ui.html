@@ -38,7 +38,7 @@
 <p>This module defines a simple command-line UI for HVCtl.</p>
 <dl class="class">
 <dt id="hvctl.command_line_ui.CommandLineUI">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.command_line_ui.</code><code class="sig-name descname">CommandLineUI</code><span class="sig-paren">(</span><em class="sig-param">serial_kwargs=None</em>, <em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.command_line_ui.</code><code class="sig-name descname">CommandLineUI</code><span class="sig-paren">(</span><em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI" title="Permalink to this definition">¶</a></dt>
 <dd><p>A simple command-line UI.</p>
 <dl class="attribute">
 <dt id="hvctl.command_line_ui.CommandLineUI.inputfile">
@@ -68,28 +68,41 @@ See <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.cmd
 <dl class="attribute">
 <dt id="hvctl.command_line_ui.CommandLineUI.api">
 <code class="sig-name descname">api</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.api" title="Permalink to this definition">¶</a></dt>
-<dd><p>An <a class="reference internal" href="api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object used to send commands ‘
-‘to the HV PSU.</p>
+<dd><p>An <a class="reference internal" href="api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object used to send commands
+to the HV PSU.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">serial_kwargs=None</em>, <em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new CommandLineUI.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>serial_kwargs</strong> – A dict of keyword arguments for forming a serial
-connection, passed to the initializer of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a>.
-If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>,
-<a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SERIAL_KWARGS</span></code></a> is used.</p></li>
-<li><p><strong>inputfile</strong> – The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a>.
-If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p></li>
-<li><p><strong>outputfile</strong> – The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a>.
-If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p></li>
-</ul>
+<p>:param <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SERIAL_KWARGS</span></code></a> is used.:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>inputfile:</dt><dd><p>The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a>.
+If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p>
+</dd>
+<dt>outputfile:</dt><dd><p>The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a>.
+If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p>
+</dd>
+<dt>kwargs:</dt><dd><p>Keyword arguments are passed to the constructor of
+<a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a>.</p>
 </dd>
 </dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.__enter__">
+<code class="sig-name descname">__enter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.__enter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called upon entering a <code class="docutils literal notranslate"><span class="pre">with</span></code> block; returns <em>self</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.__exit__">
+<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.__exit__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called upon exiting a <code class="docutils literal notranslate"><span class="pre">with</span></code> block;
+calls <a class="reference internal" href="api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">api.halt()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="attribute">

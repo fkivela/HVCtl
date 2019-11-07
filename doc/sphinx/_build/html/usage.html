@@ -91,15 +91,15 @@ PRESS &#39;q&#39; TO EXIT                                      ▼
 </pre></div>
 </div>
 <p>The last example demonstrates using HVCtl programmatically with an <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object. The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">api</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl.api</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
 <span class="go">-0.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">set_voltage</span><span class="p">(</span><span class="o">-</span><span class="mi">5000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">set_voltage</span><span class="p">(</span><span class="o">-</span><span class="mi">5000</span><span class="p">)</span>
 <span class="go">-5006.1050061050055</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
 <span class="go">-5006.1050061050055</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span><span class="o">.</span><span class="n">halt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">halt</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

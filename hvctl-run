@@ -2,12 +2,12 @@
 """This is the main script used to run HVCtl."""
 
 import argparse
-import sys
 
-from hvctl import config
 from hvctl.queuefile import QueueFile
 from hvctl.command_line_ui import CommandLineUI
 from hvctl.virtualhv import VirtualHV
+
+### Command line arguments ###
 
 # The argparse module hepls with parsing command line arguments.
 # The -h option displays an automatically generated help message.
@@ -21,36 +21,49 @@ parser.add_argument('-s', '--simple', help='use a simple command-line UI',
 
 args = parser.parse_args()
 
-if args.simple:
-    inputfile = sys.stdin
-    outputfile = sys.stdout
-else:
-    # If args.simple is specified, AdvancedTUI is not imported.
+### The main part of the script ###
+
+try:
+    # If the "--virtual" command line argument is supplied, 
+    # use a virtual HV.
+    if args.virtual:
+        virtualhv = VirtualHV()
+        port = virtualhv.port
+    
+    # If the "-simple" command line argument is specified, 
+    # AdvancedTUI is not imported.
     # This makes it possible to run the program without installing 
     # urwid.
-    from hvctl.advanced_tui import AdvancedTUI
-    inputfile = QueueFile(block=True)
-    outputfile = QueueFile()    
-    
-cmd_line_ui = CommandLineUI(config.SERIAL_KWARGS.copy(), inputfile, outputfile)
-
-def run_script():
-    if args.virtual:    
-        with VirtualHV() as virtualhv:
-            cmd_line_ui.api.serial_kwargs['port'] = virtualhv.port
-            cmd_line_ui.run()
+    if args.simple:
+        clui = CommandLineUI(port=port)
+        clui.run()
     else:
-        cmd_line_ui.run()
+        from hvctl.advanced_tui import AdvancedTUI
+        
+        # Connect the program and the UI with *inputfile* and 
+        # *outputfile*.
+        inputfile = QueueFile(block=True)
+        outputfile = QueueFile()    
+        
+        # Create an AdvancedTUI that wraps a CommandLineUI.
+        clui = CommandLineUI(inputfile, outputfile, port=port)
+        script = lambda: clui.run()
+        adv_ui = AdvancedTUI(script, inputfile, outputfile)
+        
+        # Show HV status in the UI.
+        status = clui.api.status
+        status.callback = lambda: adv_ui.display.set_text(str(status))
+        
+        adv_ui.run()
+        
+finally:  
 
-# Use a CommandLineUI or a AdvancedTUI depending on *args*.
-if args.simple:
-    run = run_script
-else:
-    tui = AdvancedTUI(run_script, inputfile, outputfile)
-    status = cmd_line_ui.api.status
-    def callback():
-        tui.display.set_text(str(status))
-    status.callback = callback
-    run = tui.run
+    # Close the serial connection and stop the parallel thread 
+    # used for polling. 
+    clui.api.halt()
 
-run()
+    # Close the virtual connection, if it was used.
+    try:
+        virtualhv.close()
+    except NameError:
+        pass

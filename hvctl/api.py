@@ -109,7 +109,7 @@ class API():
     The polling routine is run in a parallel thread, and should be 
     closed after the API is no lenger needed.
     This can be done by calling :meth:`halt` or running the API in a 
-    ``with`` bolck. Both of these closing methods also close the 
+    ``with`` block. Both of these closing methods also close the 
     serial connection.
             
     Attributes:
@@ -121,39 +121,57 @@ class API():
         timestep (float):
             If *self* was initialized with ``poll=True``, this 
             determines the time (in seconds) between polling messages.
-            The initial value is 1.
-            
-        serial_kwargs (dict): 
-            Keyword arguments for creating a :class:`serial.Serial` 
-            object. These are used when :meth:`run` creates a serial 
-            connection, but changing them while the connection is 
-            alive has no effect.
-            
-        poll (bool): 
-            Determines whether automatic polling should be used 
-            or not (see the class description for more details.)
-            Like :attr:`serial_kwargs`, changing this while the 
-            connection is alive has no effect. 
+            The initial value is 1.            
     """
     
-    def __init__(self, serial_kwargs=config.SERIAL_KWARGS, poll=True):
+    def __init__(self, poll=True, **kwargs):
         """Create a new instance of this class and form a serial 
         connection to the HV PSU.
         
-        The arguments determine initial values for 
-        :attr:`serial_kwargs` and :attr:`poll`.
-        """        
+        Args:
+            poll (bool): 
+                Determines whether automatic polling should be used 
+                or not (see the class docstring for more details.)
+                
+            kwargs: 
+                Keyword arguments for creating a 
+                :class:`serial.Serial` object. 
+                By default, the serial connection object is created 
+                with the values defined in 
+                :const:`hvctl.config.SERIAL_KWARGS` as keyword 
+                arguments.
+                However, some or all of these default values can be 
+                overridden by giving new keyword arguments here.
+                
+        Raises:
+            TypeError:
+                If a keyword argument doesn't match any of the keys 
+                in :const:`hvctl.config.SERIAL_KWARGS`.
+                
+            serial.SerialException:
+                If a serial connection cannot be formed.
+        """
         self.status = Status()
         self.timestep = 1
-        self.serial_kwargs = serial_kwargs
-        self.poll = poll
         
-        self._connection = None        
+        serargs = config.SERIAL_KWARGS.copy()
+        for key, value in kwargs.items():
+            if key not in config.SERIAL_KWARGS:
+                raise ValueError(f'invalid keyword: {key}')
+            serargs[key] = value
+        
+        self._connection = serial.Serial(**serargs)       
+        
         self._stop_flag = threading.Event()
         # *lock* prevents *_poll*-sent and user-sent messages from 
         # being sent at the same time. 
         self._lock = threading.Lock()
         self._thread = threading.Thread(target=self._poll, daemon=True)
+        # _thread and _lock are created even with poll=False, 
+        # since they are referenced by methods.
+                
+        if poll:
+            self._thread.start()
         
     def run(self):
         """Form a connection to the HV PSU and start polling 
@@ -164,9 +182,6 @@ class API():
         stopped after the API is no longer needed or in the case 
         that an error occurs.
         """
-        self._connection = serial.Serial(**self.serial_kwargs)       
-        if self.poll:
-            self._thread.start()
         
     def __enter__(self):
         """Called upon entering a ``with`` block; returns *self*."""
@@ -284,6 +299,7 @@ class API():
         performed are skipped.
         """
         self._stop_flag.set()
+        # Threads that haven't been started are not alive.
         while self._thread.is_alive():
             time.sleep(0.001)
         

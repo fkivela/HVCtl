@@ -1,21 +1,36 @@
 TODO:
 
+update command_line_ui docs
+
+# Current:
+-Make api accept serial args as kwargs
+
+# Essentials:
 -Testing!
 -Proofreading!
+-rewrite virtualconnection docs
 -Better error messages when there is no connection
 -Add examples for the use of virtualhv
 -Document hvctl.__init__
--Make api accept serial args as kwargs
--Sending a message without connection, connecting, and then sending another message blocks
+-Sending a message without connection, connecting, and then sending another message blocks (make unlock the lock if send raises an error?)
 -Update the examples
 -list of commands and aliases to docs
--inhibit to inhibition?
+-command_line_ui better run docstring
 -HV PSU to HV generator etc?
--More functionality to vhv
--What is inhibition?
--volts vs kilovolts?
 -pycache in .gitignore doesn't seem to work
 -command editing doesn't seem to work with -s
--hvctl to package; move hvctl-run
--link to external docs
 -shorten the name of virtualconnection
+-advanced_ui is weirdly slow
+-virtualconnection/hv inheritance -> composition
+-implement :ref:`name <actual_ref>`-syntax in docs
+-advancedui switches from 0.0 V to -0.0 V
+
+# Ask Tomas
+-inhibit to inhibition?
+-What is inhibition?
+-volts vs kilovolts?
+
+# Can be added later
+-More functionality to vhv
+-try pylint?
+-link to external docs

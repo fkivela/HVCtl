@@ -13,6 +13,12 @@ from . import config
 class CommandLineUI:
     """A simple command-line UI.
     
+    Instances of this class should be closed after they are no longer 
+    needed by calling :meth:`api.halt() <hvctl.api.API.halt()> or 
+    using a ``with`` block. Otherwise the parallel thread created by 
+    :attr:`api` may continue to run in the background and consume 
+    resources.
+    
     Attributes:
         inputfile: 
             A file object for receiving input.
@@ -26,8 +32,8 @@ class CommandLineUI:
             See :meth:`cmd_debug` for details.
         
         api:
-            An :class:`~hvctl.api.API` object used to send commands '
-            'to the HV PSU.                    
+            An :class:`~hvctl.api.API` object used to send commands 
+            to the HV PSU.                    
     """
     
     intro = "Welcome to HVCtl! Type 'help' for a list of commands."
@@ -64,14 +70,10 @@ class CommandLineUI:
     and the second is a list of aliases for that command.
     """
     
-    def __init__(self, serial_kwargs=None, inputfile=None, outputfile=None):
+    def __init__(self, inputfile=None, outputfile=None, **kwargs):
         """Initialize a new CommandLineUI.
         
         Args:
-            serial_kwargs:
-                A dict of keyword arguments for forming a serial 
-                connection, passed to the initializer of :attr:`api`.
-                If this is ``None``, 
                 :attr:`~hvctl.config.SERIAL_KWARGS` is used.
             inputfile:
                 The value of :attr:`inputfile`.
@@ -79,6 +81,9 @@ class CommandLineUI:
             outputfile:
                 The value of :attr:`outputfile`.
                 If this is ``None``, the value is :attr:`sys.stdin`.
+            kwargs:
+                Keyword arguments are passed to the constructor of 
+                :attr:`api`.
         """
                 
         if inputfile:
@@ -91,13 +96,27 @@ class CommandLineUI:
         else:
             self.outputfile = sys.stdout
             
-        if not serial_kwargs:
-            serial_kwargs = config.SERIAL_KWARGS
-        
+        self.api = api.API(**kwargs)
         self.debug = False
-        self.api = api.API(serial_kwargs=config.SERIAL_KWARGS, 
-                           poll=True, 
-        )
+
+    def __enter__(self):
+        """Called upon entering a ``with`` block; returns *self*."""
+        return self
+    
+    def __exit__(self):
+        """Called upon exiting a ``with`` block; 
+        calls :meth:`api.halt() <hvctl.api.API.halt()>`.
+        """
+        self.api.halt()
+
+    def run(self):
+        """Start the UI."""
+        self.print(self.intro)
+
+        stop = False
+        while not stop:
+            string = self.input(self.prompt)
+            stop = self._run_command(string)
 
     # Don't use reStructuredText in command docstrings, since they are 
     # displayed to the user unaltered.
@@ -250,18 +269,7 @@ class CommandLineUI:
         the *file* argument.
         """
         print(*objects, file=self.outputfile, sep=sep, end=end, flush=True)
-                        
-    def run(self):
-        """Start the UI."""
-        with self.api:
-            self.api.run()
-            self.print(self.intro)
-
-            stop = False
-            while not stop:
-                string = self.input(self.prompt)
-                stop = self._run_command(string)
-        
+                                
     def _run_command(self, line):
         """Parse *line* and run it as a command."""
         # Separate the command and its arguments.

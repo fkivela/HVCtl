@@ -62,12 +62,12 @@ In the second example, no -s argument is given, and HVCtl uses a more advanced U
 
 The last example demonstrates using HVCtl programmatically with an :class:`~hvctl.api.API` object. The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.
 
->>> import api
->>> apiobj = api.API()
->>> apiobj.get_voltage()
+>>> import hvctl.api
+>>> api = hvctl.api.API()
+>>> api.get_voltage()
 -0.0
->>> apiobj.set_voltage(-5000)
+>>> api.set_voltage(-5000)
 -5006.1050061050055
->>> apiobj.get_voltage()
+>>> api.get_voltage()
 -5006.1050061050055
->>> apiobj.halt()
+>>> api.halt()
