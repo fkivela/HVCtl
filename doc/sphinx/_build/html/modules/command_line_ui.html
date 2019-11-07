@@ -40,6 +40,11 @@
 <dt id="hvctl.command_line_ui.CommandLineUI">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.command_line_ui.</code><code class="sig-name descname">CommandLineUI</code><span class="sig-paren">(</span><em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI" title="Permalink to this definition">¶</a></dt>
 <dd><p>A simple command-line UI.</p>
+<p>Instances of this class should be closed after they are no longer
+needed by calling <a class="reference internal" href="api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">api.halt()</span></code></a> or
+using a <code class="docutils literal notranslate"><span class="pre">with</span></code> block. Otherwise the parallel thread created by
+<a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a> may continue to run in the background and consume
+resources.</p>
 <dl class="attribute">
 <dt id="hvctl.command_line_ui.CommandLineUI.inputfile">
 <code class="sig-name descname">inputfile</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="Permalink to this definition">¶</a></dt>
@@ -100,9 +105,10 @@ If this is <code class="docutils literal notranslate"><span class="pre">None</sp
 
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.__exit__">
-<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.__exit__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param">exception_type</em>, <em class="sig-param">exception_value</em>, <em class="sig-param">traceback</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.__exit__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called upon exiting a <code class="docutils literal notranslate"><span class="pre">with</span></code> block;
 calls <a class="reference internal" href="api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">api.halt()</span></code></a>.</p>
+<p>The arguments are ignored.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -221,6 +227,9 @@ A string used to indent text blocks.</p>
 <p>This method works like the built-in <code class="xref py py-func docutils literal notranslate"><span class="pre">input()</span></code> function,
 but uses <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> and <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a> instead of
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdout</span></code>.</p>
+<p>The line editing functionality provided by the <code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code>
+works with this method only if <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> is
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p>
 </dd></dl>
 
 <dl class="attribute">

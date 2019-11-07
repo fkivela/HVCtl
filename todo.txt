@@ -3,7 +3,6 @@ TODO:
 update command_line_ui docs
 
 # Current:
--Make api accept serial args as kwargs
 
 # Essentials:
 -Testing!
@@ -17,8 +16,6 @@ update command_line_ui docs
 -list of commands and aliases to docs
 -command_line_ui better run docstring
 -HV PSU to HV generator etc?
--pycache in .gitignore doesn't seem to work
--command editing doesn't seem to work with -s
 -shorten the name of virtualconnection
 -advanced_ui is weirdly slow
 -virtualconnection/hv inheritance -> composition

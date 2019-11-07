@@ -14,7 +14,7 @@ class CommandLineUI:
     """A simple command-line UI.
     
     Instances of this class should be closed after they are no longer 
-    needed by calling :meth:`api.halt() <hvctl.api.API.halt()> or 
+    needed by calling :meth:`api.halt() <hvctl.api.API.halt()>` or 
     using a ``with`` block. Otherwise the parallel thread created by 
     :attr:`api` may continue to run in the background and consume 
     resources.
@@ -85,7 +85,6 @@ class CommandLineUI:
                 Keyword arguments are passed to the constructor of 
                 :attr:`api`.
         """
-                
         if inputfile:
             self.inputfile = inputfile
         else:
@@ -96,6 +95,10 @@ class CommandLineUI:
         else:
             self.outputfile = sys.stdout
             
+        # Replacing sys.stdin and sys.stdout would be simpler, but 
+        # could lead to unintended consequences, and would e.g. 
+        # prevent using multiple CommandLineUIs at once.
+            
         self.api = api.API(**kwargs)
         self.debug = False
 
@@ -103,9 +106,11 @@ class CommandLineUI:
         """Called upon entering a ``with`` block; returns *self*."""
         return self
     
-    def __exit__(self):
+    def __exit__(self,  exception_type, exception_value, traceback):
         """Called upon exiting a ``with`` block; 
         calls :meth:`api.halt() <hvctl.api.API.halt()>`.
+        
+        The arguments are ignored. 
         """
         self.api.halt()
 
@@ -249,16 +254,24 @@ class CommandLineUI:
         This method works like the built-in :func:`.input` function, 
         but uses :attr:`inputfile` and :attr:`outputfile` instead of 
         :attr:`sys.stdin` and :attr:`sys.stdout`.
+        
+        The line editing functionality provided by the :mod:`readline` 
+        works with this method only if :attr:`inputfile` is 
+        :attr:`sys.stdin`.
         """
         # `.input` instead of `input` makes Sphinx refer to the 
         # built-in input instead of this method.
+        
+        if self.inputfile == sys.stdin:
+            return input(prompt) 
+        
         self.print(prompt, end='')
         string = self.inputfile.readline()
         
         if string[-1] == '\n':
             return string[:-1]
         else:
-            return string
+            return string        
 
     def print(self, *objects, sep=' ', end='\n'):
         """Print text to the UI.
