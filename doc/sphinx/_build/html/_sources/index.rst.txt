@@ -11,8 +11,8 @@ Documentation
    
    installation.rst
    usage.rst
-   protocol.rst
    modules/index.rst
+   protocol.rst
 
 Author
 ------

@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="RS232 Control protocol" href="protocol.html" />
+    <link rel="next" title="Modules" href="modules/index.html" />
     <link rel="prev" title="Installation" href="installation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -35,8 +35,11 @@
             
   <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>HVCtl may be launched in an interactive mode by running the script <code class="docutils literal notranslate"><span class="pre">hvctl-run</span></code>.
-<code class="docutils literal notranslate"><span class="pre">hvctl-run</span></code> accepts the following command-line arguments:</p>
+<div class="section" id="interactive-mode">
+<h2>Interactive mode<a class="headerlink" href="#interactive-mode" title="Permalink to this headline">¶</a></h2>
+<p>HVCtl may be launched in an interactive mode with the command <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">hvctl</span> <span class="pre">-args</span></code> or <code class="docutils literal notranslate"><span class="pre">hvctl-run</span> <span class="pre">-args</span></code>.
+Both commands run the same script; the latter is simply a shortcut to make the command slightly shorter.
+The commands accept the following command-line arguments:</p>
 <dl class="option-list">
 <dt><kbd><span class="option">-s</span>, <span class="option">--simple</span></kbd></dt>
 <dd><p>Run HVCtl with a simple command-line interface.
@@ -49,12 +52,39 @@ If this argument is included, instead of sending messages to a real HV PSU, HVCt
 This makes it possible to test HVCtl easily without having to connect to a physical HV device.</p>
 </dd>
 </dl>
-<p>HVCtl also includes a scripting possibility. The HV PSU may be controlled programmatically by creating an instance of the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">hvctl.api.API</span></code></a> class and accessing its methods (see <a class="reference internal" href="modules/api.html#module-hvctl.api" title="hvctl.api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.api</span></code></a> for details).</p>
+</div>
+<div class="section" id="importing">
+<h2>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h2>
+<p>HVCtl also includes an importable API for controlling the HV PSU programmatically.
+This can be accessed by creating an instance of the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">hvctl.api.API</span></code></a> class and accessing its methods (see <a class="reference internal" href="modules/api.html#module-hvctl.api" title="hvctl.api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.api</span></code></a> for details).
+The <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">hvctl.virtualhv.VirtualHV</span></code></a> class can be used to test the API without access to a physical HV PSU.</p>
+<p>The <a class="reference internal" href="modules/index.html"><span class="doc">Modules</span></a> page lists all importable Python modules included in HVCtl.
+These modules are all located in the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package, and can be imported with any of the following syntaxes,
+as long as the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory is your working directory or in your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl.api</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="k">import</span> <span class="n">api</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span> <span class="c1"># The name &#39;api&#39; is already taken</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl.api</span> <span class="k">import</span> <span class="n">API</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
+</pre></div>
+</div>
 <p>Configuration settings for HVCtl, such as the port used for the serial connection, are located and documented in the file <code class="docutils literal notranslate"><span class="pre">hv.conf</span></code>.</p>
+</div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>The following examples demonstrate voltage can be read and set using each of the user interfaces provided by HVCtl.</p>
-<p>In the first example, HVCtl is run in an interactive mode with the -s argument.</p>
+<p>The following examples demonstrate reading and setting the voltage by using the different interfaces provided by HVCtl.</p>
+<div class="section" id="interactive-mode-with-s">
+<h3>Interactive mode with -s<a class="headerlink" href="#interactive-mode-with-s" title="Permalink to this headline">¶</a></h3>
+<p>HVCtl is run in interactive mode with the -s argument, resulting in a simple command-line ui.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hvctl-run -s
 Welcome to HVCtl! Type &#39;help&#39; for a list of commands.
 &gt;&gt; getvoltage
@@ -66,7 +96,12 @@ The voltage is -5006.1050061050055 V
 &gt;&gt; exit
 </pre></div>
 </div>
-<p>In the second example, no -s argument is given, and HVCtl uses a more advanced UI. The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV PSU. The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.</p>
+</div>
+<div class="section" id="interactive-mode-without-s">
+<h3>Interactive mode without -s<a class="headerlink" href="#interactive-mode-without-s" title="Permalink to this headline">¶</a></h3>
+<p>Here the -s argument hasn’t been given, and HVCtl uses a more advanced UI.
+The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV PSU.
+The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Voltage: -0.00 V
 Current: 0.00 mA
 Regulation mode: voltage
@@ -90,7 +125,11 @@ The voltage is -488.40048840048837 V                   ██
 PRESS &#39;q&#39; TO EXIT                                      ▼
 </pre></div>
 </div>
-<p>The last example demonstrates using HVCtl programmatically with an <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object. The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.</p>
+</div>
+<div class="section" id="using-the-api">
+<h3>Using the API<a class="headerlink" href="#using-the-api" title="Permalink to this headline">¶</a></h3>
+<p>This example demonstrates using HVCtl in an interactive Python interpreter with an <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object.
+The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl.api</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
@@ -101,6 +140,20 @@ PRESS &#39;q&#39; TO EXIT                                      ▼
 <span class="go">-5006.1050061050055</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">halt</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="using-the-api-with-a-virtual-hv-psu">
+<h3>Using the API with a virtual HV PSU<a class="headerlink" href="#using-the-api-with-a-virtual-hv-psu" title="Permalink to this headline">¶</a></h3>
+<p>This is an example of a Python script that uses a virtual HV PSU.
+The script uses <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks to ensure that both the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> are closed properly at the end.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="k">import</span> <span class="n">api</span><span class="p">,</span> <span class="n">virtualhv</span>
+
+<span class="k">with</span> <span class="n">virtualhv</span><span class="o">.</span><span class="n">VirtualHV</span> <span class="k">as</span> <span class="n">vhv</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">vhv</span><span class="o">.</span><span class="n">port</span><span class="p">):</span>
+                <span class="n">api</span><span class="o">.</span><span class="n">set_voltage</span><span class="p">(</span><span class="o">-</span><span class="mi">5000</span><span class="p">)</span>
+                <span class="c1"># More code here...</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -125,11 +178,13 @@ PRESS &#39;q&#39; TO EXIT                                      ▼
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-mode">Interactive mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#importing">Importing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">RS232 Control protocol</a></li>
 </ul>
 
 <div class="relations">
@@ -137,7 +192,7 @@ PRESS &#39;q&#39; TO EXIT                                      ▼
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
-      <li>Next: <a href="protocol.html" title="next chapter">RS232 Control protocol</a></li>
+      <li>Next: <a href="modules/index.html" title="next chapter">Modules</a></li>
   </ul></li>
 </ul>
 </div>
