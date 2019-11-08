@@ -1,5 +1,5 @@
-:mod:`hvctl.api`
-================
+:mod:`~hvctl.api`
+=================
 
 .. automodule:: hvctl.api
 	   

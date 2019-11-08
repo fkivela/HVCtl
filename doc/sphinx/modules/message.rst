@@ -1,5 +1,5 @@
-:mod:`hvctl.message`
-====================
+:mod:`~hvctl.message`
+=====================
 
 .. automodule:: hvctl.message
 	

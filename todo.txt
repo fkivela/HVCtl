@@ -1,12 +1,12 @@
 TODO:
 
 # Current:
+-Document hvctl.__init__
 
 # Essentials:
 -rewrite virtualconnection docs
 -Better error messages when there is no connection
 -Add examples for the use of virtualhv
--Document hvctl.__init__
 -Sending a message without connection, connecting, and then sending another message blocks (make unlock the lock if send raises an error?)
 -Update the examples
 -HV PSU to HV generator etc?
@@ -14,6 +14,7 @@ TODO:
 -virtualconnection/hv inheritance -> composition
 -does this work on windows?
 -split commands at any whitespace instead of just ' '
+-__main__ module
 
 # When all else is ready
 -Testing!

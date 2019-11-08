@@ -1,5 +1,5 @@
-:mod:`hvctl.widgets`
-====================
+:mod:`~hvctl.widgets`
+=====================
 
 .. automodule:: hvctl.widgets
 	   

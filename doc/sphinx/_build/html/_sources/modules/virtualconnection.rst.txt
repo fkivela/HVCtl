@@ -1,5 +1,5 @@
-:mod:`hvctl.virtualconnection`
-==============================
+:mod:`~hvctl.virtualconnection`
+===============================
 
 .. automodule:: hvctl.virtualconnection
 	   

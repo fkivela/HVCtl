@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="hvctl.config" href="config.html" />
+    <link rel="next" title="config" href="config.html" />
     <link rel="prev" title="RS232 Control protocol" href="../protocol.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -35,19 +35,37 @@
             
   <div class="section" id="modules">
 <h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
-<p>This page contains a list of all the Python modules included in the HVCtl program.</p>
+<p>This page contains a list of all Python modules included in the HVCtl program.
+All modules are located in the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package, and can be imported with any of the following syntaxes,
+as long as the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory is your working directory or in your <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl.api</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="k">import</span> <span class="n">api</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apiobj</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">()</span> <span class="c1"># The name &#39;api&#39; is already taken</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl.api</span> <span class="k">import</span> <span class="n">API</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">API</span><span class="p">()</span>
+</pre></div>
+</div>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Modules:</span></p>
+<p class="caption"><span class="caption-text">List of modules:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.config</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.message</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.api</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.widgets</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.command_line_ui</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.advanced_tui</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.queuefile</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualconnection</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualhv</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </div>
 </div>
@@ -74,15 +92,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.config</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.message</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.api</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.widgets</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.command_line_ui</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.advanced_tui</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.queuefile</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualconnection</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -92,7 +110,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="../protocol.html" title="previous chapter">RS232 Control protocol</a></li>
-      <li>Next: <a href="config.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hvctl.config</span></code></a></li>
+      <li>Next: <a href="config.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
   </ul></li>
 </ul>
 </div>

@@ -20,9 +20,6 @@ sys.path.insert(0, os.path.abspath('.'))
 #sys.path.insert(0, os.path.abspath('../../hvctl'))
 sys.path.insert(0, os.path.abspath('../../'))
 
-from hvctl import *
-print(api)
-
 # -- Project information -----------------------------------------------------
 
 project = 'HVCtl'

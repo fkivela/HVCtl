@@ -1,5 +1,5 @@
-:mod:`hvctl.virtualhv`
-======================
+:mod:`~hvctl.virtualhv`
+=======================
 
 .. automodule:: hvctl.virtualhv
 	   

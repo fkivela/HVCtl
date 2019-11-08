@@ -1,5 +1,5 @@
-:mod:`hvctl.queuefile`
-======================
+:mod:`~hvctl.queuefile`
+=======================
 
 .. automodule:: hvctl.queuefile
 	   
