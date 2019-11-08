@@ -1,26 +1,24 @@
 TODO:
 
-update command_line_ui docs
-
 # Current:
--advanced_ui is weirdly slow
 
 # Essentials:
--Testing!
--Proofreading!
 -rewrite virtualconnection docs
 -Better error messages when there is no connection
 -Add examples for the use of virtualhv
 -Document hvctl.__init__
 -Sending a message without connection, connecting, and then sending another message blocks (make unlock the lock if send raises an error?)
 -Update the examples
--list of commands and aliases to docs
--command_line_ui better run docstring
 -HV PSU to HV generator etc?
 -shorten the name of virtualconnection
 -virtualconnection/hv inheritance -> composition
+-does this work on windows?
+-split commands at any whitespace instead of just ' '
+
+# When all else is ready
+-Testing!
+-Proofreading!
 -implement :ref:`name <actual_ref>`-syntax in docs
--advancedui switches from 0.0 V to -0.0 V
 
 # Ask Tomas
 -inhibit to inhibition?
@@ -31,3 +29,9 @@ update command_line_ui docs
 -More functionality to vhv
 -try pylint?
 -link to external docs
+-to_bytes -> __bytes__
+
+# TurboCtl
+>>> from functools import singledispatch
+unittest.mock — mock object library
+__main__ module

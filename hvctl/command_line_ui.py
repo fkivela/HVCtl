@@ -33,21 +33,48 @@ class CommandLineUI:
         
         api:
             An :class:`~hvctl.api.API` object used to send commands 
-            to the HV PSU.                    
+            to the HV PSU.    
+            
+        intro:
+            A string displayed to the user upon starting the UI.
+            The default value is ``"Welcome to HVCtl! Type 'help' 
+            for a list of commands."``.
+            
+        prompt: 
+            A string displayed to the user every time the UI 
+            requests input. The default value is ``'>> '``.
+            
+        indent:
+            Class attribute.
+            A string used to indent text blocks.
+            
+        cmds_and_aliases:
+            Class attribute.
+            A list of tuples, where index 0 of each tuple contains 
+            the name of a commands accepted by the UI and index 1 
+            contains a list of aliases for that command.
+            Has the following falue:
+            ::
+            
+                [
+                    ('getvoltage', ['getu']),
+                    ('getcurrent', ['geti']),
+                    ('setvoltage', ['setu']),
+                    ('setcurrent', ['seti']),
+                    ('hvon'      , []),
+                    ('hvoff'     , []),
+                    ('mode'      , []),
+                    ('inhibit'   , ['i']),
+                    ('status'    , ['s']),
+                    ('fullstatus', ['fs']),
+                    ('exit'      , ['e', 'q', 'x']),
+                    ('help'      , ['h']),
+                    ('debug'     , ['d']),
+                ]        
     """
     
-    intro = "Welcome to HVCtl! Type 'help' for a list of commands."
-    """Class attribute.
-    A string displayed to the user upon starting the UI.
-    """
-    prompt = '>> '
-    """Class attribute.
-    A string displayed to the user every time the UI requests input.
-    """
     indent = '    '
-    """Class attribute.
-    A string used to indent text blocks.
-    """
+
     cmds_and_aliases = [
         ('getvoltage', ['getu']),
         ('getcurrent', ['geti']),
@@ -63,18 +90,11 @@ class CommandLineUI:
         ('help'      , ['h']),
         ('debug'     , ['d']),
      ]
-    """Class attribute.
-    A list of two-index tuples.
-    The first index is of each tuple is the primary name of a command 
-    accepted by the UI,
-    and the second is a list of aliases for that command.
-    """
     
     def __init__(self, inputfile=None, outputfile=None, **kwargs):
         """Initialize a new CommandLineUI.
         
         Args:
-                :attr:`~hvctl.config.SERIAL_KWARGS` is used.
             inputfile:
                 The value of :attr:`inputfile`.
                 If this is ``None``, the value is :attr:`sys.stdin`.
@@ -101,6 +121,8 @@ class CommandLineUI:
             
         self.api = api.API(**kwargs)
         self.debug = False
+        self.intro = "Welcome to HVCtl! Type 'help' for a list of commands."
+        self.prompt = '>> '
 
     def __enter__(self):
         """Called upon entering a ``with`` block; returns *self*."""
@@ -115,7 +137,20 @@ class CommandLineUI:
         self.api.halt()
 
     def run(self):
-        """Start the UI."""
+        """Start the UI.
+        
+        This functions runs the following algorithm:
+            
+        1. Print the :attr:`prompt` and wait for user input.
+        2. Parse the input string into a command and its arguments by 
+           splitting it at whitespace.
+        3. Call a method with the name ``cmd_<the given command>``.
+           The method will execute the command and print its output.
+           If no method with that name exists, print an error message 
+           and start again from step 1.
+        4. If the method returned ``True``, break the loop. 
+           Otherwise, start another iteration from step 1.
+        """
         self.print(self.intro)
 
         stop = False

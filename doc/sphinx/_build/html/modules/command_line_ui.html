@@ -77,24 +77,71 @@ See <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.cmd
 to the HV PSU.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="hvctl.command_line_ui.CommandLineUI.intro">
+<code class="sig-name descname">intro</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.intro" title="Permalink to this definition">¶</a></dt>
+<dd><p>A string displayed to the user upon starting the UI.
+The default value is <code class="docutils literal notranslate"><span class="pre">&quot;Welcome</span> <span class="pre">to</span> <span class="pre">HVCtl!</span> <span class="pre">Type</span> <span class="pre">'help'</span>
+<span class="pre">for</span> <span class="pre">a</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">commands.&quot;</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hvctl.command_line_ui.CommandLineUI.prompt">
+<code class="sig-name descname">prompt</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.prompt" title="Permalink to this definition">¶</a></dt>
+<dd><p>A string displayed to the user every time the UI
+requests input. The default value is <code class="docutils literal notranslate"><span class="pre">'&gt;&gt;</span> <span class="pre">'</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hvctl.command_line_ui.CommandLineUI.indent">
+<code class="sig-name descname">indent</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class attribute.
+A string used to indent text blocks.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmds_and_aliases">
+<code class="sig-name descname">cmds_and_aliases</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmds_and_aliases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class attribute.
+A list of tuples, where index 0 of each tuple contains
+the name of a commands accepted by the UI and index 1
+contains a list of aliases for that command.
+Has the following falue:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;getvoltage&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;getu&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;getcurrent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;geti&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;setvoltage&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;setu&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;setcurrent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;seti&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;hvon&#39;</span>      <span class="p">,</span> <span class="p">[]),</span>
+    <span class="p">(</span><span class="s1">&#39;hvoff&#39;</span>     <span class="p">,</span> <span class="p">[]),</span>
+    <span class="p">(</span><span class="s1">&#39;mode&#39;</span>      <span class="p">,</span> <span class="p">[]),</span>
+    <span class="p">(</span><span class="s1">&#39;inhibit&#39;</span>   <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;status&#39;</span>    <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;fullstatus&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;fs&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;exit&#39;</span>      <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;help&#39;</span>      <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;debug&#39;</span>     <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new CommandLineUI.</p>
-<p>:param <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SERIAL_KWARGS</span></code></a> is used.:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>inputfile:</dt><dd><p>The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a>.
-If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p>
-</dd>
-<dt>outputfile:</dt><dd><p>The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a>.
-If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p>
-</dd>
-<dt>kwargs:</dt><dd><p>Keyword arguments are passed to the constructor of
-<a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputfile</strong> – The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a>.
+If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p></li>
+<li><p><strong>outputfile</strong> – The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a>.
+If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments are passed to the constructor of
+<a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a>.</p></li>
+</ul>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -109,16 +156,6 @@ If this is <code class="docutils literal notranslate"><span class="pre">None</sp
 <dd><p>Called upon exiting a <code class="docutils literal notranslate"><span class="pre">with</span></code> block;
 calls <a class="reference internal" href="api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">api.halt()</span></code></a>.</p>
 <p>The arguments are ignored.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmds_and_aliases">
-<code class="sig-name descname">cmds_and_aliases</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmds_and_aliases" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class attribute.
-A list of two-index tuples.
-The first index is of each tuple is the primary name of a command
-accepted by the UI,
-and the second is a list of aliases for that command.</p>
 </dd></dl>
 
 <dl class="method">
@@ -213,13 +250,6 @@ otherwise it is deactivated.</p>
 <dd><p>Get HV status (excluding voltage and current).</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="hvctl.command_line_ui.CommandLineUI.indent">
-<code class="sig-name descname">indent</code><em class="property"> = '    '</em><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.indent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class attribute.
-A string used to indent text blocks.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.input">
 <code class="sig-name descname">input</code><span class="sig-paren">(</span><em class="sig-param">prompt=''</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.input" title="Permalink to this definition">¶</a></dt>
@@ -232,13 +262,6 @@ works with this method only if <a class="reference internal" href="#hvctl.comman
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="hvctl.command_line_ui.CommandLineUI.intro">
-<code class="sig-name descname">intro</code><em class="property"> = &quot;Welcome to HVCtl! Type 'help' for a list of commands.&quot;</em><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.intro" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class attribute.
-A string displayed to the user upon starting the UI.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.print">
 <code class="sig-name descname">print</code><span class="sig-paren">(</span><em class="sig-param">*objects</em>, <em class="sig-param">sep=' '</em>, <em class="sig-param">end='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.print" title="Permalink to this definition">¶</a></dt>
@@ -249,17 +272,22 @@ but uses <a class="reference internal" href="#hvctl.command_line_ui.CommandLineU
 the <em>file</em> argument.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="hvctl.command_line_ui.CommandLineUI.prompt">
-<code class="sig-name descname">prompt</code><em class="property"> = '&gt;&gt; '</em><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.prompt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class attribute.
-A string displayed to the user every time the UI requests input.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start the UI.</p>
+<p>This functions runs the following algorithm:</p>
+<ol class="arabic simple">
+<li><p>Print the <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.prompt" title="hvctl.command_line_ui.CommandLineUI.prompt"><code class="xref py py-attr docutils literal notranslate"><span class="pre">prompt</span></code></a> and wait for user input.</p></li>
+<li><p>Parse the input string into a command and its arguments by
+splitting it at whitespace.</p></li>
+<li><p>Call a method with the name <code class="docutils literal notranslate"><span class="pre">cmd_&lt;the</span> <span class="pre">given</span> <span class="pre">command&gt;</span></code>.
+The method will execute the command and print its output.
+If no method with that name exists, print an error message
+and start again from step 1.</p></li>
+<li><p>If the method returned <code class="docutils literal notranslate"><span class="pre">True</span></code>, break the loop.
+Otherwise, start another iteration from step 1.</p></li>
+</ol>
 </dd></dl>
 
 </dd></dl>
