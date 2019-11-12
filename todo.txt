@@ -1,13 +1,8 @@
 TODO:
 
 ### Current ###
-- Convert voltage to positive
--Add apolarity option to hv.conf
--Fixed extra setattr
--Changed config units from kV to V
 
 ### Important ###
-- API(port) not working causes confusion (use * to force keyword arguments?)
 - Testing (maybe try mock objects)!
 - Ask Pekko about the license
 

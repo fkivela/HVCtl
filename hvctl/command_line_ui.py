@@ -91,19 +91,18 @@ class CommandLineUI:
         ('debug'     , ['d']),
      ]
     
-    def __init__(self, inputfile=None, outputfile=None, **kwargs):
+    def __init__(self, port=None, inputfile=None, outputfile=None):
         """Initialize a new CommandLineUI.
         
         Args:
+            port:
+                This is passed to the initializer of :attr:`api`.
             inputfile:
                 The value of :attr:`inputfile`.
                 If this is ``None``, the value is :attr:`sys.stdin`.
             outputfile:
                 The value of :attr:`outputfile`.
                 If this is ``None``, the value is :attr:`sys.stdin`.
-            kwargs:
-                Keyword arguments are passed to the constructor of 
-                :attr:`api`.
         """
         if inputfile:
             self.inputfile = inputfile
@@ -119,7 +118,7 @@ class CommandLineUI:
         # could lead to unintended consequences, and would e.g. 
         # prevent using multiple CommandLineUIs at once.
             
-        self.api = api.API(**kwargs)
+        self.api = api.API(port=port)
         self.debug = False
         self.intro = "Welcome to HVCtl! Type 'help' for a list of commands."
         self.prompt = '>> '

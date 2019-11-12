@@ -49,7 +49,7 @@ try:
         outputfile = QueueFile()    
         
         # Create an AdvancedTUI that wraps a CommandLineUI.
-        clui = CommandLineUI(inputfile, outputfile, port=port)
+        clui = CommandLineUI(port, inputfile, outputfile)
         script = lambda: clui.run()
         adv_ui = AdvancedTUI(script, inputfile, outputfile)
         

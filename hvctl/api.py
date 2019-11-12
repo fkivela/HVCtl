@@ -128,44 +128,34 @@ class API():
             The initial value is 1.            
     """
     
-    def __init__(self, poll=True, **kwargs):
+    def __init__(self, port=None, poll=True):
         """Create a new instance of this class and form a serial 
         connection to the HV PSU.
         
         Args:
+            port (str):
+                The serial port device name. If a value is not given, 
+                it will be set to :const:`SERIAL_KWARGS['port'] 
+                <hvctl.config.SERIAL_KWARGS>`.
+            
             poll (bool): 
                 Determines whether automatic polling should be used 
                 or not (see the class docstring for more details.)
-                
-            kwargs: 
-                Keyword arguments for creating a 
-                :class:`serial.Serial` object. 
-                By default, the serial connection object is created 
-                with the values defined in 
-                :const:`hvctl.config.SERIAL_KWARGS` as keyword 
-                arguments.
-                However, some or all of these default values can be 
-                overridden by giving new keyword arguments here.
-                
-        Raises:
-            TypeError:
-                If a keyword argument doesn't match any of the keys 
-                in :const:`hvctl.config.SERIAL_KWARGS`.
-                
+                                
+        Raises:                
             RuntimeError:
                 If a serial connection cannot be formed.
         """
         self.status = Status()
         self.timestep = 1
         
-        serargs = config.SERIAL_KWARGS.copy()
-        for key, value in kwargs.items():
-            if key not in config.SERIAL_KWARGS:
-                raise ValueError(f'invalid keyword: {key}')
-            serargs[key] = value
+        if not port:
+            port = config.SERIAL_KWARGS['port']
         
+        serkwargs = {
+            k: v for k, v in config.SERIAL_KWARGS.items() if k != 'port'}
         try:
-            self._connection = serial.Serial(**serargs)
+            self._connection = serial.Serial(port=port, **serkwargs)
         except serial.SerialException:
             raise RuntimeError("Could not create serial connection")
         

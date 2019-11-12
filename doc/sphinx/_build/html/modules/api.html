@@ -135,7 +135,7 @@ current regulation is being used.</p>
 
 <dl class="class">
 <dt id="hvctl.api.API">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">poll=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class defines an API for communicating with a
 Technix HV PSU.</p>
 <p>Creating an instance of this class forms a serial connection to
@@ -182,30 +182,20 @@ The initial value is 1.</p>
 
 <dl class="method">
 <dt id="hvctl.api.API.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">poll=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance of this class and form a serial
 connection to the HV PSU.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>str</em>) – The serial port device name. If a value is not given,
+it will be set to <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">SERIAL_KWARGS['port']</span></code></a>.</p></li>
 <li><p><strong>poll</strong> (<em>bool</em>) – Determines whether automatic polling should be used
 or not (see the class docstring for more details.)</p></li>
-<li><p><strong>kwargs</strong> – Keyword arguments for creating a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code> object.
-By default, the serial connection object is created
-with the values defined in
-<a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">hvctl.config.SERIAL_KWARGS</span></code></a> as keyword
-arguments.
-However, some or all of these default values can be
-overridden by giving new keyword arguments here.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If a keyword argument doesn’t match any of the keys
-    in <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">hvctl.config.SERIAL_KWARGS</span></code></a>.</p></li>
-<li><p><strong>RuntimeError</strong> – If a serial connection cannot be formed.</p></li>
-</ul>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If a serial connection cannot be formed.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -270,7 +260,13 @@ those attributes as reported by the HV PSU.</p>
 <dt id="hvctl.api.API.get_voltage">
 <code class="sig-name descname">get_voltage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.get_voltage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get HV voltage (in V).</p>
-<p>Returns: The voltage value sent by the HV PSU.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The voltage value sent by the HV PSU.
+This is always a positive value regardless of the polarity
+of the HV device.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -333,7 +329,15 @@ inhibition is activated; otherwise it is deactivated.</p>
 <dt id="hvctl.api.API.set_voltage">
 <code class="sig-name descname">set_voltage</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_voltage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set HV voltage to <em>value</em> (in V).</p>
-<p>Returns: The voltage value sent back by the HV PSU.</p>
+<p>The sign of <em>value</em> doesn’t matter, since it is automatically
+changed to match the polarity of the HV device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The voltage value sent back by the HV PSU.
+This is always a positive value regardless of the polarity
+of the HV device.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
