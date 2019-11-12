@@ -321,7 +321,9 @@ class CommandLineUI:
     def _run_command(self, line):
         """Parse *line* and run it as a command."""
         # Separate the command and its arguments.
-        parts = [x for x in line.split(' ') if x]
+        # split() splits at any whitespace character 
+        # and discards empty strings.
+        parts = line.split()
         try:
             cmdname = parts[0]
         except IndexError:

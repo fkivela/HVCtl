@@ -1,66 +1,32 @@
 TODO:
 
-Changes:
--changed hvctl-run
--fixed bugs in __main__
--added imports to __init__
-
-# Current:
-
-# Essentials:
-- Document imports in __init__
-- API(port) not working causes confusion (use * to force keyword arguments?)
-- rewrite virtualconnection docs
-- Better error messages when there is no connection
-- Sending a message without connection, connecting, and then sending another message blocks (make unlock the lock if send raises an error?)
-- HV PSU to HV generator etc?
-- shorten the name of virtualconnection
-- virtualconnection/hv inheritance -> composition
-- Does this work on windows?
+### Current ###
 - Split commands at any whitespace instead of just ' '
-- _poll -> run_poll
 
-# When all else is ready
+### Important ###
+- API(port) not working causes confusion (use * to force keyword arguments?)
 - Testing (maybe try mock objects)!
+- Convert voltage to positive
+- Ask Pekko about the license
+
+### Documentation ###
+- Document imports in __init__
+- Rewrite virtualconnection docs
+- HV PSU to HV PS, HV generator etc?
+- Does this work on windows?
+- Implement :ref:`name <actual_ref>`-syntax
 - Proofreading!
-- implement :ref:`name <actual_ref>`-syntax in docs
+- Document the interlock (a physical safety switch which prevents turning the HV on)?
+- Links to external docs
 
-# Ask Tomas
-
-- What is inhibit/inhibition?
-Testaa fyysisellä laitteella
-
-- What is fault?
-Ylikuormitus katkaisee outputin, aikaikkunan kuluttua yrittää uudelleen.
- 
-- What is interlock?
-Monta ehtoa jotta menee päälle. Fyysinen turvakytkin, joka estää menemisen päälle
-
-- Volts vs kilovolts
-volts
-
-- Positive vs negative voltage
-convert to positive
-
-- HV PSU vs HV generator
-HV PS (power supply), HV generator
-
-- Authorship information
-OK
-
-- License (kysy Pekolta)
-
-- File rights
-rw r r hyvä
-
-- serial.SerialException vs RuntimeError
-RuntimeError
-
-- Ugly error message OK?
-OK
-
-# Can be added later
+### Not important (the program works well without) ###
+- virtualconnection/hv inheritance -> composition
+- _poll -> run_poll
+- shorten the name of virtualconnection (and maybe command_line_ui)?
+- File rights could be rw,r,r
 - More functionality to VirtualHV
 - Try pyLint?
-- Links to external docs
 - to_bytes -> __bytes__? (Maybe change __init__ into a generic function?)
+
+### Test with the physical device ###
+- Try to fugure out what inhibit/inhibition is
