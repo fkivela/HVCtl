@@ -141,6 +141,9 @@ Technix HV PSU.</p>
 <p>Creating an instance of this class forms a serial connection to
 the HV PSU, after which messages can be sent to it by calling the
 methods of the instance.</p>
+<p>If the serial connection is lost, all methods of this class that
+communicate with the HV generator will raise a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code>.</p>
 <p>If an API is initialized with <code class="docutils literal notranslate"><span class="pre">poll=True</span></code> it will automatically
 call <a class="reference internal" href="#hvctl.api.API.full_status" title="hvctl.api.API.full_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_status()</span></code></a> every <a class="reference internal" href="#hvctl.api.API.timestep" title="hvctl.api.API.timestep"><code class="xref py py-attr docutils literal notranslate"><span class="pre">timestep</span></code></a> seconds.
 This updates the data in <a class="reference internal" href="#hvctl.api.API.status" title="hvctl.api.API.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a> and prevents the HV PSU
@@ -201,7 +204,7 @@ overridden by giving new keyword arguments here.</p></li>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TypeError</strong> – If a keyword argument doesn’t match any of the keys
     in <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">hvctl.config.SERIAL_KWARGS</span></code></a>.</p></li>
-<li><p><strong>serial.SerialException</strong> – If a serial connection cannot be formed.</p></li>
+<li><p><strong>RuntimeError</strong> – If a serial connection cannot be formed.</p></li>
 </ul>
 </dd>
 </dl>
@@ -277,8 +280,8 @@ those attributes as reported by the HV PSU.</p>
 <p>This method sets the voltage and the current to 0,
 turns the HV off, closes the serial connection and stops the
 parallel thread, if automatic polling is on.</p>
-<p>If the connection is already closed, actions that can’t be
-performed are skipped.</p>
+<p>If there is no connection, actions that can’t be performed
+are skipped.</p>
 </dd></dl>
 
 <dl class="method">
@@ -357,7 +360,6 @@ inhibition is activated; otherwise it is deactivated.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
@@ -370,6 +372,7 @@ inhibition is activated; otherwise it is deactivated.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 </ul>
 
 <div class="relations">

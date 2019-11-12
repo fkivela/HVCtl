@@ -100,6 +100,10 @@ class API():
     the HV PSU, after which messages can be sent to it by calling the 
     methods of the instance.
     
+    If the serial connection is lost, all methods of this class that 
+    communicate with the HV generator will raise a 
+    :class:`RuntimeError`. 
+    
     If an API is initialized with ``poll=True`` it will automatically 
     call :meth:`full_status` every :attr:`timestep` seconds.
     This updates the data in :attr:`status` and prevents the HV PSU 
@@ -148,7 +152,7 @@ class API():
                 If a keyword argument doesn't match any of the keys 
                 in :const:`hvctl.config.SERIAL_KWARGS`.
                 
-            serial.SerialException:
+            RuntimeError:
                 If a serial connection cannot be formed.
         """
         self.status = Status()
@@ -160,7 +164,10 @@ class API():
                 raise ValueError(f'invalid keyword: {key}')
             serargs[key] = value
         
-        self._connection = serial.Serial(**serargs)       
+        try:
+            self._connection = serial.Serial(**serargs)
+        except serial.SerialException:
+            raise RuntimeError("Could not create serial connection")
         
         self._stop_flag = threading.Event()
         # *lock* prevents *_poll*-sent and user-sent messages from 
@@ -295,22 +302,29 @@ class API():
         turns the HV off, closes the serial connection and stops the 
         parallel thread, if automatic polling is on.
         
-        If the connection is already closed, actions that can't be 
-        performed are skipped.
+        If there is no connection, actions that can't be performed 
+        are skipped.
         """
         self._stop_flag.set()
         # Threads that haven't been started are not alive.
         while self._thread.is_alive():
             time.sleep(0.001)
         
-        # A try block wouldn't work, since an extra "setting voltage"
-        # message would be printed even if the connection is already 
-        # closed.
-        if self._connection and self._connection.is_open:
+        # Try to turn the HV off; skip if there is no connection.
+        try:
             self.set_voltage(0)
             self.set_current(0)
             self.HV_off()
+        except RuntimeError:
+            pass
+        
+        # Try to close the connection; skip if the connection hasn't 
+        # been created (i.e. creating the connection caused an error).
+        # This works even if the connection has already been closed.
+        try:
             self._connection.close()
+        except NameError:
+            pass
         
     def _log(self, message):
         """Print *message* if :attr:`verbose` is ``True``."""
@@ -357,17 +371,31 @@ class API():
         return return_value
 
     def _send(self, query: Message) -> Message:
-        """Send *query* to the HV PSU and return the reply."""
+        """Send *query* to the HV PSU and return the reply.
+        
+        Raises:
+            RuntimeError:
+                If sending the message fails.
+        """
         self._lock.acquire()
-        self._connection.write(query.to_bytes())
         
-        reply_bytes = self._connection.read_until(terminator=b'\r')
-        reply = Message.from_bytes(reply_bytes)
-        
-        self._check_reply(query, reply)
-        self._update_status(reply)
-        self._lock.release()
-        return reply
+        try:
+            self._connection.write(query.to_bytes())
+            
+            reply_bytes = self._connection.read_until(terminator=b'\r')
+            reply = Message.from_bytes(reply_bytes)
+            
+            self._check_reply(query, reply)
+            self._update_status(reply)
+            return reply
+            
+        except serial.SerialException:
+            # Show the user a RuntimeError instead of a SerialException.
+            raise RuntimeError('The serial connection was lost')
+            
+        finally:
+            # Make sure the lock is released in all cases.
+            self._lock.release()
         
     def _update_status(self, reply: Message):
         """Update self.status according to the information in 
