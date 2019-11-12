@@ -3,8 +3,9 @@
 
 import argparse
 
-from hvctl.queuefile import QueueFile
 from hvctl.command_line_ui import CommandLineUI
+from hvctl.config import SERIAL_KWARGS
+from hvctl.queuefile import QueueFile
 from hvctl.virtualhv import VirtualHV
 
 ### Command line arguments ###
@@ -29,6 +30,8 @@ try:
     if args.virtual:
         virtualhv = VirtualHV()
         port = virtualhv.port
+    else:
+        port = SERIAL_KWARGS['port']
     
     # If the "-simple" command line argument is specified, 
     # AdvancedTUI is not imported.
@@ -59,8 +62,12 @@ try:
 finally:  
 
     # Close the serial connection and stop the parallel thread 
-    # used for polling. 
-    clui.api.halt()
+    # used for polling.
+    try:
+        clui.api.halt()
+    except NameError:
+        # An error may be raised before the name clui is defined.
+        pass
 
     # Close the virtual connection, if it was used.
     try:
