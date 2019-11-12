@@ -201,25 +201,59 @@ class API():
     def set_voltage(self, value):
         """Set HV voltage to *value* (in V).
         
-        Returns: The voltage value sent back by the HV PSU.
+        The sign of *value* doesn't matter, since it is automatically 
+        changed to match the polarity of the HV device. 
+        
+        Returns: 
+            The voltage value sent back by the HV PSU.
+            This is always a positive value regardless of the polarity 
+            of the HV device.
         """
-        return self._set('voltage', 'V', config.DELTA_U, config.VOLTAGE_LIMIT, 
-                         value)
+        return self._set(
+            'voltage', value, config.DELTA_U, config.VOLTAGE_LIMIT)
     
     def set_current(self, value):
         """Set HV current to *value* (in mA).
         
         Returns: The current value sent back by the HV PSU.
         """
-        return self._set('current', 'mA', config.DELTA_I, config.CURRENT_LIMIT, 
-                         value)
+        return self._set(
+            'current', value, config.DELTA_I, config.CURRENT_LIMIT)
+        
+    def _set(self, name, value, delta, limit):
+        """Set voltage or current to *value*.
+        
+        Args:
+            name: 
+                'voltage' or 'current'.
+            value: 
+                The value.
+            delta: 
+                config.DELTA_U or config.DELTA_I.
+            limit:
+                The maximum value for *value*; 
+                config.VOLTAGE_LIMIT or config.CURRENT_LIMIT.
+        
+        Raises:
+            ValueError: If *value* is not between 0 and *limit*.
+        """                
+        if not 0 <= value <= limit:
+            raise ValueError(
+                f'*value* should be between 0 and {limit}; was {value}')
+        
+        int_value = round(value / delta)
+        answer = self._send(Message(f'set {name}', int_value))
+        return delta * answer.value
         
     def get_voltage(self):
         """Get HV voltage (in V).
         
-        Returns: The voltage value sent by the HV PSU.
+        Returns: 
+            The voltage value sent by the HV PSU.
+            This is always a positive value regardless of the polarity 
+            of the HV device.
         """
-        return self._get('voltage', 'V', config.DELTA_U)
+        return self._get('voltage', config.DELTA_U)
     
     def get_current(self):
         """Get HV current (in mA).
@@ -227,7 +261,19 @@ class API():
         Returns: 
             The current value sent back by the HV PSU.
         """
-        return self._get('current', 'mA', config.DELTA_I)
+        return self._get('current', config.DELTA_I)
+                    
+    def _get(self, name, delta):
+        """Get voltage or current.
+        
+        Args:
+            name: 
+                'voltage' or 'current'.
+            delta: 
+                config.DELTA_U or config.DELTA_I.
+        """                
+        answer = self._send(Message(f'get {name}'))
+        return delta * answer.value
         
     def HV_on(self):
         """Turn the HV on."""
@@ -338,37 +384,6 @@ class API():
         while not self._stop_flag.is_set():
             self.full_status()
             time.sleep(self.timestep)
-
-    def _set(self, name, unit, delta, limit, value):
-        """Set voltage or current."""
-        self._check_value(value, limit)
-        int_value = round(value / delta)
-        answer = self._send(Message(f'set {name}', int_value))
-        return_value = delta * answer.value
-        setattr(self, name, return_value)
-        return return_value
-    
-    @staticmethod
-    def _check_value(value, limit):
-        """Make sure *value* is between 0 and *limit*.
-        *limit* can also be negative.
-        
-        Raises:
-            ValueError: If *value* is not between 0 and *limit*.
-        """
-        in_nonnegative_range = limit >= 0 and 0 <= value <= limit
-        in_negative_range = limit < 0 and limit <= value <= 0
-        
-        if not (in_nonnegative_range or in_negative_range):
-            raise ValueError(
-                f'*value* should be between 0 and {limit}; was {value}')
-            
-    def _get(self, name, unit, delta):
-        """Get voltage or current."""        
-        answer = self._send(Message(f'get {name}'))
-        return_value = delta * answer.value
-        setattr(self, name, return_value)
-        return return_value
 
     def _send(self, query: Message) -> Message:
         """Send *query* to the HV PSU and return the reply.

@@ -1,12 +1,14 @@
 TODO:
 
 ### Current ###
-- Split commands at any whitespace instead of just ' '
+- Convert voltage to positive
+-Add apolarity option to hv.conf
+-Fixed extra setattr
+-Changed config units from kV to V
 
 ### Important ###
 - API(port) not working causes confusion (use * to force keyword arguments?)
 - Testing (maybe try mock objects)!
-- Convert voltage to positive
 - Ask Pekko about the license
 
 ### Documentation ###
@@ -29,4 +31,7 @@ TODO:
 - to_bytes -> __bytes__? (Maybe change __init__ into a generic function?)
 
 ### Test with the physical device ###
-- Try to fugure out what inhibit/inhibition is
+- Try to figure out what inhibit/inhibition is
+
+### Ask Tomas ###
+- Does polarity matter?

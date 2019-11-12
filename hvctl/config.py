@@ -5,14 +5,23 @@ the same directory as this module.
 
 Attributes:
     SERIAL_KWARGS
-        A dict of keyword arguments and values for creating a 
-        :class:`serial.Serial` object.
-            
+        A :class:`dict` of keyword arguments and values for creating a 
+        :class:`serial.Serial` object. The following keyword arguments 
+        and their values are included: *port*, *baudrate*, *bytesize*, 
+        *parity*, *stopbits*, *timeout*, *xonxoff*, *rtscts*, *dsrdtr*.
+        The *exclusive* keyword will also be included and set to 
+        ``True``, if the version of the serial module is 3.3 or 
+        later. See the documentation of :class:`serial.Serial` for 
+        further details.
+                
     VOLTAGE_LIMIT
-        The maximum value allowed for the voltage, in V.
+        The maximum voltage for a particular application in V. 
+        HVCtl will never set the voltage to a value exceeding this. 
+        For negative polarity devices the value should be negative.
       
     CURRENT_LIMT
-        The maximum value allowed for the current, in mA.
+        The maximum current for a particular application in mA.
+        HVCtl will never set the current to a value exceeding this. 
     
     INT_MAX
         The serial protocol uses 12-bit unsigned integers for the 
@@ -72,13 +81,13 @@ def _load_values(parser):
     SERIAL_KWARGS = {
     'port'    :           parser.get(       'serial', 'port'    ),
     'baudrate':           parser.getint(    'serial', 'baudrate'),
+    'bytesize': _bytesize(parser.getint(    'serial', 'bytesize')),
     'parity'  :   _parity(parser.get(       'serial', 'parity'  )),
     'stopbits': _stopbits(parser.getint(    'serial', 'stopbits')), 
-    'bytesize': _bytesize(parser.getint(    'serial', 'bytesize')),
     'timeout' :  _timeout(parser.get(       'serial', 'timeout' )),
+    'xonxoff' :           parser.getboolean('serial', 'xonxoff' ),
     'rtscts'  :           parser.getboolean('serial', 'rtscts'  ),
     'dsrdtr'  :           parser.getboolean('serial', 'dsrdtr'  ),
-    'xonxoff' :           parser.getboolean('serial', 'xonxoff' ),
     }
     
     # The exclusive keyword isn't found in older versions of the 
@@ -86,13 +95,9 @@ def _load_values(parser):
     if float(serial.VERSION) >= 3.3:
         SERIAL_KWARGS['exclusive'] = True
     
-    # In the config file, voltages are given in kV for convenience.
-    # This program uses V internally, so voltages are multiplied 
-    # by 1000. 
-    # Currents are given and used in mA.
-    MAX_VOLTAGE   = parser.getfloat('voltage', 'max_voltage'  ) * 1000
+    MAX_VOLTAGE   = parser.getfloat('voltage', 'max_voltage'  )
     MAX_CURRENT   = parser.getfloat('current', 'max_current'  )
-    VOLTAGE_LIMIT = parser.getfloat('voltage', 'voltage_limit') * 1000
+    VOLTAGE_LIMIT = parser.getfloat('voltage', 'voltage_limit')
     CURRENT_LIMIT = parser.getfloat('current', 'current_limit')
     
     INT_MAX = 2**12-1
