@@ -1,2 +1,2 @@
 # Run hvctl with given command line arguments.
-python hvctl $@
+python $(dirname $0)/hvctl $@
