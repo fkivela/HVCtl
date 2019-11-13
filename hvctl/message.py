@@ -2,6 +2,7 @@
 the HV generator."""
 
 import re
+from functools import singledispatch
 
 from . import config
 
@@ -49,10 +50,12 @@ class Message():
         is_answer (bool): 
             Determines whether *self* represents a message to the 
             HV PSU or a response from it.
-    
     """
     
     ENCODING = 'UTF-8'
+    """The encoding used for conversions between strings and 
+    :class:`bytes` objects.
+    """
         
     def __init__(self, command, value=None, is_answer=False):
         """Create a new message and set its attributes to the values 
@@ -96,6 +99,14 @@ class Message():
             
         raise ValueError(f'invalid string: {string}')
         
+    def __bytes__(self):
+        """Convert *self* to a :class:`bytes` object, which can then be 
+        sent to the HV PSU through the serial connection.
+        """
+        value = int(self.value) if self.value != None else ''
+        string = self.pattern.format(value)
+        return string.encode(self.ENCODING)
+        
     def __repr__(self):
         """Return a string with the format 
         ``'ClassName(command=<command>, value=<value>, 
@@ -105,15 +116,7 @@ class Message():
                 f'command={repr(self.command)}, '
                 f'value={self.value}, '
                 f'is_answer={self.is_answer})')
-        
-    def to_bytes(self):
-        """Convert *self* to a :class:`bytes` object, which can then be 
-        sent to the HV PSU through the serial connection.
-        """
-        value = int(self.value) if self.value != None else ''
-        string = self.pattern.format(value)
-        return string.encode(self.ENCODING)
-        
+
     @property
     def value(self):
         """Get or set :attr:`value`.

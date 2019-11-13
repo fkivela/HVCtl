@@ -385,7 +385,7 @@ class API():
         self._lock.acquire()
         
         try:
-            self._connection.write(query.to_bytes())
+            self._connection.write(bytes(query))
             
             reply_bytes = self._connection.read_until(terminator=b'\r')
             reply = Message.from_bytes(reply_bytes)

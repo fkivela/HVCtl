@@ -255,4 +255,4 @@ class VirtualHV(VirtualConnection):
         method = getattr(self, command.replace(' ', '_'))        
         
         ret = method(message.value)
-        return Message(command, ret, is_answer=True).to_bytes()
+        return bytes(Message(command, ret, is_answer=True))
