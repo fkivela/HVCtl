@@ -18,7 +18,6 @@ TODO:
 
 ### Not important (the program works well without) ###
 - virtualconnection/hv inheritance -> composition
-- _poll -> run_poll
 - shorten the name of virtualconnection (and maybe command_line_ui)?
 - File rights could be rw,r,r
 - More functionality to VirtualHV

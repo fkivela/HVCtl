@@ -160,10 +160,10 @@ class API():
             raise RuntimeError("Could not create serial connection")
         
         self._stop_flag = threading.Event()
-        # *lock* prevents *_poll*-sent and user-sent messages from 
-        # being sent at the same time. 
+        # *lock* prevents messages from being sent at the same time by 
+        # _run_poll and the user. 
         self._lock = threading.Lock()
-        self._thread = threading.Thread(target=self._poll, daemon=True)
+        self._thread = threading.Thread(target=self._run_poll, daemon=True)
         # _thread and _lock are created even with poll=False, 
         # since they are referenced by methods.
                 
@@ -367,7 +367,7 @@ class API():
         if self.verbose:
             print(message, file=self.outputfile, flush=True)
                 
-    def _poll(self):
+    def _run_poll(self):
         """Update self.status continuously by calling 
         self.full_status() at regular intervals.
         """
