@@ -149,7 +149,7 @@ The script uses <code class="docutils literal notranslate"><span class="pre">wit
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="k">import</span> <span class="n">api</span><span class="p">,</span> <span class="n">virtualhv</span>
 
 <span class="k">with</span> <span class="n">virtualhv</span><span class="o">.</span><span class="n">VirtualHV</span> <span class="k">as</span> <span class="n">vhv</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">vhv</span><span class="o">.</span><span class="n">port</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">vhv</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">port</span><span class="p">):</span>
                 <span class="n">api</span><span class="o">.</span><span class="n">set_voltage</span><span class="p">(</span><span class="o">-</span><span class="mi">5000</span><span class="p">)</span>
                 <span class="c1"># More code here...</span>
 </pre></div>
@@ -222,7 +222,7 @@ The script uses <code class="docutils literal notranslate"><span class="pre">wit
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

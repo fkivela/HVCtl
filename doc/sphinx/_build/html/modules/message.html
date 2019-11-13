@@ -109,18 +109,18 @@ given as arguments.</p>
 <span class="pre">is_answer=&lt;value&gt;)'</span></code>.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="hvctl.message.Message.ENCODING">
+<code class="sig-name descname">ENCODING</code><em class="property"> = 'UTF-8'</em><a class="headerlink" href="#hvctl.message.Message.ENCODING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The encoding used for conversions between strings and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code> objects.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="hvctl.message.Message.from_bytes">
 <em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param">bytes_</em>, <em class="sig-param">is_answer=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.from_bytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new message from a bytes object received through
 the serial connection.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.message.Message.to_bytes">
-<code class="sig-name descname">to_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.to_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert <em>self</em> to a <code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code> object, which can then be
-sent to the HV PSU through the serial connection.</p>
 </dd></dl>
 
 <dl class="method">
@@ -160,7 +160,6 @@ sent to the HV PSU through the serial connection.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
@@ -173,6 +172,7 @@ sent to the HV PSU through the serial connection.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 </ul>
 
 <div class="relations">
@@ -212,7 +212,7 @@ sent to the HV PSU through the serial connection.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

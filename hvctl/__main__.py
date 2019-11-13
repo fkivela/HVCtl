@@ -29,7 +29,7 @@ try:
     # use a virtual HV.
     if args.virtual:
         virtualhv = VirtualHV()
-        port = virtualhv.port
+        port = virtualhv.connection.port
     else:
         port = SERIAL_KWARGS['port']
     
@@ -71,6 +71,6 @@ finally:
 
     # Close the virtual connection, if it was used.
     try:
-        virtualhv.close()
+        virtualhv.connection.close()
     except NameError:
         pass

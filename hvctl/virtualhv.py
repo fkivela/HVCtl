@@ -3,14 +3,18 @@
 from .message import Message
 from .virtualconnection import VirtualConnection
 
-class VirtualHV(VirtualConnection):
+class VirtualHV():
     """A virtual high voltage generator.
     
     This class simulates a HV PSU that can be communicated with 
     through  a serial connection. This makes it possible to test 
     HVCtl without access to a physical device.
     
-    Attributes:                
+    Attributes:     
+        connection:
+            A :class:`~hvctl.virtualconnection.VirtualConnection`
+            object used for simulating a serial connection.
+           
         voltage (float):
             | The voltage of the virtual HV PSU in V.
             | Initial value: ``0``.
@@ -66,7 +70,7 @@ class VirtualHV(VirtualConnection):
         All arguments are passed to 
         :meth:`hvctl.virtualconnection.VirtualConnection.__init__`.
         """
-        super().__init__(*args)
+        self.connection = VirtualConnection(process_method=self.process)
         
         self.voltage = 0
         self.current = 0
@@ -78,7 +82,20 @@ class VirtualHV(VirtualConnection):
         self.interlock = False
         self.fault = False
         self.regulation = 'voltage'
+        
+    def __enter__(self):
+        """Called upon entering a ``with`` block; 
+        returns *self*.
+        """
+        return self    
     
+    def __exit__(self, type_, value, traceback):
+        """Called upon exiting a ``with`` block; calls 
+        :meth:`connection.close() 
+        <hvctl.virtualconnection.VirtualConnection.close>`.
+        """
+        self.connection.close()
+        
     def get_voltage(self, _):
         """Handle a ``'get voltage'`` command.
         

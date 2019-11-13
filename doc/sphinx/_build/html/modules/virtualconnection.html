@@ -39,7 +39,7 @@
 which can be used to simulate serial connections.</p>
 <dl class="class">
 <dt id="hvctl.virtualconnection.VirtualConnection">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualconnection.</code><code class="sig-name descname">VirtualConnection</code><span class="sig-paren">(</span><em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualconnection.</code><code class="sig-name descname">VirtualConnection</code><span class="sig-paren">(</span><em class="sig-param">process_method=None</em>, <em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A virtual serial connection.</p>
 <p>Data can be sent through a <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object by
 accessing the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="hvctl.virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="hvctl.virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a> attributes.
@@ -115,11 +115,34 @@ A set of all currently running instances of the
 
 <dl class="method">
 <dt id="hvctl.virtualconnection.VirtualConnection.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">process_method=None</em>, <em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>.</p>
-<p>The new instance starts running automatically.
-The arguments set initial values for <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.buffer_size" title="hvctl.virtualconnection.VirtualConnection.buffer_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">buffer_size</span></code></a>
-and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.sleep_time" title="hvctl.virtualconnection.VirtualConnection.sleep_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sleep_time</span></code></a>.</p>
+<p>The new instance starts running automatically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_method</strong> – A function to override the default implementation
+of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a>. If this argument is not defined,
+the default implementation will be used.</p></li>
+<li><p><strong>buffer_size</strong> – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.buffer_size" title="hvctl.virtualconnection.VirtualConnection.buffer_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">buffer_size</span></code></a>.</p></li>
+<li><p><strong>sleep_time</strong> – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.sleep_time" title="hvctl.virtualconnection.VirtualConnection.sleep_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sleep_time</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.virtualconnection.VirtualConnection.__enter__">
+<code class="sig-name descname">__enter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.__enter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called at the beginning of a <code class="docutils literal notranslate"><span class="pre">with</span></code> block; returns
+<em>self</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.virtualconnection.VirtualConnection.__exit__">
+<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param">type_</em>, <em class="sig-param">value</em>, <em class="sig-param">traceback</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.__exit__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called upon exiting a <code class="docutils literal notranslate"><span class="pre">with</span></code> block; calls
+<a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -157,8 +180,8 @@ object is created.</p>
 <code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">input_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Form output based on <em>input_</em>.</p>
 <p>By default, <em>input_</em> is simply mirrored back.
-This behaviour can be changed by redefining this function in
-subcalsses.</p>
+This behaviour can be changed by assigning a different method
+with the same signature to this name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>input_</strong> – A bytes-like object.</p>
@@ -193,7 +216,6 @@ subcalsses.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
@@ -206,6 +228,7 @@ subcalsses.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 </ul>
 
 <div class="relations">
@@ -245,7 +268,7 @@ subcalsses.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

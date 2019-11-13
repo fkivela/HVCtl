@@ -1,6 +1,8 @@
 TODO:
 
 ### Current ###
+- virtualconnection/hv inheritance -> composition
+- update docs accordingly (examples)
 
 ### Important ###
 - Testing (maybe try mock objects)!
@@ -17,15 +19,17 @@ TODO:
 - Links to external docs
 
 ### Not important (the program works well without) ###
-- virtualconnection/hv inheritance -> composition
-- shorten the name of virtualconnection (and maybe command_line_ui)?
 - File rights could be rw,r,r
 - More functionality to VirtualHV
 - Try pyLint?
-- to_bytes -> __bytes__? (Maybe change __init__ into a generic function?)
 
 ### Test with the physical device ###
 - Try to figure out what inhibit/inhibition is
 
 ### Ask Tomas ###
 - Does polarity matter?
+
+### Other ###
+- Remove Message.from_bytes() and overload Message.__init__ with 
+  @singledispatchmethod. Wait for Anaconda to update to Python 3.8 
+  before this can be implemented.

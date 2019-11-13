@@ -75,15 +75,29 @@ class VirtualConnection():
     # Keep references to all running instances of this class.
     running_instances = set()
             
-    def __init__(self, buffer_size=1024, sleep_time=0.01):
+    def __init__(self, process_method=None, buffer_size=1024, sleep_time=0.01):
         """Initialize a new :class:`VirtualConnection`.
         
         The new instance starts running automatically.
-        The arguments set initial values for :attr:`buffer_size` 
-        and :attr:`sleep_time`.
+        
+        Args:
+            process_method:
+                A function to override the default implementation 
+                of :attr:`process`. If this argument is not defined, 
+                the default implementation will be used.
+            
+            buffer_size:
+                The value of :attr:`buffer_size`.
+                
+            sleep_time:
+                The value of :attr:`sleep_time`.
         """
+        if process_method:
+            self.process = process_method    
+        
         self.buffer_size = buffer_size
         self.sleep_time = sleep_time
+        
         master, slave = pty.openpty()
         # This may be written to and read from with os.write 
         # and os.read.
@@ -113,8 +127,8 @@ class VirtualConnection():
         return self
     
     def __exit__(self, type_, value, traceback):
-        """Called at the end of a ``with`` block; stops the parallel 
-        thread.
+        """Called upon exiting a ``with`` block; calls 
+        :meth:`close`.
         """
         self.close()
         
@@ -189,8 +203,8 @@ class VirtualConnection():
         """Form output based on *input_*.
         
         By default, *input_* is simply mirrored back.
-        This behaviour can be changed by redefining this function in 
-        subcalsses.    
+        This behaviour can be changed by assigning a different method 
+        with the same signature to this name.    
         
         Args:
             input_: A bytes-like object.

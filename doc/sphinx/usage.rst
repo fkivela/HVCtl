@@ -120,6 +120,6 @@ The script uses ``with`` blocks to ensure that both the :class:`~hvctl.api.API` 
 	from hvctl import api, virtualhv
 
 	with virtualhv.VirtualHV as vhv:
-		with api.API(port=vhv.port):
+		with api.API(port=vhv.connection.port):
 			api.set_voltage(-5000)
 			# More code here...

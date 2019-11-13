@@ -7,3 +7,5 @@
    :members: 
    
    .. automethod:: __init__
+   .. automethod:: __enter__
+   .. automethod:: __exit__

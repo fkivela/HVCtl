@@ -15,6 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RS232 Control protocol" href="../protocol.html" />
     <link rel="prev" title="virtualconnection" href="virtualconnection.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -38,11 +39,18 @@
 <dl class="class">
 <dt id="hvctl.virtualhv.VirtualHV">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualhv.</code><code class="sig-name descname">VirtualHV</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="virtualconnection.html#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">hvctl.virtualconnection.VirtualConnection</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A virtual high voltage generator.</p>
 <p>This class simulates a HV PSU that can be communicated with
 through  a serial connection. This makes it possible to test
 HVCtl without access to a physical device.</p>
+<dl class="attribute">
+<dt id="hvctl.virtualhv.VirtualHV.connection">
+<code class="sig-name descname">connection</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="virtualconnection.html#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>
+object used for simulating a serial connection.</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="hvctl.virtualhv.VirtualHV.voltage">
 <code class="sig-name descname">voltage</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.voltage" title="Permalink to this definition">¶</a></dt>
@@ -200,6 +208,20 @@ current or voltage.</div>
 </dd></dl>
 
 <dl class="method">
+<dt id="hvctl.virtualhv.VirtualHV.__enter__">
+<code class="sig-name descname">__enter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.__enter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called upon entering a <code class="docutils literal notranslate"><span class="pre">with</span></code> block;
+returns <em>self</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.virtualhv.VirtualHV.__exit__">
+<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param">type_</em>, <em class="sig-param">value</em>, <em class="sig-param">traceback</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.__exit__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called upon exiting a <code class="docutils literal notranslate"><span class="pre">with</span></code> block; calls
+<a class="reference internal" href="virtualconnection.html#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connection.close()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="hvctl.virtualhv.VirtualHV.HV_off">
 <code class="sig-name descname">HV_off</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.HV_off" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'HV</span> <span class="pre">off'</span></code> command.</p>
@@ -317,7 +339,7 @@ The bits are in big-endian order.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>input_</strong> – A bytes-like object created by
-<a class="reference internal" href="message.html#hvctl.message.Message.to_bytes" title="hvctl.message.Message.to_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">hvctl.message.Message.to_bytes()</span></code></a>.</p>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">hvctl.message.Message.to_bytes()</span></code>.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code> object that can be passed to
@@ -404,7 +426,6 @@ message instead of the old.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
@@ -417,6 +438,7 @@ message instead of the old.</p>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 </ul>
 
 <div class="relations">
@@ -425,6 +447,7 @@ message instead of the old.</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Modules</a><ul>
       <li>Previous: <a href="virtualconnection.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
+      <li>Next: <a href="../protocol.html" title="next chapter">RS232 Control protocol</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -455,7 +478,7 @@ message instead of the old.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
