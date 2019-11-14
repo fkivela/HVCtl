@@ -1,8 +1,9 @@
 TODO:
 
 ### Current ###
-- virtualconnection/hv inheritance -> composition
-- update docs accordingly (examples)
+- Go through modules with Pylint (currently in virtualconnection)
+- Make sure line length is checked (also for comments!)
+- changed the docstring of virtualconnection.__init__
 
 ### Important ###
 - Testing (maybe try mock objects)!
@@ -21,7 +22,9 @@ TODO:
 ### Not important (the program works well without) ###
 - File rights could be rw,r,r
 - More functionality to VirtualHV
-- Try pyLint?
+      - No voltage in off mode
+      - Switch between voltage and current regulation
+      - Shut off and switch to local mode after 5 seconds
 
 ### Test with the physical device ###
 - Try to figure out what inhibit/inhibition is

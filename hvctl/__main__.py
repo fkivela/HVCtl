@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """This is the main script used to run HVCtl."""
 
+# pylint: disable=invalid-name
+# Pylint considers all global variables constants.
+# pylint: disable=unnecessary-lambda
+# Lambdas are used to make the code look better.
+
 import argparse
 
 from hvctl.command_line_ui import CommandLineUI
@@ -25,43 +30,43 @@ args = parser.parse_args()
 ### The main part of the script ###
 
 try:
-    # If the "--virtual" command line argument is supplied, 
+    # If the "--virtual" command line argument is supplied,
     # use a virtual HV.
     if args.virtual:
         virtualhv = VirtualHV()
         port = virtualhv.connection.port
     else:
         port = SERIAL_KWARGS['port']
-    
-    # If the "-simple" command line argument is specified, 
+
+    # If the "-simple" command line argument is specified,
     # AdvancedTUI is not imported.
-    # This makes it possible to run the program without installing 
+    # This makes it possible to run the program without installing
     # urwid.
     if args.simple:
         clui = CommandLineUI(port=port)
         clui.run()
     else:
         from hvctl.advanced_tui import AdvancedTUI
-        
-        # Connect the program and the UI with *inputfile* and 
+
+        # Connect the program and the UI with *inputfile* and
         # *outputfile*.
         inputfile = QueueFile(block=True)
-        outputfile = QueueFile()    
-        
+        outputfile = QueueFile()
+
         # Create an AdvancedTUI that wraps a CommandLineUI.
         clui = CommandLineUI(port, inputfile, outputfile)
         script = lambda: clui.run()
         adv_ui = AdvancedTUI(script, inputfile, outputfile)
-        
+
         # Show HV status in the UI.
         status = clui.api.status
         status.callback = lambda: adv_ui.display.set_text(str(status))
-        
-        adv_ui.run()
-        
-finally:  
 
-    # Close the serial connection and stop the parallel thread 
+        adv_ui.run()
+
+finally:
+
+    # Close the serial connection and stop the parallel thread
     # used for polling.
     try:
         clui.api.halt()
