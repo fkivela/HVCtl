@@ -8,6 +8,7 @@ import select
 import threading
 import time
 
+
 class VirtualConnection():
     """A virtual serial connection.
 
@@ -58,7 +59,10 @@ class VirtualConnection():
 
         process (function):
             The method used for processing input and forming output.
-            Should have the same signature as :attr:`process`.
+            Its signature should be
+            ::
+
+                process(self, input_: bytes) -> output: bytes
 
         virtual_end:
              A file-like object used by a simulated device to read
@@ -68,7 +72,8 @@ class VirtualConnection():
             A file-like object used by the UI to read and write data.
 
         thread (:class:`threading.Thread`):
-            The parallel thread used to run a :class:`VirtualConnection`.
+            The parallel thread used to run a
+            :class:`VirtualConnection`.
 
         running_instances:
             Class attribute.
@@ -87,7 +92,7 @@ class VirtualConnection():
         Args:
             process (function):
                 The value of :attr:`process`.
-                If no value is supllies, :atrr:`default_process`
+                If no value is supllies, :attr:`default_process`
                 will be used.
 
             buffer_size:
@@ -205,7 +210,8 @@ class VirtualConnection():
         os.close(self.user_end)
         os.close(self.virtual_end)
 
-    def default_process(self, input_): # pylint: disable=no-self-use
+    @staticmethod
+    def default_process(input_):
         """Form output based on *input_*.
 
         This is the default method assigned to :attr:`process`,
@@ -217,8 +223,6 @@ class VirtualConnection():
         Returns:
             *input_*.
         """
-        # *self* is included as an argument since this may be
-        # overridden by a method that uses *self*.
 
         output = input_
         return output

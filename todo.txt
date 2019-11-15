@@ -1,9 +1,6 @@
 TODO:
 
 ### Current ###
-- Go through modules with Pylint (currently in virtualconnection)
-- Make sure line length is checked (also for comments!)
-- changed the docstring of virtualconnection.__init__
 
 ### Important ###
 - Testing (maybe try mock objects)!

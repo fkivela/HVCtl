@@ -1,11 +1,8 @@
 """This module defines the :class:`VirtualHV` class."""
 
-# pylint: disable=invalid-name
-# Pylint doesn't like 'HV' in names.
-# pylint: disable=too-many-instance-attributes
-
 from .message import Message
 from .virtualconnection import VirtualConnection
+
 
 class VirtualHV():
     """A virtual high voltage generator.
@@ -27,17 +24,17 @@ class VirtualHV():
             | The current of the virtual HV PSU in mA.
             | Initial value: ``0``.
 
-        HV_on_command (bool):
+        hv_on_command (bool):
             | The virtual HV PSU is turned on by setting this first to
               True and then back to False.
             | Initial value: ``False``.
 
-        HV_off_command (bool):
+        hv_off_command (bool):
             | The virtual HV PSU is turned off by setting this first to
               True and then back to False.
             | Initial value: ``False``.
 
-        HV_on_status (bool):
+        hv_on_status (bool):
             | Determines whether the virtual HV PSU is on (``True``)
               or off (``False``).
             | Initial value: ``False``.
@@ -75,9 +72,9 @@ class VirtualHV():
 
         self.voltage = 0
         self.current = 0
-        self.HV_on_command = False
-        self.HV_off_command = False
-        self.HV_on_status = False
+        self.hv_on_command = False
+        self.hv_off_command = False
+        self.hv_on_status = False
         self.mode = 'remote'
         self.inhibit = False
         self.interlock = False
@@ -139,55 +136,55 @@ class VirtualHV():
         self.current = value
         return self.current
 
-    def HV_on(self, value):
+    def hv_on(self, value):
         """Handle a ``'HV on'`` command.
 
-        If :attr:`HV_on_command` is ``False`` and *value* is ``True``,
-        :attr:`HV_on_command` is set to ``True``.
+        If :attr:`hv_on_command` is ``False`` and *value* is ``True``,
+        :attr:`hv_on_command` is set to ``True``.
 
-        If :attr:`HV_on_command` is ``True`` and *value* is ``False``,
-        :attr:`HV_on_status` is set to ``True`` and
-        :attr:`HV_on_command` is set to ``False``.
+        If :attr:`hv_on_command` is ``True`` and *value* is ``False``,
+        :attr:`hv_on_status` is set to ``True`` and
+        :attr:`hv_on_command` is set to ``False``.
 
-        If *value* has the same value as :attr:`HV_on_command`,
+        If *value* has the same value as :attr:`hv_on_command`,
         a :exc:`RuntimeError` is raised.`
 
         Returns:
-            The new value of :attr:`HV_on_command`.
+            The new value of :attr:`hv_on_command`.
         """
-        if value == self.HV_on_command:
-            raise RuntimeError(f'*HV_on_command* is already {value}')
+        if value == self.hv_on_command:
+            raise RuntimeError(f'*hv_on_command* is already {value}')
 
-        if self.HV_on_command:
-            self.HV_on_status = True
+        if self.hv_on_command:
+            self.hv_on_status = True
 
-        self.HV_on_command = value
-        return self.HV_on_command
+        self.hv_on_command = value
+        return self.hv_on_command
 
-    def HV_off(self, value):
+    def hv_off(self, value):
         """Handle a ``'HV off'`` command.
 
-        If :attr:`HV_off_command` is ``False`` and *value* is ``True``,
-        :attr:`HV_off_command` is set to ``True``.
+        If :attr:`hv_off_command` is ``False`` and *value* is ``True``,
+        :attr:`hv_off_command` is set to ``True``.
 
-        If :attr:`HV_off_command` is ``True`` and *value* is ``False``,
-        :attr:`HV_on_status` is set to ``False`` and
-        :attr:`HV_off_command` is set to ``False``.
+        If :attr:`hv_off_command` is ``True`` and *value* is ``False``,
+        :attr:`hv_on_status` is set to ``False`` and
+        :attr:`hv_off_command` is set to ``False``.
 
-        If *value* has the same value as :attr:`HV_off_command`,
+        If *value* has the same value as :attr:`hv_off_command`,
         a :exc:`RuntimeError` is raised.`
 
         Returns:
-            The new value of :attr:`HV_off_command`.
+            The new value of :attr:`hv_off_command`.
         """
-        if value == self.HV_off_command:
-            raise RuntimeError(f'*HV_off_command* is already {value}')
+        if value == self.hv_off_command:
+            raise RuntimeError(f'*hv_off_command* is already {value}')
 
-        if self.HV_off_command:
-            self.HV_on_status = False
+        if self.hv_off_command:
+            self.hv_on_status = False
 
-        self.HV_off_command = value
-        return self.HV_off_command
+        self.hv_off_command = value
+        return self.hv_off_command
 
     def set_mode(self, value):
         """Handle a ``'set mode'`` command.
@@ -224,17 +221,18 @@ class VirtualHV():
         :Bit 0: :attr:`inhibit`
         :Bit 1: :attr:`mode` (``1`` for ``'local'``,
                               ``0`` for ``'remote'``),
-        :Bit 2: :attr:`HV_off_command`,
-        :Bit 3: :attr:`HV_on_command`,
-        :Bit 4: :attr:`HV_on_status`,
+        :Bit 2: :attr:`hv_off_command`,
+        :Bit 3: :attr:`hv_on_command`,
+        :Bit 4: :attr:`hv_on_status`,
         :Bit 5: :attr:`interlock`,
         :Bit 6: :attr:`fault`,
         :Bit 7: :attr:`regulation` (``1`` for ``'voltage'``,
                                     ``0`` for ``'current'``),
 
         Since ``True`` equals ``1`` in Python, attributes with a value
-        of ``True`` will set their respective bit to ``1``, and
-        attributes with a value of ``False`` will set their bit to ``0``.
+        of ``True`` will set their respective bit to ``1``,
+        and attributes with a value of ``False`` will set their bit
+        to ``0``.
         The bits are in big-endian order.
 
         Returns:
@@ -243,9 +241,9 @@ class VirtualHV():
         values = [
             self.inhibit == 'active',
             self.mode == 'local',
-            self.HV_off_command,
-            self.HV_on_command,
-            self.HV_on_status,
+            self.hv_off_command,
+            self.hv_on_command,
+            self.hv_on_status,
             self.interlock,
             self.fault,
             self.regulation == 'voltage']

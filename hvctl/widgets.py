@@ -14,6 +14,7 @@ above that."""
 
 import urwid
 
+
 class CommandLines(urwid.WidgetWrap):
     """This widget provides a terminal-like command line interface.
 
@@ -153,7 +154,7 @@ class CommandHistory:
         self.temp_history = ['']
         self.index = 0
 
-    def up(self): # pylint: disable=invalid-name
+    def up(self):  # pylint: disable=invalid-name
         """Increase :attr:`index` by 1 (i.e. select a command that is
         older than the current one).
 
@@ -459,8 +460,9 @@ class ScrollBar(urwid.WidgetWrap):
             A list of strings, each corresponding to a text row.
             The list has the dimensions indicated by *size*.
         """
-        scroller_relative_size = (self.position.visible_rows /
-                                  self.position.total_rows)
+        scroller_relative_size = (
+            self.position.visible_rows / self.position.total_rows)
+
         if scroller_relative_size > 1:
             scroller_relative_size = 1
 
@@ -471,16 +473,16 @@ class ScrollBar(urwid.WidgetWrap):
             n_scroller_rows = 1
 
         n_background_rows = nrows - n_scroller_rows
-        n_background_rows_above = round(self.position.relative *
-                                        n_background_rows)
+        n_background_rows_above = (
+            round(self.position.relative * n_background_rows))
         n_background_rows_below = n_background_rows - n_background_rows_above
 
         basic_row = ncols * self.background_char
         scroller_row = ncols * self.scroller_char
 
-        return (n_background_rows_above * [basic_row] +
-                n_scroller_rows * [scroller_row] +
-                n_background_rows_below * [basic_row])
+        return (n_background_rows_above * [basic_row]
+                + n_scroller_rows * [scroller_row]
+                + n_background_rows_below * [basic_row])
 
     def mouse_event(self, size, event, button, col, row, focus):
         """Handle mouse events.
@@ -494,7 +496,7 @@ class ScrollBar(urwid.WidgetWrap):
             ``False`` otherwise.
         """
         if button == 1:
-            _, nrows = size # size = (ncols, nrows)
+            _, nrows = size  # size = (ncols, nrows)
             self.position.relative = row / (nrows - 1)
 
         return True

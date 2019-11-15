@@ -4,6 +4,7 @@ import queue
 import io
 import itertools
 
+
 class QueueFile:
     """This class wraps a :class:`queue.Queue` object in the interface
     of a file-like object.
@@ -14,9 +15,9 @@ class QueueFile:
     :func:`pty.openpty`.
     This object is thread-safe, can be read from and written to at
     the same time, and its blocking behaviour can be easily controlled.
-    (If there is nothing to read, reading from :class:`io.StringIO` never
-    blocks, but reading from an object created with :func:`pty.openpty`
-    always does.)
+    (If there is nothing to read, reading from :class:`io.StringIO`
+    never blocks, but reading from an object created with
+    :func:`pty.openpty` always does.)
 
     Attributes:
         queue (:class:`Queue`):

@@ -39,7 +39,7 @@
 which can be used to simulate serial connections.</p>
 <dl class="class">
 <dt id="hvctl.virtualconnection.VirtualConnection">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualconnection.</code><code class="sig-name descname">VirtualConnection</code><span class="sig-paren">(</span><em class="sig-param">process_method=None</em>, <em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualconnection.</code><code class="sig-name descname">VirtualConnection</code><span class="sig-paren">(</span><em class="sig-param">process=None</em>, <em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A virtual serial connection.</p>
 <p>Data can be sent through a <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object by
 accessing the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="hvctl.virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="hvctl.virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a> attributes.
@@ -77,6 +77,11 @@ In this case, all running instances of the
 <code class="sig-name descname">buffer_size</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.buffer_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The buffer size for the connection
 (how many bits are read at once).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -84,6 +89,26 @@ In this case, all running instances of the
 <code class="sig-name descname">sleep_time</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.sleep_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>How long (in seconds) the object waits after checking for
 input before doing it again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hvctl.virtualconnection.VirtualConnection.process">
+<code class="sig-name descname">process</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method used for processing input and forming output.
+Its signature should be</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">output</span><span class="p">:</span> <span class="nb">bytes</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>function</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -103,6 +128,11 @@ and write data.</p>
 <dt id="hvctl.virtualconnection.VirtualConnection.thread">
 <code class="sig-name descname">thread</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.thread" title="Permalink to this definition">¶</a></dt>
 <dd><p>The parallel thread used to run a <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -115,15 +145,15 @@ A set of all currently running instances of the
 
 <dl class="method">
 <dt id="hvctl.virtualconnection.VirtualConnection.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">process_method=None</em>, <em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">process=None</em>, <em class="sig-param">buffer_size=1024</em>, <em class="sig-param">sleep_time=0.01</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>.</p>
 <p>The new instance starts running automatically.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>process_method</strong> – A function to override the default implementation
-of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a>. If this argument is not defined,
-the default implementation will be used.</p></li>
+<li><p><strong>process</strong> (<em>function</em>) – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a>.
+If no value is supllies, <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.default_process" title="hvctl.virtualconnection.VirtualConnection.default_process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_process</span></code></a>
+will be used.</p></li>
 <li><p><strong>buffer_size</strong> – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.buffer_size" title="hvctl.virtualconnection.VirtualConnection.buffer_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">buffer_size</span></code></a>.</p></li>
 <li><p><strong>sleep_time</strong> – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.sleep_time" title="hvctl.virtualconnection.VirtualConnection.sleep_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sleep_time</span></code></a>.</p></li>
 </ul>
@@ -162,6 +192,22 @@ actually stopped.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="hvctl.virtualconnection.VirtualConnection.default_process">
+<code class="sig-name descname">default_process</code><span class="sig-paren">(</span><em class="sig-param">input_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.default_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Form output based on <em>input_</em>.</p>
+<p>This is the default method assigned to <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a>,
+and simply returns <em>input_</em> uncanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_</strong> – A bytes-like object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>input_</em>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="hvctl.virtualconnection.VirtualConnection.is_running">
 <code class="sig-name descname">is_running</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.is_running" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> IFF the parallel thread is running.</p>
@@ -173,23 +219,6 @@ actually stopped.</p>
 <dd><p>Return a device name (e.g. <code class="docutils literal notranslate"><span class="pre">'/dev/pts/...'</span></code>) that can be
 used as the <em>port</em> argument when a <code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code>
 object is created.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.virtualconnection.VirtualConnection.process">
-<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">input_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.process" title="Permalink to this definition">¶</a></dt>
-<dd><p>Form output based on <em>input_</em>.</p>
-<p>By default, <em>input_</em> is simply mirrored back.
-This behaviour can be changed by assigning a different method
-with the same signature to this name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input_</strong> – A bytes-like object.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>input_</em>. This is supposed to be overridden by subclasses.</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>

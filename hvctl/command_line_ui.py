@@ -1,17 +1,14 @@
 """This module defines a simple command-line UI for HVCtl."""
 
-#pylint: disable=bad-whitespace
-#pylint: disable=bad-continuation
-# These are used to improve readability.
-
 import ast
 import inspect
 # Importing readline adds command editing etc. to the input function.
-import readline # pylint: disable=unused-import
+import readline  # pylint: disable=unused-import
 import sys
 import textwrap
 
 from . import api
+
 
 class CommandLineUI:
     """A simple command-line UI.
@@ -78,6 +75,7 @@ class CommandLineUI:
 
     indent = '    '
 
+    # pylint: disable=bad-whitespace
     cmds_and_aliases = [
         ('getvoltage', ['getu']),
         ('getcurrent', ['geti']),
@@ -92,7 +90,8 @@ class CommandLineUI:
         ('exit'      , ['e', 'q', 'x']),
         ('help'      , ['h']),
         ('debug'     , ['d']),
-     ]
+    ]
+    # pylint: enable=bad-whitespace
 
     def __init__(self, port=None, inputfile=None, outputfile=None):
         """Initialize a new CommandLineUI.
@@ -130,7 +129,7 @@ class CommandLineUI:
         """Called upon entering a ``with`` block; returns *self*."""
         return self
 
-    def __exit__(self,  exception_type, exception_value, traceback):
+    def __exit__(self, exception_type, exception_value, traceback):
         """Called upon exiting a ``with`` block;
         calls :meth:`api.halt() <hvctl.api.API.halt()>`.
 
@@ -184,12 +183,12 @@ class CommandLineUI:
 
     def cmd_hvon(self):
         """Turn the HV on."""
-        self.api.HV_on()
+        self.api.hv_on()
         self.print('HV turned on')
 
     def cmd_hvoff(self):
         """Turn the HV off."""
-        self.api.HV_on()
+        self.api.hv_off()
         self.print('HV turned off')
 
     def cmd_mode(self, value):
@@ -228,8 +227,7 @@ class CommandLineUI:
         statusdict = self.api.full_status()
         string = (f"Voltage: {statusdict['voltage']}\n"
                   f"Current: {statusdict['current']}\n"
-                  + self._status_str(statusdict)
-                 )
+                  + self._status_str(statusdict))
         self.print('Status:\n' + textwrap.indent(string, self.indent))
 
     @staticmethod
@@ -239,12 +237,12 @@ class CommandLineUI:
         """
         return '\n'.join([
             f'Regulation mode: {statusdict["regulation"]}',
-            f'HV power: {"on" if statusdict["HV_on_status"] else "off"}',
-            f'HV on command given: {statusdict["HV_on_command"]}',
-            f'HV off command given: {statusdict["HV_off_command"]}',
+            f'HV power: {"on" if statusdict["hv_on_status"] else "off"}',
+            f'HV on command given: {statusdict["hv_on_command"]}',
+            f'HV off command given: {statusdict["hv_off_command"]}',
             f'Interlock: {statusdict["interlock"]}',
             ('Fault(s) present' if statusdict["fault"]
-                                else 'No faults present'),
+             else 'No faults present'),
         ])
 
     def cmd_help(self, value=None):
@@ -261,8 +259,8 @@ class CommandLineUI:
             for name, _ in self.cmds_and_aliases:
                 descriptions.append(self._helpstring(name))
             description_str = '\n\n'.join(descriptions)
-            string = ('Valid commands:\n' +
-                      textwrap.indent(description_str, self.indent))
+            string = ('Valid commands:\n'
+                      + textwrap.indent(description_str, self.indent))
 
         self.print(string)
 
@@ -284,8 +282,8 @@ class CommandLineUI:
         debugging easier.
         """
         self.debug = bool(value)
-        self.print('Debug mode ' +
-                   'activated' if self.debug else 'deactivated')
+        self.print('Debug mode '
+                   + 'activated' if self.debug else 'deactivated')
 
     def input(self, prompt=''):
         """Ask the user for input.
@@ -411,7 +409,7 @@ class CommandLineUI:
         return (f'{cmdname} {argstr}\n'
                 + textwrap.indent(docstr, self.indent)
                 + ('\n\n' + textwrap.indent(aliasstr, self.indent) if aliasstr
-                                                                   else '')
+                   else '')
                 )
 
     def _alias_string(self, command):
@@ -434,8 +432,8 @@ class CommandLineUI:
         Format: '<arg1> [optional_arg2=default]'
         """
         argspec = inspect.getfullargspec(method)
-        args = argspec.args[1:] # Ignore *self*.
-        defaults = argspec.defaults # Default values for arguments.
+        args = argspec.args[1:]  # Ignore *self*.
+        defaults = argspec.defaults  # Default values for arguments.
         if defaults is None:
             defaults = []
 

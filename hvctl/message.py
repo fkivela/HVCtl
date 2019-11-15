@@ -23,6 +23,7 @@ _PATTERN_TO_COMMAND = {p: c for c, p
 COMMANDS = list(_COMMAND_TO_PATTERN.keys())
 """A list of valid commands."""
 
+
 class Message():
     """This class represents a message sent to or received from the HV
     generator.
@@ -156,7 +157,7 @@ class Message():
         """
 
         values = range(config.INT_MAX + 1)
-        if not value in values:
+        if value not in values:
             raise ValueError(f'*value* should be in {values}, was {value}')
 
     def _check_getter_value(self, value):
@@ -183,7 +184,7 @@ class Message():
             ValueError: If this is not the case.
         """
 
-        if not value in [1, 0]:
+        if value not in [1, 0]:
             raise ValueError(f'*value* should be 1 or 0, not {value}')
 
     def _check_status_value(self, value):
@@ -196,7 +197,7 @@ class Message():
 
         if self.is_answer:
             values = range(256)
-            if not value in values:
+            if value not in values:
                 raise ValueError(f'*value* should be in {values}, was {value}')
         else:
             if value is not None:

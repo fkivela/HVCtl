@@ -217,6 +217,12 @@ should return <code class="docutils literal notranslate"><span class="pre">None<
 <dd><p>Handle key presses.</p>
 <p>The up and down arrow keys are used to browse command history.
 Enter enters a command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code> if the keypress was handled by this widget,
+<em>key</em> if it was not.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -290,6 +296,12 @@ bar.</p>
 <p>Mouse button 1 moves the scroller; e.g. clicking the scrollbar
 at a point <em>X</em> % from its top will scroll the terminal to a
 position <em>X</em> % from its beginning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the event was handled by this widget,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -447,6 +459,12 @@ objects that can scroll the widget (e.g. the scroll bar).</p>
 <dd><p>Handle key presses.</p>
 <p>Pressing any key scrolls the terminal to the bottom so that
 the current command can be edited.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code> if the keypress was handled by this widget,
+<em>key</em> if it was not.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -454,6 +472,12 @@ the current command can be edited.</p>
 <code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">event</em>, <em class="sig-param">button</em>, <em class="sig-param">col</em>, <em class="sig-param">row</em>, <em class="sig-param">focus</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollableWidget.mouse_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle mouse events.</p>
 <p>The mouse wheel scrolls the terminal up and down.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the event was handled by this widget,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -514,6 +538,12 @@ button.</p></li>
 <code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">event</em>, <em class="sig-param">button</em>, <em class="sig-param">col</em>, <em class="sig-param">row</em>, <em class="sig-param">focus</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollButton.mouse_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle mouse events.</p>
 <p>A left click scrolls the screen by <a class="reference internal" href="#hvctl.widgets.ScrollButton.step" title="hvctl.widgets.ScrollButton.step"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step</span></code></a> rows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the event was handled by this widget,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -621,7 +651,6 @@ down.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
@@ -634,6 +663,7 @@ down.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
 </ul>
 
 <div class="relations">
@@ -673,7 +703,7 @@ down.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -10,6 +10,7 @@ import urwid
 
 from . import widgets
 
+
 class AdvancedTUI(urwid.WidgetWrap):
     """A text-based user interface combining a terminal-style
     command line interface and a text screen.
@@ -71,7 +72,7 @@ class AdvancedTUI(urwid.WidgetWrap):
 
         return super().keypress(size, key)
 
-    def _callback(self, loop, user_data): #pylint: disable=unused-argument
+    def _callback(self, loop, user_data):
         """Update self.cli.cmdlines periodically so that it handles
         new output.
         This also updates self.cli.scrollbar, since printing new
@@ -81,7 +82,7 @@ class AdvancedTUI(urwid.WidgetWrap):
         # _invalidate marks a widget for re-rendering.
         # urwid documentation suggests using this method even though
         # it begins with '_'.
-        self.cli.scrollbar._invalidate() #pylint: disable=protected-access
+        self.cli.scrollbar._invalidate()  # pylint: disable=protected-access
         self._loop.set_alarm_in(0.01, self._callback, user_data=None)
 
     def run(self):

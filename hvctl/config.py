@@ -36,22 +36,21 @@ Attributes:
         The smallest amount by which the value of the current can be
         changed, in mA.
 """
-
-# pylint: disable=bad-continuation, bad-whitespace
-# These are used to make the definitions of e.g. SERIAL_KWARGS
-# more readable.
 # pylint: disable=global-variable-undefined
-# Since functions can't be forward-referenced in Python, the constants
-# must be defined in a main() function instead of at the module level.
-# They could be defined at the module level if they were placed at the
-# end of the file, but that would harm readability, since the important
-# stuff should be at the start.
+# We cannot assign the values of the constants at module level since
+# functions cannot be used before they are defined.
+# This could be avoided by assigning the constants at the end of the
+# file, but that would harm readability, since the important stuff
+# should be at the start.
+# Initializing constants to None would add unnecessary lines
+# and make uninitialized constants harder to detect.
 
 import configparser
 import os
 from typing import Union
 
 import serial
+
 
 def main():
     """Parse the configuration file and define the constants.
@@ -89,29 +88,31 @@ def _load_values(parser):
     global DELTA_U
     global DELTA_I
 
+    # pylint: disable=bad-whitespace
     SERIAL_KWARGS = {
-    'port'    :           parser.get(       'serial', 'port'    ),
-    'baudrate':           parser.getint(    'serial', 'baudrate'),
-    'bytesize': _bytesize(parser.getint(    'serial', 'bytesize')),
-    'parity'  :   _parity(parser.get(       'serial', 'parity'  )),
-    'stopbits': _stopbits(parser.getint(    'serial', 'stopbits')),
-    'timeout' :  _timeout(parser.get(       'serial', 'timeout' )),
-    'xonxoff' :           parser.getboolean('serial', 'xonxoff' ),
-    'rtscts'  :           parser.getboolean('serial', 'rtscts'  ),
-    'dsrdtr'  :           parser.getboolean('serial', 'dsrdtr'  ),
+        'port'    :           parser.get(       'serial', 'port'    ),
+        'baudrate':           parser.getint(    'serial', 'baudrate'),
+        'bytesize': _bytesize(parser.getint(    'serial', 'bytesize')),
+        'parity'  :   _parity(parser.get(       'serial', 'parity'  )),
+        'stopbits': _stopbits(parser.getint(    'serial', 'stopbits')),
+        'timeout' :  _timeout(parser.get(       'serial', 'timeout' )),
+        'xonxoff' :           parser.getboolean('serial', 'xonxoff' ),
+        'rtscts'  :           parser.getboolean('serial', 'rtscts'  ),
+        'dsrdtr'  :           parser.getboolean('serial', 'dsrdtr'  ),
     }
+    # pylint: enable=bad-whitespace
 
     # The exclusive keyword isn't found in older versions of the
     # serial module.
     if float(serial.VERSION) >= 3.3:
         SERIAL_KWARGS['exclusive'] = True
 
-    max_voltage   = parser.getfloat('voltage', 'max_voltage'  )
-    max_current   = parser.getfloat('current', 'max_current'  )
+    max_voltage = parser.getfloat('voltage', 'max_voltage')
+    max_current = parser.getfloat('current', 'max_current')
     VOLTAGE_LIMIT = parser.getfloat('voltage', 'voltage_limit')
     CURRENT_LIMIT = parser.getfloat('current', 'current_limit')
 
-    INT_MAX = 2**12-1
+    INT_MAX = 2**12 - 1
     DELTA_U = max_voltage / INT_MAX
     DELTA_I = max_current / INT_MAX
 
@@ -163,5 +164,6 @@ def _timeout(value: str):
         return float(value)
     except ValueError:
         raise ValueError('invalid timeout: {value}')
+
 
 main()

@@ -10,12 +10,6 @@ import serial
 from . import config
 from .message import Message
 
-# pylint: disable=too-many-instance-attributes
-# Status is a data class; its purpose is to contain a lot of
-# attributes.
-
-# pylint: disable=invalid-name
-# Pylint doesn't like the initialism 'HV' in variable names.
 
 @dataclass
 class Status:
@@ -39,19 +33,19 @@ class Status:
     # ';' is used instead of ':' because sphinx napoleon doesn't
     # parse the latter correctly.
 
-    HV_on_command: bool = False
+    hv_on_command: bool = False
     """The HV PSU is turned on by setting the "HV on" parameter to 1
     and then back to 0. This attribute displays the current value of
     that parameter as a boolean.
     """
 
-    HV_off_command: bool = False
+    hv_off_command: bool = False
     """The HV PSU is turned on by setting the "HV off" parameter to 1
     and then back to 0. This attribute displays the current value of
     that parameter as a boolean.
     """
 
-    HV_on_status: bool = False
+    hv_on_status: bool = False
     """``True`` if the HV PSU is currently on, ``False`` if it's
     off.
     """
@@ -91,14 +85,15 @@ class Status:
             f'Current: {self.current:.2f} mA',
             f'Regulation mode: {self.regulation}',
             f'',
-            f'HV power: {"on" if self.HV_on_status else "off"}',
-            f'HV on command given: {self.HV_on_command}',
-            f'HV off command given: {self.HV_off_command}',
+            f'HV power: {"on" if self.hv_on_status else "off"}',
+            f'HV on command given: {self.hv_on_command}',
+            f'HV off command given: {self.hv_off_command}',
             f'',
             f'Mode: {self.mode}',
             f'Interlock: {self.interlock}',
             'Fault(s) present' if self.fault else 'No faults present',
         ])
+
 
 class API():
     """This class defines an API for communicating with a
@@ -273,16 +268,16 @@ class API():
         answer = self._send(Message(f'get {name}'))
         return delta * answer.value
 
-    def HV_on(self):
+    def hv_on(self):
         """Turn the HV on."""
         self._send(Message('HV on', 1))
-        time.sleep(0.1) # Delay 100 ms
+        time.sleep(0.1)
         self._send(Message('HV on', 0))
 
-    def HV_off(self):
+    def hv_off(self):
         """Turn the HV off."""
         self._send(Message('HV off', 1))
-        time.sleep(0.1) # Delay 100 ms
+        time.sleep(0.1)
         self._send(Message('HV off', 0))
 
     def set_mode(self, mode):
@@ -356,7 +351,7 @@ class API():
         try:
             self.set_voltage(0)
             self.set_current(0)
-            self.HV_off()
+            self.hv_off()
         except RuntimeError:
             pass
 
@@ -414,10 +409,10 @@ class API():
             self.status.current = config.DELTA_I * reply.value
 
         elif reply.command == 'HV on':
-            self.status.HV_on_command = bool(reply.value)
+            self.status.hv_on_command = bool(reply.value)
 
         elif reply.command == 'HV off':
-            self.status.HV_off_command = bool(reply.value)
+            self.status.hv_off_command = bool(reply.value)
 
         elif reply.command == 'set mode':
             self.status.mode = 'local' if reply.value else 'remote'
@@ -450,9 +445,9 @@ class API():
         return {
             'inhibit'       : bool(bits[0]),
             'mode'          : 'local' if bits[1] else 'remote',
-            'HV_off_command': bool(bits[2]),
-            'HV_on_command' : bool(bits[3]),
-            'HV_on_status'  : bool(bits[4]),
+            'hv_off_command': bool(bits[2]),
+            'hv_on_command' : bool(bits[3]),
+            'hv_on_status'  : bool(bits[4]),
             'interlock'     : 'open' if bits[5] else 'closed',
             'fault'         : bool(bits[6]),
             'regulation'    : 'voltage' if bits[7] else 'current'

@@ -39,7 +39,7 @@
 generator.</p>
 <dl class="class">
 <dt id="hvctl.api.Status">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0</em>, <em class="sig-param">current: float = 0</em>, <em class="sig-param">inhibit: bool = False</em>, <em class="sig-param">mode: str = 'remote'</em>, <em class="sig-param">HV_on_command: bool = False</em>, <em class="sig-param">HV_off_command: bool = False</em>, <em class="sig-param">HV_on_status: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">regulation: str = 'current'</em>, <em class="sig-param">callback: object = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0</em>, <em class="sig-param">current: float = 0</em>, <em class="sig-param">inhibit: bool = False</em>, <em class="sig-param">mode: str = 'remote'</em>, <em class="sig-param">hv_on_command: bool = False</em>, <em class="sig-param">hv_off_command: bool = False</em>, <em class="sig-param">hv_on_status: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">regulation: str = 'current'</em>, <em class="sig-param">callback: object = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class stores information about the current status of the
 HV PSU.</p>
 <dl class="method">
@@ -53,29 +53,6 @@ HV PSU.</p>
 <code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status.__str__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the contents of <em>self</em> in a form suitable to be
 displayed in a TUI.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="hvctl.api.Status.HV_off_command">
-<code class="sig-name descname">HV_off_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.HV_off_command" title="Permalink to this definition">¶</a></dt>
-<dd><p>The HV PSU is turned on by setting the “HV off” parameter to 1
-and then back to 0. This attribute displays the current value of
-that parameter as a boolean.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="hvctl.api.Status.HV_on_command">
-<code class="sig-name descname">HV_on_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.HV_on_command" title="Permalink to this definition">¶</a></dt>
-<dd><p>The HV PSU is turned on by setting the “HV on” parameter to 1
-and then back to 0. This attribute displays the current value of
-that parameter as a boolean.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="hvctl.api.Status.HV_on_status">
-<code class="sig-name descname">HV_on_status</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.HV_on_status" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the HV PSU is currently on, <code class="docutils literal notranslate"><span class="pre">False</span></code> if it’s
-off.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -96,6 +73,29 @@ contents of this object are changed.</p>
 <code class="sig-name descname">fault</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.fault" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if there is a fault present at the HV PSU, <code class="docutils literal notranslate"><span class="pre">False</span></code>
 otherwise.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hvctl.api.Status.hv_off_command">
+<code class="sig-name descname">hv_off_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_off_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HV PSU is turned on by setting the “HV off” parameter to 1
+and then back to 0. This attribute displays the current value of
+that parameter as a boolean.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hvctl.api.Status.hv_on_command">
+<code class="sig-name descname">hv_on_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HV PSU is turned on by setting the “HV on” parameter to 1
+and then back to 0. This attribute displays the current value of
+that parameter as a boolean.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hvctl.api.Status.hv_on_status">
+<code class="sig-name descname">hv_on_status</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_status" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the HV PSU is currently on, <code class="docutils literal notranslate"><span class="pre">False</span></code> if it’s
+off.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -213,18 +213,6 @@ or not (see the class docstring for more details.)</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="hvctl.api.API.HV_off">
-<code class="sig-name descname">HV_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.HV_off" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turn the HV off.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.api.API.HV_on">
-<code class="sig-name descname">HV_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.HV_on" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turn the HV on.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="hvctl.api.API.full_status">
 <code class="sig-name descname">full_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.full_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>The same as <a class="reference internal" href="#hvctl.api.API.get_status" title="hvctl.api.API.get_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_status()</span></code></a>, but also includes
@@ -278,6 +266,18 @@ turns the HV off, closes the serial connection and stops the
 parallel thread, if automatic polling is on.</p>
 <p>If there is no connection, actions that can’t be performed
 are skipped.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.api.API.hv_off">
+<code class="sig-name descname">hv_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.hv_off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the HV off.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.api.API.hv_on">
+<code class="sig-name descname">hv_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.hv_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the HV on.</p>
 </dd></dl>
 
 <dl class="method">

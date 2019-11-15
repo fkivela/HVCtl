@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 """This is the main script used to run HVCtl."""
 
-# pylint: disable=invalid-name
-# Pylint considers all global variables constants.
-# pylint: disable=unnecessary-lambda
-# Lambdas are used to make the code look better.
-
 import argparse
 
 from hvctl.command_line_ui import CommandLineUI
@@ -55,8 +50,7 @@ try:
 
         # Create an AdvancedTUI that wraps a CommandLineUI.
         clui = CommandLineUI(port, inputfile, outputfile)
-        script = lambda: clui.run()
-        adv_ui = AdvancedTUI(script, inputfile, outputfile)
+        adv_ui = AdvancedTUI(clui.run, inputfile, outputfile)
 
         # Show HV status in the UI.
         status = clui.api.status

@@ -38,7 +38,7 @@
 <p>This module defines the <a class="reference internal" href="#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> class.</p>
 <dl class="class">
 <dt id="hvctl.virtualhv.VirtualHV">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualhv.</code><code class="sig-name descname">VirtualHV</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualhv.</code><code class="sig-name descname">VirtualHV</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A virtual high voltage generator.</p>
 <p>This class simulates a HV PSU that can be communicated with
@@ -80,8 +80,8 @@ object used for simulating a serial connection.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="hvctl.virtualhv.VirtualHV.HV_on_command">
-<code class="sig-name descname">HV_on_command</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualhv.VirtualHV.hv_on_command">
+<code class="sig-name descname">hv_on_command</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">The virtual HV PSU is turned on by setting this first to
 True and then back to False.</div>
@@ -95,8 +95,8 @@ True and then back to False.</div>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="hvctl.virtualhv.VirtualHV.HV_off_command">
-<code class="sig-name descname">HV_off_command</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualhv.VirtualHV.hv_off_command">
+<code class="sig-name descname">hv_off_command</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">The virtual HV PSU is turned off by setting this first to
 True and then back to False.</div>
@@ -110,8 +110,8 @@ True and then back to False.</div>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="hvctl.virtualhv.VirtualHV.HV_on_status">
-<code class="sig-name descname">HV_on_status</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.HV_on_status" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.virtualhv.VirtualHV.hv_on_status">
+<code class="sig-name descname">hv_on_status</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_on_status" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Determines whether the virtual HV PSU is on (<code class="docutils literal notranslate"><span class="pre">True</span></code>)
 or off (<code class="docutils literal notranslate"><span class="pre">False</span></code>).</div>
@@ -201,10 +201,8 @@ current or voltage.</div>
 
 <dl class="method">
 <dt id="hvctl.virtualhv.VirtualHV.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a>.</p>
-<p>All arguments are passed to
-<a class="reference internal" href="virtualconnection.html#hvctl.virtualconnection.VirtualConnection.__init__" title="hvctl.virtualconnection.VirtualConnection.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hvctl.virtualconnection.VirtualConnection.__init__()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -219,42 +217,6 @@ returns <em>self</em>.</p>
 <code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param">type_</em>, <em class="sig-param">value</em>, <em class="sig-param">traceback</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.__exit__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called upon exiting a <code class="docutils literal notranslate"><span class="pre">with</span></code> block; calls
 <a class="reference internal" href="virtualconnection.html#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connection.close()</span></code></a>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.virtualhv.VirtualHV.HV_off">
-<code class="sig-name descname">HV_off</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.HV_off" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'HV</span> <span class="pre">off'</span></code> command.</p>
-<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="hvctl.virtualhv.VirtualHV.HV_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_off_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
-<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="hvctl.virtualhv.VirtualHV.HV_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_off_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="hvctl.virtualhv.VirtualHV.HV_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_off_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">False</span></code>,
-<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_status" title="hvctl.virtualhv.VirtualHV.HV_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_status</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code> and
-<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="hvctl.virtualhv.VirtualHV.HV_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_off_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<p>If <em>value</em> has the same value as <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="hvctl.virtualhv.VirtualHV.HV_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_off_command</span></code></a>,
-a <code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code> is raised.`</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The new value of <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="hvctl.virtualhv.VirtualHV.HV_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_off_command</span></code></a>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.virtualhv.VirtualHV.HV_on">
-<code class="sig-name descname">HV_on</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.HV_on" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'HV</span> <span class="pre">on'</span></code> command.</p>
-<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="hvctl.virtualhv.VirtualHV.HV_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
-<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="hvctl.virtualhv.VirtualHV.HV_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="hvctl.virtualhv.VirtualHV.HV_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">False</span></code>,
-<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_status" title="hvctl.virtualhv.VirtualHV.HV_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_status</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> and
-<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="hvctl.virtualhv.VirtualHV.HV_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<p>If <em>value</em> has the same value as <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="hvctl.virtualhv.VirtualHV.HV_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_command</span></code></a>,
-a <code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code> is raised.`</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The new value of <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="hvctl.virtualhv.VirtualHV.HV_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_command</span></code></a>.</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -288,13 +250,13 @@ attributes of <em>self</em> in the following manner:</p>
 <code class="docutils literal notranslate"><span class="pre">0</span></code> for <code class="docutils literal notranslate"><span class="pre">'remote'</span></code>),</p>
 </dd>
 <dt class="field-odd">Bit 2</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_off_command" title="hvctl.virtualhv.VirtualHV.HV_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_off_command</span></code></a>,</p>
+<dd class="field-odd"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="hvctl.virtualhv.VirtualHV.hv_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_off_command</span></code></a>,</p>
 </dd>
 <dt class="field-even">Bit 3</dt>
-<dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_command" title="hvctl.virtualhv.VirtualHV.HV_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_command</span></code></a>,</p>
+<dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="hvctl.virtualhv.VirtualHV.hv_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_command</span></code></a>,</p>
 </dd>
 <dt class="field-odd">Bit 4</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.HV_on_status" title="hvctl.virtualhv.VirtualHV.HV_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">HV_on_status</span></code></a>,</p>
+<dd class="field-odd"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_status" title="hvctl.virtualhv.VirtualHV.hv_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_status</span></code></a>,</p>
 </dd>
 <dt class="field-even">Bit 5</dt>
 <dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.interlock" title="hvctl.virtualhv.VirtualHV.interlock"><code class="xref py py-attr docutils literal notranslate"><span class="pre">interlock</span></code></a>,</p>
@@ -328,6 +290,42 @@ The bits are in big-endian order.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.voltage" title="hvctl.virtualhv.VirtualHV.voltage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">voltage</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.virtualhv.VirtualHV.hv_off">
+<code class="sig-name descname">hv_off</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'HV</span> <span class="pre">off'</span></code> command.</p>
+<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="hvctl.virtualhv.VirtualHV.hv_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_off_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
+<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="hvctl.virtualhv.VirtualHV.hv_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_off_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="hvctl.virtualhv.VirtualHV.hv_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_off_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">False</span></code>,
+<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_status" title="hvctl.virtualhv.VirtualHV.hv_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_status</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code> and
+<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="hvctl.virtualhv.VirtualHV.hv_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_off_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>If <em>value</em> has the same value as <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="hvctl.virtualhv.VirtualHV.hv_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_off_command</span></code></a>,
+a <code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code> is raised.`</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The new value of <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="hvctl.virtualhv.VirtualHV.hv_off_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_off_command</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.virtualhv.VirtualHV.hv_on">
+<code class="sig-name descname">hv_on</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'HV</span> <span class="pre">on'</span></code> command.</p>
+<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="hvctl.virtualhv.VirtualHV.hv_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
+<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="hvctl.virtualhv.VirtualHV.hv_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>If <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="hvctl.virtualhv.VirtualHV.hv_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_command</span></code></a> is <code class="docutils literal notranslate"><span class="pre">True</span></code> and <em>value</em> is <code class="docutils literal notranslate"><span class="pre">False</span></code>,
+<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_status" title="hvctl.virtualhv.VirtualHV.hv_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_status</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> and
+<a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="hvctl.virtualhv.VirtualHV.hv_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_command</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>If <em>value</em> has the same value as <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="hvctl.virtualhv.VirtualHV.hv_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_command</span></code></a>,
+a <code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code> is raised.`</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The new value of <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="hvctl.virtualhv.VirtualHV.hv_on_command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hv_on_command</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
