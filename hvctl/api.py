@@ -34,13 +34,13 @@ class Status:
     # parse the latter correctly.
 
     hv_on_command: bool = False
-    """The HV PSU is turned on by setting the "HV on" parameter to 1
+    """The HV PSU is turned on by setting the "hv on" parameter to 1
     and then back to 0. This attribute displays the current value of
     that parameter as a boolean.
     """
 
     hv_off_command: bool = False
-    """The HV PSU is turned on by setting the "HV off" parameter to 1
+    """The HV PSU is turned on by setting the "hv off" parameter to 1
     and then back to 0. This attribute displays the current value of
     that parameter as a boolean.
     """
@@ -86,8 +86,8 @@ class Status:
             f'Regulation mode: {self.regulation}',
             f'',
             f'HV power: {"on" if self.hv_on_status else "off"}',
-            f'HV on command given: {self.hv_on_command}',
-            f'HV off command given: {self.hv_off_command}',
+            f'hv on command given: {self.hv_on_command}',
+            f'hv off command given: {self.hv_off_command}',
             f'',
             f'Mode: {self.mode}',
             f'Interlock: {self.interlock}',
@@ -269,16 +269,16 @@ class API():
         return delta * answer.value
 
     def hv_on(self):
-        """Turn the HV on."""
-        self._send(Message('HV on', 1))
+        """Turn the hv on."""
+        self._send(Message('hv on', 1))
         time.sleep(0.1)
-        self._send(Message('HV on', 0))
+        self._send(Message('hv on', 0))
 
     def hv_off(self):
-        """Turn the HV off."""
-        self._send(Message('HV off', 1))
+        """Turn the hv off."""
+        self._send(Message('hv off', 1))
         time.sleep(0.1)
-        self._send(Message('HV off', 0))
+        self._send(Message('hv off', 0))
 
     def set_mode(self, mode):
         """Set the HV to remote or local mode.
@@ -408,10 +408,10 @@ class API():
         elif reply.command in ['get current', 'set current']:
             self.status.current = config.DELTA_I * reply.value
 
-        elif reply.command == 'HV on':
+        elif reply.command == 'hv on':
             self.status.hv_on_command = bool(reply.value)
 
-        elif reply.command == 'HV off':
+        elif reply.command == 'hv off':
             self.status.hv_off_command = bool(reply.value)
 
         elif reply.command == 'set mode':

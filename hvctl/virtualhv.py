@@ -94,21 +94,21 @@ class VirtualHV():
         """
         self.connection.close()
 
-    def get_voltage(self, _):
+    def get_voltage(self, *args):
         """Handle a ``'get voltage'`` command.
 
         Args:
-            _: This is ignored.
+            args: These are ignored.
 
         Returns:
             :attr:`voltage`."""
         return self.voltage
 
-    def get_current(self, _):
+    def get_current(self, *args):
         """Handle a ``'get current'`` command.
 
         Args:
-            _: This is ignored.
+            args: These are ignored.
 
         Returns:
             :attr:`current`."""
@@ -123,7 +123,8 @@ class VirtualHV():
             The new value of :attr:`voltage`.
         """
         self.voltage = value
-        return self.voltage
+        self.regulation = 'voltage'
+        return self.get_voltage()
 
     def set_current(self, value):
         """Handle a ``'set current'`` command.
@@ -134,7 +135,8 @@ class VirtualHV():
             The new value of :attr:`current`.
         """
         self.current = value
-        return self.current
+        self.regulation = 'current'
+        return self.get_current()
 
     def hv_on(self, value):
         """Handle a ``'HV on'`` command.

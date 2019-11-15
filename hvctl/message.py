@@ -10,8 +10,8 @@ _COMMAND_TO_PATTERN = {
     'set current': 'd2,{}\r',
     'get voltage': 'a1{}\r',
     'get current': 'a2{}\r',
-    'HV on'      : 'P5,{}\r',
-    'HV off'     : 'P6,{}\r',
+    'hv on'      : 'P5,{}\r',
+    'hv off'     : 'P6,{}\r',
     'set mode'   : 'P7,{}\r',
     'set inhibit': 'P8,{}\r',
     'get status' : 'E{}\r'
@@ -32,7 +32,7 @@ class Message():
         command (string):
             The command that is sent to the HV PSU, or the command
             to which *self* is an answer; e.g. ``'set voltage'`` or
-            ``'HV on'``.
+            ``'hv on'``.
             All valid commands are listed in
             :const:`~hvctl.message.COMMANDS`.
 
@@ -141,7 +141,7 @@ class Message():
             return self._check_setter_value
         if command in ['get voltage', 'get current']:
             return self._check_getter_value
-        if command in ['HV on', 'HV off', 'set mode', 'set inhibit']:
+        if command in ['hv on', 'hv off', 'set mode', 'set inhibit']:
             return self._check_parameter_value
         if command == 'get status':
             return self._check_status_value

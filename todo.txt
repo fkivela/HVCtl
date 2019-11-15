@@ -17,14 +17,16 @@ TODO:
 - Links to external docs
 
 ### Not important (the program works well without) ###
-- File rights could be rw,r,r
 - More functionality to VirtualHV
       - No voltage in off mode
-      - Switch between voltage and current regulation
       - Shut off and switch to local mode after 5 seconds
+      - Find out how the physical device works
 
 ### Test with the physical device ###
 - Try to figure out what inhibit/inhibition is
+- How does the HV behave when it is off? Does it respond to commands?
+  What happens when trying to set voltage or current?
+- How does the HV behave in local mode? Does it respond to commands?
 
 ### Ask Tomas ###
 - Does polarity matter?
