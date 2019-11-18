@@ -14,37 +14,32 @@ class VirtualConnection():
 
     Data can be sent through a :class:`VirtualConnection` object by
     accessing the :attr:`user_end` and :attr:`virtual_end` attributes.
-    :attr:`virtual_end` can be written to and read from with
-    :func:`os.read` and :func:`os.write`.
-    :func:`os.read` doesn't seem to work with :attr:`user_end`,
-    and the :mod:`serial` module should be used instead.
-    :attr:`port` returns a device name which can be given to
+    The :attr:`port` property is a device name which can be given to
     :func:`serial.Serial` as an argument.
 
-    A :class:`VirtualConnection` object runs code in a parallel thread.
-    If a VC is not closed after it is no longer needed,
-    it may continue using resources needlessly.
-    A VC may be closed by calling :func:`close`; this stops the
-    parallel thread, closes :attr:`user_end` and :attr:`virtual_end`,
+    A :class:`VirtualConnection` object runs code in a parallel thread,
+    which will continue running until it is closed or the Python 
+    interpreter exits.
+    A parallel thread may be closed by calling the :func:`close` 
+    method of the :class:`VirtualConnection` object that created it.
+    This also closes :attr:`user_end` and :attr:`virtual_end`, 
     and frees their file descriptors.
 
-    If a VC is used with a ``with`` block in the following manner:
+    If a :class:`VirtualConnection` object is used in a ``with`` 
+    block in the following manner:
 
     .. code-block:: python
 
-        with VirtualConnection as vc:
-            # some code here
+        with VirtualConnection() as vc:
+            # Some code here
 
-    the VC will close automatically when the ``with`` block is exited.
+    :meth:`close` will be called automatically when the ``with`` block is exited.
 
-    It is possible for a VC to continue running even if there
-    are no accessible references to it.
-    This happens e.g. if a VC is
-    defined in an IPython console and then deleted using ``del vc``.
-    This deletes the name ``vc``, but doesn't seem to garbage-collect
-    the object.
-    In this case, all running instances of the
-    :class:`VirtualConnection` class can be closed with
+    If all variables referring to a :class:`VirtualConnection` 
+    object are removed with ``del`` or by reassigning them,
+    the parallel thread will continue to run without a possibility of 
+    closing it with :meth:`close`.
+    In this case, all running instances of the class can be closed with
 
     >>> VirtualConnection.close_all()
 
@@ -64,16 +59,24 @@ class VirtualConnection():
 
                 process(self, input_: bytes) -> output: bytes
 
-        virtual_end:
-             A file-like object used by a simulated device to read
-             and write data.
+        virtual_end (file-like object):
+             This end of the connection is used by :meth:`process` to 
+             read and write data. It can be written to and read from with 
+             :func:`os.read` and :func:`os.write`.
+             
+             A simulated machine or other device for communicating with
+             its user should define this functionality by assigning a 
+             suitable function to the :attr:`process` attribute.
 
-        user_end:
-            A file-like object used by the UI to read and write data.
+        user_end (file-like object):
+            This end of the connection is meant to be used by a user to
+            send commands to and read data from a simulated device.
+            :func:`os.read` doesn't seem to work with it attribute,
+            and the :mod:`serial` module should be used instead.            
 
         thread (:class:`threading.Thread`):
-            The parallel thread used to run a
-            :class:`VirtualConnection`.
+            The parallel thread that runs most functionality in a 
+            :class:`VirtualConnection` object.
 
         running_instances:
             Class attribute.
@@ -87,7 +90,7 @@ class VirtualConnection():
     def __init__(self, process=None, buffer_size=1024, sleep_time=0.01):
         """Initialize a new :class:`VirtualConnection`.
 
-        The new instance starts running automatically.
+        The new instance starts the parallel thread automatically.
 
         Args:
             process (function):
@@ -175,7 +178,8 @@ class VirtualConnection():
             i.close()
 
     def is_running(self):
-        """Return ``True`` IFF the parallel thread is running."""
+        """Return ``True`` if the parallel thread is running,
+        ``False`` otherwise."""
         return self.thread.is_alive()
 
     @property

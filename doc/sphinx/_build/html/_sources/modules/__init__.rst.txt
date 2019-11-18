@@ -1,5 +1,0 @@
-:mod:`~hvctl.__init__`
-======================
-
-.. automodule:: hvctl
-   :members:

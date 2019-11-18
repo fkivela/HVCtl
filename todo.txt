@@ -28,7 +28,7 @@ TODO:
 - Does polarity matter?
 
 ### Other ###
-- Testing (maybe try mock objects)!
+- Testing (maybe try mock objects, Hypothesis)!
 - Proofreading!
 - Remove Message.from_bytes() and overload Message.__init__ with 
   @singledispatchmethod. Wait for Anaconda to update to Python 3.8 
