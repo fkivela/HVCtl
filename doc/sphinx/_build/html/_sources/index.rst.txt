@@ -1,7 +1,11 @@
 HVCtl
 =====
 
-HVCtl is a Linux program written in Python for controlling a Technix SR 5kw to 10kW high voltage generator.
+HVCtl is a RS-232 controller for a Technix SR 5 kW to 10 kW high voltage generator.
+It is written in Python and intended for Linux operating systems.
+
+.. note::
+   HVCtl is under development and not ready yet.
 
 Documentation
 -------------
@@ -20,7 +24,7 @@ Author
 HVCtl was written by Feliks Kivelä based on an earlier work by Pekko Metsä.
 The author can be contacted at firstname.lastname@helsinki.fi.
 
-Copyright 2019 University of Helsinki Fusor Team.
+Copyright © 2019 University of Helsinki Fusor Team.
 
 License
 -------

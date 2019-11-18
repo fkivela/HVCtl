@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="RS232 Control protocol" href="../protocol.html" />
+    <link rel="next" title="RS-232 Control Protocol" href="../protocol.html" />
     <link rel="prev" title="virtualconnection" href="virtualconnection.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -221,11 +221,11 @@ returns <em>self</em>.</p>
 
 <dl class="method">
 <dt id="hvctl.virtualhv.VirtualHV.get_current">
-<code class="sig-name descname">get_current</code><span class="sig-paren">(</span><em class="sig-param">_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_current" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_current</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">current'</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>_</strong> – This is ignored.</p>
+<dd class="field-odd"><p><strong>args</strong> – These are ignored.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.current" title="hvctl.virtualhv.VirtualHV.current"><code class="xref py py-attr docutils literal notranslate"><span class="pre">current</span></code></a>.</p>
@@ -270,8 +270,9 @@ attributes of <em>self</em> in the following manner:</p>
 </dd>
 </dl>
 <p>Since <code class="docutils literal notranslate"><span class="pre">True</span></code> equals <code class="docutils literal notranslate"><span class="pre">1</span></code> in Python, attributes with a value
-of <code class="docutils literal notranslate"><span class="pre">True</span></code> will set their respective bit to <code class="docutils literal notranslate"><span class="pre">1</span></code>, and
-attributes with a value of <code class="docutils literal notranslate"><span class="pre">False</span></code> will set their bit to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+of <code class="docutils literal notranslate"><span class="pre">True</span></code> will set their respective bit to <code class="docutils literal notranslate"><span class="pre">1</span></code>,
+and attributes with a value of <code class="docutils literal notranslate"><span class="pre">False</span></code> will set their bit
+to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
 The bits are in big-endian order.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -282,11 +283,11 @@ The bits are in big-endian order.</p>
 
 <dl class="method">
 <dt id="hvctl.virtualhv.VirtualHV.get_voltage">
-<code class="sig-name descname">get_voltage</code><span class="sig-paren">(</span><em class="sig-param">_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_voltage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_voltage</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_voltage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">voltage'</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>_</strong> – This is ignored.</p>
+<dd class="field-odd"><p><strong>args</strong> – These are ignored.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.voltage" title="hvctl.virtualhv.VirtualHV.voltage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">voltage</span></code></a>.</p>
@@ -425,6 +426,7 @@ message instead of the old.</p>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="__init__.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__init__</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
@@ -436,7 +438,7 @@ message instead of the old.</p>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 Control Protocol</a></li>
 </ul>
 
 <div class="relations">
@@ -445,7 +447,7 @@ message instead of the old.</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Modules</a><ul>
       <li>Previous: <a href="virtualconnection.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
-      <li>Next: <a href="../protocol.html" title="next chapter">RS232 Control protocol</a></li>
+      <li>Next: <a href="../protocol.html" title="next chapter">RS-232 Control Protocol</a></li>
   </ul></li>
   </ul></li>
 </ul>

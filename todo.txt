@@ -3,16 +3,14 @@ TODO:
 ### Current ###
 
 ### Important ###
-- Testing (maybe try mock objects)!
-- Ask Pekko about the license
 
 ### Documentation ###
-- Document imports in __init__
+- What does the autodata directive do in message.rst?
+- Remove 'bases' from virtualhv.rst
 - Rewrite virtualconnection docs
 - HV PSU to HV PS, HV generator etc?
 - Does this work on windows?
 - Implement :ref:`name <actual_ref>`-syntax
-- Proofreading!
 - Document the interlock (a physical safety switch which prevents turning the HV on)?
 - Links to external docs
 
@@ -32,6 +30,8 @@ TODO:
 - Does polarity matter?
 
 ### Other ###
+- Testing (maybe try mock objects)!
+- Proofreading!
 - Remove Message.from_bytes() and overload Message.__init__ with 
   @singledispatchmethod. Wait for Anaconda to update to Python 3.8 
   before this can be implemented.

@@ -1,5 +1,5 @@
-RS232 Control protocol
-======================
+RS-232 Control Protocol
+=======================
 
 Communication with the HV PSU is based on question/answer pairs. Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13). CR is represented here as ``\r``, which is how Python and C represent it.
 

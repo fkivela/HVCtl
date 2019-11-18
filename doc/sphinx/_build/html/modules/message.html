@@ -39,7 +39,7 @@
 the HV generator.</p>
 <dl class="data">
 <dt id="hvctl.message.COMMANDS">
-<code class="sig-prename descclassname">hvctl.message.</code><code class="sig-name descname">COMMANDS</code><em class="property"> = ['set voltage', 'set current', 'get voltage', 'get current', 'HV on', 'HV off', 'set mode', 'set inhibit', 'get status']</em><a class="headerlink" href="#hvctl.message.COMMANDS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">hvctl.message.</code><code class="sig-name descname">COMMANDS</code><em class="property"> = ['set voltage', 'set current', 'get voltage', 'get current', 'hv on', 'hv off', 'set mode', 'set inhibit', 'get status']</em><a class="headerlink" href="#hvctl.message.COMMANDS" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of valid commands.</p>
 </dd></dl>
 
@@ -53,7 +53,7 @@ generator.</p>
 <code class="sig-name descname">command</code><a class="headerlink" href="#hvctl.message.Message.command" title="Permalink to this definition">¶</a></dt>
 <dd><p>The command that is sent to the HV PSU, or the command
 to which <em>self</em> is an answer; e.g. <code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">voltage'</span></code> or
-<code class="docutils literal notranslate"><span class="pre">'HV</span> <span class="pre">on'</span></code>.
+<code class="docutils literal notranslate"><span class="pre">'hv</span> <span class="pre">on'</span></code>.
 All valid commands are listed in
 <a class="reference internal" href="#hvctl.message.COMMANDS" title="hvctl.message.COMMANDS"><code class="xref py py-const docutils literal notranslate"><span class="pre">COMMANDS</span></code></a>.</p>
 <dl class="field-list simple">
@@ -161,6 +161,7 @@ the serial connection.</p>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="__init__.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__init__</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
@@ -172,7 +173,7 @@ the serial connection.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS232 Control protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 Control Protocol</a></li>
 </ul>
 
 <div class="relations">

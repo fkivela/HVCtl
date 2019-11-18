@@ -1,18 +1,7 @@
-"""A Linux controller for a Technix SR 5kw to 10kW high voltage
+"""A RS-232 controller for a Technix SR 5kw to 10kW high voltage
 generator.
 """
-
-from . import (
-    advanced_tui,
-    api,
-    command_line_ui,
-    config,
-    message,
-    queuefile,
-    virtualconnection,
-    virtualhv,
-    widgets
-)
+# This docstring is displayed when 'help(hvctl)' is called.
 
 from .api import API
 from .virtualhv import VirtualHV

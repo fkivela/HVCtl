@@ -19,26 +19,24 @@ Importing
 ---------
 
 HVCtl also includes an importable API for controlling the HV PSU programmatically. 
-This can be accessed by creating an instance of the :class:`hvctl.api.API` class and accessing its methods (see :mod:`hvctl.api` for details).
-The :class:`hvctl.virtualhv.VirtualHV` class can be used to test the API without access to a physical HV PSU.
+The API is used by creating an instance of the :class:`~hvctl.api.API` class and calling its methods, 
+and the :class:`~hvctl.virtualhv.VirtualHV` class allows it to be tested without access to a physical HV PSU.
+These two classes are members of the ``hvctl`` namespace as well as the namespaces of their own modules, 
+so they can be imported with 
 
-The :doc:`Modules <modules/index>` page lists all importable Python modules included in HVCtl.
-These modules are all located in the ``hvctl`` package, and can be imported with any of the following syntaxes, 
-as long as the ``HVCtl`` directory is your working directory or in your ``PYTHONPATH``. 
+>>> from hvctl import API, VirtualHV
 
->>> import hvctl
->>> api = hvctl.api.API()
-
->>> import hvctl.api
->>> api = hvctl.api.API()
-
->>> from hvctl import api
->>> apiobj = api.API() # The name 'api' is already taken
+as well as
 
 >>> from hvctl.api import API
->>> api = API()
+>>> from hvctl.virtualhv import VirtualHV
 
-Configuration settings for HVCtl, such as the port used for the serial connection, are located and documented in the file ``hv.conf``.
+All importable modules in the ``hvctl`` package are listed in the :doc:`Modules <modules/index>` page. 
+
+Configuration
+-------------
+
+Configuration settings for HVCtl, such as the port used for the serial connection, are defined and documented in the file ``hv.conf``, located in the ``HVCtl/hvctl`` directory.
 
 Examples
 --------
@@ -99,8 +97,8 @@ Using the API
 This example demonstrates using HVCtl in an interactive Python interpreter with an :class:`~hvctl.api.API` object. 
 The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.
 
->>> import hvctl.api
->>> api = hvctl.api.API()
+>>> import hvctl
+>>> api = hvctl.API()
 >>> api.get_voltage()
 -0.0
 >>> api.set_voltage(-5000)
@@ -117,9 +115,9 @@ The script uses ``with`` blocks to ensure that both the :class:`~hvctl.api.API` 
 
 ::
 
-	from hvctl import api, virtualhv
+	from hvctl import API, VirtualHV
 
-	with virtualhv.VirtualHV as vhv:
-		with api.API(port=vhv.connection.port):
+	with VirtualHV as vhv:
+		with API(port=vhv.connection.port) as api:
 			api.set_voltage(-5000)
 			# More code here...
