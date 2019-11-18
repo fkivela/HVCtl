@@ -4,12 +4,13 @@ Installation
 Dependencies
 ------------
 
-HVCtl was written and tested in Python 3.7.3, so that or another relatively new Python version should be installed.
+HVCtl was written and tested in Python 3.7.5, so that or another relatively new Python version should be installed.
+It is intended to be used on a Linux operating system, and probably won't work on other systems such as Windows without some tweaks. 
 
 .. _urwid-installation:
 .. usage.rst links to here.
 
-In addition to the Python standard library, HVCtl uses pySerial_ (tested with version 3.4) and urwid_ (tested with version 2.0.1). pySerial must be installed for HVCtl to work, but HVCtl can run without urwid by using a simpler user interface (see :doc:`usage` for details).
+In addition to the Python standard library, HVCtl uses pySerial_ (tested with version 3.4) and urwid_ (tested with version 2.0.1). pySerial must be installed for HVCtl to work, but HVCtl can run without urwid by using an alternative user interface (see :doc:`usage` for details).
 
 The HVCtl directory
 -------------------

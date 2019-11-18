@@ -5,7 +5,6 @@ TODO:
 ### Important ###
 
 ### Documentation ###
-- Does this work on windows?
 - Implement :ref:`name <actual_ref>`-syntax
 - Document the interlock (a physical safety switch which prevents turning the HV on)?
 - Links to external docs
