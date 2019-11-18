@@ -51,9 +51,9 @@ generator.</p>
 <dl class="attribute">
 <dt id="hvctl.message.Message.command">
 <code class="sig-name descname">command</code><a class="headerlink" href="#hvctl.message.Message.command" title="Permalink to this definition">¶</a></dt>
-<dd><p>The command that is sent to the HV PSU, or the command
-to which <em>self</em> is an answer; e.g. <code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">voltage'</span></code> or
-<code class="docutils literal notranslate"><span class="pre">'hv</span> <span class="pre">on'</span></code>.
+<dd><p>The command that is sent to the HV generator,
+or the command to which <em>self</em> is an answer;
+e.g. <code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">voltage'</span></code> or <code class="docutils literal notranslate"><span class="pre">'hv</span> <span class="pre">on'</span></code>.
 All valid commands are listed in
 <a class="reference internal" href="#hvctl.message.COMMANDS" title="hvctl.message.COMMANDS"><code class="xref py py-const docutils literal notranslate"><span class="pre">COMMANDS</span></code></a>.</p>
 <dl class="field-list simple">
@@ -86,7 +86,7 @@ or <a class="reference internal" href="config.html#hvctl.config.DELTA_I" title="
 <dt id="hvctl.message.Message.is_answer">
 <code class="sig-name descname">is_answer</code><a class="headerlink" href="#hvctl.message.Message.is_answer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines whether <em>self</em> represents a message to the
-HV PSU or a response from it.</p>
+HV generator or a response from it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>

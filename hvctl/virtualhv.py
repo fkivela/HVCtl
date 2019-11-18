@@ -7,7 +7,7 @@ from .virtualconnection import VirtualConnection
 class VirtualHV():
     """A virtual high voltage generator.
 
-    This class simulates a HV PSU that can be communicated with
+    This class simulates a HV generator that can be communicated with
     through  a serial connection. This makes it possible to test
     HVCtl without access to a physical device.
 
@@ -17,36 +17,36 @@ class VirtualHV():
             object used for simulating a serial connection.
 
         voltage (float):
-            | The voltage of the virtual HV PSU in V.
+            | The voltage of the virtual HV generator in V.
             | Initial value: ``0``.
 
         current (float):
-            | The current of the virtual HV PSU in mA.
+            | The current of the virtual HV generator in mA.
             | Initial value: ``0``.
 
         hv_on_command (bool):
-            | The virtual HV PSU is turned on by setting this first to
-              True and then back to False.
+            | The virtual HV generator is turned on by setting this
+              first to True and then back to False.
             | Initial value: ``False``.
 
         hv_off_command (bool):
-            | The virtual HV PSU is turned off by setting this first to
-              True and then back to False.
+            | The virtual HV generator is turned off by setting this
+              first to True and then back to False.
             | Initial value: ``False``.
 
         hv_on_status (bool):
-            | Determines whether the virtual HV PSU is on (``True``)
-              or off (``False``).
+            | Determines whether the virtual HV generator is on 
+              (``True``) or off (``False``).
             | Initial value: ``False``.
 
         mode (string):
             | ``'local'`` or ``'remote'``.
-            | Determines the control mode of the virtual HV PSU.
+            | Determines the control mode of the virtual HV generator.
             | Initial value: ``'remote'``.
 
         inhibit (bool):
             | Determines whether inhibition is turned on (``True``) or
-              off (``False``) at the virtual HV PSU.
+              off (``False``) at the virtual HV generator.
             | Initial value: ``False``.
 
         interlock (bool):
@@ -55,12 +55,12 @@ class VirtualHV():
 
         fault (bool):
             | ``True`` IFF there are faults present in the virtual
-              HV PSU.
+              HV generator.
             | Initial value: ``False``.
 
         regulation (string):
             | ``'current'`` or ``'voltage'``.
-            | Determines whether the virtual HV PSU is regulating
+            | Determines whether the virtual HV generator is regulating
               current or voltage.
             | Initial value: ``'voltage'``
     """
@@ -216,7 +216,8 @@ class VirtualHV():
         """Handle a ``'get status'`` command.
 
         This method returns an 8-bit integer describing the current
-        status of the virtual HV PSU (excluding voltage and current).
+        status of the virtual HV generator (excluding voltage and 
+        current).
         The values of the bits in the number are copied from the
         attributes of *self* in the following manner:
 

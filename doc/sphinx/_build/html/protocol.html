@@ -34,7 +34,9 @@
             
   <div class="section" id="rs-232-control-protocol">
 <h1>RS-232 Control Protocol<a class="headerlink" href="#rs-232-control-protocol" title="Permalink to this headline">¶</a></h1>
-<p>Communication with the HV PSU is based on question/answer pairs. Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13). CR is represented here as <code class="docutils literal notranslate"><span class="pre">\r</span></code>, which is how Python and C represent it.</p>
+<p>Communication with the HV generator is based on question/answer pairs.
+Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13).
+CR is represented here as <code class="docutils literal notranslate"><span class="pre">\r</span></code>, which is how Python and C represent it.</p>
 <p>Command strings start with a letter denoting the given command, followed by one or more function parameters separated by commas.
 Answers copy the command string, and may append a return value to itse end (without a separating comma).</p>
 <p>The connection has the following specifications:</p>
@@ -52,9 +54,10 @@ Answers copy the command string, and may append a return value to itse end (with
 </div>
 <div class="section" id="list-of-commands-and-answers">
 <h2>List of commands and answers<a class="headerlink" href="#list-of-commands-and-answers" title="Permalink to this headline">¶</a></h2>
-<p>This section lists all commands recognized by the HV PSU and the answers to them.
-An <em>X</em> denotes a numerical value. This value is a 12-bit unsigned integer (i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>), linearly scaled to cover
-the whole voltage or current range of the PSU. For example, with a SR100kV-5kW device with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (ie. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to the maximum value of -100 kV.</p>
+<p>This section lists all commands recognized by the HV generator and the answers to them.
+An <em>X</em> denotes a numerical value. This value is a 12-bit unsigned integer (i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>),
+linearly scaled to cover the entire voltage or current range of the generator.
+For example, with a SR100kV-5kW device with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (ie. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to the maximum value of -100 kV.</p>
 <div class="section" id="set-output-voltage">
 <h3>1. Set output voltage<a class="headerlink" href="#set-output-voltage" title="Permalink to this headline">¶</a></h3>
 <blockquote>

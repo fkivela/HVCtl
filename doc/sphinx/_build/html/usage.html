@@ -47,17 +47,17 @@ Running this UI doesn’t require installing <a class="reference internal" href=
 If HVCtl is run without the -s argument, a slighlty more advanced UI will be used (see below for  an example).</p>
 </dd>
 <dt><kbd><span class="option">-v</span>, <span class="option">--virtual</span></kbd></dt>
-<dd><p>Run HVCtl with a virtual HV PSU.
-If this argument is included, instead of sending messages to a real HV PSU, HVCtl creates a simulated virtual one and sends messages to it.
+<dd><p>Run HVCtl with a virtual HV generator.
+If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that.
 This makes it possible to test HVCtl easily without having to connect to a physical HV device.</p>
 </dd>
 </dl>
 </div>
 <div class="section" id="importing">
 <h2>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h2>
-<p>HVCtl also includes an importable API for controlling the HV PSU programmatically.
+<p>HVCtl also includes an importable API for controlling the HV generator programmatically.
 The API is used by creating an instance of the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> class and calling its methods,
-and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> class allows it to be tested without access to a physical HV PSU.
+and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> class allows it to be tested without access to a physical HV generator.
 These two classes are members of the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> namespace as well as the namespaces of their own modules,
 so they can be imported with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="k">import</span> <span class="n">API</span><span class="p">,</span> <span class="n">VirtualHV</span>
@@ -95,7 +95,7 @@ The voltage is -5006.1050061050055 V
 <div class="section" id="interactive-mode-without-s">
 <h3>Interactive mode without -s<a class="headerlink" href="#interactive-mode-without-s" title="Permalink to this headline">¶</a></h3>
 <p>Here the -s argument hasn’t been given, and HVCtl uses a more advanced UI.
-The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV PSU.
+The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV generator.
 The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Voltage: -0.00 V
 Current: 0.00 mA
@@ -124,7 +124,7 @@ PRESS &#39;q&#39; TO EXIT                                      ▼
 <div class="section" id="using-the-api">
 <h3>Using the API<a class="headerlink" href="#using-the-api" title="Permalink to this headline">¶</a></h3>
 <p>This example demonstrates using HVCtl in an interactive Python interpreter with an <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object.
-The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.</p>
+The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV generator to keep it from switching to local mode.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">get_voltage</span><span class="p">()</span>
@@ -137,9 +137,9 @@ The last call to <a class="reference internal" href="modules/api.html#hvctl.api.
 </pre></div>
 </div>
 </div>
-<div class="section" id="using-the-api-with-a-virtual-hv-psu">
-<h3>Using the API with a virtual HV PSU<a class="headerlink" href="#using-the-api-with-a-virtual-hv-psu" title="Permalink to this headline">¶</a></h3>
-<p>This is an example of a Python script that uses a virtual HV PSU.
+<div class="section" id="using-the-api-with-a-virtual-hv-generator">
+<h3>Using the API with a virtual HV generator<a class="headerlink" href="#using-the-api-with-a-virtual-hv-generator" title="Permalink to this headline">¶</a></h3>
+<p>This is an example of a Python script that uses a virtual HV generator.
 The script uses <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks to ensure that both the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> are closed properly at the end.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="k">import</span> <span class="n">API</span><span class="p">,</span> <span class="n">VirtualHV</span>
 

@@ -41,7 +41,7 @@ generator.</p>
 <dt id="hvctl.api.Status">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0</em>, <em class="sig-param">current: float = 0</em>, <em class="sig-param">inhibit: bool = False</em>, <em class="sig-param">mode: str = 'remote'</em>, <em class="sig-param">hv_on_command: bool = False</em>, <em class="sig-param">hv_off_command: bool = False</em>, <em class="sig-param">hv_on_status: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">regulation: str = 'current'</em>, <em class="sig-param">callback: object = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class stores information about the current status of the
-HV PSU.</p>
+HV generator.</p>
 <dl class="method">
 <dt id="hvctl.api.Status.__setattr__">
 <code class="sig-name descname">__setattr__</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status.__setattr__" title="Permalink to this definition">¶</a></dt>
@@ -65,36 +65,38 @@ contents of this object are changed.</p>
 <dl class="attribute">
 <dt id="hvctl.api.Status.current">
 <code class="sig-name descname">current</code><em class="property"> = 0</em><a class="headerlink" href="#hvctl.api.Status.current" title="Permalink to this definition">¶</a></dt>
-<dd><p>The current produced by the HV PSU in mA.</p>
+<dd><p>The current produced by the generator in mA.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.api.Status.fault">
 <code class="sig-name descname">fault</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.fault" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if there is a fault present at the HV PSU, <code class="docutils literal notranslate"><span class="pre">False</span></code>
-otherwise.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if there is a fault present at the generator,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.api.Status.hv_off_command">
 <code class="sig-name descname">hv_off_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_off_command" title="Permalink to this definition">¶</a></dt>
-<dd><p>The HV PSU is turned on by setting the “hv off” parameter to 1
-and then back to 0. This attribute displays the current value of
-that parameter as a boolean.</p>
+<dd><p>The generator is turned on by setting the “hv off” parameter
+to 1 and then back to 0.
+This attribute displays the current value of that parameter as a
+boolean.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.api.Status.hv_on_command">
 <code class="sig-name descname">hv_on_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_command" title="Permalink to this definition">¶</a></dt>
-<dd><p>The HV PSU is turned on by setting the “hv on” parameter to 1
-and then back to 0. This attribute displays the current value of
-that parameter as a boolean.</p>
+<dd><p>The generator is turned on by setting the “hv on” parameter
+to 1 and then back to 0.
+This attribute displays the current value of that parameter as a
+boolean.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.api.Status.hv_on_status">
 <code class="sig-name descname">hv_on_status</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_status" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the HV PSU is currently on, <code class="docutils literal notranslate"><span class="pre">False</span></code> if it’s
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the generator is currently on, <code class="docutils literal notranslate"><span class="pre">False</span></code> if it’s
 off.</p>
 </dd></dl>
 
@@ -128,7 +130,7 @@ current regulation is being used.</p>
 <dl class="attribute">
 <dt id="hvctl.api.Status.voltage">
 <code class="sig-name descname">voltage</code><em class="property"> = 0</em><a class="headerlink" href="#hvctl.api.Status.voltage" title="Permalink to this definition">¶</a></dt>
-<dd><p>The voltage produced by the HV PSU in V.</p>
+<dd><p>The voltage produced by the generator in V.</p>
 </dd></dl>
 
 </dd></dl>
@@ -137,16 +139,15 @@ current regulation is being used.</p>
 <dt id="hvctl.api.API">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class defines an API for communicating with a
-Technix HV PSU.</p>
+Technix HV generator.</p>
 <p>Creating an instance of this class forms a serial connection to
-the HV PSU, after which messages can be sent to it by calling the
-methods of the instance.</p>
+the generator, after which messages can be sent to it by calling
+the methods of the instance.</p>
 <p>If the serial connection is lost, all methods of this class that
-communicate with the HV generator will raise a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code>.</p>
+communicate with the generator will raise a <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code>.</p>
 <p>If an API is initialized with <code class="docutils literal notranslate"><span class="pre">poll=True</span></code> it will automatically
 call <a class="reference internal" href="#hvctl.api.API.full_status" title="hvctl.api.API.full_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_status()</span></code></a> every <a class="reference internal" href="#hvctl.api.API.timestep" title="hvctl.api.API.timestep"><code class="xref py py-attr docutils literal notranslate"><span class="pre">timestep</span></code></a> seconds.
-This updates the data in <a class="reference internal" href="#hvctl.api.API.status" title="hvctl.api.API.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a> and prevents the HV PSU
+This updates the data in <a class="reference internal" href="#hvctl.api.API.status" title="hvctl.api.API.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a> and prevents the generator
 from switching to local mode, which it normally does after not
 receiving a command for 5 seconds.</p>
 <p>The polling routine is run in a parallel thread, and should be
@@ -157,8 +158,8 @@ serial connection.</p>
 <dl class="attribute">
 <dt id="hvctl.api.API.status">
 <code class="sig-name descname">status</code><a class="headerlink" href="#hvctl.api.API.status" title="Permalink to this definition">¶</a></dt>
-<dd><p>An object storing the current status of the HV PSU.
-Its attributes are updated every time the HV PSU sends
+<dd><p>An object storing the current status of the generator.
+Its attributes are updated every time the generator sends
 back a reply.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -184,7 +185,7 @@ The initial value is 1.</p>
 <dt id="hvctl.api.API.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance of this class and form a serial
-connection to the HV PSU.</p>
+connection to the HV generator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -225,7 +226,7 @@ or not (see the class docstring for more details.)</p></li>
 <dd><p>Get HV current (in mA).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The current value sent back by the HV PSU.</p>
+<dd class="field-odd"><p>The current value sent back by the HV generator.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -239,7 +240,7 @@ or not (see the class docstring for more details.)</p></li>
 <dd class="field-odd"><p>A dict with keys corresponding to the attributes of
 <a class="reference internal" href="#hvctl.api.API.status" title="hvctl.api.API.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a> except <a class="reference internal" href="#hvctl.api.Status.voltage" title="hvctl.api.Status.voltage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Status.voltage</span></code></a> and
 <a class="reference internal" href="#hvctl.api.Status.current" title="hvctl.api.Status.current"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Status.current</span></code></a>. The values contain the values of
-those attributes as reported by the HV PSU.</p>
+those attributes as reported by the HV generator.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -250,7 +251,7 @@ those attributes as reported by the HV PSU.</p>
 <dd><p>Get HV voltage (in V).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The voltage value sent by the HV PSU.
+<dd class="field-odd"><p>The voltage value sent by the HV generator.
 This is always a positive value regardless of the polarity
 of the HV device.</p>
 </dd>
@@ -281,21 +282,10 @@ are skipped.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hvctl.api.API.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Form a connection to the HV PSU and start polling
-(if <em>self</em> was initialized with <code class="docutils literal notranslate"><span class="pre">poll=True</span></code>).</p>
-<p>This method sould be run inside a <code class="docutils literal notranslate"><span class="pre">with</span></code> block in order to
-ensue that the connection is properly closed and the polling
-stopped after the API is no longer needed or in the case
-that an error occurs.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="hvctl.api.API.set_current">
 <code class="sig-name descname">set_current</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set HV current to <em>value</em> (in mA).</p>
-<p>Returns: The current value sent back by the HV PSU.</p>
+<p>Returns: The current value sent back by the HV generator.</p>
 </dd></dl>
 
 <dl class="method">
@@ -333,7 +323,7 @@ inhibition is activated; otherwise it is deactivated.</p>
 changed to match the polarity of the HV device.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The voltage value sent back by the HV PSU.
+<dd class="field-odd"><p>The voltage value sent back by the HV generator.
 This is always a positive value regardless of the polarity
 of the HV device.</p>
 </dd>

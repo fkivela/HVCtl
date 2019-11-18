@@ -14,14 +14,14 @@ from .message import Message
 @dataclass
 class Status:
     """This class stores information about the current status of the
-    HV PSU.
+    HV generator.
     """
 
     voltage: float = 0
-    """The voltage produced by the HV PSU in V."""
+    """The voltage produced by the generator in V."""
 
     current: float = 0
-    """The current produced by the HV PSU in mA."""
+    """The current produced by the generator in mA."""
 
     inhibit: bool = False
     """``True`` if the inhibit parameter is turned on, ``False``
@@ -34,19 +34,21 @@ class Status:
     # parse the latter correctly.
 
     hv_on_command: bool = False
-    """The HV PSU is turned on by setting the "hv on" parameter to 1
-    and then back to 0. This attribute displays the current value of
-    that parameter as a boolean.
+    """The generator is turned on by setting the "hv on" parameter
+    to 1 and then back to 0.
+    This attribute displays the current value of that parameter as a
+    boolean.
     """
 
     hv_off_command: bool = False
-    """The HV PSU is turned on by setting the "hv off" parameter to 1
-    and then back to 0. This attribute displays the current value of
-    that parameter as a boolean.
+    """The generator is turned on by setting the "hv off" parameter
+    to 1 and then back to 0.
+    This attribute displays the current value of that parameter as a
+    boolean.
     """
 
     hv_on_status: bool = False
-    """``True`` if the HV PSU is currently on, ``False`` if it's
+    """``True`` if the generator is currently on, ``False`` if it's
     off.
     """
 
@@ -56,8 +58,8 @@ class Status:
     """
 
     fault: bool = False
-    """``True`` if there is a fault present at the HV PSU, ``False``
-    otherwise.
+    """``True`` if there is a fault present at the generator, 
+    ``False`` otherwise.
     """
 
     regulation: str = 'current'
@@ -97,19 +99,18 @@ class Status:
 
 class API():
     """This class defines an API for communicating with a
-    Technix HV PSU.
+    Technix HV generator.
 
     Creating an instance of this class forms a serial connection to
-    the HV PSU, after which messages can be sent to it by calling the
-    methods of the instance.
+    the generator, after which messages can be sent to it by calling
+    the methods of the instance.
 
     If the serial connection is lost, all methods of this class that
-    communicate with the HV generator will raise a
-    :class:`RuntimeError`.
+    communicate with the generator will raise a :class:`RuntimeError`.
 
     If an API is initialized with ``poll=True`` it will automatically
     call :meth:`full_status` every :attr:`timestep` seconds.
-    This updates the data in :attr:`status` and prevents the HV PSU
+    This updates the data in :attr:`status` and prevents the generator
     from switching to local mode, which it normally does after not
     receiving a command for 5 seconds.
 
@@ -121,8 +122,8 @@ class API():
 
     Attributes:
         status (:class:`Status`):
-            An object storing the current status of the HV PSU.
-            Its attributes are updated every time the HV PSU sends
+            An object storing the current status of the generator.
+            Its attributes are updated every time the generator sends
             back a reply.
 
         timestep (float):
@@ -133,7 +134,7 @@ class API():
 
     def __init__(self, port=None, poll=True):
         """Create a new instance of this class and form a serial
-        connection to the HV PSU.
+        connection to the HV generator.
 
         Args:
             port (str):
@@ -173,16 +174,6 @@ class API():
         if poll:
             self._thread.start()
 
-    def run(self):
-        """Form a connection to the HV PSU and start polling
-        (if *self* was initialized with ``poll=True``).
-
-        This method sould be run inside a ``with`` block in order to
-        ensue that the connection is properly closed and the polling
-        stopped after the API is no longer needed or in the case
-        that an error occurs.
-        """
-
     def __enter__(self):
         """Called upon entering a ``with`` block; returns *self*."""
         return self
@@ -198,7 +189,7 @@ class API():
         changed to match the polarity of the HV device.
 
         Returns:
-            The voltage value sent back by the HV PSU.
+            The voltage value sent back by the HV generator.
             This is always a positive value regardless of the polarity
             of the HV device.
         """
@@ -208,7 +199,7 @@ class API():
     def set_current(self, value):
         """Set HV current to *value* (in mA).
 
-        Returns: The current value sent back by the HV PSU.
+        Returns: The current value sent back by the HV generator.
         """
         return self._set(
             'current', value, config.DELTA_I, config.CURRENT_LIMIT)
@@ -242,7 +233,7 @@ class API():
         """Get HV voltage (in V).
 
         Returns:
-            The voltage value sent by the HV PSU.
+            The voltage value sent by the HV generator.
             This is always a positive value regardless of the polarity
             of the HV device.
         """
@@ -252,7 +243,7 @@ class API():
         """Get HV current (in mA).
 
         Returns:
-            The current value sent back by the HV PSU.
+            The current value sent back by the HV generator.
         """
         return self._get('current', config.DELTA_I)
 
@@ -316,7 +307,7 @@ class API():
             A dict with keys corresponding to the attributes of
             :attr:`status` except :attr:`Status.voltage` and
             :attr:`Status.current`. The values contain the values of
-            those attributes as reported by the HV PSU.
+            those attributes as reported by the HV generator.
         """
         reply = self._send(Message('get status'))
 
@@ -372,7 +363,7 @@ class API():
             time.sleep(self.timestep)
 
     def _send(self, query: Message) -> Message:
-        """Send *query* to the HV PSU and return the reply.
+        """Send *query* to the HV generator and return the reply.
 
         Raises:
             RuntimeError:

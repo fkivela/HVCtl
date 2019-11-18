@@ -5,8 +5,6 @@ TODO:
 ### Important ###
 
 ### Documentation ###
-- Rewrite virtualconnection docs
-- HV PSU to HV PS, HV generator etc?
 - Does this work on windows?
 - Implement :ref:`name <actual_ref>`-syntax
 - Document the interlock (a physical safety switch which prevents turning the HV on)?

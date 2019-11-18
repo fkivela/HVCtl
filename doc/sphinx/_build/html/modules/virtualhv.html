@@ -40,7 +40,7 @@
 <dt id="hvctl.virtualhv.VirtualHV">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.virtualhv.</code><code class="sig-name descname">VirtualHV</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV" title="Permalink to this definition">¶</a></dt>
 <dd><p>A virtual high voltage generator.</p>
-<p>This class simulates a HV PSU that can be communicated with
+<p>This class simulates a HV generator that can be communicated with
 through  a serial connection. This makes it possible to test
 HVCtl without access to a physical device.</p>
 <dl class="attribute">
@@ -54,7 +54,7 @@ object used for simulating a serial connection.</p>
 <dt id="hvctl.virtualhv.VirtualHV.voltage">
 <code class="sig-name descname">voltage</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.voltage" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">The voltage of the virtual HV PSU in V.</div>
+<div class="line">The voltage of the virtual HV generator in V.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -68,7 +68,7 @@ object used for simulating a serial connection.</p>
 <dt id="hvctl.virtualhv.VirtualHV.current">
 <code class="sig-name descname">current</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.current" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">The current of the virtual HV PSU in mA.</div>
+<div class="line">The current of the virtual HV generator in mA.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -82,8 +82,8 @@ object used for simulating a serial connection.</p>
 <dt id="hvctl.virtualhv.VirtualHV.hv_on_command">
 <code class="sig-name descname">hv_on_command</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_on_command" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">The virtual HV PSU is turned on by setting this first to
-True and then back to False.</div>
+<div class="line">The virtual HV generator is turned on by setting this
+first to True and then back to False.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -97,8 +97,8 @@ True and then back to False.</div>
 <dt id="hvctl.virtualhv.VirtualHV.hv_off_command">
 <code class="sig-name descname">hv_off_command</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_off_command" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">The virtual HV PSU is turned off by setting this first to
-True and then back to False.</div>
+<div class="line">The virtual HV generator is turned off by setting this
+first to True and then back to False.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -112,8 +112,8 @@ True and then back to False.</div>
 <dt id="hvctl.virtualhv.VirtualHV.hv_on_status">
 <code class="sig-name descname">hv_on_status</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.hv_on_status" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">Determines whether the virtual HV PSU is on (<code class="docutils literal notranslate"><span class="pre">True</span></code>)
-or off (<code class="docutils literal notranslate"><span class="pre">False</span></code>).</div>
+<div class="line">Determines whether the virtual HV generator is on
+(<code class="docutils literal notranslate"><span class="pre">True</span></code>) or off (<code class="docutils literal notranslate"><span class="pre">False</span></code>).</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -128,7 +128,7 @@ or off (<code class="docutils literal notranslate"><span class="pre">False</span
 <code class="sig-name descname">mode</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.mode" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">'local'</span></code> or <code class="docutils literal notranslate"><span class="pre">'remote'</span></code>.</div>
-<div class="line">Determines the control mode of the virtual HV PSU.</div>
+<div class="line">Determines the control mode of the virtual HV generator.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">'remote'</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -143,7 +143,7 @@ or off (<code class="docutils literal notranslate"><span class="pre">False</span
 <code class="sig-name descname">inhibit</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.inhibit" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Determines whether inhibition is turned on (<code class="docutils literal notranslate"><span class="pre">True</span></code>) or
-off (<code class="docutils literal notranslate"><span class="pre">False</span></code>) at the virtual HV PSU.</div>
+off (<code class="docutils literal notranslate"><span class="pre">False</span></code>) at the virtual HV generator.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -172,7 +172,7 @@ off (<code class="docutils literal notranslate"><span class="pre">False</span></
 <code class="sig-name descname">fault</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.fault" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">True</span></code> IFF there are faults present in the virtual
-HV PSU.</div>
+HV generator.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</div>
 </div>
 <dl class="field-list simple">
@@ -187,7 +187,7 @@ HV PSU.</div>
 <code class="sig-name descname">regulation</code><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.regulation" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">'current'</span></code> or <code class="docutils literal notranslate"><span class="pre">'voltage'</span></code>.</div>
-<div class="line">Determines whether the virtual HV PSU is regulating
+<div class="line">Determines whether the virtual HV generator is regulating
 current or voltage.</div>
 <div class="line">Initial value: <code class="docutils literal notranslate"><span class="pre">'voltage'</span></code></div>
 </div>
@@ -237,7 +237,8 @@ returns <em>self</em>.</p>
 <code class="sig-name descname">get_status</code><span class="sig-paren">(</span><em class="sig-param">_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">status'</span></code> command.</p>
 <p>This method returns an 8-bit integer describing the current
-status of the virtual HV PSU (excluding voltage and current).
+status of the virtual HV generator (excluding voltage and
+current).
 The values of the bits in the number are copied from the
 attributes of <em>self</em> in the following manner:</p>
 <dl class="field-list simple">

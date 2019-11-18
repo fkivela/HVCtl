@@ -15,7 +15,7 @@ from hvctl.virtualhv import VirtualHV
 parser = argparse.ArgumentParser(description='This script runs HVCtl')
 
 # Some options.
-parser.add_argument('-v', '--virtual', help='use a virtual HV PSU',
+parser.add_argument('-v', '--virtual', help='use a virtual HV generator',
                     action='store_true')
 parser.add_argument('-s', '--simple', help='use a simple command-line UI',
                     action='store_true')

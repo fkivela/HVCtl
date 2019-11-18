@@ -11,16 +11,16 @@ The commands accept the following command-line arguments:
 -s, --simple	Run HVCtl with a simple command-line interface. 
 				Running this UI doesn't require installing :doc:`urwid <installation>`.
 				If HVCtl is run without the -s argument, a slighlty more advanced UI will be used (see below for  an example).
--v, --virtual 	Run HVCtl with a virtual HV PSU. 
-				If this argument is included, instead of sending messages to a real HV PSU, HVCtl creates a simulated virtual one and sends messages to it. 
+-v, --virtual 	Run HVCtl with a virtual HV generator. 
+				If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that. 
 				This makes it possible to test HVCtl easily without having to connect to a physical HV device.
 
 Importing
 ---------
 
-HVCtl also includes an importable API for controlling the HV PSU programmatically. 
+HVCtl also includes an importable API for controlling the HV generator programmatically. 
 The API is used by creating an instance of the :class:`~hvctl.api.API` class and calling its methods, 
-and the :class:`~hvctl.virtualhv.VirtualHV` class allows it to be tested without access to a physical HV PSU.
+and the :class:`~hvctl.virtualhv.VirtualHV` class allows it to be tested without access to a physical HV generator.
 These two classes are members of the ``hvctl`` namespace as well as the namespaces of their own modules, 
 so they can be imported with 
 
@@ -64,7 +64,7 @@ Interactive mode without -s
 ...........................
 
 Here the -s argument hasn't been given, and HVCtl uses a more advanced UI. 
-The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV PSU. 
+The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV generator. 
 The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.
 
 ::
@@ -95,7 +95,7 @@ Using the API
 .............
 
 This example demonstrates using HVCtl in an interactive Python interpreter with an :class:`~hvctl.api.API` object. 
-The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and the parallel thread that is used to poll the HV PSU to keep it from switching to local mode.
+The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and the parallel thread that is used to poll the HV generator to keep it from switching to local mode.
 
 >>> import hvctl
 >>> api = hvctl.API()
@@ -107,10 +107,10 @@ The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and 
 -5006.1050061050055
 >>> api.halt()
 
-Using the API with a virtual HV PSU
-...................................
+Using the API with a virtual HV generator
+.........................................
 
-This is an example of a Python script that uses a virtual HV PSU.
+This is an example of a Python script that uses a virtual HV generator.
 The script uses ``with`` blocks to ensure that both the :class:`~hvctl.api.API` and the :class:`~hvctl.virtualhv.VirtualHV` are closed properly at the end.
 
 ::

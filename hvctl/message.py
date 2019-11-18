@@ -30,9 +30,9 @@ class Message():
 
     Attributes:
         command (string):
-            The command that is sent to the HV PSU, or the command
-            to which *self* is an answer; e.g. ``'set voltage'`` or
-            ``'hv on'``.
+            The command that is sent to the HV generator, 
+            or the command to which *self* is an answer; 
+            e.g. ``'set voltage'`` or ``'hv on'``.
             All valid commands are listed in
             :const:`~hvctl.message.COMMANDS`.
 
@@ -49,7 +49,7 @@ class Message():
 
         is_answer (bool):
             Determines whether *self* represents a message to the
-            HV PSU or a response from it.
+            HV generator or a response from it.
     """
 
     ENCODING = 'UTF-8'
@@ -101,7 +101,7 @@ class Message():
 
     def __bytes__(self):
         """Convert *self* to a :class:`bytes` object, which can then be
-        sent to the HV PSU through the serial connection.
+        sent to the HV generator through the serial connection.
         """
         value = int(self.value) if self.value is not None else ''
         string = self.pattern.format(value)

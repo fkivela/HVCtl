@@ -33,7 +33,7 @@ class CommandLineUI:
 
         api:
             An :class:`~hvctl.api.API` object used to send commands
-            to the HV PSU.
+            to the HV generator.
 
         intro:
             A string displayed to the user upon starting the UI.

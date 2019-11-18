@@ -1,7 +1,9 @@
 RS-232 Control Protocol
 =======================
 
-Communication with the HV PSU is based on question/answer pairs. Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13). CR is represented here as ``\r``, which is how Python and C represent it.
+Communication with the HV generator is based on question/answer pairs.
+Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13).
+CR is represented here as ``\r``, which is how Python and C represent it.
 
 Command strings start with a letter denoting the given command, followed by one or more function parameters separated by commas.
 Answers copy the command string, and may append a return value to itse end (without a separating comma).
@@ -21,9 +23,10 @@ The connection has the following specifications:
 List of commands and answers
 ----------------------------
 
-This section lists all commands recognized by the HV PSU and the answers to them.
-An *X* denotes a numerical value. This value is a 12-bit unsigned integer (i.e. :math:`X \in \left[0, 4095 \right]`), linearly scaled to cover
-the whole voltage or current range of the PSU. For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets the voltage to 0 V (ie. the ground potential), and ``X = 4095`` sets it to the maximum value of -100 kV.
+This section lists all commands recognized by the HV generator and the answers to them.
+An *X* denotes a numerical value. This value is a 12-bit unsigned integer (i.e. :math:`X \in \left[0, 4095 \right]`),
+linearly scaled to cover the entire voltage or current range of the generator. 
+For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets the voltage to 0 V (ie. the ground potential), and ``X = 4095`` sets it to the maximum value of -100 kV.
 
 1. Set output voltage
 .....................
