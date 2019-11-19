@@ -425,7 +425,7 @@ class ScrollBar(urwid.WidgetWrap):
             An object used to keep track of how far the screen is
             scrolled.
 
-        scroller char (single-character str):
+        scroller_char (single-character str):
             The character used to draw the moving part of the scroll
             bar.
 
@@ -437,7 +437,7 @@ class ScrollBar(urwid.WidgetWrap):
     def __init__(self, position, scroller_char='█', background_char='░'):
         """Initialize a new scrollbar.
 
-        The arguments set the initial values of :attr:`position` and
+        The arguments set the initial values of :attr:`position`,
         :attr:`scroller_char` and :attr:`background_char`.
         """
         self.position = position

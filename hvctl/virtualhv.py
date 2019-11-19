@@ -6,6 +6,8 @@ from .virtualconnection import VirtualConnection
 
 class VirtualHV():
     """A virtual high voltage generator.
+    
+    test
 
     This class simulates a HV generator that can be communicated with
     through  a serial connection. This makes it possible to test
@@ -259,11 +261,13 @@ class VirtualHV():
         Args:
             input_:
                 A bytes-like object created by
-                :func:`hvctl.message.Message.to_bytes`.
+                :meth:`Message.__bytes__()
+                <hvctl.message.Message.__bytes__>`.
 
         Returns:
             A :class:`bytes` object that can be passed to
-            :func:`hvctl.message.Message.from_bytes`.
+            :meth:`Message.from_bytes()
+            <hvctl.message.Message.from_bytes>`.
             The return message will contain the same command as the
             input message, but if the command changed a value of an
             attribute of *self*, the new value will be included in the

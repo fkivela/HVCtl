@@ -11,11 +11,11 @@ import time
 
 class VirtualConnection():
     """A virtual serial connection.
-
+    
     Data can be sent through a :class:`VirtualConnection` object by
     accessing the :attr:`user_end` and :attr:`virtual_end` attributes.
     The :attr:`port` property is a device name which can be given to
-    :func:`serial.Serial` as an argument.
+    the initializer of :class:`serial.Serial` as an argument.
 
     A :class:`VirtualConnection` object runs code in a parallel thread,
     which will continue running until it is closed or the Python 
@@ -33,7 +33,8 @@ class VirtualConnection():
         with VirtualConnection() as vc:
             # Some code here
 
-    :meth:`close` will be called automatically when the ``with`` block is exited.
+    :meth:`close` will be called automatically when the ``with`` block
+    is exited.
 
     If all variables referring to a :class:`VirtualConnection` 
     object are removed with ``del`` or by reassigning them,
@@ -72,7 +73,8 @@ class VirtualConnection():
             This end of the connection is meant to be used by a user to
             send commands to and read data from a simulated device.
             :func:`os.read` doesn't seem to work with it attribute,
-            and the :mod:`serial` module should be used instead.            
+            and the `serial <https://pypi.org/project/pyserial/>`_ 
+            module should be used instead.            
 
         thread (:class:`threading.Thread`):
             The parallel thread that runs most functionality in a 

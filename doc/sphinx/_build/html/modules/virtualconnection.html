@@ -44,7 +44,7 @@ which can be used to simulate serial connections.</p>
 <p>Data can be sent through a <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object by
 accessing the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="hvctl.virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="hvctl.virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a> attributes.
 The <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.port" title="hvctl.virtualconnection.VirtualConnection.port"><code class="xref py py-attr docutils literal notranslate"><span class="pre">port</span></code></a> property is a device name which can be given to
-<code class="xref py py-func docutils literal notranslate"><span class="pre">serial.Serial()</span></code> as an argument.</p>
+the initializer of <a class="reference external" href="https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial" title="(in pySerial v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code></a> as an argument.</p>
 <p>A <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object runs code in a parallel thread,
 which will continue running until it is closed or the Python
 interpreter exits.
@@ -58,7 +58,8 @@ block in the following manner:</p>
     <span class="c1"># Some code here</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> will be called automatically when the <code class="docutils literal notranslate"><span class="pre">with</span></code> block is exited.</p>
+<p><a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> will be called automatically when the <code class="docutils literal notranslate"><span class="pre">with</span></code> block
+is exited.</p>
 <p>If all variables referring to a <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a>
 object are removed with <code class="docutils literal notranslate"><span class="pre">del</span></code> or by reassigning them,
 the parallel thread will continue to run without a possibility of
@@ -74,7 +75,7 @@ In this case, all running instances of the class can be closed with</p>
 (how many bits are read at once).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -86,7 +87,7 @@ In this case, all running instances of the class can be closed with</p>
 input before doing it again.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -111,7 +112,7 @@ Its signature should be</p>
 <code class="sig-name descname">virtual_end</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>This end of the connection is used by <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">process()</span></code></a> to
 read and write data. It can be written to and read from with
-<code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">os.write()</span></code>.</p>
+<a class="reference external" href="https://docs.python.org/3/library/os.html#os.read" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/os.html#os.write" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.write()</span></code></a>.</p>
 <p>A simulated machine or other device for communicating with
 its user should define this functionality by assigning a
 suitable function to the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a> attribute.</p>
@@ -127,8 +128,9 @@ suitable function to the <a class="reference internal" href="#hvctl.virtualconne
 <code class="sig-name descname">user_end</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>This end of the connection is meant to be used by a user to
 send commands to and read data from a simulated device.
-<code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code> doesn’t seem to work with it attribute,
-and the <code class="xref py py-mod docutils literal notranslate"><span class="pre">serial</span></code> module should be used instead.</p>
+<a class="reference external" href="https://docs.python.org/3/library/os.html#os.read" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code></a> doesn’t seem to work with it attribute,
+and the <a class="reference external" href="https://pypi.org/project/pyserial/">serial</a>
+module should be used instead.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>file-like object</p>
@@ -143,7 +145,7 @@ and the <code class="xref py py-mod docutils literal notranslate"><span class="p
 <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/threading.html#threading.Thread" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -231,7 +233,7 @@ and simply returns <em>input_</em> uncanged.</p>
 <dt id="hvctl.virtualconnection.VirtualConnection.port">
 <em class="property">property </em><code class="sig-name descname">port</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.port" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a device name (e.g. <code class="docutils literal notranslate"><span class="pre">'/dev/pts/...'</span></code>) that can be
-used as the <em>port</em> argument when a <code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code>
+used as the <em>port</em> argument when a <a class="reference external" href="https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial" title="(in pySerial v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code></a>
 object is created.</p>
 </dd></dl>
 

@@ -10,3 +10,4 @@
    
    .. automethod:: __init__
    .. automethod:: __repr__
+   .. automethod:: __bytes__

@@ -144,7 +144,7 @@ Technix HV generator.</p>
 the generator, after which messages can be sent to it by calling
 the methods of the instance.</p>
 <p>If the serial connection is lost, all methods of this class that
-communicate with the generator will raise a <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code>.</p>
+communicate with the generator will raise a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>.</p>
 <p>If an API is initialized with <code class="docutils literal notranslate"><span class="pre">poll=True</span></code> it will automatically
 call <a class="reference internal" href="#hvctl.api.API.full_status" title="hvctl.api.API.full_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">full_status()</span></code></a> every <a class="reference internal" href="#hvctl.api.API.timestep" title="hvctl.api.API.timestep"><code class="xref py py-attr docutils literal notranslate"><span class="pre">timestep</span></code></a> seconds.
 This updates the data in <a class="reference internal" href="#hvctl.api.API.status" title="hvctl.api.API.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a> and prevents the generator
@@ -176,7 +176,7 @@ determines the time (in seconds) between polling messages.
 The initial value is 1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -189,14 +189,14 @@ connection to the HV generator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>port</strong> (<em>str</em>) – The serial port device name. If a value is not given,
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The serial port device name. If a value is not given,
 it will be set to <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">SERIAL_KWARGS['port']</span></code></a>.</p></li>
-<li><p><strong>poll</strong> (<em>bool</em>) – Determines whether automatic polling should be used
+<li><p><strong>poll</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Determines whether automatic polling should be used
 or not (see the class docstring for more details.)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>RuntimeError</strong> – If a serial connection cannot be formed.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><strong>RuntimeError</strong></a> – If a serial connection cannot be formed.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -310,7 +310,7 @@ inhibition is activated; otherwise it is deactivated.</p>
 ‘remote’, ‘r’ or 0 for remote mode.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If <em>mode</em> is not a valid value.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <em>mode</em> is not a valid value.</p>
 </dd>
 </dl>
 </dd></dl>

@@ -39,17 +39,17 @@
 <dl class="class">
 <dt id="hvctl.queuefile.QueueFile">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.queuefile.</code><code class="sig-name descname">QueueFile</code><span class="sig-paren">(</span><em class="sig-param">block=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.queuefile.QueueFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class wraps a <code class="xref py py-class docutils literal notranslate"><span class="pre">queue.Queue</span></code> object in the interface
+<dd><p>This class wraps a <a class="reference external" href="https://docs.python.org/3/library/queue.html#queue.Queue" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">queue.Queue</span></code></a> object in the interface
 of a file-like object.</p>
 <p>This class makes redirecting input and output between different
 parts of a program easier than it would be using standard file
-objects, such as <code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code> or those created by
-<code class="xref py py-func docutils literal notranslate"><span class="pre">pty.openpty()</span></code>.
+objects, such as <a class="reference external" href="https://docs.python.org/3/library/io.html#io.StringIO" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a> or those created by
+<a class="reference external" href="https://docs.python.org/3/library/pty.html#pty.openpty" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pty.openpty()</span></code></a>.
 This object is thread-safe, can be read from and written to at
 the same time, and its blocking behaviour can be easily controlled.
-(If there is nothing to read, reading from <code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code>
+(If there is nothing to read, reading from <a class="reference external" href="https://docs.python.org/3/library/io.html#io.StringIO" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a>
 never blocks, but reading from an object created with
-<code class="xref py py-func docutils literal notranslate"><span class="pre">pty.openpty()</span></code> always does.)</p>
+<a class="reference external" href="https://docs.python.org/3/library/pty.html#pty.openpty" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pty.openpty()</span></code></a> always does.)</p>
 <dl class="attribute">
 <dt id="hvctl.queuefile.QueueFile.queue">
 <code class="sig-name descname">queue</code><a class="headerlink" href="#hvctl.queuefile.QueueFile.queue" title="Permalink to this definition">¶</a></dt>
@@ -69,7 +69,7 @@ one character at a time.</p>
 <a class="reference internal" href="#hvctl.queuefile.QueueFile.readline" title="hvctl.queuefile.QueueFile.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a> should block or not.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -85,8 +85,8 @@ to the value given as an argument.</p>
 <dt id="hvctl.queuefile.QueueFile.flush">
 <code class="sig-name descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.queuefile.QueueFile.flush" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method does nothing, but its existence makes it
-possible to <code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code> to this object with <code class="docutils literal notranslate"><span class="pre">flush=True</span></code>
-without raising an <code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeError</span></code>.</p>
+possible to <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> to this object with <code class="docutils literal notranslate"><span class="pre">flush=True</span></code>
+without raising an <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -96,7 +96,7 @@ without raising an <code class="xref py py-class docutils literal notranslate"><
 <p>If the queue contains less than <em>size</em> characters or <em>size</em> is
 <code class="docutils literal notranslate"><span class="pre">None</span></code> or less than <code class="docutils literal notranslate"><span class="pre">1</span></code>, all characters in the queue are
 read.</p>
-<p>This method emulates <code class="xref py py-meth docutils literal notranslate"><span class="pre">io.TextIOBase.read()</span></code>.</p>
+<p>This method emulates <a class="reference external" href="https://docs.python.org/3/library/io.html#io.TextIOBase.read" title="(in Python v3.8)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">io.TextIOBase.read()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -105,7 +105,7 @@ read.</p>
 <dd><p>Like :meth`read`, but reading characters is stopped if a
 newline character is encountered. If this happens, the string
 returned includes that newline character.</p>
-<p>This method emulates <code class="xref py py-meth docutils literal notranslate"><span class="pre">io.TextIOBase.readline()</span></code>.</p>
+<p>This method emulates <a class="reference external" href="https://docs.python.org/3/library/io.html#io.TextIOBase.readline" title="(in Python v3.8)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">io.TextIOBase.readline()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -113,7 +113,7 @@ returned includes that newline character.</p>
 <code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">string</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.queuefile.QueueFile.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write the <em>string</em> to the queue and return the number of
 characters written.</p>
-<p>This method emulates <code class="xref py py-meth docutils literal notranslate"><span class="pre">io.TextIOBase.write()</span></code>.</p>
+<p>This method emulates <a class="reference external" href="https://docs.python.org/3/library/io.html#io.TextIOBase.write" title="(in Python v3.8)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">io.TextIOBase.write()</span></code></a>.</p>
 </dd></dl>
 
 </dd></dl>

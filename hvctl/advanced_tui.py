@@ -18,10 +18,10 @@ class AdvancedTUI(urwid.WidgetWrap):
     Attributes:
         display (:class:`urwid.Text`):
             A text field for presenting information to the user.
-            Use :func:`display.set_text` to change its
-            contents.
+            Use :meth:`display.set_text <urwid.Text.set_text>` to
+            change its contents.
 
-        cli (:class:`CLI`):
+        cli (:class:`~hvctl.widgets.CLI`):
             A command-line interface for issuing commands; located
             below the display.
     """
@@ -36,7 +36,7 @@ class AdvancedTUI(urwid.WidgetWrap):
             inputfile:
                 A file-like object where user input is sent.
             outputfile:
-                A file-like object where :attr:`script` should print
+                A file-like object where *script* should print
                 its output, if it is to be printed on the screen.
         """
         self.display = urwid.Text('')

@@ -101,10 +101,10 @@ class CommandLineUI:
                 This is passed to the initializer of :attr:`api`.
             inputfile:
                 The value of :attr:`inputfile`.
-                If this is ``None``, the value is :attr:`sys.stdin`.
+                If this is ``None``, the value is :data:`sys.stdin`.
             outputfile:
                 The value of :attr:`outputfile`.
-                If this is ``None``, the value is :attr:`sys.stdin`.
+                If this is ``None``, the value is :data:`sys.stdout`.
         """
         if inputfile:
             self.inputfile = inputfile
@@ -290,11 +290,11 @@ class CommandLineUI:
 
         This method works like the built-in :func:`.input` function,
         but uses :attr:`inputfile` and :attr:`outputfile` instead of
-        :attr:`sys.stdin` and :attr:`sys.stdout`.
+        :data:`sys.stdin` and :data:`sys.stdout`.
 
         The line editing functionality provided by the :mod:`readline`
         works with this method only if :attr:`inputfile` is
-        :attr:`sys.stdin`.
+        :data:`sys.stdin`.
         """
         # `.input` instead of `input` makes Sphinx refer to the
         # built-in input instead of this method.
@@ -315,7 +315,7 @@ class CommandLineUI:
 
         This method works like the built-in :func:`.print` function,
         but uses :attr:`inputfile` and :attr:`outputfile` instead of
-        :attr:`sys.stdin` and :attr:`sys.stdout`, and doesn't include
+        :data:`sys.stdin` and :data:`sys.stdout`, and doesn't include
         the *file* argument.
         """
         print(*objects, file=self.outputfile, sep=sep, end=end, flush=True)

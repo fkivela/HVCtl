@@ -16,9 +16,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
-#sys.path.insert(0, os.path.abspath('../../hvctl'))
-sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../../')) # Add the HVCtl directory
 
 # -- Project information -----------------------------------------------------
 
@@ -26,14 +24,22 @@ project = 'HVCtl'
 copyright = '2019, University of Helsinki Fusor Team'
 author = 'Feliks Kivelä'
 
-
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
 
+# Autodoc: Generate documentation from docstrings automatically.
+# Napoleon: Support for Google-style docstrings.
+# Intersphinx: Link to the documentaion of other sphinx projects.
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx.ext.intersphinx']
+
+# Projects linked to by Intersphinx.
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
+					   'serial': ('https://pyserial.readthedocs.io/en/latest', None),
+					   'urwid': ('http://urwid.org', None),}
+                       
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

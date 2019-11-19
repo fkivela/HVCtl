@@ -65,7 +65,7 @@ value is <code class="docutils literal notranslate"><span class="pre">False</spa
 See <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.cmd_debug" title="hvctl.command_line_ui.CommandLineUI.cmd_debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cmd_debug()</span></code></a> for details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -135,9 +135,9 @@ Has the following falue:</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>port</strong> – This is passed to the initializer of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a>.</p></li>
 <li><p><strong>inputfile</strong> – The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a>.
-If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p></li>
+If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdin" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a>.</p></li>
 <li><p><strong>outputfile</strong> – The value of <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a>.
-If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p></li>
+If this is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value is <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdout" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -253,21 +253,21 @@ otherwise it is deactivated.</p>
 <dt id="hvctl.command_line_ui.CommandLineUI.input">
 <code class="sig-name descname">input</code><span class="sig-paren">(</span><em class="sig-param">prompt=''</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.input" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ask the user for input.</p>
-<p>This method works like the built-in <code class="xref py py-func docutils literal notranslate"><span class="pre">input()</span></code> function,
+<p>This method works like the built-in <a class="reference external" href="https://docs.python.org/3/library/functions.html#input" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">input()</span></code></a> function,
 but uses <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> and <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a> instead of
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdout</span></code>.</p>
-<p>The line editing functionality provided by the <code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code>
+<a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdin" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdout" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>.</p>
+<p>The line editing functionality provided by the <a class="reference external" href="https://docs.python.org/3/library/readline.html#module-readline" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code></a>
 works with this method only if <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> is
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code>.</p>
+<a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdin" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.print">
 <code class="sig-name descname">print</code><span class="sig-paren">(</span><em class="sig-param">*objects</em>, <em class="sig-param">sep=' '</em>, <em class="sig-param">end='\n'</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.print" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print text to the UI.</p>
-<p>This method works like the built-in <code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code> function,
+<p>This method works like the built-in <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function,
 but uses <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> and <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a> instead of
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdin</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.stdout</span></code>, and doesn’t include
+<a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdin" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdout" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>, and doesn’t include
 the <em>file</em> argument.</p>
 </dd></dl>
 

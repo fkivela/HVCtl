@@ -1,13 +1,13 @@
 TODO:
 
 ### Current ###
+- Proofreading!
 
 ### Important ###
+- Paths in sphinx config file
 
 ### Documentation ###
-- Implement :ref:`name <actual_ref>`-syntax
 - Document the interlock (a physical safety switch which prevents turning the HV on)?
-- Links to external docs
 
 ### Not important (the program works well without) ###
 - More functionality to VirtualHV
@@ -26,7 +26,6 @@ TODO:
 
 ### Other ###
 - Testing (maybe try mock objects, Hypothesis)!
-- Proofreading!
 - Remove Message.from_bytes() and overload Message.__init__ with 
   @singledispatchmethod. Wait for Anaconda to update to Python 3.8 
   before this can be implemented.
