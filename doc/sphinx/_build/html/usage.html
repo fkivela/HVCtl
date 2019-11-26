@@ -37,19 +37,27 @@
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="interactive-mode">
 <h2>Interactive mode<a class="headerlink" href="#interactive-mode" title="Permalink to this headline">¶</a></h2>
-<p>HVCtl may be launched in an interactive mode with the command <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">hvctl</span> <span class="pre">-args</span></code> or <code class="docutils literal notranslate"><span class="pre">hvctl-run</span> <span class="pre">-args</span></code>.
-Both commands run the same script; the latter is simply a shortcut to make the command slightly shorter.
-The commands accept the following command-line arguments:</p>
+<p>HVCtl may be launched in an interactive mode by running the <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> script inside the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package.
+This is done with the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python path/to/hvctl -args
+</pre></div>
+</div>
+<p>Because this command requires providing the relative or absolute path to the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package every time it is used,
+HVCtl also provides a shell script which automatically fills in the path before calling the command.
+If the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory is added to <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, the shell script can be run from any directory with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hvctl-run -args
+</pre></div>
+</div>
+<p>Both of these commands accept the following command-line arguments:</p>
 <dl class="option-list">
 <dt><kbd><span class="option">-s</span>, <span class="option">--simple</span></kbd></dt>
-<dd><p>Run HVCtl with a simple command-line interface.
-Running this UI doesn’t require installing <a class="reference internal" href="installation.html"><span class="doc">urwid</span></a>.
-If HVCtl is run without the -s argument, a slighlty more advanced UI will be used (see below for  an example).</p>
+<dd><p>Run HVCtl with a simple command-line interface that doesn’t require <a class="reference internal" href="installation.html"><span class="doc">urwid</span></a> to work.
+If HVCtl is run without the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, a slightly more advanced UI will be used (see below for  an example).</p>
 </dd>
 <dt><kbd><span class="option">-v</span>, <span class="option">--virtual</span></kbd></dt>
 <dd><p>Run HVCtl with a virtual HV generator.
 If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that.
-This makes it possible to test HVCtl easily without having to connect to a physical HV device.</p>
+This makes it possible to test HVCtl easily without having to connect to an actual HV generator.</p>
 </dd>
 </dl>
 </div>
@@ -78,46 +86,52 @@ so they can be imported with</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>The following examples demonstrate reading and setting the voltage by using the different interfaces provided by HVCtl.</p>
 <div class="section" id="interactive-mode-with-s">
-<h3>Interactive mode with -s<a class="headerlink" href="#interactive-mode-with-s" title="Permalink to this headline">¶</a></h3>
-<p>HVCtl is run in interactive mode with the -s argument, resulting in a simple command-line ui.</p>
+<h3>Interactive mode with <code class="docutils literal notranslate"><span class="pre">-s</span></code><a class="headerlink" href="#interactive-mode-with-s" title="Permalink to this headline">¶</a></h3>
+<p>HVCtl is run in interactive mode with the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, resulting in a simple command-line ui.
+The UI imports the <a class="reference external" href="https://docs.python.org/3/library/readline.html#module-readline" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code></a> module, which enables command editing and browsing command history with the up and down arrows.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hvctl-run -s
 Welcome to HVCtl! Type &#39;help&#39; for a list of commands.
+&gt;&gt; hvon
+HV turned on
 &gt;&gt; getvoltage
-The voltage is -0.0 V
-&gt;&gt; setvoltage -5000
-Voltage set to -5006.1050061050055 V
+The voltage is 0.0 V
+&gt;&gt; setvoltage 5000
+Voltage set to 5006.1050061050055 V
 &gt;&gt; getvoltage
-The voltage is -5006.1050061050055 V
+The voltage is 5006.1050061050055 V
 &gt;&gt; exit
 </pre></div>
 </div>
 </div>
 <div class="section" id="interactive-mode-without-s">
-<h3>Interactive mode without -s<a class="headerlink" href="#interactive-mode-without-s" title="Permalink to this headline">¶</a></h3>
-<p>Here the -s argument hasn’t been given, and HVCtl uses a more advanced UI.
-The bottom of the UI is an interactive command-line interface identical to the one above, but the top part contains a screen showing the current status of the HV generator.
+<h3>Interactive mode without <code class="docutils literal notranslate"><span class="pre">-s</span></code><a class="headerlink" href="#interactive-mode-without-s" title="Permalink to this headline">¶</a></h3>
+<p>Here the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument hasn’t been given, and HVCtl uses a more advanced UI.
+The bottom of the UI is an interactive command-line interface similar to the one above, but the top part contains a screen showing the current status of the HV generator.
 The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Voltage: -0.00 V
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Voltage: 5006.11 V
 Current: 0.00 mA
 Regulation mode: voltage
 
-HV power: off
+HV power: on
 HV on command given: False
 HV off command given: False
 
 Mode: remote
-Interlock: closed
+Interlock: open
 No faults present
 ─────────────────────────────────────────────────────────
 Welcome to HVCtl! Type &#39;help&#39; for a list of commands.  ▲
+&gt;&gt; hvon                                                ██
+HV turned on                                           ██
 &gt;&gt; getvoltage                                          ██
-The voltage is -0.0 V                                  ██
-&gt;&gt; setvoltage -500                                     ██
-Voltage set to -488.40048840048837 V                   ██
+The voltage is 0.0 V                                   ██
+&gt;&gt; setvoltage 5000                                     ██
+Voltage set to 5006.1050061050055 V                    ██
 &gt;&gt; getvoltage                                          ██
-The voltage is -488.40048840048837 V                   ██
+The voltage is 5006.1050061050055 V                    ██
 &gt;&gt; exit                                                ██
-PRESS &#39;q&#39; TO EXIT                                      ▼
+PRESS &#39;q&#39; TO EXIT                                      ██
+                                                       ▼
 </pre></div>
 </div>
 </div>
@@ -180,7 +194,7 @@ The script uses <code class="docutils literal notranslate"><span class="pre">wit
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="protocol.html">RS-232 Control Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">RS-232 control protocol</a></li>
 </ul>
 
 <div class="relations">

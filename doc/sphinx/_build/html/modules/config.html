@@ -56,13 +56,12 @@ further details.</p>
 <dt id="hvctl.config.VOLTAGE_LIMIT">
 <code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">VOLTAGE_LIMIT</code><a class="headerlink" href="#hvctl.config.VOLTAGE_LIMIT" title="Permalink to this definition">¶</a></dt>
 <dd><p>The maximum voltage for a particular application in V.
-HVCtl will never set the voltage to a value exceeding this.
-For negative polarity devices the value should be negative.</p>
+HVCtl will never set the voltage to a value exceeding this.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="hvctl.config.CURRENT_LIMT">
-<code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">CURRENT_LIMT</code><a class="headerlink" href="#hvctl.config.CURRENT_LIMT" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.config.CURRENT_LIMIT">
+<code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">CURRENT_LIMIT</code><a class="headerlink" href="#hvctl.config.CURRENT_LIMIT" title="Permalink to this definition">¶</a></dt>
 <dd><p>The maximum current for a particular application in mA.
 HVCtl will never set the current to a value exceeding this.</p>
 </dd></dl>
@@ -79,14 +78,16 @@ This is the maximum value of that integer, <code class="docutils literal notrans
 <dt id="hvctl.config.DELTA_U">
 <code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">DELTA_U</code><a class="headerlink" href="#hvctl.config.DELTA_U" title="Permalink to this definition">¶</a></dt>
 <dd><p>The smallest amount by which the value of the voltage can be
-changed, in V.</p>
+changed, in V. This is computed by dividing the maximum voltage
+produced by the generator with <a class="reference internal" href="#hvctl.config.INT_MAX" title="hvctl.config.INT_MAX"><code class="xref py py-const docutils literal notranslate"><span class="pre">INT_MAX</span></code></a>.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.config.DELTA_I">
 <code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">DELTA_I</code><a class="headerlink" href="#hvctl.config.DELTA_I" title="Permalink to this definition">¶</a></dt>
 <dd><p>The smallest amount by which the value of the current can be
-changed, in mA.</p>
+changed, in mA. This is computed analogously to
+<a class="reference internal" href="#hvctl.config.DELTA_U" title="hvctl.config.DELTA_U"><code class="xref py py-const docutils literal notranslate"><span class="pre">DELTA_U</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -140,7 +141,7 @@ imported.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 Control Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
 </ul>
 
 <div class="relations">

@@ -1,28 +1,27 @@
 TODO:
 
 ### Current ###
-- Proofreading!
 
 ### Important ###
-- Paths in sphinx config file
+- Move status string formatting to AdvancedUI
+- __main__: clui is a bad name
 
 ### Documentation ###
-- Document the interlock (a physical safety switch which prevents turning the HV on)?
+- Add better descriptions of inhibition and the interlock based on the manual 
 
 ### Not important (the program works well without) ###
 - More functionality to VirtualHV
-      - No voltage in off mode
+      - No voltage in off mode, when inhibition is on or when interlock is open
       - Shut off and switch to local mode after 5 seconds
       - Find out how the physical device works
+- Try if this works on Windows?
 
 ### Test with the physical device ###
-- Try to figure out what inhibit/inhibition is
+- Test inhibition & interlock
 - How does the HV behave when it is off? Does it respond to commands?
   What happens when trying to set voltage or current?
 - How does the HV behave in local mode? Does it respond to commands?
-
-### Ask Tomas ###
-- Does polarity matter?
+- Are the examples realistic
 
 ### Other ###
 - Testing (maybe try mock objects, Hypothesis)!

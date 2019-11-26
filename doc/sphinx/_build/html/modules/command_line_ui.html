@@ -35,7 +35,8 @@
             
   <div class="section" id="module-hvctl.command_line_ui">
 <span id="command-line-ui"></span><h1><a class="reference internal" href="#module-hvctl.command_line_ui" title="hvctl.command_line_ui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a><a class="headerlink" href="#module-hvctl.command_line_ui" title="Permalink to this headline">¶</a></h1>
-<p>This module defines a simple command-line UI for HVCtl.</p>
+<p>This module defines a simple command-line user interface for
+HVCtl.</p>
 <dl class="class">
 <dt id="hvctl.command_line_ui.CommandLineUI">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.command_line_ui.</code><code class="sig-name descname">CommandLineUI</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI" title="Permalink to this definition">¶</a></dt>
@@ -45,23 +46,32 @@ needed by calling <a class="reference internal" href="api.html#hvctl.api.API.hal
 using a <code class="docutils literal notranslate"><span class="pre">with</span></code> block. Otherwise the parallel thread created by
 <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a> may continue to run in the background and consume
 resources.</p>
+<p>This class contains several methods with names following the pattern
+<code class="docutils literal notranslate"><span class="pre">cmd_&lt;command&gt;</span></code>.
+These methods correspond to the commands a user can give to the
+UI: when the command string <code class="docutils literal notranslate"><span class="pre">'command'</span></code> is entered, the method
+<code class="docutils literal notranslate"><span class="pre">cmd_command</span></code> is called.
+Because messages printed by the <code class="docutils literal notranslate"><span class="pre">help</span></code> command use the
+docstrings of these methods in an unaltered form, the docstrings
+are written in plain text and cannot contain any reStructuredText
+syntax that isn’t easily readable by humans.</p>
 <dl class="attribute">
 <dt id="hvctl.command_line_ui.CommandLineUI.inputfile">
 <code class="sig-name descname">inputfile</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>A file object for receiving input.</p>
+<dd><p>A file-like object for receiving input.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.command_line_ui.CommandLineUI.outputfile">
 <code class="sig-name descname">outputfile</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>A file object for writing output.</p>
+<dd><p>A file-like object for writing output.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.command_line_ui.CommandLineUI.debug">
 <code class="sig-name descname">debug</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.debug" title="Permalink to this definition">¶</a></dt>
-<dd><p>Setting this to True enables a debug mode; the default
-value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+<dd><p>Setting this to <code class="docutils literal notranslate"><span class="pre">True</span></code> activates the debug mode;
+the default value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
 See <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.cmd_debug" title="hvctl.command_line_ui.CommandLineUI.cmd_debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cmd_debug()</span></code></a> for details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -73,7 +83,7 @@ See <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.cmd
 <dl class="attribute">
 <dt id="hvctl.command_line_ui.CommandLineUI.api">
 <code class="sig-name descname">api</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.api" title="Permalink to this definition">¶</a></dt>
-<dd><p>An <a class="reference internal" href="api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object used to send commands
+<dd><p>An <a class="reference internal" href="api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object used for sending commands
 to the HV generator.</p>
 </dd></dl>
 
@@ -96,7 +106,8 @@ requests input. The default value is <code class="docutils literal notranslate">
 <dt id="hvctl.command_line_ui.CommandLineUI.indent">
 <code class="sig-name descname">indent</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.indent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class attribute.
-A string used to indent text blocks.</p>
+A string used to indent text blocks.
+The default value is <code class="docutils literal notranslate"><span class="pre">'</span>&#160;&#160;&#160; <span class="pre">'</span></code> (four spaces).</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -104,9 +115,9 @@ A string used to indent text blocks.</p>
 <code class="sig-name descname">cmds_and_aliases</code><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmds_and_aliases" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class attribute.
 A list of tuples, where index 0 of each tuple contains
-the name of a commands accepted by the UI and index 1
+the name of a command accepted by the UI and index 1
 contains a list of aliases for that command.
-Has the following falue:</p>
+It has the following value:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">(</span><span class="s1">&#39;getvoltage&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;getu&#39;</span><span class="p">]),</span>
     <span class="p">(</span><span class="s1">&#39;getcurrent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;geti&#39;</span><span class="p">]),</span>
@@ -158,16 +169,97 @@ calls <a class="reference internal" href="api.html#hvctl.api.API.halt" title="hv
 </dd></dl>
 
 <dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_debug">
-<code class="sig-name descname">cmd_debug</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_debug" title="Permalink to this definition">¶</a></dt>
-<dd><p>Activate or deactivate debug mode.</p>
-<p>If bool(value) evaluates to True, debug mode is activated;
-otherwise it is deactivated.</p>
-<p>When debug mode is inactive, TypeErrors and ValueErrors raised
-during the execution of commands are caught to prevent users
-from crashing the program with invalid commands.
-In debug mode, this functionality is disabled to make
-debugging easier.</p>
+<dt id="hvctl.command_line_ui.CommandLineUI.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the UI.</p>
+<p>This functions runs the following algorithm:</p>
+<ol class="arabic simple">
+<li><p>Print <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.prompt" title="hvctl.command_line_ui.CommandLineUI.prompt"><code class="xref py py-attr docutils literal notranslate"><span class="pre">prompt</span></code></a> and wait for user input.</p></li>
+<li><p>Parse the input string into a command and its arguments by
+splitting it at whitespace.</p></li>
+<li><p>Call a method with the name <code class="docutils literal notranslate"><span class="pre">cmd_&lt;the</span> <span class="pre">given</span> <span class="pre">command&gt;</span></code>.
+The method will execute the command and print its output.
+If no method with that name exists, print an error message
+and start again from step 1.</p></li>
+<li><p>If the method returned <code class="docutils literal notranslate"><span class="pre">True</span></code>, break the loop.
+Otherwise, start another iteration from step 1.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_getvoltage">
+<code class="sig-name descname">cmd_getvoltage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_getvoltage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the voltage (in V).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_getcurrent">
+<code class="sig-name descname">cmd_getcurrent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_getcurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current (in mA).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_setvoltage">
+<code class="sig-name descname">cmd_setvoltage</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_setvoltage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the voltage to <em>value</em> (in V).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_setcurrent">
+<code class="sig-name descname">cmd_setcurrent</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_setcurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the current to <em>value</em> (in mA).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_hvon">
+<code class="sig-name descname">cmd_hvon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_hvon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the HV generator on.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_hvoff">
+<code class="sig-name descname">cmd_hvoff</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_hvoff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the HV generator off.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_mode">
+<code class="sig-name descname">cmd_mode</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the HV generator to remote or local mode.</p>
+<p>Set <em>value</em> to ‘local’, ‘l’ or 1 for local mode,
+or ‘remote’, ‘r’ or 0 for remote mode.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_inhibit">
+<code class="sig-name descname">cmd_inhibit</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_inhibit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activate or deactivate inhibition.</p>
+<p>If bool(value) evaluates to True, inhibition is
+activated; otherwise it is deactivated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_status">
+<code class="sig-name descname">cmd_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the status of the HV generator
+(excluding voltage and current).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_fullstatus">
+<code class="sig-name descname">cmd_fullstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_fullstatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the full status of the HV generator,
+including voltage and current.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_help">
+<code class="sig-name descname">cmd_help</code><span class="sig-paren">(</span><em class="sig-param">value=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a help message.</p>
+<p><em>value</em> should be the name or an alias of the command that
+should be described.
+If no <em>value</em> is specified, all commands are listed and
+described.</p>
 </dd></dl>
 
 <dl class="method">
@@ -177,76 +269,16 @@ debugging easier.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_fullstatus">
-<code class="sig-name descname">cmd_fullstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_fullstatus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get full HV status including voltage and current.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_getcurrent">
-<code class="sig-name descname">cmd_getcurrent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_getcurrent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get HV current (in mA).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_getvoltage">
-<code class="sig-name descname">cmd_getvoltage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_getvoltage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get HV voltage (in V).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_help">
-<code class="sig-name descname">cmd_help</code><span class="sig-paren">(</span><em class="sig-param">value=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_help" title="Permalink to this definition">¶</a></dt>
-<dd><p>Disply a help message.</p>
-<p><em>value</em> should be the name or alias of a command that should
-be described. If no <em>value</em> is specified, all commands are
-listed and described.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_hvoff">
-<code class="sig-name descname">cmd_hvoff</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_hvoff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turn the HV off.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_hvon">
-<code class="sig-name descname">cmd_hvon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_hvon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turn the HV on.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_inhibit">
-<code class="sig-name descname">cmd_inhibit</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_inhibit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Activate or deactivate HV inhibition.</p>
-<p>If bool(value) evaluates to <code class="docutils literal notranslate"><span class="pre">True</span></code>, inhibition is activated;
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_debug">
+<code class="sig-name descname">cmd_debug</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activate or deactivate the debug mode.</p>
+<p>If bool(value) evaluates to True, the debug mode is activated;
 otherwise it is deactivated.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_mode">
-<code class="sig-name descname">cmd_mode</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_mode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the HV to remote or local mode.</p>
-<p>Set <em>value</em> to ‘local’, ‘l’ or 1 for local mode, or
-‘remote’, ‘r’ or 0 for remote mode.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_setcurrent">
-<code class="sig-name descname">cmd_setcurrent</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_setcurrent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set HV current to <em>value</em> (in mA).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_setvoltage">
-<code class="sig-name descname">cmd_setvoltage</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_setvoltage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set HV voltage to <em>value</em> (in V).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_status">
-<code class="sig-name descname">cmd_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get HV status (excluding voltage and current).</p>
+<p>When the debug mode is inactive, TypeErrors and ValueErrors
+raised during the execution of commands are caught to prevent
+users from crashing the program with invalid commands.
+The debug mode disables this error-catching in order to make
+debugging easier.</p>
 </dd></dl>
 
 <dl class="method">
@@ -257,7 +289,7 @@ otherwise it is deactivated.</p>
 but uses <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> and <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a> instead of
 <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdin" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdout" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>.</p>
 <p>The line editing functionality provided by the <a class="reference external" href="https://docs.python.org/3/library/readline.html#module-readline" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code></a>
-works with this method only if <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> is
+module works with this method only if <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> is
 <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdin" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a>.</p>
 </dd></dl>
 
@@ -268,25 +300,7 @@ works with this method only if <a class="reference internal" href="#hvctl.comman
 <p>This method works like the built-in <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function,
 but uses <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.inputfile" title="hvctl.command_line_ui.CommandLineUI.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> and <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.outputfile" title="hvctl.command_line_ui.CommandLineUI.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a> instead of
 <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdin" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdin</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/sys.html#sys.stdout" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>, and doesn’t include
-the <em>file</em> argument.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start the UI.</p>
-<p>This functions runs the following algorithm:</p>
-<ol class="arabic simple">
-<li><p>Print the <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.prompt" title="hvctl.command_line_ui.CommandLineUI.prompt"><code class="xref py py-attr docutils literal notranslate"><span class="pre">prompt</span></code></a> and wait for user input.</p></li>
-<li><p>Parse the input string into a command and its arguments by
-splitting it at whitespace.</p></li>
-<li><p>Call a method with the name <code class="docutils literal notranslate"><span class="pre">cmd_&lt;the</span> <span class="pre">given</span> <span class="pre">command&gt;</span></code>.
-The method will execute the command and print its output.
-If no method with that name exists, print an error message
-and start again from step 1.</p></li>
-<li><p>If the method returned <code class="docutils literal notranslate"><span class="pre">True</span></code>, break the loop.
-Otherwise, start another iteration from step 1.</p></li>
-</ol>
+the <em>file</em> and <em>flush</em> arguments.</p>
 </dd></dl>
 
 </dd></dl>
@@ -325,7 +339,7 @@ Otherwise, start another iteration from step 1.</p></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 Control Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
 </ul>
 
 <div class="relations">

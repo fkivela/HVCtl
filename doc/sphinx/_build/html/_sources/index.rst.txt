@@ -1,7 +1,7 @@
 HVCtl
 =====
 
-HVCtl is a RS-232 controller for a Technix SR 5 kW to 10 kW high voltage generator.
+HVCtl is a RS-232 controller for a Technix SR100KV-5KW high voltage generator.
 It is written in Python and intended for Linux operating systems.
 
 .. note::
@@ -17,6 +17,14 @@ Documentation
    usage.rst
    modules/index.rst
    protocol.rst
+   
+Compatibility with other Technix models
+---------------------------------------
+
+HVCtl is based on information provided in the SR100KV-5KW user manual,
+which only describes that specific model.
+It might also work with other Technix SR series models,
+since it seems likely that those models use the same or a very similar control protocol.
 
 Author
 ------

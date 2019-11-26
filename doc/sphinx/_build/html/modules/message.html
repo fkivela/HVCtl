@@ -37,25 +37,32 @@
 <span id="message"></span><h1><a class="reference internal" href="#module-hvctl.message" title="hvctl.message"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a><a class="headerlink" href="#module-hvctl.message" title="Permalink to this headline">¶</a></h1>
 <p>This module defines the <a class="reference internal" href="#hvctl.message.Message" title="hvctl.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> class for communicating with
 the HV generator.</p>
-<dl class="data">
-<dt id="hvctl.message.COMMANDS">
-<code class="sig-prename descclassname">hvctl.message.</code><code class="sig-name descname">COMMANDS</code><em class="property"> = ['set voltage', 'set current', 'get voltage', 'get current', 'hv on', 'hv off', 'set mode', 'set inhibit', 'get status']</em><a class="headerlink" href="#hvctl.message.COMMANDS" title="Permalink to this definition">¶</a></dt>
-<dd><p>A list of valid commands.</p>
-</dd></dl>
-
 <dl class="class">
 <dt id="hvctl.message.Message">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.message.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents a message sent to or received from the HV
 generator.</p>
+<p>All of the following attributes are defined as read-only
+properties to prevent changing them after an object is instantiated.</p>
 <dl class="attribute">
 <dt id="hvctl.message.Message.command">
 <code class="sig-name descname">command</code><a class="headerlink" href="#hvctl.message.Message.command" title="Permalink to this definition">¶</a></dt>
 <dd><p>The command that is sent to the HV generator,
-or the command to which <em>self</em> is an answer;
-e.g. <code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">voltage'</span></code> or <code class="docutils literal notranslate"><span class="pre">'hv</span> <span class="pre">on'</span></code>.
-All valid commands are listed in
-<a class="reference internal" href="#hvctl.message.COMMANDS" title="hvctl.message.COMMANDS"><code class="xref py py-const docutils literal notranslate"><span class="pre">COMMANDS</span></code></a>.</p>
+or the command to which this object is an answer.
+The following values are accepted:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">voltage'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">current'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">voltage'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">current'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'hv</span> <span class="pre">on'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'hv</span> <span class="pre">off'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">mode'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'set</span> <span class="pre">inhibit'</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">status'</span></code></div>
+</div>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>string</p>
@@ -94,19 +101,30 @@ HV generator or a response from it.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="hvctl.message.Message.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new message and set its attributes to the values
-given as arguments.</p>
+<dl class="attribute">
+<dt id="hvctl.message.Message.ENCODING">
+<code class="sig-name descname">ENCODING</code><em class="property"> = 'UTF-8'</em><a class="headerlink" href="#hvctl.message.Message.ENCODING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The encoding used for conversions between strings and
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hvctl.message.Message.__repr__">
-<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__repr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string with the format
-<code class="docutils literal notranslate"><span class="pre">'ClassName(command=&lt;command&gt;,</span> <span class="pre">value=&lt;value&gt;,</span>
-<span class="pre">is_answer=&lt;value&gt;)'</span></code>.</p>
+<dt id="hvctl.message.Message.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new <a class="reference internal" href="#hvctl.message.Message" title="hvctl.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> and set its attributes
+to the values given as arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <em>command</em> is not recognized or <em>value</em> is not valid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.message.Message.from_bytes">
+<em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param">bytes_</em>, <em class="sig-param">is_answer=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.from_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new <a class="reference internal" href="#hvctl.message.Message" title="hvctl.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>
+object received through the serial connection.</p>
 </dd></dl>
 
 <dl class="method">
@@ -116,31 +134,12 @@ given as arguments.</p>
 sent to the HV generator through the serial connection.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="hvctl.message.Message.ENCODING">
-<code class="sig-name descname">ENCODING</code><em class="property"> = 'UTF-8'</em><a class="headerlink" href="#hvctl.message.Message.ENCODING" title="Permalink to this definition">¶</a></dt>
-<dd><p>The encoding used for conversions between strings and
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects.</p>
-</dd></dl>
-
 <dl class="method">
-<dt id="hvctl.message.Message.from_bytes">
-<em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param">bytes_</em>, <em class="sig-param">is_answer=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.from_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new message from a bytes object received through
-the serial connection.</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<em class="property">property </em><code class="sig-name descname">value</code></dt>
-<dd><p>Get or set <a class="reference internal" href="#hvctl.message.Message.value" title="hvctl.message.Message.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If an attempt is made to set an invalid
-    <a class="reference internal" href="#hvctl.message.Message.value" title="hvctl.message.Message.value"><code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code></a>.
-    The range of valid values depends on <a class="reference internal" href="#hvctl.message.Message.command" title="hvctl.message.Message.command"><code class="xref py py-attr docutils literal notranslate"><span class="pre">command</span></code></a>.</p>
-</dd>
-</dl>
+<dt id="hvctl.message.Message.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string with the format
+<code class="docutils literal notranslate"><span class="pre">'ClassName(command=&lt;command&gt;,</span> <span class="pre">value=&lt;value&gt;,</span>
+<span class="pre">is_answer=&lt;is_answer&gt;)'</span></code>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -179,7 +178,7 @@ the serial connection.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 Control Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
 </ul>
 
 <div class="relations">

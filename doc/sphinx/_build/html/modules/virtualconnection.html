@@ -48,7 +48,7 @@ the initializer of <a class="reference external" href="https://pyserial.readthed
 <p>A <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object runs code in a parallel thread,
 which will continue running until it is closed or the Python
 interpreter exits.
-A parallel thread may be closed by calling the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-func docutils literal notranslate"><span class="pre">close()</span></code></a>
+A parallel thread can be closed by calling the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-func docutils literal notranslate"><span class="pre">close()</span></code></a>
 method of the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> object that created it.
 This also closes <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="hvctl.virtualconnection.VirtualConnection.user_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">user_end</span></code></a> and <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.virtual_end" title="hvctl.virtualconnection.VirtualConnection.virtual_end"><code class="xref py py-attr docutils literal notranslate"><span class="pre">virtual_end</span></code></a>,
 and frees their file descriptors.</p>
@@ -64,7 +64,8 @@ is exited.</p>
 object are removed with <code class="docutils literal notranslate"><span class="pre">del</span></code> or by reassigning them,
 the parallel thread will continue to run without a possibility of
 closing it with <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.close" title="hvctl.virtualconnection.VirtualConnection.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>.
-In this case, all running instances of the class can be closed with</p>
+In this case, all running instances of the
+<a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection" title="hvctl.virtualconnection.VirtualConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualConnection</span></code></a> class can be closed with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VirtualConnection</span><span class="o">.</span><span class="n">close_all</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -100,6 +101,9 @@ Its signature should be</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">output</span><span class="p">:</span> <span class="nb">bytes</span>
 </pre></div>
 </div>
+<p>A machine or other device that communicates with its user
+can be simulated by assigning a suitable method to the
+<a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a> attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>function</p>
@@ -113,9 +117,6 @@ Its signature should be</p>
 <dd><p>This end of the connection is used by <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">process()</span></code></a> to
 read and write data. It can be written to and read from with
 <a class="reference external" href="https://docs.python.org/3/library/os.html#os.read" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/os.html#os.write" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.write()</span></code></a>.</p>
-<p>A simulated machine or other device for communicating with
-its user should define this functionality by assigning a
-suitable function to the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a> attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>file-like object</p>
@@ -128,7 +129,7 @@ suitable function to the <a class="reference internal" href="#hvctl.virtualconne
 <code class="sig-name descname">user_end</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.user_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>This end of the connection is meant to be used by a user to
 send commands to and read data from a simulated device.
-<a class="reference external" href="https://docs.python.org/3/library/os.html#os.read" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code></a> doesn’t seem to work with it attribute,
+<a class="reference external" href="https://docs.python.org/3/library/os.html#os.read" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.read()</span></code></a> doesn’t seem to work with it,
 and the <a class="reference external" href="https://pypi.org/project/pyserial/">serial</a>
 module should be used instead.</p>
 <dl class="field-list simple">
@@ -166,9 +167,9 @@ A set of all currently running instances of the
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>process</strong> (<em>function</em>) – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a>.
-If no value is supllies, <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.default_process" title="hvctl.virtualconnection.VirtualConnection.default_process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_process</span></code></a>
-will be used.</p></li>
+<li><p><strong>process</strong> (<em>function</em>) – The function assigned to the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.process" title="hvctl.virtualconnection.VirtualConnection.process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">process</span></code></a> attribute.
+If no value is supplied, the <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.default_process" title="hvctl.virtualconnection.VirtualConnection.default_process"><code class="xref py py-attr docutils literal notranslate"><span class="pre">default_process</span></code></a>
+method will be used instead.</p></li>
 <li><p><strong>buffer_size</strong> – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.buffer_size" title="hvctl.virtualconnection.VirtualConnection.buffer_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">buffer_size</span></code></a>.</p></li>
 <li><p><strong>sleep_time</strong> – The value of <a class="reference internal" href="#hvctl.virtualconnection.VirtualConnection.sleep_time" title="hvctl.virtualconnection.VirtualConnection.sleep_time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sleep_time</span></code></a>.</p></li>
 </ul>
@@ -207,6 +208,21 @@ actually stopped.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="hvctl.virtualconnection.VirtualConnection.is_running">
+<code class="sig-name descname">is_running</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.is_running" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the parallel thread is running,
+<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hvctl.virtualconnection.VirtualConnection.port">
+<em class="property">property </em><code class="sig-name descname">port</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.port" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a device name (e.g. <code class="docutils literal notranslate"><span class="pre">'/dev/pts/...'</span></code>) that can be
+used as the <em>port</em> argument when a <a class="reference external" href="https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial" title="(in pySerial v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code></a>
+object is created.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="hvctl.virtualconnection.VirtualConnection.default_process">
 <em class="property">static </em><code class="sig-name descname">default_process</code><span class="sig-paren">(</span><em class="sig-param">input_</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.default_process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Form output based on <em>input_</em>.</p>
@@ -220,21 +236,6 @@ and simply returns <em>input_</em> uncanged.</p>
 <dd class="field-even"><p><em>input_</em>.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.virtualconnection.VirtualConnection.is_running">
-<code class="sig-name descname">is_running</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.is_running" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the parallel thread is running,
-<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.virtualconnection.VirtualConnection.port">
-<em class="property">property </em><code class="sig-name descname">port</code><a class="headerlink" href="#hvctl.virtualconnection.VirtualConnection.port" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a device name (e.g. <code class="docutils literal notranslate"><span class="pre">'/dev/pts/...'</span></code>) that can be
-used as the <em>port</em> argument when a <a class="reference external" href="https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial" title="(in pySerial v3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">serial.Serial</span></code></a>
-object is created.</p>
 </dd></dl>
 
 </dd></dl>
@@ -273,7 +274,7 @@ object is created.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 Control Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
 </ul>
 
 <div class="relations">

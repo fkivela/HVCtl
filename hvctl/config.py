@@ -17,9 +17,8 @@ Attributes:
     VOLTAGE_LIMIT
         The maximum voltage for a particular application in V.
         HVCtl will never set the voltage to a value exceeding this.
-        For negative polarity devices the value should be negative.
 
-    CURRENT_LIMT
+    CURRENT_LIMIT
         The maximum current for a particular application in mA.
         HVCtl will never set the current to a value exceeding this.
 
@@ -30,11 +29,13 @@ Attributes:
 
     DELTA_U
         The smallest amount by which the value of the voltage can be
-        changed, in V.
+        changed, in V. This is computed by dividing the maximum voltage
+        produced by the generator with :const:`INT_MAX`.
 
     DELTA_I
         The smallest amount by which the value of the current can be
-        changed, in mA.
+        changed, in mA. This is computed analogously to 
+        :const:`DELTA_U`.
 """
 # pylint: disable=global-variable-undefined
 # We cannot assign the values of the constants at module level since

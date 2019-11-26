@@ -7,8 +7,6 @@ from .virtualconnection import VirtualConnection
 class VirtualHV():
     """A virtual high voltage generator.
     
-    test
-
     This class simulates a HV generator that can be communicated with
     through  a serial connection. This makes it possible to test
     HVCtl without access to a physical device.
@@ -28,12 +26,12 @@ class VirtualHV():
 
         hv_on_command (bool):
             | The virtual HV generator is turned on by setting this
-              first to True and then back to False.
+              first to ``True`` and then back to ``False``.
             | Initial value: ``False``.
 
         hv_off_command (bool):
             | The virtual HV generator is turned off by setting this
-              first to True and then back to False.
+              first to ``True`` and then back to ``False``.
             | Initial value: ``False``.
 
         hv_on_status (bool):
@@ -52,12 +50,13 @@ class VirtualHV():
             | Initial value: ``False``.
 
         interlock (bool):
-            | ``True`` IFF the HV interlock is active.
+            | ``True`` if the interlock is active, ``False`` if it is
+              not.
             | Initial value: ``False``.
 
         fault (bool):
-            | ``True`` IFF there are faults present in the virtual
-              HV generator.
+            | ``True`` if there is a fault present in the virtual
+              HV generator, ``False`` otherwise.
             | Initial value: ``False``.
 
         regulation (string):
@@ -151,7 +150,7 @@ class VirtualHV():
         :attr:`hv_on_command` is set to ``False``.
 
         If *value* has the same value as :attr:`hv_on_command`,
-        a :exc:`RuntimeError` is raised.`
+        a :exc:`RuntimeError` is raised.
 
         Returns:
             The new value of :attr:`hv_on_command`.
@@ -176,7 +175,7 @@ class VirtualHV():
         :attr:`hv_off_command` is set to ``False``.
 
         If *value* has the same value as :attr:`hv_off_command`,
-        a :exc:`RuntimeError` is raised.`
+        a :exc:`RuntimeError` is raised.
 
         Returns:
             The new value of :attr:`hv_off_command`.
@@ -197,7 +196,8 @@ class VirtualHV():
         ``'local'``; otherwise it is set to ``'remote'``.
 
         Returns:
-            The new value of :attr:`mode`.
+            ``1`` if the new value of :attr:`mode` is ``'local'``,
+            ``0`` if it is ``'remote'``.
         """
         self.mode = 'local' if value else 'remote'
         return value
@@ -205,23 +205,22 @@ class VirtualHV():
     def set_inhibit(self, value):
         """Handle a ``'set inhibit'`` command.
 
-        If ``bool(value)`` is ``True``, :attr:`inhibit` is set to
-        ``'active'``; otherwise it is set to ``'remote'``.
-
+        Sets :attr:`inhibit` to ``bool(value)``.
+        
         Returns:
-            The new value of :attr:`mode`.
+            The new value of :attr:`inhibit`. 
         """
-        self.inhibit = 'active' if value else 'idle'
-        return value
+        self.inhibit = bool(value)
+        return self.inhibit
 
     def get_status(self, _):
         """Handle a ``'get status'`` command.
 
-        This method returns an 8-bit integer describing the current
-        status of the virtual HV generator (excluding voltage and 
-        current).
+        This method returns an 8-bit unsigned integer describing the
+        current status of the virtual HV generator (excluding voltage
+        and current).
         The values of the bits in the number are copied from the
-        attributes of *self* in the following manner:
+        attributes of this object in the following manner:
 
         :Bit 0: :attr:`inhibit`
         :Bit 1: :attr:`mode` (``1`` for ``'local'``,
@@ -258,9 +257,27 @@ class VirtualHV():
     def process(self, input_):
         """Parse input into a command and execute it.
 
+        This method executes the following steps:
+        
+        1. Turn *input_* into a :class:`~hvctl.message.Message`
+           object with :meth:`Message.from_bytes()
+           <hvctl.message.Message.from_bytes>`.
+        2. Generate a method name by replacing ``' '`` with
+           ``'_'`` in :class:`message.command <hvctl.message.Message>`
+           and call a method with that name.
+        3. Create a new :class:`~hvctl.message.Message` object.
+           The :attr:`command <hvctl.message.Message.command>`
+           attribute of the new object is copied from the input
+           message and the
+           :attr:`value <hvctl.message.Message.command>` attribute is
+           the value returned by the method that was called.
+        4. Convert the new message to a :class:`bytes` object with
+           :meth:`Message.__bytes__()
+           <hvctl.message.Message.__bytes__>` and return the bytes.
+
         Args:
             input_:
-                A bytes-like object created by
+                A :class:`bytes` object created by
                 :meth:`Message.__bytes__()
                 <hvctl.message.Message.__bytes__>`.
 
@@ -268,10 +285,6 @@ class VirtualHV():
             A :class:`bytes` object that can be passed to
             :meth:`Message.from_bytes()
             <hvctl.message.Message.from_bytes>`.
-            The return message will contain the same command as the
-            input message, but if the command changed a value of an
-            attribute of *self*, the new value will be included in the
-            message instead of the old.
         """
         message = Message.from_bytes(input_, is_answer=False)
         command = message.command

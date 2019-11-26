@@ -1,6 +1,12 @@
 """This module uses the `urwid <http://urwid.org/>`_ library to create
-a TUI that contains a scrollable command line interface and a screen
-above that."""
+widgets (see :class:`urwid.Widget`) for a text-based user interface 
+containing a scrollable command line interface below a text screen.
+
+The docstring of each widget defined here tells whether it is a box,
+flow or fixed widget. The differences between these widget types are
+explained `here <http://urwid.org/manual/widgets.html
+#box-flow-and-fixed-widgets>`_. 
+"""
 
 # pylint: disable=too-many-arguments
 # Some urwid methods have many arguments.
@@ -15,43 +21,101 @@ above that."""
 import urwid
 
 
+class ScrollableCommandLines(urwid.WidgetWrap):
+    """A widget consisting of a scrollable command line interface and
+    a scroll bar with two arrow buttons for scrolling it.
+    
+    This is a box widget; its container sets it height and width.
+
+    Attributes:
+        position (:class:`Position`):
+            Keeps track of how far the screen is scrolled.
+
+        command_lines (:class:`CommandLines`):
+            Provides the command line interface.
+
+        scroller (:class:`Scroller`):
+            Adds scrolling functionality to :attr:`command_lines`.
+
+        scrollbar (:class:`ScrollBar`):
+            The scroll bar.
+
+        arrow_up (:class:`ScrollButton`):
+            An arrow button that can be clicked to scroll the screen
+            up.
+
+        arrow_down (:class:`ScrollButton`):
+            An arrow button that can be clicked to scroll the screen
+            down.
+    """
+    
+    def sizing(self):
+        """"""
+        # By default, self.sizing() seems to return the sizing of 
+        # urwid.Columns, frozenset({'box', 'flow'}).
+        # Overriding _sizing doesn't work, so this method has to be
+        # defined.
+        # The """""" docstring prevents this method from inheriting the
+        # docstring of urwid.Widget.sizing.
+        # Because the docstring is empty, this method isn't included in
+        # the documentation.
+        return {urwid.BOX}
+    
+    def __init__(self, inputfile, outputfile):
+        """Initialize a new :class:`ScrollableCommandLines`.
+        
+        The arguments are passed to the initializer of
+        :attr:`command_lines`.
+        """
+        self.position = Position()
+
+        self.command_lines = CommandLines(inputfile, outputfile)
+        self.scroller = Scroller(self.command_lines, self.position)
+        self.scrollbar = ScrollBar(self.position)
+        self.arrow_up = ScrollButton('▲', -1, self.position)
+        self.arrow_down = ScrollButton('▼', +1, self.position)
+
+        self.position.listeners = {self.command_lines, self.scrollbar}
+
+        # (num, widget)-tuples are used to specify the height
+        # (for Piles) or width (for Columns) of contained widgets.   
+        pile = urwid.Pile([(1, self.arrow_up), self.scrollbar,
+                           (1, self.arrow_down)])
+        super().__init__(urwid.Columns([self.scroller, (2, pile)]))
+
+
 class CommandLines(urwid.WidgetWrap):
     """This widget provides a terminal-like command line interface.
 
-    Entering commands scrolls the screen upwards so that the current
-    command is always visible on the screen, but the functionality to
-    scroll up to view old commands is provided by the
-    :class:`ScrollableWidget` class instead of this class.
+    Entering commands scrolls the screen automatically so that the
+    latest command is always visible on the screen, but the
+    functionality to scroll up to view old commands is provided by the
+    :class:`Scroller` class instead of this class.
 
-    This is a box widget, so its container sets its height and width.
+    This is a flow widget; its container sets it height but not width.
 
     Attributes:
-        input_queue (:class:`queue.Queue`):
-            Input entered to *self* by the user is saved here, and can
-            be read by a program.
+        inputfile (file-like object):
+            Input entered into the command-line interface by the user
+            is written to this object.
 
-        output_queue (:class:`queue.Queue`):
-            Output enetered here is printed to *self*.
+        outputfile (file-like object):
+            The command-line interface reads its output from this 
+            object and prints it on the screen.
 
         history (:class:`CommandHistory`):
-            An object that stores previously given commands.
+            This object stores previously given commands.
 
         edit (:class:`urwid.Edit`):
-            A widget that stores the text displayed by *self* and
-            provides functionality for writing input.
+            This widget provides the functionality for displaying and
+            editing text.            
     """
 
     def __init__(self, inputfile, outputfile):
         """Initialize a new :class:`CommandLines` object.
-
-        Args:
-            process_command:
-                The method that should be used for processing the
-                commands given to the TUI. The method should accept a
-                string as an argument, perform whatever tasks the
-                command requests, and return any possible output as a
-                string. If the command produces no output, the method
-                should return ``None`` instead.
+        
+        The arguments set the values of :attr:`inputfile` and
+        :attr:`outputfile`.
         """
         self.inputfile = inputfile
         self.outputfile = outputfile
@@ -64,21 +128,30 @@ class CommandLines(urwid.WidgetWrap):
         self.edit.set_edit_pos(len(self.edit.edit_text))
 
     def update(self):
-        """Print the contents of :attr:`output_queue` to the screen.
-        If :attr:`output_queue` is empty, do nothing."""
+        """Print the string returned by 
+        :attr:`outputfile.read() <outputfile>` to the screen.
+        """
         string = self.outputfile.read()
         if string:
             self.edit.set_caption(self.edit.caption + string)
 
     def history_up(self):
-        """Scroll command history up one step."""
+        """Scroll command history up one step.
+        
+        Calling this function has approximately the same effect as
+        pressing the up arrow button in a Linux terminal.
+        """
         self.history.update_command(self.edit.edit_text)
         self.history.up()
         self.edit.set_edit_text(self.history.get_command())
         self.move_cursor_to_end()
 
     def history_down(self):
-        """Scroll command history down one step."""
+        """Scroll command history down one step.
+        
+        Calling this function has approximately the same effect as
+        pressing the down arrow button in a Linux terminal.
+        """
         self.history.update_command(self.edit.edit_text)
         self.history.down()
         self.edit.set_edit_text(self.history.get_command())
@@ -100,7 +173,7 @@ class CommandLines(urwid.WidgetWrap):
         Enter enters a command.
 
         Returns:
-            ``None`` if the keypress was handled by this widget,
+            ``None`` if the key press was handled by this widget,
             *key* if it was not.
         """
         if key == 'enter':
@@ -122,12 +195,12 @@ class CommandHistory:
     """A class to store command history.
 
     This class emulates the command history browsing behaviour of a
-    standard Linux terminal.
+    typical Linux terminal.
 
     Attributes:
         history:
             A list of previously entered commands.
-            Index 0 is filled with None to give :attr:`history`
+            Index 0 is set to ``None`` to give :attr:`history`
             and :attr:`temp_history` the same length.
 
         temp_history:
@@ -135,14 +208,14 @@ class CommandHistory:
             command (the one that is currently being written) at
             index 0.
             If any previously given commands are modified
-            (through :meth:`update_command`), the modified forms
+            (through :meth:`update_command`), the modified versions
             are saved here, while :attr:`history` contains the
-            original forms.
+            original ones.
 
         index:
             The index of the currently selected command.
-            0 is the command currently being written; 1 is the
-            previous one etc.
+            ``0`` is the command currently being written;
+            ``1`` is the previous one etc.
     """
 
     def __init__(self):
@@ -189,10 +262,9 @@ class CommandHistory:
         :attr:`index` to 0. If the command was created by modifying a
         previous command, that command's history entry will be reset
         into its original form. If multiple identical commands are
-        entered consecutively, only one is saved, and empty commands
+        entered consecutively, only one is saved; empty commands
         are not saved at all.
         """
-
         # The command that was entered:
         entered_cmd = self.temp_history[self.index]
         # The command before that:
@@ -220,12 +292,15 @@ class CommandHistory:
         self.index = 0
 
 
-class ScrollableWidget(urwid.WidgetWrap):
-    """A class that wraps a float widget and makes it scrollable.
+class Scroller(urwid.WidgetWrap):
+    """A container widget that makes a flow widget scrollable.
+    
+    This is a box widget; its container sets it height and width.
 
     Attributes:
-        widget (a float widget):
-            The widget to be wrapped.
+        widget (urwid.Widget):
+            The widget to be made scrollable. This should be a flow
+            widget.
 
         position (:class:`Position`):
             An object to keep track of how far the widget is scrolled.
@@ -234,9 +309,9 @@ class ScrollableWidget(urwid.WidgetWrap):
     """
 
     def __init__(self, widget, position):
-        """Initialize a new :class:`ScrollableWidget`.
+        """Initialize a new :class:`Scroller`.
 
-        The arguments set the initial values of :attr:`widget` and
+        The arguments set the values of :attr:`widget` and
         :attr:`position`.
         """
         self.widget = widget
@@ -244,14 +319,19 @@ class ScrollableWidget(urwid.WidgetWrap):
         super().__init__(urwid.Filler(self.widget))
 
     def render(self, size, focus=False):
-        """Render *self* and return a :class:`urwid.Canvas` object."""
+        """Render the visible portion of the scrollable widget,
+        update :attr:`position` and
+        return an :class:`urwid.Canvas` object.
+        """
         cols = size[0]
         # self.widget should be a float widget.
         canvas = self.widget.render((cols,), focus)
         # *canvas* has been finalized and can't be edited.
         new_canvas = urwid.CompositeCanvas(canvas)
 
+        # How many rows should be rendered.
         given_rows = size[1]
+        # How many rows tall self.widget is.
         canvas_rows = new_canvas.rows()
 
         # Update self.position
@@ -273,9 +353,11 @@ class ScrollableWidget(urwid.WidgetWrap):
 
         # If the cursor is moved off the screen, it shouldn't be
         # displayed.
-        _, cursor_row = new_canvas.cursor
-        if cursor_row >= given_rows + top_trim:
-            new_canvas.cursor = None
+        if new_canvas.cursor:
+            # canvas.cursor is None or (col, row).
+            cursor_row = new_canvas.cursor[1]
+            if cursor_row >= given_rows + top_trim:
+                new_canvas.cursor = None
 
         # Negative arguments trim, positive arguments pad
         # -> trim amounts must be converted to negative values.
@@ -310,7 +392,7 @@ class ScrollableWidget(urwid.WidgetWrap):
         the current command can be edited.
 
         Returns:
-            ``None`` if the keypress was handled by this widget,
+            ``None`` if the key press was handled by this widget,
             *key* if it was not.
         """
         self.position.relative = 1
@@ -318,20 +400,21 @@ class ScrollableWidget(urwid.WidgetWrap):
 
 
 class Position:
-    """A class to keep track of the position to which a terminal is
-    scrolled.
+    """A class to keep track of the position to which a widget made
+    scrollable with :class:`Scroller` has been scrolled.
 
     Attributes:
         listeners (iterable):
-            The widgets that should be re-rendered whenever *self* is
-            changed.
+            The widgets that should be re-rendered whenever
+            :attr:`absolute` or :attr:`relative` is changed.
 
         total_rows (int):
-            The number of rows in the terminal, counting also those
-            that are not currently visible on the screen.
-            Empty rows are included.
-            Whenever the terminal is re-rendered, the terminal widget
-            should update this attribute.
+            The height of the scrollable widget in rows,
+            including those that are not currently visible on the
+            screen.
+            Empty rows are also included.
+            The :class:`Scroller` widget should update this attribute
+            whenever it is rendered.         
 
         visible_rows (int):
             Like :attr:`total_rows`, but only counts the rows visible
@@ -339,23 +422,29 @@ class Position:
 
         relative (float):
             A relative scroll position between ``0`` (scrolled to the
-            top) and ``1`` (scrolled to the bottom). Setting this
-            also changes the value of :attr:`absolute`.
+            top) and ``1`` (scrolled to the bottom).
+            Changing this also changes the value of :attr:`absolute`.
 
         absolute (int):
             An absolute scroll position given as the number of
             invisible rows that are located above the top edge of the
-            terminal.
+            widget.
+            Changing this also changes the value of :attr:`relative`.
     """
 
-    def __init__(self, listeners):
+    def __init__(self, listeners=None):
         """Initialize a new :class:`Position` object.
 
         Args:
             listeners (iterable):
                 The initial value for :attr:`listeners`.
+                This may be changed later. If no value is given, 
+                :attr:`listeners` is initialized to ``set()``.
         """
-        self.listeners = listeners
+        if listeners is not None:
+            self.listeners = listeners
+        else:
+             self.listeners = set()
         self.total_rows = 1
         self.visible_rows = 1
         self._relative = 0
@@ -374,7 +463,8 @@ class Position:
     @property
     def relative(self):
         """Get or set :attr:`relative`.
-        Values below 0 are set to 0 and values over 1 to 1.
+        Values below ``0`` are set to ``0`` and values above ``1``
+        to ``1``.
         """
         return self._relative
 
@@ -393,7 +483,7 @@ class Position:
     @property
     def absolute(self):
         """Get or set :attr:`absolute`.
-        Values below 0 are set to 0 and values over
+        Values below ``0`` are set to ``0`` and values above
         :attr:`max_absolute` to :attr:`max_absolute`.
         """
         return round(self._relative * self.max_absolute)
@@ -418,18 +508,18 @@ class Position:
 class ScrollBar(urwid.WidgetWrap):
     """A widget that provides a vertical scroll bar.
 
-    This is a box widget, so its container sets its height and width.
+    This is a box widget; its container sets it height and width.
 
     Attributes:
         position (:class:`Position`):
             An object used to keep track of how far the screen is
             scrolled.
 
-        scroller_char (single-character str):
+        scroller_char (single-character :class:`str`):
             The character used to draw the moving part of the scroll
             bar.
 
-        background_char (single-character str):
+        background_char (single-character :class:`str`):
             The character used to draw the other parts of the scroll
             bar.
     """
@@ -437,7 +527,7 @@ class ScrollBar(urwid.WidgetWrap):
     def __init__(self, position, scroller_char='█', background_char='░'):
         """Initialize a new scrollbar.
 
-        The arguments set the initial values of :attr:`position`,
+        The arguments set the values of :attr:`position`,
         :attr:`scroller_char` and :attr:`background_char`.
         """
         self.position = position
@@ -448,7 +538,7 @@ class ScrollBar(urwid.WidgetWrap):
         super().__init__(widget)
 
     def render(self, size, focus=False):
-        """Render *self.*"""
+        """Generate the scroll bar and render it."""
         text = self._generate_text(size)
         self._w.original_widget.set_text(text)
         return super().render(size, focus)
@@ -487,33 +577,37 @@ class ScrollBar(urwid.WidgetWrap):
     def mouse_event(self, size, event, button, col, row, focus):
         """Handle mouse events.
 
-        Mouse button 1 moves the scroller; e.g. clicking the scrollbar
-        at a point *X* % from its top will scroll the terminal to a
-        position *X* % from its beginning.
+        Mouse button 1 moves the scroller so that clicking the scroll
+        bar at a point *X* % from its top will set
+        :attr:`position.relative <Position.relative>` to  ``X / 100``.
 
         Returns:
             ``True`` if the event was handled by this widget,
             ``False`` otherwise.
         """
         if button == 1:
-            _, nrows = size  # size = (ncols, nrows)
-            self.position.relative = row / (nrows - 1)
+            nrows = size[1]  # size = (ncols, nrows)
+            max_row = nrows - 1
+            self.position.relative = row / (max_row)
 
         return True
 
 
 class ScrollButton(urwid.WidgetWrap):
-    """A widget that can be clicked with the mouse to scroll a
-    screen.
+    """A widget that can be clicked with the mouse to scroll another
+    widget.
+
+    This is a box widget; its container sets it height and width.
 
     Attributes:
         step (int):
-            The amount of rows scrolled when *self* is clicked.
-            Negative values scroll up, positive values down.
+            The amount of rows scrolled when this widget is clicked.
+            Negative values are used to scroll towards the top of the
+            scrollable widget, positive values towards the bottom.
 
         position (:class:`Position`):
-            An object used to keep track of how far the screen is
-            scrolled.
+            An object used to keep track of how far the scrollable
+            widget is scrolled.
     """
 
     def __init__(self, symbol, step, position):
@@ -525,10 +619,10 @@ class ScrollButton(urwid.WidgetWrap):
                 button.
 
             step:
-                The initial value of :attr:`step`.
+                The value of :attr:`step`.
 
             position:
-                The initial value of :attr:`position`.
+                The value of :attr:`position`.
         """
         self.position = position
         self.step = step
@@ -538,7 +632,8 @@ class ScrollButton(urwid.WidgetWrap):
     def mouse_event(self, size, event, button, col, row, focus):
         """Handle mouse events.
 
-        A left click scrolls the screen by :attr:`step` rows.
+        A left click scrolls the scrollable widget by :attr:`step`
+        rows.
 
         Returns:
             ``True`` if the event was handled by this widget,
@@ -548,45 +643,3 @@ class ScrollButton(urwid.WidgetWrap):
             self.position.absolute += self.step
 
         return True
-
-
-class CLI(urwid.WidgetWrap):
-    """A command line interface including a scroll bar and arrows.
-
-    Attributes:
-        position (:class:`Position`):
-            Keeps track of how far the screen is scrolled.
-
-        cmdlines (:class:`CommandLines`):
-            Provides the functionality for displaying text.
-
-        scrollable_lines (:class:`ScrollableWidget`):
-            Wraps :attr:`cmdlines` and adds scrolling functionality
-            to it.
-
-        scrollbar (:class:`ScrollBar`):
-            A scroll bar.
-
-        arrow_up (:class:`ScrollButton`):
-            An arrow button that can be clicked to scroll the screen
-            up.
-
-        arrow_down (:class:`ScrollButton`):
-            An arrow button that can be clicked to scroll the screen
-            down.
-    """
-    def __init__(self, inputfile, outputfile):
-        """Initialize a new :class:`CLI`."""
-        self.position = Position(set())
-
-        self.cmdlines = CommandLines(inputfile, outputfile)
-        self.scrollable_lines = ScrollableWidget(self.cmdlines, self.position)
-        self.scrollbar = ScrollBar(self.position)
-        self.arrow_up = ScrollButton('▲', -1, self.position)
-        self.arrow_down = ScrollButton('▼', +1, self.position)
-
-        self.position.listeners = {self.cmdlines, self.scrollbar}
-
-        pile = urwid.Pile([(1, self.arrow_up), self.scrollbar,
-                           (1, self.arrow_down)])
-        super().__init__(urwid.Columns([self.scrollable_lines, (2, pile)]))

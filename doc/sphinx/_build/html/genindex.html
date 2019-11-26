@@ -100,19 +100,19 @@
 </li>
         <li><a href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV.__init__">(hvctl.virtualhv.VirtualHV method)</a>
 </li>
-        <li><a href="modules/widgets.html#hvctl.widgets.CLI.__init__">(hvctl.widgets.CLI method)</a>
-</li>
         <li><a href="modules/widgets.html#hvctl.widgets.CommandHistory.__init__">(hvctl.widgets.CommandHistory method)</a>
 </li>
         <li><a href="modules/widgets.html#hvctl.widgets.CommandLines.__init__">(hvctl.widgets.CommandLines method)</a>
 </li>
         <li><a href="modules/widgets.html#hvctl.widgets.Position.__init__">(hvctl.widgets.Position method)</a>
 </li>
-        <li><a href="modules/widgets.html#hvctl.widgets.ScrollableWidget.__init__">(hvctl.widgets.ScrollableWidget method)</a>
+        <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines.__init__">(hvctl.widgets.ScrollableCommandLines method)</a>
 </li>
         <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar.__init__">(hvctl.widgets.ScrollBar method)</a>
 </li>
         <li><a href="modules/widgets.html#hvctl.widgets.ScrollButton.__init__">(hvctl.widgets.ScrollButton method)</a>
+</li>
+        <li><a href="modules/widgets.html#hvctl.widgets.Scroller.__init__">(hvctl.widgets.Scroller method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -141,9 +141,9 @@
 </li>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.api">api (hvctl.command_line_ui.CommandLineUI attribute)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.CLI.arrow_down">arrow_down (hvctl.widgets.CLI attribute)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines.arrow_down">arrow_down (hvctl.widgets.ScrollableCommandLines attribute)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.CLI.arrow_up">arrow_up (hvctl.widgets.CLI attribute)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines.arrow_up">arrow_up (hvctl.widgets.ScrollableCommandLines attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -167,10 +167,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/api.html#hvctl.api.Status.callback">callback (hvctl.api.Status attribute)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.CLI">CLI (class in hvctl.widgets)</a>
-</li>
-      <li><a href="modules/advanced_tui.html#hvctl.advanced_tui.AdvancedTUI.cli">cli (hvctl.advanced_tui.AdvancedTUI attribute)</a>
-</li>
       <li><a href="modules/virtualconnection.html#hvctl.virtualconnection.VirtualConnection.close">close() (hvctl.virtualconnection.VirtualConnection method)</a>
 </li>
       <li><a href="modules/virtualconnection.html#hvctl.virtualconnection.VirtualConnection.close_all">close_all() (hvctl.virtualconnection.VirtualConnection class method)</a>
@@ -193,29 +189,29 @@
 </li>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.cmd_inhibit">cmd_inhibit() (hvctl.command_line_ui.CommandLineUI method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.cmd_mode">cmd_mode() (hvctl.command_line_ui.CommandLineUI method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.cmd_setcurrent">cmd_setcurrent() (hvctl.command_line_ui.CommandLineUI method)</a>
 </li>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.cmd_setvoltage">cmd_setvoltage() (hvctl.command_line_ui.CommandLineUI method)</a>
 </li>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.cmd_status">cmd_status() (hvctl.command_line_ui.CommandLineUI method)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.CLI.cmdlines">cmdlines (hvctl.widgets.CLI attribute)</a>
-</li>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.cmds_and_aliases">cmds_and_aliases (hvctl.command_line_ui.CommandLineUI attribute)</a>
 </li>
       <li><a href="modules/message.html#hvctl.message.Message.command">command (hvctl.message.Message attribute)</a>
+</li>
+      <li><a href="modules/advanced_tui.html#hvctl.advanced_tui.AdvancedTUI.command_line_interface">command_line_interface (hvctl.advanced_tui.AdvancedTUI attribute)</a>
+</li>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines.command_lines">command_lines (hvctl.widgets.ScrollableCommandLines attribute)</a>
 </li>
       <li><a href="modules/widgets.html#hvctl.widgets.CommandHistory">CommandHistory (class in hvctl.widgets)</a>
 </li>
       <li><a href="modules/widgets.html#hvctl.widgets.CommandLines">CommandLines (class in hvctl.widgets)</a>
 </li>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI">CommandLineUI (class in hvctl.command_line_ui)</a>
-</li>
-      <li><a href="modules/message.html#hvctl.message.COMMANDS">COMMANDS (in module hvctl.message)</a>
 </li>
       <li><a href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV.connection">connection (hvctl.virtualhv.VirtualHV attribute)</a>
 </li>
@@ -225,7 +221,7 @@
         <li><a href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV.current">(hvctl.virtualhv.VirtualHV attribute)</a>
 </li>
       </ul></li>
-      <li><a href="modules/config.html#hvctl.config.CURRENT_LIMT">CURRENT_LIMT (in module hvctl.config)</a>
+      <li><a href="modules/config.html#hvctl.config.CURRENT_LIMIT">CURRENT_LIMIT (in module hvctl.config)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -397,12 +393,14 @@
       </ul></li>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.input">input() (hvctl.command_line_ui.CommandLineUI method)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.CommandLines.input_queue">input_queue (hvctl.widgets.CommandLines attribute)</a>
+      <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.inputfile">inputfile (hvctl.command_line_ui.CommandLineUI attribute)</a>
+
+      <ul>
+        <li><a href="modules/widgets.html#hvctl.widgets.CommandLines.inputfile">(hvctl.widgets.CommandLines attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.inputfile">inputfile (hvctl.command_line_ui.CommandLineUI attribute)</a>
-</li>
       <li><a href="modules/config.html#hvctl.config.INT_MAX">INT_MAX (in module hvctl.config)</a>
 </li>
       <li><a href="modules/api.html#hvctl.api.Status.interlock">interlock (hvctl.api.Status attribute)</a>
@@ -428,7 +426,7 @@
       <ul>
         <li><a href="modules/widgets.html#hvctl.widgets.CommandLines.keypress">(hvctl.widgets.CommandLines method)</a>
 </li>
-        <li><a href="modules/widgets.html#hvctl.widgets.ScrollableWidget.keypress">(hvctl.widgets.ScrollableWidget method)</a>
+        <li><a href="modules/widgets.html#hvctl.widgets.Scroller.keypress">(hvctl.widgets.Scroller method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -459,12 +457,12 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableWidget.mouse_event">mouse_event() (hvctl.widgets.ScrollableWidget method)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar.mouse_event">mouse_event() (hvctl.widgets.ScrollBar method)</a>
 
       <ul>
-        <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar.mouse_event">(hvctl.widgets.ScrollBar method)</a>
-</li>
         <li><a href="modules/widgets.html#hvctl.widgets.ScrollButton.mouse_event">(hvctl.widgets.ScrollButton method)</a>
+</li>
+        <li><a href="modules/widgets.html#hvctl.widgets.Scroller.mouse_event">(hvctl.widgets.Scroller method)</a>
 </li>
       </ul></li>
       <li><a href="modules/widgets.html#hvctl.widgets.CommandLines.move_cursor_to_end">move_cursor_to_end() (hvctl.widgets.CommandLines method)</a>
@@ -475,12 +473,12 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/widgets.html#hvctl.widgets.CommandLines.output_queue">output_queue (hvctl.widgets.CommandLines attribute)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/command_line_ui.html#hvctl.command_line_ui.CommandLineUI.outputfile">outputfile (hvctl.command_line_ui.CommandLineUI attribute)</a>
+
+      <ul>
+        <li><a href="modules/widgets.html#hvctl.widgets.CommandLines.outputfile">(hvctl.widgets.CommandLines attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -491,14 +489,14 @@
 </li>
       <li><a href="modules/widgets.html#hvctl.widgets.Position">Position (class in hvctl.widgets)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.CLI.position">position (hvctl.widgets.CLI attribute)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines.position">position (hvctl.widgets.ScrollableCommandLines attribute)</a>
 
       <ul>
-        <li><a href="modules/widgets.html#hvctl.widgets.ScrollableWidget.position">(hvctl.widgets.ScrollableWidget attribute)</a>
-</li>
         <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar.position">(hvctl.widgets.ScrollBar attribute)</a>
 </li>
         <li><a href="modules/widgets.html#hvctl.widgets.ScrollButton.position">(hvctl.widgets.ScrollButton attribute)</a>
+</li>
+        <li><a href="modules/widgets.html#hvctl.widgets.Scroller.position">(hvctl.widgets.Scroller attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -545,10 +543,10 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#hvctl.widgets.Position.relative">relative() (hvctl.widgets.Position property)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableWidget.render">render() (hvctl.widgets.ScrollableWidget method)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar.render">render() (hvctl.widgets.ScrollBar method)</a>
 
       <ul>
-        <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar.render">(hvctl.widgets.ScrollBar method)</a>
+        <li><a href="modules/widgets.html#hvctl.widgets.Scroller.render">(hvctl.widgets.Scroller method)</a>
 </li>
       </ul></li>
       <li><a href="modules/advanced_tui.html#hvctl.advanced_tui.AdvancedTUI.run">run() (hvctl.advanced_tui.AdvancedTUI method)</a>
@@ -565,15 +563,17 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/widgets.html#hvctl.widgets.CLI.scrollable_lines">scrollable_lines (hvctl.widgets.CLI attribute)</a>
-</li>
-      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableWidget">ScrollableWidget (class in hvctl.widgets)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines">ScrollableCommandLines (class in hvctl.widgets)</a>
 </li>
       <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar">ScrollBar (class in hvctl.widgets)</a>
 </li>
-      <li><a href="modules/widgets.html#hvctl.widgets.CLI.scrollbar">scrollbar (hvctl.widgets.CLI attribute)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines.scrollbar">scrollbar (hvctl.widgets.ScrollableCommandLines attribute)</a>
 </li>
       <li><a href="modules/widgets.html#hvctl.widgets.ScrollButton">ScrollButton (class in hvctl.widgets)</a>
+</li>
+      <li><a href="modules/widgets.html#hvctl.widgets.Scroller">Scroller (class in hvctl.widgets)</a>
+</li>
+      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableCommandLines.scroller">scroller (hvctl.widgets.ScrollableCommandLines attribute)</a>
 </li>
       <li><a href="modules/widgets.html#hvctl.widgets.ScrollBar.scroller_char">scroller_char (hvctl.widgets.ScrollBar attribute)</a>
 </li>
@@ -653,16 +653,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/message.html#hvctl.message.Message.value">value (hvctl.message.Message attribute)</a>
 </li>
-      <li><a href="modules/message.html#hvctl.message.Message.value">value() (hvctl.message.Message property)</a>
-</li>
       <li><a href="modules/virtualconnection.html#hvctl.virtualconnection.VirtualConnection.virtual_end">virtual_end (hvctl.virtualconnection.VirtualConnection attribute)</a>
 </li>
       <li><a href="modules/virtualconnection.html#hvctl.virtualconnection.VirtualConnection">VirtualConnection (class in hvctl.virtualconnection)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV">VirtualHV (class in hvctl.virtualhv)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="modules/widgets.html#hvctl.widgets.Position.visible_rows">visible_rows (hvctl.widgets.Position attribute)</a>
 </li>
       <li><a href="modules/api.html#hvctl.api.Status.voltage">voltage (hvctl.api.Status attribute)</a>
@@ -679,7 +677,7 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules/widgets.html#hvctl.widgets.ScrollableWidget.widget">widget (hvctl.widgets.ScrollableWidget attribute)</a>
+      <li><a href="modules/widgets.html#hvctl.widgets.Scroller.widget">widget (hvctl.widgets.Scroller attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -710,7 +708,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="protocol.html">RS-232 Control Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">RS-232 control protocol</a></li>
 </ul>
 
 <div class="relations">

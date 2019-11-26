@@ -1,21 +1,21 @@
-RS-232 Control Protocol
+RS-232 control protocol
 =======================
 
-Communication with the HV generator is based on question/answer pairs.
-Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13).
-CR is represented here as ``\r``, which is how Python and C represent it.
+Communication with the HV generator is based on command-answer pairs.
+Both commands and answers consist of a string of ASCII characters ending with the carriage return character (ASCII character number 13).
+Carriage return is displayed here as ``\r``, since that is the representation used by Python.
 
 Command strings start with a letter denoting the given command, followed by one or more function parameters separated by commas.
-Answers copy the command string, and may append a return value to itse end (without a separating comma).
+Answers copy the command string, and may append a return value to its end (without a separating comma).
 
-The connection has the following specifications:
+The RS-232 connection has the following specifications:
 
 - 1 start bit
 - 8 data bits
 - 1 stop bit
 - No parity bit
-- Full duplex mode
-- Baud rate 9600
+- Duplex mode: full
+- Signal rate: 9600 baud
 
 .. Note::
    If the HV generator doesn't receive any instructions for 5 seconds, it will automatically power off and enter local mode.
@@ -24,9 +24,10 @@ List of commands and answers
 ----------------------------
 
 This section lists all commands recognized by the HV generator and the answers to them.
-An *X* denotes a numerical value. This value is a 12-bit unsigned integer (i.e. :math:`X \in \left[0, 4095 \right]`),
+An *X* denotes a numerical value.
+Unless otherwise signified, it is a 12-bit unsigned integer (i.e. :math:`X \in \left[0, 4095 \right]`),
 linearly scaled to cover the entire voltage or current range of the generator. 
-For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets the voltage to 0 V (ie. the ground potential), and ``X = 4095`` sets it to the maximum value of -100 kV.
+For example, with a SR 100 kV - 5 kW generator with negative polarity, ``X = 0`` sets the voltage to 0 V (i.e. the ground potential), and ``X = 4095`` sets it to -100 kV, which is the highest voltage the generator can produce.
 
 1. Set output voltage
 .....................
@@ -55,21 +56,29 @@ For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets th
 5. Turn the HV on
 .................
 
+  This instruction requires sending two commands, with a 100 ms delay between receiving the answer to the first command and sending the second one.
+  
+  The first command-answer pair:
+
   :Command: ``P5,1\r``
   :Answer: ``P5,1\r``
 
-  Wait 100 ms after receiving the answer to the first command before sending the second command.
-
+  The second command-answer pair:
+  
   :Command: ``P5,0\r``
   :Answer: ``P5,0\r``
 
 6. Turn the HV off
 ..................
 
+  This instruction requires sending two commands, with a 100 ms delay between receiving the answer to the first command and sending the second one.
+  
+  The first command-answer pair:
+
   :Command: ``P6,1\r``
   :Answer: ``P6,1\r``
 
-  Wait 100 ms after receiving the answer to the first command before sending the second command.
+  The second command-answer pair:
 
   :Command: ``P6,0\r``
   :Answer: ``P6,0\r``
@@ -77,12 +86,12 @@ For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets th
 7. Switch between local and remote mode
 .......................................
 
-  Switch to local mode    
+  Switch to local mode:
 
     :Command:   ``P7,1\r``
     :Answer:    ``P7,1\r``
 
-  Switch to remote mode
+  Switch to remote mode:
 
     :Command:   ``P7,0\r``
     :Answer:    ``P7,0\r``
@@ -90,12 +99,12 @@ For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets th
 8. Activate or deactivate inhibition
 ....................................
 
-  Activate inhibition
+  Activate inhibition:
 
     :Command: ``P8,1\r``
     :Answer:  ``P8,1\r``
 
-  Deactivate inhibition
+  Deactivate inhibition:
 
     :Command:   ``P8,0\r`` 
     :Answer:    ``P8,0\r``
@@ -106,7 +115,7 @@ For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets th
   :Command: ``E\r``
   :Answer: ``EX\r``, :math:`X \in \left[0, 255 \right]`
 
-  This command returns an 8-bit big-endian integer, with the bits being numbered in the following manner.
+  This command returns an 8-bit big-endian unsigned integer, with the bits being numbered in the following manner.
   MSB and LSB denote the most and least significant bits.
   
   +---------+---+---+---+---+---+---+---------+
@@ -115,7 +124,7 @@ For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets th
 
   The values of bits 5-8 correspond to the values set by the commands 5-8.
   Bits 1-4 are status bits whose values don't directly correspond to a single command.
-  The meanings of different bit values are presentted in the table below. 
+  The meanings of different bit values are presented in the table below. 
 
   +-----+-----------------------------------------+---------------------------------+
   | Bit | Value                                                                     |
@@ -134,7 +143,7 @@ For example, with a SR100kV-5kW device with negative polarity, ``X = 0`` sets th
   +-----+-----------------------------------------+---------------------------------+
   | 3   | Interlock open                          | Interlock closed                |
   +-----+-----------------------------------------+---------------------------------+
-  | 2   | Fault                                   | No fault                        |
+  | 2   | Fault present                           | Fault not present               |
   +-----+-----------------------------------------+---------------------------------+
   | 1   | Voltage regulation                      | Current regulation              |
   +-----+-----------------------------------------+---------------------------------+

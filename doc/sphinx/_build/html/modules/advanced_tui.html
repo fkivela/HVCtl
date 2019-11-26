@@ -35,11 +35,10 @@
             
   <div class="section" id="module-hvctl.advanced_tui">
 <span id="advanced-tui"></span><h1><a class="reference internal" href="#module-hvctl.advanced_tui" title="hvctl.advanced_tui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a><a class="headerlink" href="#module-hvctl.advanced_tui" title="Permalink to this headline">¶</a></h1>
-<p>This module defines the AdvancedTUI class.</p>
-<p>This module uses <a class="reference external" href="http://urwid.org/">urwid</a>.
-If urwid isn’t installed,
-<a class="reference internal" href="command_line_ui.html#hvctl.command_line_ui.CommandLineUI" title="hvctl.command_line_ui.CommandLineUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandLineUI</span></code></a>
-provides a UI that can be run without it.</p>
+<p>This module defines the <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a> class.</p>
+<p><a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a> uses <a class="reference external" href="http://urwid.org/">urwid</a>.
+If urwid hasn’t been installed,
+<a class="reference internal" href="command_line_ui.html#hvctl.command_line_ui.CommandLineUI" title="hvctl.command_line_ui.CommandLineUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandLineUI</span></code></a> should be used instead.</p>
 <dl class="class">
 <dt id="hvctl.advanced_tui.AdvancedTUI">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.advanced_tui.</code><code class="sig-name descname">AdvancedTUI</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI" title="Permalink to this definition">¶</a></dt>
@@ -49,7 +48,7 @@ command line interface and a text screen.</p>
 <dt id="hvctl.advanced_tui.AdvancedTUI.display">
 <code class="sig-name descname">display</code><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>A text field for presenting information to the user.
-Use <a class="reference external" href="http://urwid.org/reference/widget.html#urwid.Text.set_text" title="(in Urwid v2.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">display.set_text</span></code></a> to
+Use <a class="reference external" href="http://urwid.org/reference/widget.html#urwid.Text.set_text" title="(in Urwid v2.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">display.set_text()</span></code></a> to
 change its contents.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -59,13 +58,13 @@ change its contents.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="hvctl.advanced_tui.AdvancedTUI.cli">
-<code class="sig-name descname">cli</code><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.cli" title="Permalink to this definition">¶</a></dt>
-<dd><p>A command-line interface for issuing commands; located
-below the display.</p>
+<dt id="hvctl.advanced_tui.AdvancedTUI.command_line_interface">
+<code class="sig-name descname">command_line_interface</code><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.command_line_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command-line interface for issuing commands, located
+below <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI.display" title="hvctl.advanced_tui.AdvancedTUI.display"><code class="xref py py-attr docutils literal notranslate"><span class="pre">display</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="widgets.html#hvctl.widgets.CLI" title="hvctl.widgets.CLI"><code class="xref py py-class docutils literal notranslate"><span class="pre">CLI</span></code></a></p>
+<dd class="field-odd"><p><a class="reference internal" href="widgets.html#hvctl.widgets.ScrollableCommandLines" title="hvctl.widgets.ScrollableCommandLines"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScrollableCommandLines</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -77,11 +76,17 @@ below the display.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>script</strong> – An object that should run the program controlled by
-the TUI when called with <code class="docutils literal notranslate"><span class="pre">script()</span></code>.</p></li>
-<li><p><strong>inputfile</strong> – A file-like object where user input is sent.</p></li>
-<li><p><strong>outputfile</strong> – A file-like object where <em>script</em> should print
-its output, if it is to be printed on the screen.</p></li>
+<li><p><strong>script</strong> – The program that this UI controls.
+It should be wrapped in a callable object so that
+calling <code class="docutils literal notranslate"><span class="pre">script()</span></code> executes it.
+The UI communicates with the program through
+<em>inputfile</em> and <em>outputfile</em>;
+the program should read its input from <em>inputfile</em>
+and send its output to <em>outputfile</em>.</p></li>
+<li><p><strong>inputfile</strong> (<em>file-like object</em>) – User input entered into the UI is written into this
+object.</p></li>
+<li><p><strong>outputfile</strong> (<em>file-like object</em>) – Output printed on the screen by the UI is read from
+this object.</p></li>
 </ul>
 </dd>
 </dl>
@@ -91,14 +96,26 @@ its output, if it is to be printed on the screen.</p></li>
 <dt id="hvctl.advanced_tui.AdvancedTUI.keypress">
 <code class="sig-name descname">keypress</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.keypress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle key presses.</p>
-<p>Pressing ‘q’ after the program has returned exits the
-UI.</p>
+<p>Pressing ‘q’ after the program has finished its execution
+breaks the UI loop.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hvctl.advanced_tui.AdvancedTUI.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start the program and the UI loop in parallel threads.</p>
+<dd><p>Run the program and the UI loop in parallel threads.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the UI loop (which is executed in the main thread)
+crashes,
+the program (executed in a parallel thread) will probably
+be left waiting for input in a blocking state.
+Safeguards to prevent this should be built into code that
+uses <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a>; for example, this method may
+be called in a <code class="docutils literal notranslate"><span class="pre">with</span></code> or a <code class="docutils literal notranslate"><span class="pre">try-finally</span></code> block that
+makes sure the program is closed when the block is
+exited.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -137,7 +154,7 @@ UI.</p>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 Control Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
 </ul>
 
 <div class="relations">

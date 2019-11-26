@@ -54,7 +54,9 @@ try:
 
         # Show HV status in the UI.
         status = clui.api.status
-        status.callback = lambda: adv_ui.display.set_text(str(status))
+        def callback(status):
+            adv_ui.display.set_text(str(status))
+        status.callback = callback
 
         adv_ui.run()
 

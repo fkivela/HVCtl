@@ -4,97 +4,12 @@ generator.
 import time
 import threading
 from dataclasses import dataclass
+from typing import Callable
 
 import serial
 
 from . import config
 from .message import Message
-
-
-@dataclass
-class Status:
-    """This class stores information about the current status of the
-    HV generator.
-    """
-
-    voltage: float = 0
-    """The voltage produced by the generator in V."""
-
-    current: float = 0
-    """The current produced by the generator in mA."""
-
-    inhibit: bool = False
-    """``True`` if the inhibit parameter is turned on, ``False``
-    otherwise.
-    """
-
-    mode: str = 'remote'
-    """HV control mode; ``'remote'`` or ``'local'.``"""
-    # ';' is used instead of ':' because sphinx napoleon doesn't
-    # parse the latter correctly.
-
-    hv_on_command: bool = False
-    """The generator is turned on by setting the "hv on" parameter
-    to 1 and then back to 0.
-    This attribute displays the current value of that parameter as a
-    boolean.
-    """
-
-    hv_off_command: bool = False
-    """The generator is turned on by setting the "hv off" parameter
-    to 1 and then back to 0.
-    This attribute displays the current value of that parameter as a
-    boolean.
-    """
-
-    hv_on_status: bool = False
-    """``True`` if the generator is currently on, ``False`` if it's
-    off.
-    """
-
-    interlock: str = 'closed'
-    """The value of the interlock parameter; ``open`` or
-    ``closed``.
-    """
-
-    fault: bool = False
-    """``True`` if there is a fault present at the generator, 
-    ``False`` otherwise.
-    """
-
-    regulation: str = 'current'
-    """``'voltage'`` or ``'current'`` depending on whether voltage or
-    current regulation is being used.
-    """
-
-    callback: object = None
-    """A function (with no arguments) that is called every time the
-    contents of this object are changed.
-    """
-
-    def __setattr__(self, name, value):
-        """Call :attr:`callback` whenever an attribute is set."""
-        super().__setattr__(name, value)
-        if self.callback:
-            self.callback()
-
-    def __str__(self):
-        """Return the contents of *self* in a form suitable to be
-        displayed in a TUI.
-        """
-        return '\n'.join([
-            f'Voltage: {self.voltage:.2f} V',
-            f'Current: {self.current:.2f} mA',
-            f'Regulation mode: {self.regulation}',
-            f'',
-            f'HV power: {"on" if self.hv_on_status else "off"}',
-            f'hv on command given: {self.hv_on_command}',
-            f'hv off command given: {self.hv_off_command}',
-            f'',
-            f'Mode: {self.mode}',
-            f'Interlock: {self.interlock}',
-            'Fault(s) present' if self.fault else 'No faults present',
-        ])
 
 
 class API():
@@ -106,9 +21,10 @@ class API():
     the methods of the instance.
 
     If the serial connection is lost, all methods of this class that
-    communicate with the generator will raise a :class:`RuntimeError`.
+    communicate with the generator will raise a
+    :class:`serial.SerialException`.
 
-    If an API is initialized with ``poll=True`` it will automatically
+    If an API is initialized with ``poll=True``, it will automatically
     call :meth:`full_status` every :attr:`timestep` seconds.
     This updates the data in :attr:`status` and prevents the generator
     from switching to local mode, which it normally does after not
@@ -121,15 +37,15 @@ class API():
     serial connection.
 
     Attributes:
-        status (:class:`Status`):
+        status (Status):
             An object storing the current status of the generator.
             Its attributes are updated every time the generator sends
             back a reply.
 
-        timestep (float):
+        timestep (int or float):
             If *self* was initialized with ``poll=True``, this
             determines the time (in seconds) between polling messages.
-            The initial value is 1.
+            The default value is ``1``.
     """
 
     def __init__(self, port=None, poll=True):
@@ -158,10 +74,9 @@ class API():
 
         serkwargs = {
             k: v for k, v in config.SERIAL_KWARGS.items() if k != 'port'}
-        try:
-            self._connection = serial.Serial(port=port, **serkwargs)
-        except serial.SerialException:
-            raise RuntimeError("Could not create serial connection")
+
+        # This may raise a serial.SerialException.
+        self._connection = serial.Serial(port=port, **serkwargs)
 
         self._stop_flag = threading.Event()
         # *lock* prevents messages from being sent at the same time by
@@ -183,21 +98,21 @@ class API():
         self.halt()
 
     def set_voltage(self, value):
-        """Set HV voltage to *value* (in V).
+        """Set the voltage to *value* (in V).
 
         The sign of *value* doesn't matter, since it is automatically
-        changed to match the polarity of the HV device.
+        changed to match the polarity of the HV generator.
 
         Returns:
             The voltage value sent back by the HV generator.
-            This is always a positive value regardless of the polarity
-            of the HV device.
+            This is always non-negative regardless of the polarity
+            of the generator.
         """
         return self._set(
             'voltage', value, config.DELTA_U, config.VOLTAGE_LIMIT)
 
     def set_current(self, value):
-        """Set HV current to *value* (in mA).
+        """Set the current to *value* (in mA).
 
         Returns: The current value sent back by the HV generator.
         """
@@ -230,17 +145,17 @@ class API():
         return delta * answer.value
 
     def get_voltage(self):
-        """Get HV voltage (in V).
+        """Get the voltage (in V).
 
         Returns:
             The voltage value sent by the HV generator.
-            This is always a positive value regardless of the polarity
-            of the HV device.
+            This is always non-negative regardless of the polarity
+            of the generator.
         """
         return self._get('voltage', config.DELTA_U)
 
     def get_current(self):
-        """Get HV current (in mA).
+        """Get the current (in mA).
 
         Returns:
             The current value sent back by the HV generator.
@@ -260,23 +175,23 @@ class API():
         return delta * answer.value
 
     def hv_on(self):
-        """Turn the hv on."""
+        """Turn the HV generator on."""
         self._send(Message('hv on', 1))
         time.sleep(0.1)
         self._send(Message('hv on', 0))
 
     def hv_off(self):
-        """Turn the hv off."""
+        """Turn the HV generator off."""
         self._send(Message('hv off', 1))
         time.sleep(0.1)
         self._send(Message('hv off', 0))
 
     def set_mode(self, mode):
-        """Set the HV to remote or local mode.
+        """Set the HV generator to remote or local mode.
 
         Args:
-            mode: 'local', 'l' or 1 for local mode;
-                'remote', 'r' or 0 for remote mode.
+            mode: ``'local'``, ``'l'`` or ``1`` for local mode;
+                ``'remote'``, ``'r'`` or ``0`` for remote mode.
 
         Raises:
             ValueError: If *mode* is not a valid value.
@@ -290,7 +205,7 @@ class API():
         self._send(Message('set mode', value))
 
     def set_inhibit(self, value):
-        """Activate or deactivate HV inhibition.
+        """Activate or deactivate inhibition.
 
         args:
             value:
@@ -301,13 +216,14 @@ class API():
         self._send(Message('set inhibit', value))
 
     def get_status(self):
-        """Get HV status.
+        """Get the status of the HV generator.
 
         Returns:
-            A dict with keys corresponding to the attributes of
-            :attr:`status` except :attr:`Status.voltage` and
-            :attr:`Status.current`. The values contain the values of
-            those attributes as reported by the HV generator.
+            A :class:`dict` with keys and values corresponding to the 
+            attributes of :attr:`status` and the values of those
+            attributes as reported by the HV generator.
+            However, :attr:`~Status.voltage` and
+            :attr:`~Status.current` are not included. 
         """
         reply = self._send(Message('get status'))
 
@@ -316,7 +232,7 @@ class API():
 
     def full_status(self):
         """The same as :meth:`get_status`, but also includes
-        :attr:`Status.voltage` and :attr:`Status.current`.
+        :attr:`~Status.voltage` and :attr:`~Status.current`.
         """
         statusdict = self.get_status()
         statusdict['voltage'] = self.get_voltage()
@@ -327,8 +243,8 @@ class API():
         """Close the connection.
 
         This method sets the voltage and the current to 0,
-        turns the HV off, closes the serial connection and stops the
-        parallel thread, if automatic polling is on.
+        turns the HV generator off, closes the serial connection, and
+        stops the parallel thread, if automatic polling is on.
 
         If there is no connection, actions that can't be performed
         are skipped.
@@ -343,7 +259,7 @@ class API():
             self.set_voltage(0)
             self.set_current(0)
             self.hv_off()
-        except RuntimeError:
+        except serial.SerialException:
             pass
 
         # Try to close the connection; skip if the connection hasn't
@@ -366,12 +282,13 @@ class API():
         """Send *query* to the HV generator and return the reply.
 
         Raises:
-            RuntimeError:
+            serial.SerialException:
                 If sending the message fails.
         """
         self._lock.acquire()
 
         try:
+            # This may raise a serial.SerialException.
             self._connection.write(bytes(query))
 
             reply_bytes = self._connection.read_until(terminator=b'\r')
@@ -380,11 +297,6 @@ class API():
             self._check_reply(query, reply)
             self._update_status(reply)
             return reply
-
-        except serial.SerialException:
-            # Show the user a RuntimeError instead of a SerialException.
-            raise RuntimeError('The serial connection was lost')
-
         finally:
             # Make sure the lock is released in all cases.
             self._lock.release()
@@ -467,3 +379,98 @@ class API():
             raise RuntimeError(
                 f"the value {query.value} was sent, "
                 f"but {reply.value} was received")
+
+
+@dataclass
+class Status:
+    """This class stores information about the current status of the
+    HV generator.
+    """
+
+    voltage: float = 0.0
+    """The voltage produced by the generator in V."""
+
+    current: float = 0.0
+    """The current produced by the generator in mA."""
+
+    inhibit: bool = False
+    """``True`` if the inhibition parameter is turned on, ``False``
+    otherwise.
+    """
+
+    mode: str = 'remote'
+    """The control mode of the generator:
+    ``'remote'`` or ``'local'``.
+    """
+    # Sphinx needs a line break after ':' here to parse it correctly.
+
+    hv_on_command: bool = False
+    """The generator is turned on by setting the "hv on" parameter
+    to 1 and then back to 0.
+    This attribute displays the current value of that parameter as a
+    boolean.
+    """
+
+    hv_off_command: bool = False
+    """The generator is turned on by setting the "hv off" parameter
+    to 1 and then back to 0.
+    This attribute displays the current value of that parameter as a
+    boolean.
+    """
+
+    hv_on_status: bool = False
+    """``True`` if the generator is currently on, ``False`` if it's
+    off.
+    """
+
+    interlock: str = 'open'
+    """The value of the interlock parameter; ``open`` or
+    ``closed``.
+    """
+
+    fault: bool = False
+    """``True`` if there is a fault present at the generator, 
+    ``False`` otherwise.
+    """
+
+    regulation: str = 'voltage'
+    """``'voltage'`` or ``'current'`` depending on whether voltage or
+    current regulation is being used.
+    """
+
+    callback: Callable = None
+    """A function that is called every time the contents of this object
+    are changed. Its signature should be
+    ::
+        
+        callback(status: Status) -> None
+    """
+
+    def __setattr__(self, name, value):
+        """Call :attr:`callback(self) <callback>` whenever an attribute
+        is set.
+        """
+        super().__setattr__(name, value)
+        if self.callback:
+            # *callback* is a function assigned as an attribute to 
+            # *self* instead of a bound method, so *self* has to be
+            # passed as an argument.
+            self.callback(self)
+
+    def __str__(self):
+        """Return the contents of this object in a form suitable to be
+        displayed in a user interface.
+        """
+        return '\n'.join([
+            f'Voltage: {self.voltage:.2f} V',
+            f'Current: {self.current:.2f} mA',
+            f'Regulation mode: {self.regulation}',
+            f'',
+            f'HV power: {"on" if self.hv_on_status else "off"}',
+            f'hv on command given: {self.hv_on_command}',
+            f'hv off command given: {self.hv_off_command}',
+            f'',
+            f'Mode: {self.mode}',
+            f'Interlock: {self.interlock}',
+            'Fault(s) present' if self.fault else 'No faults present',
+        ])

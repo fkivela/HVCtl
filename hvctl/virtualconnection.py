@@ -20,7 +20,7 @@ class VirtualConnection():
     A :class:`VirtualConnection` object runs code in a parallel thread,
     which will continue running until it is closed or the Python 
     interpreter exits.
-    A parallel thread may be closed by calling the :func:`close` 
+    A parallel thread can be closed by calling the :func:`close` 
     method of the :class:`VirtualConnection` object that created it.
     This also closes :attr:`user_end` and :attr:`virtual_end`, 
     and frees their file descriptors.
@@ -40,7 +40,8 @@ class VirtualConnection():
     object are removed with ``del`` or by reassigning them,
     the parallel thread will continue to run without a possibility of 
     closing it with :meth:`close`.
-    In this case, all running instances of the class can be closed with
+    In this case, all running instances of the
+    :class:`VirtualConnection` class can be closed with
 
     >>> VirtualConnection.close_all()
 
@@ -59,20 +60,20 @@ class VirtualConnection():
             ::
 
                 process(self, input_: bytes) -> output: bytes
+                
+            A machine or other device that communicates with its user
+            can be simulated by assigning a suitable method to the
+            :attr:`process` attribute.
 
         virtual_end (file-like object):
              This end of the connection is used by :meth:`process` to 
              read and write data. It can be written to and read from with 
              :func:`os.read` and :func:`os.write`.
              
-             A simulated machine or other device for communicating with
-             its user should define this functionality by assigning a 
-             suitable function to the :attr:`process` attribute.
-
         user_end (file-like object):
             This end of the connection is meant to be used by a user to
             send commands to and read data from a simulated device.
-            :func:`os.read` doesn't seem to work with it attribute,
+            :func:`os.read` doesn't seem to work with it,
             and the `serial <https://pypi.org/project/pyserial/>`_ 
             module should be used instead.            
 
@@ -96,9 +97,9 @@ class VirtualConnection():
 
         Args:
             process (function):
-                The value of :attr:`process`.
-                If no value is supllies, :attr:`default_process`
-                will be used.
+                The function assigned to the :attr:`process` attribute.
+                If no value is supplied, the :attr:`default_process`
+                method will be used instead.
 
             buffer_size:
                 The value of :attr:`buffer_size`.

@@ -9,20 +9,21 @@ class QueueFile:
     """This class wraps a :class:`queue.Queue` object in the interface
     of a file-like object.
 
-    This class makes redirecting input and output between different
-    parts of a program easier than it would be using standard file
-    objects, such as :class:`io.StringIO` or those created by
-    :func:`pty.openpty`.
-    This object is thread-safe, can be read from and written to at
-    the same time, and its blocking behaviour can be easily controlled.
+    The :class:`QueueFile` class makes redirecting input and output
+    between different parts of a program easier than it would be using
+    standard file objects, such as :class:`io.StringIO` or those
+    created by :func:`pty.openpty`.
+    :class:`QueueFile` is thread-safe, can be read from and written to
+    at the same time, and its blocking behaviour can be easily
+    controlled.
     (If there is nothing to read, reading from :class:`io.StringIO`
     never blocks, but reading from an object created with
     :func:`pty.openpty` always does.)
 
     Attributes:
-        queue (:class:`Queue`):
-            The wrapped Queue object. Strings are saved in the queue
-            one character at a time.
+        queue (queue.Queue):
+            The wrapped :class:`~queue.Queue` object.
+            Strings are saved in the queue one character at a time.
 
         block (bool):
             A flag indicating whether :meth:`read` and
@@ -37,7 +38,7 @@ class QueueFile:
         self.block = block
 
     def write(self, string):
-        """Write the *string* to the queue and return the number of
+        """Write *string* to the queue and return the number of
         characters written.
 
         This method emulates :meth:`io.TextIOBase.write`.
@@ -50,7 +51,7 @@ class QueueFile:
         return len(string)
 
     def read(self, size=-1):
-        """Read and return string of *size* characters from the queue.
+        """Read and return a string of *size* characters from the queue.
 
         If the queue contains less than *size* characters or *size* is
         ``None`` or less than ``1``, all characters in the queue are
@@ -61,7 +62,7 @@ class QueueFile:
         return self._read(size)
 
     def readline(self, size=-1):
-        """Like :meth`read`, but reading characters is stopped if a
+        """Like :meth:`read`, but reading characters is stopped if a
         newline character is encountered. If this happens, the string
         returned includes that newline character.
 

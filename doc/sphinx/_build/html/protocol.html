@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>RS-232 Control Protocol &#8212; HVCtl  documentation</title>
+    <title>RS-232 control protocol &#8212; HVCtl  documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -33,20 +33,20 @@
           <div class="body" role="main">
             
   <div class="section" id="rs-232-control-protocol">
-<h1>RS-232 Control Protocol<a class="headerlink" href="#rs-232-control-protocol" title="Permalink to this headline">¶</a></h1>
-<p>Communication with the HV generator is based on question/answer pairs.
-Both questions and answers consist of a string of ASCII characters that ends with the Carriage Return character (CR, ASCII character number 13).
-CR is represented here as <code class="docutils literal notranslate"><span class="pre">\r</span></code>, which is how Python and C represent it.</p>
+<h1>RS-232 control protocol<a class="headerlink" href="#rs-232-control-protocol" title="Permalink to this headline">¶</a></h1>
+<p>Communication with the HV generator is based on command-answer pairs.
+Both commands and answers consist of a string of ASCII characters ending with the carriage return character (ASCII character number 13).
+Carriage return is displayed here as <code class="docutils literal notranslate"><span class="pre">\r</span></code>, since that is the representation used by Python.</p>
 <p>Command strings start with a letter denoting the given command, followed by one or more function parameters separated by commas.
-Answers copy the command string, and may append a return value to itse end (without a separating comma).</p>
-<p>The connection has the following specifications:</p>
+Answers copy the command string, and may append a return value to its end (without a separating comma).</p>
+<p>The RS-232 connection has the following specifications:</p>
 <ul class="simple">
 <li><p>1 start bit</p></li>
 <li><p>8 data bits</p></li>
 <li><p>1 stop bit</p></li>
 <li><p>No parity bit</p></li>
-<li><p>Full duplex mode</p></li>
-<li><p>Baud rate 9600</p></li>
+<li><p>Duplex mode: full</p></li>
+<li><p>Signal rate: 9600 baud</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -55,9 +55,10 @@ Answers copy the command string, and may append a return value to itse end (with
 <div class="section" id="list-of-commands-and-answers">
 <h2>List of commands and answers<a class="headerlink" href="#list-of-commands-and-answers" title="Permalink to this headline">¶</a></h2>
 <p>This section lists all commands recognized by the HV generator and the answers to them.
-An <em>X</em> denotes a numerical value. This value is a 12-bit unsigned integer (i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>),
+An <em>X</em> denotes a numerical value.
+Unless otherwise signified, it is a 12-bit unsigned integer (i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>),
 linearly scaled to cover the entire voltage or current range of the generator.
-For example, with a SR100kV-5kW device with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (ie. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to the maximum value of -100 kV.</p>
+For example, with a SR 100 kV - 5 kW generator with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (i.e. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to -100 kV, which is the highest voltage the generator can produce.</p>
 <div class="section" id="set-output-voltage">
 <h3>1. Set output voltage<a class="headerlink" href="#set-output-voltage" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -113,7 +114,9 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 <div class="section" id="turn-the-hv-on">
 <h3>5. Turn the HV on<a class="headerlink" href="#turn-the-hv-on" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><dl class="field-list simple">
+<div><p>This instruction requires sending two commands, with a 100 ms delay between receiving the answer to the first command and sending the second one.</p>
+<p>The first command-answer pair:</p>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P5,1\r</span></code></p>
 </dd>
@@ -121,7 +124,7 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P5,1\r</span></code></p>
 </dd>
 </dl>
-<p>Wait 100 ms after receiving the answer to the first command before sending the second command.</p>
+<p>The second command-answer pair:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P5,0\r</span></code></p>
@@ -135,7 +138,9 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 <div class="section" id="turn-the-hv-off">
 <h3>6. Turn the HV off<a class="headerlink" href="#turn-the-hv-off" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><dl class="field-list simple">
+<div><p>This instruction requires sending two commands, with a 100 ms delay between receiving the answer to the first command and sending the second one.</p>
+<p>The first command-answer pair:</p>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P6,1\r</span></code></p>
 </dd>
@@ -143,7 +148,7 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P6,1\r</span></code></p>
 </dd>
 </dl>
-<p>Wait 100 ms after receiving the answer to the first command before sending the second command.</p>
+<p>The second command-answer pair:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P6,0\r</span></code></p>
@@ -157,7 +162,7 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 <div class="section" id="switch-between-local-and-remote-mode">
 <h3>7. Switch between local and remote mode<a class="headerlink" href="#switch-between-local-and-remote-mode" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><p>Switch to local mode</p>
+<div><p>Switch to local mode:</p>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">Command</dt>
@@ -168,7 +173,7 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 </dd>
 </dl>
 </div></blockquote>
-<p>Switch to remote mode</p>
+<p>Switch to remote mode:</p>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">Command</dt>
@@ -184,7 +189,7 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 <div class="section" id="activate-or-deactivate-inhibition">
 <h3>8. Activate or deactivate inhibition<a class="headerlink" href="#activate-or-deactivate-inhibition" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><p>Activate inhibition</p>
+<div><p>Activate inhibition:</p>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">Command</dt>
@@ -195,7 +200,7 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 </dd>
 </dl>
 </div></blockquote>
-<p>Deactivate inhibition</p>
+<p>Deactivate inhibition:</p>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">Command</dt>
@@ -219,7 +224,7 @@ For example, with a SR100kV-5kW device with negative polarity, <code class="docu
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">EX\r</span></code>, <span class="math notranslate nohighlight">\(X \in \left[0, 255 \right]\)</span></p>
 </dd>
 </dl>
-<p>This command returns an 8-bit big-endian integer, with the bits being numbered in the following manner.
+<p>This command returns an 8-bit big-endian unsigned integer, with the bits being numbered in the following manner.
 MSB and LSB denote the most and least significant bits.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -246,7 +251,7 @@ MSB and LSB denote the most and least significant bits.</p>
 </table>
 <p>The values of bits 5-8 correspond to the values set by the commands 5-8.
 Bits 1-4 are status bits whose values don’t directly correspond to a single command.
-The meanings of different bit values are presentted in the table below.</p>
+The meanings of different bit values are presented in the table below.</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 6%" />
@@ -288,8 +293,8 @@ The meanings of different bit values are presentted in the table below.</p>
 <td><p>Interlock closed</p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
-<td colspan="2"><p>Fault</p></td>
-<td><p>No fault</p></td>
+<td colspan="2"><p>Fault present</p></td>
+<td><p>Fault not present</p></td>
 </tr>
 <tr class="row-even"><td><p>1</p></td>
 <td colspan="2"><p>Voltage regulation</p></td>
@@ -323,7 +328,7 @@ The meanings of different bit values are presentted in the table below.</p>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">RS-232 Control Protocol</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RS-232 control protocol</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#list-of-commands-and-answers">List of commands and answers</a></li>
 </ul>
 </li>
