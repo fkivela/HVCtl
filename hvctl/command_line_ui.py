@@ -242,8 +242,8 @@ class CommandLineUI:
         including voltage and current.
         """
         statusdict = self.api.full_status()
-        string = (f"Voltage: {statusdict['voltage']}\n"
-                  f"Current: {statusdict['current']}\n"
+        string = (f"Voltage: {statusdict['voltage']} V\n"
+                  f"Current: {statusdict['current']} mA\n"
                   + self._status_str(statusdict))
         self.print('Status:\n' + textwrap.indent(string, self.indent))
 
@@ -257,9 +257,11 @@ class CommandLineUI:
             f'HV power: {"on" if statusdict["hv_on_status"] else "off"}',
             f'HV on command given: {statusdict["hv_on_command"]}',
             f'HV off command given: {statusdict["hv_off_command"]}',
+            f'Control mode: {statusdict["mode"]}',
+            f'Inhibition: {statusdict["inhibit"]}',
             f'Interlock: {statusdict["interlock"]}',
-            ('Fault(s) present' if statusdict["fault"]
-             else 'No faults present'),
+            ('Fault detected' if statusdict["fault"] 
+             else 'No fault detected'),
         ])
 
     def cmd_help(self, value=None):

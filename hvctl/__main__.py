@@ -49,13 +49,29 @@ try:
         outputfile = QueueFile()
 
         # Create an AdvancedTUI that wraps a CommandLineUI.
-        clui = CommandLineUI(port, inputfile, outputfile)
-        adv_ui = AdvancedTUI(clui.run, inputfile, outputfile)
+        cmd_line_ui = CommandLineUI(port, inputfile, outputfile)
+        adv_ui = AdvancedTUI(cmd_line_ui.run, inputfile, outputfile)
 
         # Show HV status in the UI.
-        status = clui.api.status
+        status = cmd_line_ui.api.status
+        
         def callback(status):
-            adv_ui.display.set_text(str(status))
+            string = '\n'.join([
+                f"Voltage: {status.voltage:.2f} V",
+                f"Current: {status.current:.2f} mA",
+                f'Regulation mode: {status.regulation}',
+                '',
+                f'HV power: {"on" if status.hv_on_status else "off"}',
+                f'HV on command given: {status.hv_on_command}',
+                f'HV off command given: {status.hv_off_command}',
+                '',
+                f'Control mode: {status.mode}',
+                f'Inhibition: {status.inhibit}',
+                f'Interlock: {status.interlock}',
+                'Fault detected' if status.fault else 'No fault detected',
+            ])
+            adv_ui.display.set_text(string)
+        
         status.callback = callback
 
         adv_ui.run()
@@ -65,9 +81,9 @@ finally:
     # Close the serial connection and stop the parallel thread
     # used for polling.
     try:
-        clui.api.halt()
+        cmd_line_ui.api.halt()
     except NameError:
-        # An error may be raised before the name clui is defined.
+        # An error may be raised before the name cmd_line_ui is defined.
         pass
 
     # Close the virtual connection, if it was used.

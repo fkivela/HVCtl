@@ -14,7 +14,7 @@ from .message import Message
 
 class API():
     """This class defines an API for communicating with a
-    Technix HV generator.
+    Technix SR100KV-5KW high voltage generator.
 
     Creating an instance of this class forms a serial connection to
     the generator, after which messages can be sent to it by calling
@@ -226,9 +226,7 @@ class API():
             :attr:`~Status.current` are not included. 
         """
         reply = self._send(Message('get status'))
-
-        statusdict = self._parse_status_bits(reply.value)
-        return statusdict
+        return self._parse_status_bits(reply.value)
 
     def full_status(self):
         """The same as :meth:`get_status`, but also includes
@@ -418,12 +416,18 @@ class Status:
     boolean.
     """
 
-    hv_on_status: bool = False
-    """``True`` if the generator is currently on, ``False`` if it's
-    off.
+    mode: str = 'remote'
+    """The control mode of the generator:
+    ``'remote'`` or ``'local'``.
+    """
+    # Sphinx needs a line break after ':' here to parse it correctly.
+
+    inhibit: bool = False
+    """``True`` if the inhibition parameter is turned on, ``False``
+    otherwise.
     """
 
-    interlock: str = 'open'
+    interlock: str = 'closed'
     """The value of the interlock parameter; ``open`` or
     ``closed``.
     """
@@ -431,11 +435,6 @@ class Status:
     fault: bool = False
     """``True`` if there is a fault present at the generator, 
     ``False`` otherwise.
-    """
-
-    regulation: str = 'voltage'
-    """``'voltage'`` or ``'current'`` depending on whether voltage or
-    current regulation is being used.
     """
 
     callback: Callable = None
@@ -456,21 +455,3 @@ class Status:
             # *self* instead of a bound method, so *self* has to be
             # passed as an argument.
             self.callback(self)
-
-    def __str__(self):
-        """Return the contents of this object in a form suitable to be
-        displayed in a user interface.
-        """
-        return '\n'.join([
-            f'Voltage: {self.voltage:.2f} V',
-            f'Current: {self.current:.2f} mA',
-            f'Regulation mode: {self.regulation}',
-            f'',
-            f'HV power: {"on" if self.hv_on_status else "off"}',
-            f'hv on command given: {self.hv_on_command}',
-            f'hv off command given: {self.hv_off_command}',
-            f'',
-            f'Mode: {self.mode}',
-            f'Interlock: {self.interlock}',
-            'Fault(s) present' if self.fault else 'No faults present',
-        ])

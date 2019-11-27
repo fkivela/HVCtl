@@ -1,10 +1,14 @@
 TODO:
 
 ### Current ###
+- Move status string formatting to AdvancedUI
+- __main__: clui is a bad name DONE
 
 ### Important ###
-- Move status string formatting to AdvancedUI
-- __main__: clui is a bad name
+- Capital letters to status str?
+- VHV doesn't set inhibit
+- run pylint/pycodestyle
+- inhibit to inhibition
 
 ### Documentation ###
 - Add better descriptions of inhibition and the interlock based on the manual 
