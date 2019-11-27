@@ -391,16 +391,15 @@ class Status:
     current: float = 0.0
     """The current produced by the generator in mA."""
 
-    inhibit: bool = False
-    """``True`` if the inhibition parameter is turned on, ``False``
-    otherwise.
+    regulation: str = 'voltage'
+    """``'voltage'`` or ``'current'`` depending on whether voltage or
+    current regulation is being used.
     """
 
-    mode: str = 'remote'
-    """The control mode of the generator:
-    ``'remote'`` or ``'local'``.
+    hv_on_status: bool = False
+    """``True`` if the generator is currently on, ``False`` if it's
+    off.
     """
-    # Sphinx needs a line break after ':' here to parse it correctly.
 
     hv_on_command: bool = False
     """The generator is turned on by setting the "hv on" parameter

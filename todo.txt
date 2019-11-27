@@ -1,14 +1,13 @@
 TODO:
 
 ### Current ###
-- Move status string formatting to AdvancedUI
-- __main__: clui is a bad name DONE
 
 ### Important ###
 - Capital letters to status str?
 - VHV doesn't set inhibit
 - run pylint/pycodestyle
 - inhibit to inhibition
+- Changing mode always says 'remote mode activated'
 
 ### Documentation ###
 - Add better descriptions of inhibition and the interlock based on the manual 
