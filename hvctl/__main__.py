@@ -38,8 +38,8 @@ try:
     # This makes it possible to run the program without installing
     # urwid.
     if args.simple:
-        clui = CommandLineUI(port=port)
-        clui.run()
+        cmd_line_ui = CommandLineUI(port=port)
+        cmd_line_ui.run()
     else:
         from hvctl.advanced_tui import AdvancedTUI
 
