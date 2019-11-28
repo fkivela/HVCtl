@@ -7,7 +7,8 @@ TODO:
 - VHV doesn't set inhibit
 - run pylint/pycodestyle
 - inhibit to inhibition
-- Changing mode always says 'remote mode activated'
+- replace part of virtualhv with a Status object
+- config file as command-line kwarg
 
 ### Documentation ###
 - Add better descriptions of inhibition and the interlock based on the manual 

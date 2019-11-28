@@ -49,10 +49,9 @@ class VirtualHV():
               off (``False``) at the virtual HV generator.
             | Initial value: ``False``.
 
-        interlock (bool):
-            | ``True`` if the interlock is active, ``False`` if it is
-              not.
-            | Initial value: ``False``.
+        interlock (string):
+            | The status of the interlock; ``open`` or ``closed``. 
+            | Initial value: ``open``.
 
         fault (bool):
             | ``True`` if there is a fault present in the virtual
@@ -78,7 +77,7 @@ class VirtualHV():
         self.hv_on_status = False
         self.mode = 'remote'
         self.inhibit = False
-        self.interlock = False
+        self.interlock = 'open'
         self.fault = False
         self.regulation = 'voltage'
 
@@ -243,12 +242,12 @@ class VirtualHV():
             An :class:`int` in ``range(256)``.
         """
         values = [
-            self.inhibit == 'active',
+            self.inhibit,
             self.mode == 'local',
             self.hv_off_command,
             self.hv_on_command,
             self.hv_on_status,
-            self.interlock,
+            self.interlock == 'open',
             self.fault,
             self.regulation == 'voltage']
         bits = ''.join([str(int(v)) for v in values])
