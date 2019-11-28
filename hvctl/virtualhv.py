@@ -1,5 +1,6 @@
 """This module defines the :class:`VirtualHV` class."""
 
+from .api import Status
 from .message import Message
 from .virtualconnection import VirtualConnection
 
@@ -15,71 +16,16 @@ class VirtualHV():
         connection:
             A :class:`~hvctl.virtualconnection.VirtualConnection`
             object used for simulating a serial connection.
-
-        voltage (float):
-            | The voltage of the virtual HV generator in V.
-            | Initial value: ``0``.
-
-        current (float):
-            | The current of the virtual HV generator in mA.
-            | Initial value: ``0``.
-
-        hv_on_command (bool):
-            | The virtual HV generator is turned on by setting this
-              first to ``True`` and then back to ``False``.
-            | Initial value: ``False``.
-
-        hv_off_command (bool):
-            | The virtual HV generator is turned off by setting this
-              first to ``True`` and then back to ``False``.
-            | Initial value: ``False``.
-
-        hv_on_status (bool):
-            | Determines whether the virtual HV generator is on 
-              (``True``) or off (``False``).
-            | Initial value: ``False``.
-
-        mode (string):
-            | ``'local'`` or ``'remote'``.
-            | Determines the control mode of the virtual HV generator.
-            | Initial value: ``'remote'``.
-
-        inhibit (bool):
-            | Determines whether inhibition is turned on (``True``) or
-              off (``False``) at the virtual HV generator.
-            | Initial value: ``False``.
-
-        interlock (string):
-            | The status of the interlock; ``open`` or ``closed``. 
-            | Initial value: ``open``.
-
-        fault (bool):
-            | ``True`` if there is a fault present in the virtual
-              HV generator, ``False`` otherwise.
-            | Initial value: ``False``.
-
-        regulation (string):
-            | ``'current'`` or ``'voltage'``.
-            | Determines whether the virtual HV generator is regulating
-              current or voltage.
-            | Initial value: ``'voltage'``
+            
+        status:
+            A :class:`~hvctl.api.Status` object that stores the status
+            of the virtual HV generator.
     """
 
     def __init__(self):
         """Initialize a new :class:`VirtualHV`."""
-
         self.connection = VirtualConnection(process=self.process)
-
-        self.voltage = 0
-        self.current = 0
-        self.hv_on_command = False
-        self.hv_off_command = False
-        self.hv_on_status = False
-        self.mode = 'remote'
-        self.inhibit = False
-        self.interlock = 'open'
-        self.fault = False
-        self.regulation = 'voltage'
+        self.status = Status()
 
     def __enter__(self):
         """Called upon entering a ``with`` block;
@@ -101,8 +47,8 @@ class VirtualHV():
             args: These are ignored.
 
         Returns:
-            :attr:`voltage`."""
-        return self.voltage
+            :attr:`status.voltage <status>`."""
+        return self.status.voltage
 
     def get_current(self, *args):
         """Handle a ``'get current'`` command.
@@ -111,92 +57,99 @@ class VirtualHV():
             args: These are ignored.
 
         Returns:
-            :attr:`current`."""
-        return self.current
+            :attr:`status.current <status>`."""
+        return self.status.current
 
     def set_voltage(self, value):
         """Handle a ``'set voltage'`` command.
 
-        Sets :attr:`voltage` to *value*.
+        Sets :attr:`status.voltage <status>` to *value*.
 
         Returns:
-            The new value of :attr:`voltage`.
+            The new value of :attr:`status.voltage <status>`.
         """
-        self.voltage = value
-        self.regulation = 'voltage'
+        self.status.voltage = value
+        self.status.regulation = 'voltage'
         return self.get_voltage()
 
     def set_current(self, value):
         """Handle a ``'set current'`` command.
 
-        Sets :attr:`current` to *value*.
+        Sets :attr:`status.current <status>` to *value*.
 
         Returns:
-            The new value of :attr:`current`.
+            The new value of :attr:`status.current <status>`.
         """
-        self.current = value
-        self.regulation = 'current'
+        self.status.current = value
+        self.status.regulation = 'current'
         return self.get_current()
 
     def hv_on(self, value):
         """Handle a ``'HV on'`` command.
 
-        If :attr:`hv_on_command` is ``False`` and *value* is ``True``,
-        :attr:`hv_on_command` is set to ``True``.
+        If :attr:`status.hv_on_command <status>` is ``False``
+        and *value* is ``True``,
+        :attr:`status.hv_on_command <status>` is set to ``True``.
 
-        If :attr:`hv_on_command` is ``True`` and *value* is ``False``,
-        :attr:`hv_on_status` is set to ``True`` and
-        :attr:`hv_on_command` is set to ``False``.
+        If :attr:`status.hv_on_command <status>` is ``True``
+        and *value* is ``False``,
+        :attr:`status.hv_on_status <status>` is set to ``True`` and
+        :attr:`status.hv_on_command <status>` is set to ``False``.
 
-        If *value* has the same value as :attr:`hv_on_command`,
+        If *value* has the same value as
+        :attr:`status.hv_on_command <status>`,
         a :exc:`RuntimeError` is raised.
 
         Returns:
-            The new value of :attr:`hv_on_command`.
+            The new value of :attr:`status.hv_on_command <status>`.
         """
-        if value == self.hv_on_command:
+        if value == self.status.hv_on_command:
             raise RuntimeError(f'*hv_on_command* is already {value}')
 
-        if self.hv_on_command:
-            self.hv_on_status = True
+        if self.status.hv_on_command:
+            self.status.hv_on_status = True
 
-        self.hv_on_command = value
-        return self.hv_on_command
+        self.status.hv_on_command = value
+        return self.status.hv_on_command
 
     def hv_off(self, value):
         """Handle a ``'HV off'`` command.
 
-        If :attr:`hv_off_command` is ``False`` and *value* is ``True``,
-        :attr:`hv_off_command` is set to ``True``.
+        If :attr:`status.hv_off_command <status>` is ``False``
+        and *value* is ``True``,
+        :attr:`status.hv_off_command <status>` is set to ``True``.
 
-        If :attr:`hv_off_command` is ``True`` and *value* is ``False``,
-        :attr:`hv_on_status` is set to ``False`` and
-        :attr:`hv_off_command` is set to ``False``.
+        If :attr:`status.hv_off_command <status>` is ``True``
+        and *value* is ``False``,
+        :attr:`status.hv_on_status <status>` is set to ``False`` and
+        :attr:`status.hv_off_command <status>` is set to ``False``.
 
-        If *value* has the same value as :attr:`hv_off_command`,
+        If *value* has the same value as
+        :attr:`status.hv_off_command <status>`,
         a :exc:`RuntimeError` is raised.
 
         Returns:
-            The new value of :attr:`hv_off_command`.
+            The new value of :attr:`status.hv_off_command <status>`.
         """
-        if value == self.hv_off_command:
+        if value == self.status.hv_off_command:
             raise RuntimeError(f'*hv_off_command* is already {value}')
 
-        if self.hv_off_command:
-            self.hv_on_status = False
+        if self.status.hv_off_command:
+            self.status.hv_on_status = False
 
-        self.hv_off_command = value
-        return self.hv_off_command
+        self.status.hv_off_command = value
+        return self.status.hv_off_command
 
     def set_mode(self, value):
         """Handle a ``'set mode'`` command.
 
-        If ``bool(value)`` is ``True``, :attr:`mode` is set to
-        ``'local'``; otherwise it is set to ``'remote'``.
+        If ``bool(value)`` is ``True``,
+        :attr:`status.mode <status>` is set to ``'local'``;
+        otherwise it is set to ``'remote'``.
 
         Returns:
-            ``1`` if the new value of :attr:`mode` is ``'local'``,
-            ``0`` if it is ``'remote'``.
+            ``1`` if the new value of :attr:`status.mode <status>`
+            is ``'local'``, ``0`` if it is ``'remote'``.
         """
         self.mode = 'local' if value else 'remote'
         return value
@@ -204,13 +157,13 @@ class VirtualHV():
     def set_inhibit(self, value):
         """Handle a ``'set inhibit'`` command.
 
-        Sets :attr:`inhibit` to ``bool(value)``.
+        Sets :attr:`status.inhibit <status>` to ``bool(value)``.
         
         Returns:
-            The new value of :attr:`inhibit`. 
+            The new value of :attr:`status.inhibit <status>`. 
         """
-        self.inhibit = bool(value)
-        return self.inhibit
+        self.status.inhibit = bool(value)
+        return self.status.inhibit
 
     def get_status(self, _):
         """Handle a ``'get status'`` command.
@@ -221,16 +174,16 @@ class VirtualHV():
         The values of the bits in the number are copied from the
         attributes of this object in the following manner:
 
-        :Bit 0: :attr:`inhibit`
-        :Bit 1: :attr:`mode` (``1`` for ``'local'``,
-                              ``0`` for ``'remote'``),
-        :Bit 2: :attr:`hv_off_command`,
-        :Bit 3: :attr:`hv_on_command`,
-        :Bit 4: :attr:`hv_on_status`,
-        :Bit 5: :attr:`interlock`,
-        :Bit 6: :attr:`fault`,
-        :Bit 7: :attr:`regulation` (``1`` for ``'voltage'``,
-                                    ``0`` for ``'current'``),
+        :Bit 0: :attr:`status.inhibit <status>`
+        :Bit 1: :attr:`status.mode <status>`
+            (``1`` for ``'local'``, ``0`` for ``'remote'``)
+        :Bit 2: :attr:`status.hv_off_command <status>`
+        :Bit 3: :attr:`status.hv_on_command <status>`
+        :Bit 4: :attr:`status.hv_on_status <status>`
+        :Bit 5: :attr:`status.interlock <status>`
+        :Bit 6: :attr:`status.fault <status>`
+        :Bit 7: :attr:`status.regulation <status>`
+            (``1`` for ``'voltage'``, ``0`` for ``'current'``)
 
         Since ``True`` equals ``1`` in Python, attributes with a value
         of ``True`` will set their respective bit to ``1``,
@@ -242,14 +195,14 @@ class VirtualHV():
             An :class:`int` in ``range(256)``.
         """
         values = [
-            self.inhibit,
-            self.mode == 'local',
-            self.hv_off_command,
-            self.hv_on_command,
-            self.hv_on_status,
-            self.interlock == 'open',
-            self.fault,
-            self.regulation == 'voltage']
+            self.status.inhibit,
+            self.status.mode == 'local',
+            self.status.hv_off_command,
+            self.status.hv_on_command,
+            self.status.hv_on_status,
+            self.status.interlock == 'open',
+            self.status.fault,
+            self.status.regulation == 'voltage']
         bits = ''.join([str(int(v)) for v in values])
         return int(bits, 2)
 

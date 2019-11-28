@@ -4,28 +4,22 @@ TODO:
 
 ### Important ###
 - Capital letters to status str?
-- VHV doesn't set inhibit
 - run pylint/pycodestyle
 - inhibit to inhibition
-- replace part of virtualhv with a Status object
 - config file as command-line kwarg
 
 ### Documentation ###
 - Add better descriptions of inhibition and the interlock based on the manual 
+- Document the results of the tests with the real hv generator
+- Revise the examples
+- Try to remove underlines from links?
 
 ### Not important (the program works well without) ###
 - More functionality to VirtualHV
       - No voltage in off mode, when inhibition is on or when interlock is open
       - Shut off and switch to local mode after 5 seconds
-      - Find out how the physical device works
+      - Implement the behaviour of the physical device
 - Try if this works on Windows?
-
-### Test with the physical device ###
-- Test inhibition & interlock
-- How does the HV behave when it is off? Does it respond to commands?
-  What happens when trying to set voltage or current?
-- How does the HV behave in local mode? Does it respond to commands?
-- Are the examples realistic
 
 ### Other ###
 - Testing (maybe try mock objects, Hypothesis)!
