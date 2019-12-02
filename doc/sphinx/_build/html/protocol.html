@@ -50,7 +50,7 @@ Answers copy the command string, and may append a return value to its end (witho
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the HV generator doesn’t receive any instructions for 5 seconds, it will automatically power off and enter local mode.</p>
+<p>If the HV generator doesn’t receive any instructions for 5 seconds, it will automatically turn the HV <a class="reference internal" href="#hv-off">off</a> and enter <a class="reference internal" href="#mode">local mode</a>.</p>
 </div>
 <div class="section" id="list-of-commands-and-answers">
 <h2>List of commands and answers<a class="headerlink" href="#list-of-commands-and-answers" title="Permalink to this headline">¶</a></h2>
@@ -58,11 +58,10 @@ Answers copy the command string, and may append a return value to its end (witho
 An <em>X</em> denotes a numerical value.
 Unless otherwise signified, it is a 12-bit unsigned integer (i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>),
 linearly scaled to cover the entire voltage or current range of the generator.
-For example, with a SR 100 kV - 5 kW generator with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (i.e. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to -100 kV, which is the highest voltage the generator can produce.</p>
+For example, with a SR100KV-5KW generator with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (i.e. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to -100 kV, which is the highest (by absolute value) voltage the generator can produce.</p>
 <div class="section" id="set-output-voltage">
-<h3>1. Set output voltage<a class="headerlink" href="#set-output-voltage" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><dl class="field-list simple">
+<span id="set-voltage"></span><h3>1. Set output voltage<a class="headerlink" href="#set-output-voltage" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">d1,X\r</span></code></p>
 </dd>
@@ -70,12 +69,13 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">d1,X\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
+<p>This command sets the voltage produced by the HV generator to the given value.
+If the command is sent while the generator is currently in the <a class="reference internal" href="#hv-off">HV off</a> state or <a class="reference internal" href="#inhibition">inhibition</a> has been activated,
+the new value will be applied when the pump is switched to a HV on/inhibition off state.</p>
 </div>
 <div class="section" id="set-output-current">
-<h3>2. Set output current<a class="headerlink" href="#set-output-current" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><dl class="field-list simple">
+<span id="set-current"></span><h3>2. Set output current<a class="headerlink" href="#set-output-current" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">d2,X\r</span></code></p>
 </dd>
@@ -83,12 +83,11 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">d2,X\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
+<p>This command works just like <a class="reference internal" href="#set-voltage">the previous one</a>, but sets the output current instead of the output voltage.</p>
 </div>
 <div class="section" id="get-output-voltage">
-<h3>3. Get output voltage<a class="headerlink" href="#get-output-voltage" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><dl class="field-list simple">
+<span id="get-voltage"></span><h3>3. Get output voltage<a class="headerlink" href="#get-output-voltage" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">a1\r</span></code></p>
 </dd>
@@ -96,12 +95,13 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">a1X\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
+<p>This command returns the voltage produced by the HV generator.
+If the generator is in the <a class="reference internal" href="#hv-off">HV off</a> state or <a class="reference internal" href="#inhibition">inhibition</a> has been activated,
+the returned value will be zero.</p>
 </div>
 <div class="section" id="get-output-current">
-<h3>4. Get output current<a class="headerlink" href="#get-output-current" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><dl class="field-list simple">
+<span id="get-current"></span><h3>4. Get output current<a class="headerlink" href="#get-output-current" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">a2\r</span></code></p>
 </dd>
@@ -109,13 +109,10 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">a2X\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
+<p>This command works just like <a class="reference internal" href="#get-voltage">the previous one</a>, but returns the output current instead of the output voltage.</p>
 </div>
 <div class="section" id="turn-the-hv-on">
-<h3>5. Turn the HV on<a class="headerlink" href="#turn-the-hv-on" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>This instruction requires sending two commands, with a 100 ms delay between receiving the answer to the first command and sending the second one.</p>
-<p>The first command-answer pair:</p>
+<span id="hv-on"></span><h3>5. Turn the HV on<a class="headerlink" href="#turn-the-hv-on" title="Permalink to this headline">¶</a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P5,1\r</span></code></p>
@@ -124,7 +121,7 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P5,1\r</span></code></p>
 </dd>
 </dl>
-<p>The second command-answer pair:</p>
+<p><strong>Wait 100 ms.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P5,0\r</span></code></p>
@@ -133,13 +130,17 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P5,0\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
+<p>This command is used to switch the generator to the HV on state.
+The command is actually a sequence of two different commands,
+which are sent with a 100 ms delay between receiving the answer to the first command and sending the second one.</p>
+<p>The HV generator has two states: HV on and HV off.
+In the HV off state the generator doesn’t produce any output (i.e. the voltage and the current are 0),
+while in the HV on state output is produced normally.</p>
+<p>Note that the HV on and HV off states are a different thing than the HV generator itself being on or off;
+the generator is powered on and can respond to commands in both the HV on and the HV off state.</p>
 </div>
 <div class="section" id="turn-the-hv-off">
-<h3>6. Turn the HV off<a class="headerlink" href="#turn-the-hv-off" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>This instruction requires sending two commands, with a 100 ms delay between receiving the answer to the first command and sending the second one.</p>
-<p>The first command-answer pair:</p>
+<span id="hv-off"></span><h3>6. Turn the HV off<a class="headerlink" href="#turn-the-hv-off" title="Permalink to this headline">¶</a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P6,1\r</span></code></p>
@@ -148,7 +149,7 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P6,1\r</span></code></p>
 </dd>
 </dl>
-<p>The second command-answer pair:</p>
+<p><strong>Wait 100 ms.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P6,0\r</span></code></p>
@@ -157,14 +158,12 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P6,0\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
+<p>This command works just like <a class="reference internal" href="#hv-on">the previous one</a>, but switches the HV generator to the HV off state instead of the HV on state.</p>
 </div>
 <div class="section" id="switch-between-local-and-remote-mode">
-<h3>7. Switch between local and remote mode<a class="headerlink" href="#switch-between-local-and-remote-mode" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>Switch to local mode:</p>
-<blockquote>
-<div><dl class="field-list simple">
+<span id="mode"></span><h3>7. Switch between local and remote mode<a class="headerlink" href="#switch-between-local-and-remote-mode" title="Permalink to this headline">¶</a></h3>
+<p>Switch to local mode:</p>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P7,1\r</span></code></p>
 </dd>
@@ -172,10 +171,8 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P7,1\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
 <p>Switch to remote mode:</p>
-<blockquote>
-<div><dl class="field-list simple">
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P7,0\r</span></code></p>
 </dd>
@@ -183,15 +180,20 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P7,0\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
-</div></blockquote>
+<p>This command switches the HV generator to the local mode or the remote mode.</p>
+<p>The HV generator can be operated in two modes: local and remote.
+In the remote mode, the generator is controlled through a remote connection, such as the RS-232 connection described here,
+while in the local mode it is controlled through the buttons located on its front panel.</p>
+<p>In the local mode, the <a class="reference internal" href="#hv-on">HV on</a> command cannot be sent remotely,
+and switching the generator to the local mode in the HV on state will automatically set it to the HV off state.
+However, the command to switch to remote mode and the <a class="reference internal" href="#inhibition">inhibition</a> command can be sent remotely even in the local mode.</p>
 </div>
 <div class="section" id="activate-or-deactivate-inhibition">
-<h3>8. Activate or deactivate inhibition<a class="headerlink" href="#activate-or-deactivate-inhibition" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>Activate inhibition:</p>
-<blockquote>
-<div><dl class="field-list simple">
+<span id="inhibition"></span><h3>8. Activate or deactivate inhibition<a class="headerlink" href="#activate-or-deactivate-inhibition" title="Permalink to this headline">¶</a></h3>
+<p>This command is used to activate or deactivate output inhibition.
+While inhibition is activated, the HV generator doesn’t produce output even in the <a class="reference internal" href="#hv-on">HV on</a> state.</p>
+<p>Activate inhibition:</p>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P8,1\r</span></code></p>
 </dd>
@@ -199,10 +201,8 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P8,1\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
 <p>Deactivate inhibition:</p>
-<blockquote>
-<div><dl class="field-list simple">
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">P8,0\r</span></code></p>
 </dd>
@@ -210,13 +210,10 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P8,0\r</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
-</div></blockquote>
 </div>
-<div class="section" id="get-power-supply-status">
-<h3>9. Get power supply status<a class="headerlink" href="#get-power-supply-status" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><dl class="field-list simple">
+<div class="section" id="get-generator-status">
+<span id="status"></span><h3>9. Get generator status<a class="headerlink" href="#get-generator-status" title="Permalink to this headline">¶</a></h3>
+<dl class="field-list simple">
 <dt class="field-odd">Command</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">E\r</span></code></p>
 </dd>
@@ -224,8 +221,12 @@ For example, with a SR 100 kV - 5 kW generator with negative polarity, <code cla
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">EX\r</span></code>, <span class="math notranslate nohighlight">\(X \in \left[0, 255 \right]\)</span></p>
 </dd>
 </dl>
-<p>This command returns an 8-bit big-endian unsigned integer, with the bits being numbered in the following manner.
-MSB and LSB denote the most and least significant bits.</p>
+<p>This command returns the status of the HV generator, excluding the values of the voltage and the current.
+The returned value is the decimal representation of an 8-bit unsigned integer,
+where each bit signifies a single status condition.</p>
+<p>The bits are numbered in the following manner,
+with MSB and LSB denoting the most and least significant bits.
+Bits 5-8 directly correspond to the parameter values (1 or 0) of commands 5-8.</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 25%" />
@@ -249,9 +250,7 @@ MSB and LSB denote the most and least significant bits.</p>
 </tr>
 </tbody>
 </table>
-<p>The values of bits 5-8 correspond to the values set by the commands 5-8.
-Bits 1-4 are status bits whose values don’t directly correspond to a single command.
-The meanings of different bit values are presented in the table below.</p>
+<p>The meanings of the bits are explained below.</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 6%" />
@@ -270,7 +269,7 @@ The meanings of different bit values are presented in the table below.</p>
 <tbody>
 <tr class="row-odd"><td><p>8</p></td>
 <td colspan="2"><p>Inhibition active</p></td>
-<td><p>Inhibition idle</p></td>
+<td><p>Inhibition not active</p></td>
 </tr>
 <tr class="row-even"><td><p>7</p></td>
 <td colspan="2"><p>Local mode</p></td>
@@ -293,8 +292,8 @@ The meanings of different bit values are presented in the table below.</p>
 <td><p>Interlock closed</p></td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
-<td colspan="2"><p>Fault present</p></td>
-<td><p>Fault not present</p></td>
+<td colspan="2"><p>Fault</p></td>
+<td><p>No fault</p></td>
 </tr>
 <tr class="row-even"><td><p>1</p></td>
 <td colspan="2"><p>Voltage regulation</p></td>
@@ -302,7 +301,52 @@ The meanings of different bit values are presented in the table below.</p>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
+<div class="section" id="bit-8-inhibition">
+<h4>Bit 8: inhibition<a class="headerlink" href="#bit-8-inhibition" title="Permalink to this headline">¶</a></h4>
+<p>This bit tells whether <a class="reference internal" href="#inhibition">inhibition</a> is active or not.</p>
+</div>
+<div class="section" id="bit-7-mode">
+<h4>Bit 7: mode<a class="headerlink" href="#bit-7-mode" title="Permalink to this headline">¶</a></h4>
+<p>This bit tells whether the HV generator is in <a class="reference internal" href="#mode">local or remote</a> mode.</p>
+</div>
+<div class="section" id="bit-6-hv-off">
+<h4>Bit 6: HV off<a class="headerlink" href="#bit-6-hv-off" title="Permalink to this headline">¶</a></h4>
+<p>The value of this bit is 1 if the first <a class="reference internal" href="#hv-off">HV off</a> command has been sent and the second one hasn’t.</p>
+</div>
+<div class="section" id="bit-5-hv-on">
+<h4>Bit 5: HV on<a class="headerlink" href="#bit-5-hv-on" title="Permalink to this headline">¶</a></h4>
+<p>The value of this bit is 1 if the first <a class="reference internal" href="#hv-on">HV on</a> command has been sent and the second one hasn’t.</p>
+</div>
+<div class="section" id="bit-4-hv-status">
+<h4>Bit 4: HV status<a class="headerlink" href="#bit-4-hv-status" title="Permalink to this headline">¶</a></h4>
+<p>This bit tells whether the HV generator is in the <a class="reference internal" href="#hv-on">HV on</a> state or the <a class="reference internal" href="#hv-off">HV off</a> state.</p>
+</div>
+<div class="section" id="bit-3-interlock">
+<h4>Bit 3: interlock<a class="headerlink" href="#bit-3-interlock" title="Permalink to this headline">¶</a></h4>
+<p>This bit tells whether the interlock is closed or open.</p>
+<p>The interlock is a physical safety device consisting of two pins on the rear panel of the HV generator.
+In some generator models the interlock is a Lemo-type 2-pin connector; in others, pins 16 and 24 of a 25-pin D-subminiature remote connector serve as the interlock.
+In both cases, the interlock must be closed by connecting the two pins to one another for the generator to produce output.
+Opening the interlock will switch the generator to the <a class="reference internal" href="#hv-off">HV off</a> state and activate the <a class="reference internal" href="#fault">fault</a> state.</p>
+</div>
+<div class="section" id="bit-2-fault">
+<span id="fault"></span><h4>Bit 2: fault<a class="headerlink" href="#bit-2-fault" title="Permalink to this headline">¶</a></h4>
+<p>This bit tells whether the fault state is active or not.</p>
+<p>The fault state is activated whenever some error condition happens.
+This turns the HV <a class="reference internal" href="#hv-off">off</a> and prevents it from being turned back <a class="reference internal" href="#hv-on">on</a>.
+The fault state can be activated e.g. if the interlock is opened, the key lock is turned on before powering on the generator,
+or if there is a  hardware problem inside the generator.
+After the cause of the error condition is removed, the fault state can be reset by pressing the HV off button on the front panel of the generator.</p>
+</div>
+<div class="section" id="bit-1-regulation">
+<h4>Bit 1: regulation<a class="headerlink" href="#bit-1-regulation" title="Permalink to this headline">¶</a></h4>
+<p>This bit tells whether the generator is currently regulating voltage or current.</p>
+<p>The <a class="reference internal" href="#set-voltage">set voltage</a> command activates the voltage regulation mode,
+where the generator sets its output voltage to the desired value and keeps it there.
+The output current is then determined by the output voltage and the resistance of the circuit the generator is connected to.</p>
+<p>Conversely, the <a class="reference internal" href="#set-current">set current</a> command sets the current to the desired value
+and the voltage to whatever value is needed to generate that current; this is the current regulation mode.</p>
+</div>
 </div>
 </div>
 </div>
