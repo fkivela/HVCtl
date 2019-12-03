@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""This script can be used to test opening and closing the interlock
+in HVCtl with a virtual HV generator.
+
+Because the interlock is a physical feature and cannot be controlled
+remotely, the effects of opening and closing it cannot be tested 
+by running HVCtl as hvctl-run -v; instead, this script must be used.
+
+The script is used in the following manner:
+1. Run this script in a terminal.
+2. A port name will be printed; copy it.
+3. Launch HVCtl in another terminal using the port name you just copied
+   (hvctl-run -p <port>).
+4. Give commands to the UI loop of this script ('help' lists all valid
+   commands) and observe the effects in the HVCtl session running in the
+   other terminal.
+5. Exit the HVCtl session and then this script.
+"""
+
+from hvctl import VirtualHV
+
+with VirtualHV() as virtualhv:
+    print(f'Port: {virtualhv.connection.port}')
+    
+    while True:
+        string = input("Give a command ('h' or 'help' for help): ")
+        
+        if string in ('open interlock', 'o'):
+            virtualhv.open_interlock()
+        
+        elif string in ('close interlock', 'c'):
+            virtualhv.close_interlock()
+        
+        elif string in ('reset fault', 'r'):
+            virtualhv.reset_fault()
+        
+        elif string in ('help', 'h'):
+            print('\n'.join([
+                  'Valid commands and aliases:',
+                  '    open interlock, o',
+                  '    close interlock, c',
+                  '    reset fault, r',
+                  '    help, h',
+                  '    exit, x']))
+            
+        elif string in ['exit', 'x']:
+            break
+        else:
+            print('Invalid command')
