@@ -1,28 +1,33 @@
 TODO:
 
-### Current ###
+### Now ###
+- Document test-interlock
 
-### Important ###
-- Capital letters to status str?
-- run pylint/pycodestyle
-- inhibit to inhibition
-- config file as command-line kwarg
+### Soon ###
+- Remove the hard-coding of the configuration file
+- Improve and document the new command-line arguments
+- Improve the graphics of AdvancedTUI; maybe change True/False options to a dot 
+  or another visual indicator
+- Document command-line arguments
 
-### Documentation ###
-- Add better descriptions of inhibition and the interlock based on the manual 
-- Document the results of the tests with the real hv generator
-- Revise the examples
-- Try to remove underlines from links?
+### Before this is ready ###
+- Add 'm' as an alias to 'mode' in the UI
+- Test the timeout option in the configuration file;
+  does specifying a timeout get rid of all blocking commands
+- Mke sure the setting in the configuration file are correct
+- Run Pylint and Pycodestyle
+- Change 'inhibit' to 'inhibition' where needed
+- Make sure the examples in usage.rst are correct and up-to-date
+- Try to remove the underlines of links in the documentation
+- Make sure API.halt() works correctly if HVCtl is stopped while it is 
+  connected to the HV
+- Test whether opening the interlock in the HV off state causes a fault
+  condition
 
-### Not important (the program works well without) ###
-- More functionality to VirtualHV
-      - No voltage in off mode, when inhibition is on or when interlock is open
-      - Shut off and switch to local mode after 5 seconds
-      - Implement the behaviour of the physical device
-- Try if this works on Windows?
-
-### Other ###
-- Testing (maybe try mock objects, Hypothesis)!
-- Remove Message.from_bytes() and overload Message.__init__ with 
-  @singledispatchmethod. Wait for Anaconda to update to Python 3.8 
-  before this can be implemented.
+### Maybe later ###
+- Test the program. unittest.mock and/or the Hypothesis library should be
+  looked into
+- Message.from_bytes() could be replaced by overloading Message.__init__ with 
+  @singledispatchmethod. However, this would need Python 3.8 so it might not
+  be practical even in the future (HVCtl might need to run on machines which
+  don't have Python 3.8) 
