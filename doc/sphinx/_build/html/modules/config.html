@@ -37,8 +37,8 @@
 <span id="config"></span><h1><a class="reference internal" href="#module-hvctl.config" title="hvctl.config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a><a class="headerlink" href="#module-hvctl.config" title="Permalink to this headline">¶</a></h1>
 <p>This module defines several constants based on the options defined
 in a configuration file.
-The configuration file should be named <code class="docutils literal notranslate"><span class="pre">'hv.conf'</span></code> and be located in
-the same directory as this module.</p>
+The default configuration file should be named <code class="docutils literal notranslate"><span class="pre">'default.conf'</span></code> and be
+located in the same directory as this module.</p>
 <dl class="attribute">
 <dt id="hvctl.config.SERIAL_KWARGS">
 <code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">SERIAL_KWARGS</code><a class="headerlink" href="#hvctl.config.SERIAL_KWARGS" title="Permalink to this definition">¶</a></dt>
@@ -91,14 +91,22 @@ changed, in mA. This is computed analogously to
 </dd></dl>
 
 <dl class="function">
-<dt id="hvctl.config.main">
-<code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.config.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse the configuration file and define the constants.
-This function is called automatically when the module is
-imported.</p>
+<dt id="hvctl.config.load">
+<code class="sig-prename descclassname">hvctl.config.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.config.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the configuration file and define the constants.</p>
+<p>This function is called automatically with the default argument
+when the module is imported. If a different configuration file
+should be used, the constants should be reloaded by calling this
+function manually with the correct argument.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><ul class="simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – The path to the configuration file.
+If this isn’t defined, the file <code class="docutils literal notranslate"><span class="pre">'default.conf'</span></code>
+(located in the same directory as this module)
+is used.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.8)"><strong>FileNotFoundError</strong></a> – If the configuration file cannot be found.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><strong>RuntimeError</strong></a> – If the configuration file is found but cannot be
     parsed.</p></li>

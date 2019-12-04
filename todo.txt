@@ -1,14 +1,12 @@
 TODO:
 
 ### Now ###
-- Document test-interlock
+- Document the new command-line arguments
 
 ### Soon ###
-- Remove the hard-coding of the configuration file
-- Improve and document the new command-line arguments
+- Document test-interlock
 - Improve the graphics of AdvancedTUI; maybe change True/False options to a dot 
   or another visual indicator
-- Document command-line arguments
 
 ### Before this is ready ###
 - Add 'm' as an alias to 'mode' in the UI
@@ -23,6 +21,8 @@ TODO:
   connected to the HV
 - Test whether opening the interlock in the HV off state causes a fault
   condition
+- The main script should perhaps be made more readable.
+- Make sure all multi-part references (e.g. package.module.class) are OK.
 
 ### Maybe later ###
 - Test the program. unittest.mock and/or the Hypothesis library should be

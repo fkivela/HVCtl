@@ -48,7 +48,7 @@ All importable modules in the ``hvctl`` package are listed in the :doc:`Modules 
 Configuration
 -------------
 
-Configuration settings for HVCtl, such as the port used for the serial connection, are defined and documented in the file ``hv.conf``, located in the ``HVCtl/hvctl`` directory.
+Configuration settings for HVCtl, such as the port used for the serial connection, are defined and documented in the file ``default.conf``, located in the ``HVCtl/hvctl`` directory.
 
 Examples
 --------
