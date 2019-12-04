@@ -1,7 +1,7 @@
 """This module defines several constants based on the options defined
 in a configuration file.
-The configuration file should be named ``'hv.conf'`` and be located in
-the same directory as this module.
+The default configuration file should be named ``'default.conf'`` and be
+located in the same directory as this module.
 
 Attributes:
     SERIAL_KWARGS
@@ -37,14 +37,6 @@ Attributes:
         changed, in mA. This is computed analogously to 
         :const:`DELTA_U`.
 """
-# pylint: disable=global-variable-undefined
-# We cannot assign the values of the constants at module level since
-# functions cannot be used before they are defined.
-# This could be avoided by assigning the constants at the end of the
-# file, but that would harm readability, since the important stuff
-# should be at the start.
-# Initializing constants to None would add unnecessary lines
-# and make uninitialized constants harder to detect.
 
 import configparser
 import os
@@ -52,20 +44,42 @@ from typing import Union
 
 import serial
 
+# Defining the constants at the module level helps automatic tools
+# such as IDEs and Pylint. 
+SERIAL_KWARGS = None
+VOLTAGE_LIMIT = None
+CURRENT_LIMIT = None
+INT_MAX = None
+DELTA_U = None
+DELTA_I = None
 
-def main():
+
+def load(filename=None):
     """Parse the configuration file and define the constants.
-    This function is called automatically when the module is
-    imported.
+    
+    This function is called automatically with the default argument
+    when the module is imported. If a different configuration file
+    should be used, the constants should be reloaded by calling this
+    function manually with the correct argument.
+    
+    Args:
+        filename:
+            The path to the configuration file.
+            If this isn't defined, the file ``'default.conf'``
+            (located in the same directory as this module)
+            is used.
 
     Raises:
         FileNotFoundError: If the configuration file cannot be found.
         RuntimeError: If the configuration file is found but cannot be
             parsed.
-    """
-    configfile = 'hv.conf'
-    dirpath = os.path.dirname(__file__)
-    path = os.path.join(dirpath, configfile)
+    """    
+    if not filename:
+        configfile = 'default.conf'
+        dirpath = os.path.dirname(__file__)
+        path = os.path.join(dirpath, configfile)
+    else:
+        path = filename
 
     parser = configparser.ConfigParser()
     # read_file is used instead of read, because read doesn't raise
@@ -167,4 +181,4 @@ def _timeout(value: str):
         raise ValueError('invalid timeout: {value}')
 
 
-main()
+load()

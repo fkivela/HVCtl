@@ -106,12 +106,14 @@ class CommandLineUI:
     ]
     # pylint: enable=bad-whitespace
 
-    def __init__(self, port=None, inputfile=None, outputfile=None):
+    def __init__(self, port=None, poll=True, inputfile=None, outputfile=None):
         """Initialize a new CommandLineUI.
 
         Args:
             port:
                 This is passed to the initializer of :attr:`api`.
+            poll:
+                This is also passed to :attr:`api`.
             inputfile:
                 The value of :attr:`inputfile`.
                 If this is ``None``, the value is :data:`sys.stdin`.
@@ -133,7 +135,7 @@ class CommandLineUI:
         # could lead to unintended consequences, and would e.g.
         # prevent using multiple CommandLineUIs at once.
 
-        self.api = api.API(port=port)
+        self.api = api.API(port, poll)
         self.debug = False
         self.intro = "Welcome to HVCtl! Type 'help' for a list of commands."
         self.prompt = '>> '
