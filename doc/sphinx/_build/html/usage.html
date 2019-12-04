@@ -50,14 +50,31 @@ If the <code class="docutils literal notranslate"><span class="pre">HVCtl</span>
 </div>
 <p>Both of these commands accept the following command-line arguments:</p>
 <dl class="option-list">
-<dt><kbd><span class="option">-s</span>, <span class="option">--simple</span></kbd></dt>
-<dd><p>Run HVCtl with a simple command-line interface that doesn’t require <a class="reference internal" href="installation.html"><span class="doc">urwid</span></a> to work.
-If HVCtl is run without the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, a slightly more advanced UI will be used (see below for  an example).</p>
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>Show a help message that lists all command-line arguments.</p>
+</dd>
+<dt><kbd><span class="option">-c</span>, <span class="option">--config <var>path</var></span></kbd></dt>
+<dd><p>Define a configuration file. If this argument isn’t defined, the default file <code class="docutils literal notranslate"><span class="pre">HVCtl/hvctl/default.conf</span></code> is used instead.
+The default file contains the documentation for all configuration options.</p>
+</dd>
+<dt><kbd><span class="option">-p</span>, <span class="option">--port <var>port</var></span></kbd></dt>
+<dd><p>Define the port (e.g. <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code>) used for the serial connection.
+If this argument is defined, it overrides the port defined in the configuration file.</p>
 </dd>
 <dt><kbd><span class="option">-v</span>, <span class="option">--virtual</span></kbd></dt>
 <dd><p>Run HVCtl with a virtual HV generator.
 If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that.
-This makes it possible to test HVCtl easily without having to connect to an actual HV generator.</p>
+This makes it possible to test HVCtl easily without having to connect to an actual HV generator.
+This option is incompatible with <code class="docutils literal notranslate"><span class="pre">-p</span></code>.</p>
+</dd>
+<dt><kbd><span class="option">-s</span>, <span class="option">--simple</span></kbd></dt>
+<dd><p>Run HVCtl with a simple command-line interface that doesn’t require <a class="reference internal" href="installation.html"><span class="doc">urwid</span></a> to work.
+If HVCtl is run without the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, a slightly more advanced UI will be used (see below for  an example).</p>
+</dd>
+<dt><kbd><span class="option">-n</span>, <span class="option">--no-poll</span></kbd></dt>
+<dd><p>Disable automatic polling. If automatic polling is enabled, HVCtl automatically sends messages to the HV generator at regular intervals.
+Disabling this functionality makes the generator automatically turn the HV off if the user doesn’t send it a command for 5 seconds.
+Additionally, each status variable displayed by the UI will only be updated whenever the generator sends back the value of the variable as a response to a command sent by the user.</p>
 </dd>
 </dl>
 </div>
@@ -77,10 +94,6 @@ so they can be imported with</p>
 </pre></div>
 </div>
 <p>All importable modules in the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package are listed in the <a class="reference internal" href="modules/index.html"><span class="doc">Modules</span></a> page.</p>
-</div>
-<div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>Configuration settings for HVCtl, such as the port used for the serial connection, are defined and documented in the file <code class="docutils literal notranslate"><span class="pre">default.conf</span></code>, located in the <code class="docutils literal notranslate"><span class="pre">HVCtl/hvctl</span></code> directory.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -189,7 +202,6 @@ The script uses <code class="docutils literal notranslate"><span class="pre">wit
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#interactive-mode">Interactive mode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#importing">Importing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>

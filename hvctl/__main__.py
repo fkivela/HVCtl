@@ -45,13 +45,13 @@ port_options.add_argument(
     action='store_true')
 
 parser.add_argument(
-    '--no-poll',
-    help='disable automatic polling',
+    '-s', '--simple',
+    help="use a UI that doesn't require urwid.",
     action='store_true')
 
 parser.add_argument(
-    '-s', '--simple',
-    help="use a UI that doesn't require urwid.",
+    '-n', '--no-poll',
+    help='disable automatic polling',
     action='store_true')
 
 args = parser.parse_args()

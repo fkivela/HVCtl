@@ -1,7 +1,6 @@
 TODO:
 
 ### Now ###
-- Document the new command-line arguments
 
 ### Soon ###
 - Document test-interlock
@@ -23,6 +22,7 @@ TODO:
   condition
 - The main script should perhaps be made more readable.
 - Make sure all multi-part references (e.g. package.module.class) are OK.
+- Replace tabs with spaces in the docs.
 
 ### Maybe later ###
 - Test the program. unittest.mock and/or the Hypothesis library should be

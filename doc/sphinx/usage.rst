@@ -21,11 +21,26 @@ If the ``HVCtl`` directory is added to ``$PATH``, the shell script can be run fr
 
 Both of these commands accept the following command-line arguments:
 
--s, --simple	Run HVCtl with a simple command-line interface that doesn't require :doc:`urwid <installation>` to work.
-				If HVCtl is run without the ``-s`` argument, a slightly more advanced UI will be used (see below for  an example).
--v, --virtual 	Run HVCtl with a virtual HV generator. 
-				If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that. 
-				This makes it possible to test HVCtl easily without having to connect to an actual HV generator.
+-h, --help          Show a help message that lists all command-line arguments.
+
+-c, --config path   Define a configuration file. If this argument isn't defined, the default file ``HVCtl/hvctl/default.conf`` is used instead.
+                    The default file contains the documentation for all configuration options.
+
+-p, --port port     Define the port (e.g. ``/dev/ttyUSB0``) used for the serial connection.
+                    If this argument is defined, it overrides the port defined in the configuration file.
+
+-v, --virtual       Run HVCtl with a virtual HV generator. 
+                    If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that.
+                    This makes it possible to test HVCtl easily without having to connect to an actual HV generator.
+                    This option is incompatible with ``-p``.
+
+-s, --simple        Run HVCtl with a simple command-line interface that doesn't require :doc:`urwid <installation>` to work.
+                    If HVCtl is run without the ``-s`` argument, a slightly more advanced UI will be used (see below for  an example).
+
+-n, --no-poll       Disable automatic polling. If automatic polling is enabled, HVCtl automatically sends messages to the HV generator at regular intervals.
+                    Disabling this functionality makes the generator automatically turn the HV off if the user doesn't send it a command for 5 seconds.
+                    Additionally, each status variable displayed by the UI will only be updated whenever the generator sends back the value of the variable as a response to a command sent by the user.  
+
 
 Importing
 ---------
@@ -45,15 +60,12 @@ as well as
 
 All importable modules in the ``hvctl`` package are listed in the :doc:`Modules <modules/index>` page. 
 
-Configuration
--------------
-
-Configuration settings for HVCtl, such as the port used for the serial connection, are defined and documented in the file ``default.conf``, located in the ``HVCtl/hvctl`` directory.
 
 Examples
 --------
 
 The following examples demonstrate reading and setting the voltage by using the different interfaces provided by HVCtl.
+
 
 Interactive mode with ``-s``
 ............................
@@ -74,6 +86,7 @@ The UI imports the :mod:`readline` module, which enables command editing and bro
 	>> getvoltage
 	The voltage is 5006.1050061050055 V
 	>> exit
+
 
 Interactive mode without ``-s``
 ...............................
@@ -124,6 +137,7 @@ The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and 
 >>> api.get_voltage()
 -5006.1050061050055
 >>> api.halt()
+
 
 Using the API with a virtual HV generator
 .........................................
