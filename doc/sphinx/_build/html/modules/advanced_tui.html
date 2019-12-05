@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="queuefile" href="queuefile.html" />
+    <link rel="next" title="display" href="display.html" />
     <link rel="prev" title="command_line_ui" href="command_line_ui.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -41,7 +41,7 @@ If urwid hasn’t been installed,
 <a class="reference internal" href="command_line_ui.html#hvctl.command_line_ui.CommandLineUI" title="hvctl.command_line_ui.CommandLineUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandLineUI</span></code></a> should be used instead.</p>
 <dl class="class">
 <dt id="hvctl.advanced_tui.AdvancedTUI">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.advanced_tui.</code><code class="sig-name descname">AdvancedTUI</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.advanced_tui.</code><code class="sig-name descname">AdvancedTUI</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em>, <em class="sig-param">palette=()</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI" title="Permalink to this definition">¶</a></dt>
 <dd><p>A text-based user interface combining a terminal-style
 command line interface and a text screen.</p>
 <dl class="attribute">
@@ -71,7 +71,7 @@ below <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI.displa
 
 <dl class="method">
 <dt id="hvctl.advanced_tui.AdvancedTUI.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em>, <em class="sig-param">palette=()</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -87,6 +87,12 @@ and send its output to <em>outputfile</em>.</p></li>
 object.</p></li>
 <li><p><strong>outputfile</strong> (<em>file-like object</em>) – Output printed on the screen by the UI is read from
 this object.</p></li>
+<li><p><strong>palette</strong> (<em>iterable of palette entries</em>) – The palette used for the UI.
+This is passed to the initializer of
+<a class="reference external" href="http://urwid.org/reference/main_loop.html#urwid.MainLoop" title="(in Urwid v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">urwid.MainLoop</span></code></a>.
+The format used by palette entries is specified in the
+documentation of
+<a class="reference external" href="http://urwid.org/reference/display_modules.html#urwid.BaseScreen.register_palette" title="(in Urwid v2.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">urwid.BaseScreen.register_palette()</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -149,6 +155,7 @@ exited.</p>
 <li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="display.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">display</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
@@ -163,7 +170,7 @@ exited.</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Modules</a><ul>
       <li>Previous: <a href="command_line_ui.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
-      <li>Next: <a href="queuefile.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
+      <li>Next: <a href="display.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">display</span></code></a></li>
   </ul></li>
   </ul></li>
 </ul>

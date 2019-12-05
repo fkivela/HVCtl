@@ -4,7 +4,7 @@
 import argparse
 import sys
 
-from hvctl import config
+from hvctl import config, display
 from hvctl.command_line_ui import CommandLineUI
 from hvctl.queuefile import QueueFile
 from hvctl.virtualhv import VirtualHV
@@ -150,37 +150,17 @@ def get_ui(command_line_ui):
         from hvctl.advanced_tui import AdvancedTUI
         advanced_ui = AdvancedTUI(command_line_ui.run, 
                                   command_line_ui.inputfile, 
-                                  command_line_ui.outputfile)
+                                  command_line_ui.outputfile,
+                                  display.palette)
+        
         # Show the status of the HV generator in the UI.
-        command_line_ui.api.status.callback = get_callback(advanced_ui)
+        def callback(status):
+            text = display.generate_text(status)
+            advanced_ui.display.set_text(text)
+        command_line_ui.api.status.callback = callback
         ui = advanced_ui
 
     return ui
 
-
-def get_callback(advanced_ui):
-    """Return a callback function that prints the contents of a Status
-    object to *advanced_ui*.
-    
-    The returned function is intended to be assigned to the
-    callback attribute of a Status object.
-    """
-    def callback(status):
-        string = '\n'.join([
-            f"Voltage: {status.voltage:.2f} V",
-            f"Current: {status.current:.2f} mA",
-            f'Regulation mode: {status.regulation}',
-            '',
-            f'HV power: {"on" if status.hv_on_status else "off"}',
-            f'HV on command given: {status.hv_on_command}',
-            f'HV off command given: {status.hv_off_command}',
-            '',
-            f'Control mode: {status.mode}',
-            f'Inhibition: {status.inhibit}',
-            f'Interlock: {status.interlock}',
-            'Fault detected' if status.fault else 'No fault detected',
-        ])
-        advanced_ui.display.set_text(string)
-    return callback
 
 main(args)

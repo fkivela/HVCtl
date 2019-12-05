@@ -25,7 +25,7 @@ class AdvancedTUI(urwid.WidgetWrap):
             below :attr:`display`.
     """
 
-    def __init__(self, script, inputfile, outputfile):
+    def __init__(self, script, inputfile, outputfile, palette=()):
         """Initialize a new :class:`AdvancedTUI`.
 
         Args:
@@ -43,6 +43,13 @@ class AdvancedTUI(urwid.WidgetWrap):
             outputfile (file-like object):
                 Output printed on the screen by the UI is read from
                 this object.
+            palette (iterable of palette entries):
+                The palette used for the UI.
+                This is passed to the initializer of
+                :class:`urwid.MainLoop`.
+                The format used by palette entries is specified in the
+                documentation of
+                :meth:`urwid.BaseScreen.register_palette`.
         """
         self.display = urwid.Text('')
         self.command_line_interface = widgets.ScrollableCommandLines(
@@ -65,7 +72,7 @@ class AdvancedTUI(urwid.WidgetWrap):
             self._script_finished = True
 
         self._thread = threading.Thread(target=run_script, daemon=True)
-        self._loop = urwid.MainLoop(self)
+        self._loop = urwid.MainLoop(self, palette)
         self._loop.set_alarm_in(0.01, self._callback, user_data=None)
 
     def keypress(self, size, key):

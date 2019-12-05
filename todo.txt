@@ -4,25 +4,29 @@ TODO:
 
 ### Soon ###
 - Document test-interlock
-- Improve the graphics of AdvancedTUI; maybe change True/False options to a dot 
-  or another visual indicator
+- Add 'm' as an alias to 'mode' in the UI
+- Change 'inhibit' to 'inhibition' where needed
+- Make sure all multi-part references (e.g. package.module.class) are OK.
+- Replace tabs with spaces in the docs.
+- Change the 'hvon' and 'hvoff' commands to 'hv on' and 'hv off'
+- Make the interlock command accept 'on' and 'off'
+- Remove strings that are printed when a command is given
+- Add input editing to test-interlock
 
 ### Before this is ready ###
-- Add 'm' as an alias to 'mode' in the UI
 - Test the timeout option in the configuration file;
   does specifying a timeout get rid of all blocking commands
-- Mke sure the setting in the configuration file are correct
+- Make sure the settings in the configuration file are correct
 - Run Pylint and Pycodestyle
-- Change 'inhibit' to 'inhibition' where needed
 - Make sure the examples in usage.rst are correct and up-to-date
 - Try to remove the underlines of links in the documentation
 - Make sure API.halt() works correctly if HVCtl is stopped while it is 
   connected to the HV
 - Test whether opening the interlock in the HV off state causes a fault
   condition
-- The main script should perhaps be made more readable.
-- Make sure all multi-part references (e.g. package.module.class) are OK.
-- Replace tabs with spaces in the docs.
+- Make advancedTUI exit automatically
+- Review the status string in CommandLineUI 
+- Investigate: HVCtl with test-interlock sometimes starts in local mode
 
 ### Maybe later ###
 - Test the program. unittest.mock and/or the Hypothesis library should be
