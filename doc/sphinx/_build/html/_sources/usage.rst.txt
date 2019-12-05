@@ -9,15 +9,15 @@ This is done with the command
 
 ::
 
-	$ python path/to/hvctl -args
-	
+    $ python path/to/hvctl -args
+    
 Because this command requires providing the relative or absolute path to the ``hvctl`` package every time it is used, 
 HVCtl also provides a shell script which automatically fills in the path before calling the command.
 If the ``HVCtl`` directory is added to ``$PATH``, the shell script can be run from any directory with
 
 ::
 
-	$ hvctl-run -args 
+    $ hvctl-run -args 
 
 Both of these commands accept the following command-line arguments:
 
@@ -89,17 +89,17 @@ The UI imports the :mod:`readline` module, which enables command editing and bro
 
 ::
 
-	$ hvctl-run -s
-	Welcome to HVCtl! Type 'help' for a list of commands.
-	>> hvon
-	HV turned on
-	>> getvoltage
-	The voltage is 0.0 V
-	>> setvoltage 5000
-	Voltage set to 5006.1050061050055 V
-	>> getvoltage
-	The voltage is 5006.1050061050055 V
-	>> exit
+    $ hvctl-run -s
+    Welcome to HVCtl! Type 'help' for a list of commands.
+    >> hvon
+    HV turned on
+    >> getvoltage
+    The voltage is 0.0 V
+    >> setvoltage 5000
+    Voltage set to 5006.1050061050055 V
+    >> getvoltage
+    The voltage is 5006.1050061050055 V
+    >> exit
 
 
 Interactive mode without ``-s``
@@ -111,30 +111,30 @@ The command-line interface can be scrolled using the mouse wheel, clicking the s
 
 ::
 
-	Voltage: 5006.11 V
-	Current: 0.00 mA
-	Regulation mode: voltage
+    Voltage: 5006.11 V
+    Current: 0.00 mA
+    Regulation mode: voltage
 
-	HV power: on
-	HV on command given: False
-	HV off command given: False
+    HV power: on
+    HV on command given: False
+    HV off command given: False
 
-	Mode: remote
-	Interlock: open
-	No faults present
-	─────────────────────────────────────────────────────────
-	Welcome to HVCtl! Type 'help' for a list of commands.  ▲
-	>> hvon                                                ██
-	HV turned on                                           ██
-	>> getvoltage                                          ██
-	The voltage is 0.0 V                                   ██
-	>> setvoltage 5000                                     ██
-	Voltage set to 5006.1050061050055 V                    ██
-	>> getvoltage                                          ██
-	The voltage is 5006.1050061050055 V                    ██
-	>> exit                                                ██
-	PRESS 'q' TO EXIT                                      ██
-	                                                       ▼
+    Mode: remote
+    Interlock: open
+    No faults present
+    ─────────────────────────────────────────────────────────
+    Welcome to HVCtl! Type 'help' for a list of commands.  ▲
+    >> hvon                                                ██
+    HV turned on                                           ██
+    >> getvoltage                                          ██
+    The voltage is 0.0 V                                   ██
+    >> setvoltage 5000                                     ██
+    Voltage set to 5006.1050061050055 V                    ██
+    >> getvoltage                                          ██
+    The voltage is 5006.1050061050055 V                    ██
+    >> exit                                                ██
+    PRESS 'q' TO EXIT                                      ██
+                                                           ▼
 
 Using the API
 .............
@@ -161,9 +161,9 @@ The script uses ``with`` blocks to ensure that both the :class:`~hvctl.api.API` 
 
 ::
 
-	from hvctl import API, VirtualHV
+    from hvctl import API, VirtualHV
 
-	with VirtualHV as vhv:
-		with API(port=vhv.connection.port) as api:
-			api.set_voltage(-5000)
-			# More code here...
+    with VirtualHV as vhv:
+        with API(port=vhv.connection.port) as api:
+            api.set_voltage(-5000)
+            # More code here...

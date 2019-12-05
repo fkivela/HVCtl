@@ -2,4 +2,3 @@
 ====================
 
 .. automodule:: hvctl.config
-	:members:

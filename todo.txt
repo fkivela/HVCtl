@@ -1,9 +1,9 @@
 TODO:
 
 ### Now ###
+- Replace tabs with spaces in the docs.
 
 ### Soon ###
-- Replace tabs with spaces in the docs.
 - Change the 'hvon' and 'hvoff' commands to 'hv on' and 'hv off'
 - Make the interlock command accept 'on' and 'off'
 - Make sure the examples in usage.rst are correct and up-to-date
