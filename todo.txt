@@ -1,10 +1,10 @@
 TODO:
 
 ### Now ###
+- Add 'm' as an alias to 'mode' in the UI
 
 ### Soon ###
 - Document test-interlock
-- Add 'm' as an alias to 'mode' in the UI
 - Change 'inhibit' to 'inhibition' where needed
 - Make sure all multi-part references (e.g. package.module.class) are OK.
 - Replace tabs with spaces in the docs.

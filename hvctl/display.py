@@ -35,7 +35,7 @@ def generate_text(status):
         ?highlight=display%20attributes#text-markup>`_.
     """
     text = ([
-        _output_text, '\n',
+        _output_text(status), '\n',
         _onoff_text(status), '\n',
         '\n',
         _mode_text(status), '\n',
