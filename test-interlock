@@ -17,6 +17,9 @@ The script is used in the following manner:
 5. Exit the HVCtl session and then this script.
 """
 
+# Importing readline adds command editing etc. to the input function.
+import readline  # pylint: disable=unused-import
+
 from hvctl import VirtualHV
 
 with VirtualHV() as virtualhv:

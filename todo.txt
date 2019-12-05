@@ -1,7 +1,6 @@
 TODO:
 
 ### Now ###
-- Add 'm' as an alias to 'mode' in the UI
 
 ### Soon ###
 - Document test-interlock
@@ -11,7 +10,6 @@ TODO:
 - Change the 'hvon' and 'hvoff' commands to 'hv on' and 'hv off'
 - Make the interlock command accept 'on' and 'off'
 - Remove strings that are printed when a command is given
-- Add input editing to test-interlock
 
 ### Before this is ready ###
 - Test the timeout option in the configuration file;
