@@ -9,7 +9,7 @@ import readline  # pylint: disable=unused-import
 import sys
 import textwrap
 
-from . import api
+from . import api, status_format
 
 
 class CommandLineUI:
@@ -74,8 +74,7 @@ class CommandLineUI:
                     ('getcurrent', ['geti']),
                     ('setvoltage', ['setu']),
                     ('setcurrent', ['seti']),
-                    ('hvon'      , []),
-                    ('hvoff'     , []),
+                    ('hv'        , []),
                     ('mode'      , ['m']),
                     ('inhibit'   , ['i']),
                     ('status'    , ['s']),
@@ -94,8 +93,7 @@ class CommandLineUI:
         ('getcurrent', ['geti']),
         ('setvoltage', ['setu']),
         ('setcurrent', ['seti']),
-        ('hvon'      , []),
-        ('hvoff'     , []),
+        ('hv'        , []),
         ('mode'      , ['m']),
         ('inhibit'   , ['i']),
         ('status'    , ['s']),
@@ -196,47 +194,66 @@ class CommandLineUI:
         """Set the current to *value* (in mA)."""
         current = self.api.set_current(value)
         self.print(f'Current set to {current} mA')
-
-    def cmd_hvon(self):
-        """Turn the HV generator on."""
-        self.api.hv_on()
-        self.print('HV on command sent')
-
-    def cmd_hvoff(self):
-        """Turn the HV generator off."""
-        self.api.hv_off()
-        self.print('HV off command sent')
+        
+    def cmd_hv(self, value):
+        """Turn the HV on or off.
+        
+        Values of '1', 'True' and 'on' turn the HV on;
+        '0', 'False' and 'off' turn it off. 
+        """
+        # 1 == True and 0 == False.
+        if value in [True, 'on']:
+            self.api.hv_on()
+            self.print('HV on command sent')
+        
+        elif value in [False, 'off']:
+            self.api.hv_off()
+            self.print('HV off command sent')
+        
+        else:
+            raise ValueError('invalid value')
 
     def cmd_mode(self, value):
         """Set the HV generator to remote or local mode.
 
-        Set *value* to 'local', 'l' or 1 for local mode,
-        or 'remote', 'r' or 0 for remote mode.
+        Values of 'local' and 'l' activate local mode,
+        'remote' and 'r' activate remote mode.
         """
-        self.api.set_mode(value)
         if value in ['local', 'l']:
+            self.api.set_mode('local')
             self.print('Local mode activated')
-        else:
+        
+        elif value in ['remote', 'r']:
+            self.api.set_mode('remote')
             self.print('Remote mode activated')
+        
+        else:
+            raise ValueError('invalid value')
 
     def cmd_inhibit(self, value):
         """Activate or deactivate inhibition.
 
-        If bool(value) evaluates to True, inhibition is
-        activated; otherwise it is deactivated.
+        Values of '1', 'True' and 'on' activate inhibition;
+        '0', 'False' and 'off' deactivate it. 
         """
-        self.api.set_inhibition(value)
-        if value:
+        # 1 == True and 0 == False.
+        if value in [True, 'on']:
+            self.api.set_inhibition(True)
             self.print('HV inhibition activated')
-        else:
+        
+        elif value in [False, 'off']:
+            self.api.set_inhibition(False)
             self.print('HV inhibition deactivated')
+
+        else:
+            raise ValueError('invalid value')
 
     def cmd_status(self):
         """Get the status of the HV generator
         (excluding voltage and current).
         """
         statusdict = self.api.get_status()
-        string = self._status_str(statusdict)
+        string = status_format.status_string(statusdict)
         self.print('Status:\n' + textwrap.indent(string, self.indent))
 
     def cmd_fullstatus(self):
@@ -244,27 +261,8 @@ class CommandLineUI:
         including voltage and current.
         """
         statusdict = self.api.full_status()
-        string = (f"Voltage: {statusdict['voltage']} V\n"
-                  f"Current: {statusdict['current']} mA\n"
-                  + self._status_str(statusdict))
+        string = status_format.status_string(statusdict)
         self.print('Status:\n' + textwrap.indent(string, self.indent))
-
-    @staticmethod
-    def _status_str(statusdict):
-        """Return a formatted string displaying the data returned
-        by API.get_status.
-        """
-        return '\n'.join([
-            f'Regulation mode: {statusdict["regulation"]}',
-            f'HV power: {"on" if statusdict["hv_on_status"] else "off"}',
-            f'HV on command given: {statusdict["hv_on_command"]}',
-            f'HV off command given: {statusdict["hv_off_command"]}',
-            f'Control mode: {statusdict["mode"]}',
-            f'Inhibition: {statusdict["inhibition"]}',
-            f'Interlock: {statusdict["interlock"]}',
-            ('Fault detected' if statusdict["fault"] 
-             else 'No fault detected'),
-        ])
 
     def cmd_help(self, value=None):
         """Display a help message.
@@ -293,19 +291,27 @@ class CommandLineUI:
 
     def cmd_debug(self, value):
         """Activate or deactivate the debug mode.
+        
+        Values of '1', 'True' and 'on' activate the debug mode;
+        '0', 'False' and 'off' deactivate it. 
 
-        If bool(value) evaluates to True, the debug mode is activated;
-        otherwise it is deactivated.
-
-        When the debug mode is inactive, TypeErrors and ValueErrors
+        In normal operation, TypeErrors and ValueErrors
         raised during the execution of commands are caught to prevent
         users from crashing the program with invalid commands.
-        The debug mode disables this error-catching in order to make
-        debugging easier.
+        Activating the debug mode disables this error-catching in order
+        to make debugging easier.
         """
-        self.debug = bool(value)
-        self.print('Debug mode '
-                   + ('activated' if self.debug else 'deactivated'))
+        # 1 == True and 0 == False.
+        if value in [True, 'on']:
+            self.debug = True
+            self.print('Debug mode activated')
+        
+        elif value in [False, 'off']:
+            self.debug = False
+            self.print('Debug mode deactivated')
+
+        else:
+            raise ValueError('invalid value')
 
     def input(self, prompt=''):
         """Ask the user for input.

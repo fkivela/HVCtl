@@ -123,8 +123,7 @@ It has the following value:</p>
     <span class="p">(</span><span class="s1">&#39;getcurrent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;geti&#39;</span><span class="p">]),</span>
     <span class="p">(</span><span class="s1">&#39;setvoltage&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;setu&#39;</span><span class="p">]),</span>
     <span class="p">(</span><span class="s1">&#39;setcurrent&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;seti&#39;</span><span class="p">]),</span>
-    <span class="p">(</span><span class="s1">&#39;hvon&#39;</span>      <span class="p">,</span> <span class="p">[]),</span>
-    <span class="p">(</span><span class="s1">&#39;hvoff&#39;</span>     <span class="p">,</span> <span class="p">[]),</span>
+    <span class="p">(</span><span class="s1">&#39;hv&#39;</span>        <span class="p">,</span> <span class="p">[]),</span>
     <span class="p">(</span><span class="s1">&#39;mode&#39;</span>      <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]),</span>
     <span class="p">(</span><span class="s1">&#39;inhibit&#39;</span>   <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]),</span>
     <span class="p">(</span><span class="s1">&#39;status&#39;</span>    <span class="p">,</span> <span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">]),</span>
@@ -212,31 +211,27 @@ Otherwise, start another iteration from step 1.</p></li>
 </dd></dl>
 
 <dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_hvon">
-<code class="sig-name descname">cmd_hvon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_hvon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turn the HV generator on.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="hvctl.command_line_ui.CommandLineUI.cmd_hvoff">
-<code class="sig-name descname">cmd_hvoff</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_hvoff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turn the HV generator off.</p>
+<dt id="hvctl.command_line_ui.CommandLineUI.cmd_hv">
+<code class="sig-name descname">cmd_hv</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_hv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the HV on or off.</p>
+<p>Values of ‘1’, ‘True’ and ‘on’ turn the HV on;
+‘0’, ‘False’ and ‘off’ turn it off.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.cmd_mode">
 <code class="sig-name descname">cmd_mode</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the HV generator to remote or local mode.</p>
-<p>Set <em>value</em> to ‘local’, ‘l’ or 1 for local mode,
-or ‘remote’, ‘r’ or 0 for remote mode.</p>
+<p>Values of ‘local’ and ‘l’ activate local mode,
+‘remote’ and ‘r’ activate remote mode.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="hvctl.command_line_ui.CommandLineUI.cmd_inhibit">
 <code class="sig-name descname">cmd_inhibit</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_inhibit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate or deactivate inhibition.</p>
-<p>If bool(value) evaluates to True, inhibition is
-activated; otherwise it is deactivated.</p>
+<p>Values of ‘1’, ‘True’ and ‘on’ activate inhibition;
+‘0’, ‘False’ and ‘off’ deactivate it.</p>
 </dd></dl>
 
 <dl class="method">
@@ -273,13 +268,13 @@ described.</p>
 <dt id="hvctl.command_line_ui.CommandLineUI.cmd_debug">
 <code class="sig-name descname">cmd_debug</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI.cmd_debug" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate or deactivate the debug mode.</p>
-<p>If bool(value) evaluates to True, the debug mode is activated;
-otherwise it is deactivated.</p>
-<p>When the debug mode is inactive, TypeErrors and ValueErrors
+<p>Values of ‘1’, ‘True’ and ‘on’ activate the debug mode;
+‘0’, ‘False’ and ‘off’ deactivate it.</p>
+<p>In normal operation, TypeErrors and ValueErrors
 raised during the execution of commands are caught to prevent
 users from crashing the program with invalid commands.
-The debug mode disables this error-catching in order to make
-debugging easier.</p>
+Activating the debug mode disables this error-catching in order
+to make debugging easier.</p>
 </dd></dl>
 
 <dl class="method">
@@ -335,7 +330,7 @@ the <em>file</em> and <em>flush</em> arguments.</p>
 <li class="toctree-l2"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="display.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">display</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="status_format.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">status_format</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>

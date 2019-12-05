@@ -1,6 +1,5 @@
-"""This module is used to create a status screen for the
-:attr:`display <hvctl.advanced_tui.AdvancedTUI.display>`
-of an :class:`~hvctl.advanced_tui.AdvancedTUI`.
+"""This module controls how the status of the HV generator is presented
+to the user in the UIs.
 
 Attributes:
     palette:
@@ -24,8 +23,59 @@ palette = [('green', 'light green', ''),
 red_button = ('red', '⏺')
 green_button = ('green', '⏺')
 
-def generate_text(status):
-    """Return a formatted status display.
+
+def status_string(statusdict):
+    """Return a formatted string displaying the data returned
+    by :meth:`API.get_status <hvctl.api.API.get_status>` or 
+    :meth:`API.full_status <hvctl.api.API.full_status>`.
+    
+    Args:
+        statusdict:
+            A dictionary returned by
+            :meth:`API.get_status <hvctl.api.API.get_status>` or 
+            :meth:`API.full_status <hvctl.api.API.full_status>`.
+    """
+    lines = [
+        'Voltage: {voltage} V' if 'voltage' in statusdict else None,
+        'Current: {current} mA' if 'current' in statusdict else None,
+        'Regulation mode: {regulation}',
+        'HV on/off: {onoff}',
+        'HV on command given: {hvon}',
+        'HV off command given: {hvoff}',
+        'Control mode: {mode}',
+        'Inhibition: {inhibition}',
+        'Interlock: {interlock}',
+        'Fault: {fault}'
+    ]
+    string = '\n'.join([line for line in lines if line is not None])
+    
+    # Capitalizing values makes reading them easier.
+    formatdict = {
+        'voltage'   : (statusdict['voltage'] 
+                           if 'voltage' in statusdict else None),
+        'current'   : (statusdict['current']
+                           if 'current' in statusdict else None),
+        'regulation': statusdict['regulation'].capitalize(),
+        'onoff'     : 'On' if statusdict['hv_on_status'] else 'Off',
+        'hvon'      : 'Yes' if statusdict["hv_on_command"] else 'No',
+        'hvoff'     : 'Yes' if statusdict["hv_off_command"] else 'No',
+        'mode'      : statusdict['mode'].capitalize(),
+        'inhibition': 'On' if statusdict['inhibition'] else 'Off',
+        'interlock' : statusdict['interlock'].capitalize(),
+        'fault'     : 'Yes' if statusdict["fault"] else 'No'
+    }
+    return string.format_map(formatdict)
+
+
+def status_screen(status):
+    """Return a status screen for the
+    :attr:`display <hvctl.advanced_tui.AdvancedTUI.display>`
+    of an :class:`~hvctl.advanced_tui.AdvancedTUI`.
+    
+    Args:
+        status:
+            A :class:`~hvctl.api.Status` object, the contents of which
+            will be displayed on the screen.
     
     Returns:
         A nested iterable of strings, which will be interpreted by
@@ -75,7 +125,7 @@ def _onoff_text(status):
     """Return the HV on/off status as well as the status of the 
     HV on and HV off commands as an iterable accepted by urwid.Text.
     """
-    name = ('', 'HV output: '.ljust(_width))
+    name = ('', 'HV on/off: '.ljust(_width))
     button = green_button if status.hv_on_status else red_button
     space = ' '
     value = 'On' if status.hv_on_status else 'Off'

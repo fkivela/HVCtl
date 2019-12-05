@@ -4,7 +4,7 @@
 import argparse
 import sys
 
-from hvctl import config, display
+from hvctl import config, status_format
 from hvctl.command_line_ui import CommandLineUI
 from hvctl.queuefile import QueueFile
 from hvctl.virtualhv import VirtualHV
@@ -151,11 +151,11 @@ def get_ui(command_line_ui):
         advanced_ui = AdvancedTUI(command_line_ui.run, 
                                   command_line_ui.inputfile, 
                                   command_line_ui.outputfile,
-                                  display.palette)
+                                  status_format.palette)
         
         # Show the status of the HV generator in the UI.
         def callback(status):
-            text = display.generate_text(status)
+            text = status_format.status_screen(status)
             advanced_ui.display.set_text(text)
         command_line_ui.api.status.callback = callback
         ui = advanced_ui

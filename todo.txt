@@ -1,14 +1,10 @@
 TODO:
 
 ### Now ###
-- Replace tabs with spaces in the docs.
+- Try to remove the underlines of links in the documentation
 
 ### Soon ###
-- Change the 'hvon' and 'hvoff' commands to 'hv on' and 'hv off'
-- Make the interlock command accept 'on' and 'off'
 - Make sure the examples in usage.rst are correct and up-to-date
-- Try to remove the underlines of links in the documentation
-- Review the status string in CommandLineUI 
 - Investigate: HVCtl with test-interlock sometimes starts in local mode
 
 ### Before this is ready ###

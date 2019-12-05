@@ -15,7 +15,7 @@ This page lists all importable Python modules in the ``hvctl`` package.
    widgets.rst
    command_line_ui.rst
    advanced_tui.rst
-   display.rst
+   status_format.rst
    queuefile.rst
    virtualconnection.rst
    virtualhv.rst
