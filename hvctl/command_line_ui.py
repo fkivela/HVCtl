@@ -200,12 +200,12 @@ class CommandLineUI:
     def cmd_hvon(self):
         """Turn the HV generator on."""
         self.api.hv_on()
-        self.print('HV turned on')
+        self.print('HV on command sent')
 
     def cmd_hvoff(self):
         """Turn the HV generator off."""
         self.api.hv_off()
-        self.print('HV turned off')
+        self.print('HV off command sent')
 
     def cmd_mode(self, value):
         """Set the HV generator to remote or local mode.
@@ -305,7 +305,7 @@ class CommandLineUI:
         """
         self.debug = bool(value)
         self.print('Debug mode '
-                   + 'activated' if self.debug else 'deactivated')
+                   + ('activated' if self.debug else 'deactivated'))
 
     def input(self, prompt=''):
         """Ask the user for input.
