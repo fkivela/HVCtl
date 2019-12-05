@@ -54,7 +54,7 @@ class AdvancedTUI(urwid.WidgetWrap):
         self.display = urwid.Text('')
         self.command_line_interface = widgets.ScrollableCommandLines(
             inputfile, outputfile)
-        self._script_finished = False
+        self._stop_flag = threading.Event()
 
         upper_half = self.display
         divider = urwid.Divider('─')
@@ -67,33 +67,30 @@ class AdvancedTUI(urwid.WidgetWrap):
 
         def run_script():
             script()
-            self.command_line_interface.command_lines.outputfile.write(
-                "PRESS 'q' TO EXIT")
-            self._script_finished = True
+            self._stop_flag.set()
 
         self._thread = threading.Thread(target=run_script, daemon=True)
         self._loop = urwid.MainLoop(self, palette)
         self._loop.set_alarm_in(0.01, self._callback, user_data=None)
 
-    def keypress(self, size, key):
-        """Handle key presses.
-
-        Pressing 'q' after the program has finished its execution
+    def _callback(self, loop, user_data):
+        """Update the UI periodically.
+        
+        This method makes self.command_line_interface.command_lines
+        handle new output and re-renders
+        self.command_line_interface.scrollbar,
+        since printing new output may change its size or position.
+        
+        If the program has finished its execution, this method
         breaks the UI loop.
+        
+        A call to this method sets an alarm which calls it again after
+        a set period; this repeats until the UI loop is broken.
         """
-        if key == 'q' and self._script_finished:
+        if self._stop_flag.is_set():
             raise urwid.ExitMainLoop
 
-        return super().keypress(size, key)
-
-    def _callback(self, loop, user_data):
-        """Update self.command_line_interface.command_lines
-        periodically so that it handles new output.
-        This also updates self.command_line_interface.scrollbar,
-        since printing new output may change its size or position.
-        """
-        self.command_line_interface.command_lines.update()
-        
+        self.command_line_interface.command_lines.update()        
         # _invalidate marks a widget for re-rendering.
         # urwid documentation suggests using this method even though
         # it begins with '_'.
@@ -105,6 +102,7 @@ class AdvancedTUI(urwid.WidgetWrap):
 
     def run(self):
         """Run the program and the UI loop in parallel threads.
+        The UI loop beaks automatically when the program ends.
         
         .. Warning:: 
             If the UI loop (which is executed in the main thread)
