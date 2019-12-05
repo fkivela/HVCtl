@@ -57,9 +57,9 @@ class VirtualHV():
     .. |mode| replace::
         :attr:`status`:attr:`.mode
         <hvctl.api.Status.mode>`
-    .. |inhibit| replace::
-        :attr:`status`:attr:`.inhibit
-        <hvctl.api.Status.inhibit>`
+    .. |inhibition| replace::
+        :attr:`status`:attr:`.inhibition
+        <hvctl.api.Status.inhibition>`
     .. |interlock| replace::
         :attr:`status`:attr:`.interlock
         <hvctl.api.Status.interlock>`
@@ -95,9 +95,9 @@ class VirtualHV():
 
         Returns:
             |voltage|, or 0 if |hv_on_status| is ``False`` or
-            |inhibit| is ``True``.
+            |inhibition| is ``True``.
             """
-        output_active = self.status.hv_on_status and not self.status.inhibit
+        output_active = self.status.hv_on_status and not self.status.inhibition
         return self.status.voltage if output_active else 0
 
     def get_current(self, *args):
@@ -108,9 +108,9 @@ class VirtualHV():
 
         Returns:
             |current|, or 0 if |hv_on_status| is ``False`` or
-            |inhibit| is ``True``.
+            |inhibition| is ``True``.
             """
-        output_active = self.status.hv_on_status and not self.status.inhibit
+        output_active = self.status.hv_on_status and not self.status.inhibition
         return self.status.current if output_active else 0
 
     def set_voltage(self, value):
@@ -146,7 +146,7 @@ class VirtualHV():
             
         - The old value of |hv_on_command| was ``True``.
         - The new value of |hv_on_command| is ``False``.
-        - |inhibit| is ``False``.
+        - |inhibition| is ``False``.
         - |fault| is ``False``.
 
         Returns:
@@ -208,16 +208,16 @@ class VirtualHV():
         
         return value
 
-    def set_inhibit(self, value):
-        """Handle a ``'set inhibit'`` command.
+    def set_inhibition(self, value):
+        """Handle a ``'set inhibition'`` command.
 
-        Sets |inhibit| to ``bool(value)``.
+        Sets |inhibition| to ``bool(value)``.
         
         Returns:
            *value*.
         """
-        self.status.inhibit = bool(value)
-        return self.status.inhibit
+        self.status.inhibition = bool(value)
+        return self.status.inhibition
 
     def get_status(self, _):
         """Handle a ``'get status'`` command.
@@ -228,7 +228,7 @@ class VirtualHV():
         The values of the bits in the number are copied from the
         attributes of this object in the following manner:
 
-        :Bit 0: |inhibit|
+        :Bit 0: |inhibition|
         :Bit 1: |mode|
             (``1`` for ``'local'``, ``0`` for ``'remote'``)
         :Bit 2: |hv_off_command|
@@ -250,7 +250,7 @@ class VirtualHV():
             An :class:`int` in ``range(256)``.
         """
         values = [
-            self.status.inhibit,
+            self.status.inhibition,
             self.status.mode == 'local',
             self.status.hv_off_command,
             self.status.hv_on_command,

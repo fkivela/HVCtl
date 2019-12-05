@@ -13,7 +13,7 @@ _COMMAND_TO_PATTERN = {
     'hv on'      : 'P5,{}\r',
     'hv off'     : 'P6,{}\r',
     'set mode'   : 'P7,{}\r',
-    'set inhibit': 'P8,{}\r',
+    'set inhibition': 'P8,{}\r',
     'get status' : 'E{}\r'
 }
 
@@ -41,7 +41,7 @@ class Message():
                 | ``'hv on'``      
                 | ``'hv off'``     
                 | ``'set mode'``   
-                | ``'set inhibit'``
+                | ``'set inhibition'``
                 | ``'get status'``
 
         value (int or None):
@@ -165,7 +165,7 @@ class Message():
         elif self.command in ['get voltage', 'get current']:
             self._check_getter_value()
         
-        elif self.command in ['hv on', 'hv off', 'set mode', 'set inhibit']:
+        elif self.command in ['hv on', 'hv off', 'set mode', 'set inhibition']:
             self._check_parameter_value()
         
         elif self.command == 'get status':

@@ -225,7 +225,7 @@ class CommandLineUI:
         If bool(value) evaluates to True, inhibition is
         activated; otherwise it is deactivated.
         """
-        self.api.set_inhibit(value)
+        self.api.set_inhibition(value)
         if value:
             self.print('HV inhibition activated')
         else:
@@ -260,7 +260,7 @@ class CommandLineUI:
             f'HV on command given: {statusdict["hv_on_command"]}',
             f'HV off command given: {statusdict["hv_off_command"]}',
             f'Control mode: {statusdict["mode"]}',
-            f'Inhibition: {statusdict["inhibit"]}',
+            f'Inhibition: {statusdict["inhibition"]}',
             f'Interlock: {statusdict["interlock"]}',
             ('Fault detected' if statusdict["fault"] 
              else 'No fault detected'),

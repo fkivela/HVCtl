@@ -204,7 +204,7 @@ class API():
             raise ValueError(f'invalid mode: {mode}')
         self._send(Message('set mode', value))
 
-    def set_inhibit(self, value):
+    def set_inhibition(self, value):
         """Activate or deactivate inhibition.
 
         args:
@@ -213,7 +213,7 @@ class API():
                 inhibition is activated; otherwise it is deactivated.
         """
         value = bool(value)
-        self._send(Message('set inhibit', value))
+        self._send(Message('set inhibition', value))
 
     def get_status(self):
         """Get the status of the HV generator.
@@ -318,8 +318,8 @@ class API():
         elif reply.command == 'set mode':
             self.status.mode = 'local' if reply.value else 'remote'
 
-        elif reply.command == 'set inhibit':
-            self.status.inhibit = bool(reply.value)
+        elif reply.command == 'set inhibition':
+            self.status.inhibition = bool(reply.value)
 
         elif reply.command == 'get status':
             statusdict = self._parse_status_bits(reply.value)
@@ -344,7 +344,7 @@ class API():
         bits = [int(b) for b in bit_str]
 
         return {
-            'inhibit'       : bool(bits[0]),
+            'inhibition'    : bool(bits[0]),
             'mode'          : 'local' if bits[1] else 'remote',
             'hv_off_command': bool(bits[2]),
             'hv_on_command' : bool(bits[3]),
@@ -421,18 +421,16 @@ class Status:
     """
     # Sphinx needs a line break after ':' here to parse it correctly.
 
-    inhibit: bool = False
-    """``True`` if the inhibition parameter is turned on, ``False``
-    otherwise.
+    inhibition: bool = False
+    """``True`` if inhibition is turned on, ``False`` otherwise.
     """
 
     interlock: str = 'closed'
-    """The value of the interlock parameter; ``open`` or
-    ``closed``.
+    """The status of the interlock; ``open`` or ``closed``.
     """
 
     fault: bool = False
-    """``True`` if there is a fault present at the generator, 
+    """``True`` if there the generator is in a fault state, 
     ``False`` otherwise.
     """
 

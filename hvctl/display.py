@@ -104,9 +104,9 @@ def _inhibition_text(status):
     accepted by urwid.Text.
     """
     name = ('', 'Inhibition: '.ljust(_width))
-    button = red_button if status.inhibit else green_button
+    button = red_button if status.inhibition else green_button
     space = ' '
-    value = 'On' if status.inhibit else 'Off'
+    value = 'On' if status.inhibition else 'Off'
     return [name, button, space, value]
 
 

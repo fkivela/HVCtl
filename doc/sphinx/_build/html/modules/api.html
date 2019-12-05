@@ -190,8 +190,8 @@ of the generator.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="hvctl.api.API.set_inhibit">
-<code class="sig-name descname">set_inhibit</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_inhibit" title="Permalink to this definition">¶</a></dt>
+<dt id="hvctl.api.API.set_inhibition">
+<code class="sig-name descname">set_inhibition</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_inhibition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate or deactivate inhibition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -238,7 +238,7 @@ are skipped.</p>
 
 <dl class="class">
 <dt id="hvctl.api.Status">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0.0</em>, <em class="sig-param">current: float = 0.0</em>, <em class="sig-param">regulation: str = 'voltage'</em>, <em class="sig-param">hv_on_status: bool = False</em>, <em class="sig-param">hv_on_command: bool = False</em>, <em class="sig-param">hv_off_command: bool = False</em>, <em class="sig-param">mode: str = 'remote'</em>, <em class="sig-param">inhibit: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">callback: Callable = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0.0</em>, <em class="sig-param">current: float = 0.0</em>, <em class="sig-param">regulation: str = 'voltage'</em>, <em class="sig-param">hv_on_status: bool = False</em>, <em class="sig-param">hv_on_command: bool = False</em>, <em class="sig-param">hv_off_command: bool = False</em>, <em class="sig-param">mode: str = 'remote'</em>, <em class="sig-param">inhibition: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">callback: Callable = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class stores information about the current status of the
 HV generator.</p>
 <dl class="attribute">
@@ -293,23 +293,21 @@ boolean.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="hvctl.api.Status.inhibit">
-<code class="sig-name descname">inhibit</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.inhibit" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the inhibition parameter is turned on, <code class="docutils literal notranslate"><span class="pre">False</span></code>
-otherwise.</p>
+<dt id="hvctl.api.Status.inhibition">
+<code class="sig-name descname">inhibition</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.inhibition" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if inhibition is turned on, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.api.Status.interlock">
 <code class="sig-name descname">interlock</code><em class="property"> = 'closed'</em><a class="headerlink" href="#hvctl.api.Status.interlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>The value of the interlock parameter; <code class="docutils literal notranslate"><span class="pre">open</span></code> or
-<code class="docutils literal notranslate"><span class="pre">closed</span></code>.</p>
+<dd><p>The status of the interlock; <code class="docutils literal notranslate"><span class="pre">open</span></code> or <code class="docutils literal notranslate"><span class="pre">closed</span></code>.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="hvctl.api.Status.fault">
 <code class="sig-name descname">fault</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.fault" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if there is a fault present at the generator,
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if there the generator is in a fault state,
 <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 </dd></dl>
 

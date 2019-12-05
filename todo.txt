@@ -3,24 +3,23 @@ TODO:
 ### Now ###
 
 ### Soon ###
-- Change 'inhibit' to 'inhibition' where needed
 - Replace tabs with spaces in the docs.
 - Change the 'hvon' and 'hvoff' commands to 'hv on' and 'hv off'
 - Make the interlock command accept 'on' and 'off'
+- Make sure the examples in usage.rst are correct and up-to-date
+- Try to remove the underlines of links in the documentation
+- Review the status string in CommandLineUI 
+- Investigate: HVCtl with test-interlock sometimes starts in local mode
 
 ### Before this is ready ###
 - Test the timeout option in the configuration file;
   does specifying a timeout get rid of all blocking commands
 - Make sure the settings in the configuration file are correct
 - Run Pylint and Pycodestyle
-- Make sure the examples in usage.rst are correct and up-to-date
-- Try to remove the underlines of links in the documentation
 - Make sure API.halt() works correctly if HVCtl is stopped while it is 
   connected to the HV
 - Test whether opening the interlock in the HV off state causes a fault
   condition
-- Review the status string in CommandLineUI 
-- Investigate: HVCtl with test-interlock sometimes starts in local mode
 - Make sure all multi-part references (e.g. package.module.class) are OK.
 
 ### Maybe later ###
