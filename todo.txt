@@ -1,7 +1,6 @@
 TODO:
 
 ### Now ###
-- Try to remove the underlines of links in the documentation
 
 ### Soon ###
 - Make sure the examples in usage.rst are correct and up-to-date
