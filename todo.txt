@@ -3,7 +3,6 @@ TODO:
 ### Now ###
 
 ### Soon ###
-- Document test-interlock
 - Change 'inhibit' to 'inhibition' where needed
 - Replace tabs with spaces in the docs.
 - Change the 'hvon' and 'hvoff' commands to 'hv on' and 'hv off'

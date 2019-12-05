@@ -235,6 +235,8 @@ Bit 4: HV status
 This bit tells whether the HV generator is in the `HV on <hv-on_>`_ state or the `HV off <hv-off_>`_ state.
 
 
+.. _interlock:
+
 Bit 3: interlock  
 ****************
 This bit tells whether the interlock is closed or open.

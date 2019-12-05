@@ -68,8 +68,8 @@ This makes it possible to test HVCtl easily without having to connect to an actu
 This option is incompatible with <code class="docutils literal notranslate"><span class="pre">-p</span></code>.</p>
 </dd>
 <dt><kbd><span class="option">-s</span>, <span class="option">--simple</span></kbd></dt>
-<dd><p>Run HVCtl with a simple command-line interface that doesn’t require <a class="reference internal" href="installation.html"><span class="doc">urwid</span></a> to work.
-If HVCtl is run without the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, a slightly more advanced UI will be used (see below for  an example).</p>
+<dd><p>Run HVCtl with a simple command-line interface that doesn’t require <a class="reference internal" href="installation.html#dependencies"><span class="std std-ref">urwid</span></a>.
+If HVCtl is run without the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, a more advanced UI will be used (see below for  an example).</p>
 </dd>
 <dt><kbd><span class="option">-n</span>, <span class="option">--no-poll</span></kbd></dt>
 <dd><p>Disable automatic polling. If automatic polling is enabled, HVCtl automatically sends messages to the HV generator at regular intervals.
@@ -77,6 +77,15 @@ Disabling this functionality makes the generator automatically turn the HV off i
 Additionally, each status variable displayed by the UI will only be updated whenever the generator sends back the value of the variable as a response to a command sent by the user.</p>
 </dd>
 </dl>
+<div class="section" id="testing-the-interlock">
+<h3>Testing the interlock<a class="headerlink" href="#testing-the-interlock" title="Permalink to this headline">¶</a></h3>
+<p>When HVCtl is run with the <code class="docutils literal notranslate"><span class="pre">-v</span></code> argument, it communicates with the virtual HV generator only by sending messages through the virtual serial connection.
+Because of this, in this mode it is impossible to test actions that require physical access to the HV generator, such as opening the <a class="reference internal" href="protocol.html#interlock"><span class="std std-ref">interlock</span></a>.</p>
+<p>However, physical access to the generator can be simulated with the <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code> script (located in the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory).
+Running the script in a terminal creates a virtual HV generator, prints the name of its port, and starts a simple command-line UI.
+The virtual HV generator can then be controlled with HVCtl by launching HVCtl in another terminal window with the <code class="docutils literal notranslate"><span class="pre">-p</span></code> argument and supplying the port name printed by <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code>.
+The interlock of the virtual HV generator can be opened and closed through the UI of <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code>, and these actions affect HVCtl session running in the other window.</p>
+</div>
 </div>
 <div class="section" id="importing">
 <h2>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h2>

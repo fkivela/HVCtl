@@ -31,15 +31,29 @@ Both of these commands accept the following command-line arguments:
 
 -v, --virtual       Run HVCtl with a virtual HV generator. 
                     If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that.
-                    This makes it possible to test HVCtl easily without having to connect to an actual HV generator.
+                    This makes it possible to test HVCtl easily without having to connect to an actual HV generator.     
                     This option is incompatible with ``-p``.
 
--s, --simple        Run HVCtl with a simple command-line interface that doesn't require :doc:`urwid <installation>` to work.
-                    If HVCtl is run without the ``-s`` argument, a slightly more advanced UI will be used (see below for  an example).
+-s, --simple        Run HVCtl with a simple command-line interface that doesn't require :ref:`urwid <dependencies>`.
+                    If HVCtl is run without the ``-s`` argument, a more advanced UI will be used (see below for  an example).
 
 -n, --no-poll       Disable automatic polling. If automatic polling is enabled, HVCtl automatically sends messages to the HV generator at regular intervals.
                     Disabling this functionality makes the generator automatically turn the HV off if the user doesn't send it a command for 5 seconds.
                     Additionally, each status variable displayed by the UI will only be updated whenever the generator sends back the value of the variable as a response to a command sent by the user.  
+
+
+Testing the interlock
+.....................
+
+When HVCtl is run with the ``-v`` argument, it communicates with the virtual HV generator only by sending messages through the virtual serial connection.
+Because of this, in this mode it is impossible to test actions that require physical access to the HV generator, such as opening the :ref:`interlock <interlock>`.
+
+.. Using :ref:`interlock` would be rendered as 'Bit 3: interlock'.
+
+However, physical access to the generator can be simulated with the ``test-interlock`` script (located in the ``HVCtl`` directory).
+Running the script in a terminal creates a virtual HV generator, prints the name of its port, and starts a simple command-line UI.
+The virtual HV generator can then be controlled with HVCtl by launching HVCtl in another terminal window with the ``-p`` argument and supplying the port name printed by ``test-interlock``.
+The interlock of the virtual HV generator can be opened and closed through the UI of ``test-interlock``, and these actions affect HVCtl session running in the other window.
 
 
 Importing
