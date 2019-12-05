@@ -79,6 +79,12 @@ def _onoff_text(status):
     button = green_button if status.hv_on_status else red_button
     space = ' '
     value = 'On' if status.hv_on_status else 'Off'
+    
+    if status.hv_on_command:
+        value += ' (switching on)'
+    if status.hv_off_command:
+        value += ' (switching off)'
+    
     return [name, button, space, value]
 
 
