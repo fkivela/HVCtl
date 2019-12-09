@@ -1,11 +1,11 @@
 """This module uses the `urwid <http://urwid.org/>`_ library to create
-widgets (see :class:`urwid.Widget`) for a text-based user interface 
+widgets (see :class:`urwid.Widget`) for a text-based user interface
 containing a scrollable command line interface below a text screen.
 
 The docstring of each widget defined here tells whether it is a box,
 flow or fixed widget. The differences between these widget types are
 explained `here <http://urwid.org/manual/widgets.html
-#box-flow-and-fixed-widgets>`_. 
+#box-flow-and-fixed-widgets>`_.
 """
 
 # pylint: disable=too-many-arguments
@@ -24,7 +24,7 @@ import urwid
 class ScrollableCommandLines(urwid.WidgetWrap):
     """A widget consisting of a scrollable command line interface and
     a scroll bar with two arrow buttons for scrolling it.
-    
+
     This is a box widget; its container sets it height and width.
 
     Attributes:
@@ -48,10 +48,10 @@ class ScrollableCommandLines(urwid.WidgetWrap):
             An arrow button that can be clicked to scroll the screen
             down.
     """
-    
-    def sizing(self):
+
+    def sizing(self):  # pylint: disable=empty-docstring
         """"""
-        # By default, self.sizing() seems to return the sizing of 
+        # By default, self.sizing() seems to return the sizing of
         # urwid.Columns, frozenset({'box', 'flow'}).
         # Overriding _sizing doesn't work, so this method has to be
         # defined.
@@ -60,10 +60,10 @@ class ScrollableCommandLines(urwid.WidgetWrap):
         # Because the docstring is empty, this method isn't included in
         # the documentation.
         return {urwid.BOX}
-    
+
     def __init__(self, inputfile, outputfile):
         """Initialize a new :class:`ScrollableCommandLines`.
-        
+
         The arguments are passed to the initializer of
         :attr:`command_lines`.
         """
@@ -78,7 +78,7 @@ class ScrollableCommandLines(urwid.WidgetWrap):
         self.position.listeners = {self.command_lines, self.scrollbar}
 
         # (num, widget)-tuples are used to specify the height
-        # (for Piles) or width (for Columns) of contained widgets.   
+        # (for Piles) or width (for Columns) of contained widgets.
         pile = urwid.Pile([(1, self.arrow_up), self.scrollbar,
                            (1, self.arrow_down)])
         super().__init__(urwid.Columns([self.scroller, (2, pile)]))
@@ -100,7 +100,7 @@ class CommandLines(urwid.WidgetWrap):
             is written to this object.
 
         outputfile (file-like object):
-            The command-line interface reads its output from this 
+            The command-line interface reads its output from this
             object and prints it on the screen.
 
         history (:class:`CommandHistory`):
@@ -108,12 +108,12 @@ class CommandLines(urwid.WidgetWrap):
 
         edit (:class:`urwid.Edit`):
             This widget provides the functionality for displaying and
-            editing text.            
+            editing text.
     """
 
     def __init__(self, inputfile, outputfile):
         """Initialize a new :class:`CommandLines` object.
-        
+
         The arguments set the values of :attr:`inputfile` and
         :attr:`outputfile`.
         """
@@ -128,7 +128,7 @@ class CommandLines(urwid.WidgetWrap):
         self.edit.set_edit_pos(len(self.edit.edit_text))
 
     def update(self):
-        """Print the string returned by 
+        """Print the string returned by
         :attr:`outputfile.read() <outputfile>` to the screen.
         """
         string = self.outputfile.read()
@@ -137,7 +137,7 @@ class CommandLines(urwid.WidgetWrap):
 
     def history_up(self):
         """Scroll command history up one step.
-        
+
         Calling this function has approximately the same effect as
         pressing the up arrow button in a Linux terminal.
         """
@@ -148,7 +148,7 @@ class CommandLines(urwid.WidgetWrap):
 
     def history_down(self):
         """Scroll command history down one step.
-        
+
         Calling this function has approximately the same effect as
         pressing the down arrow button in a Linux terminal.
         """
@@ -294,7 +294,7 @@ class CommandHistory:
 
 class Scroller(urwid.WidgetWrap):
     """A container widget that makes a flow widget scrollable.
-    
+
     This is a box widget; its container sets it height and width.
 
     Attributes:
@@ -414,7 +414,7 @@ class Position:
             screen.
             Empty rows are also included.
             The :class:`Scroller` widget should update this attribute
-            whenever it is rendered.         
+            whenever it is rendered.
 
         visible_rows (int):
             Like :attr:`total_rows`, but only counts the rows visible
@@ -438,13 +438,13 @@ class Position:
         Args:
             listeners (iterable):
                 The initial value for :attr:`listeners`.
-                This may be changed later. If no value is given, 
+                This may be changed later. If no value is given,
                 :attr:`listeners` is initialized to ``set()``.
         """
         if listeners is not None:
             self.listeners = listeners
         else:
-             self.listeners = set()
+            self.listeners = set()
         self.total_rows = 1
         self.visible_rows = 1
         self._relative = 0

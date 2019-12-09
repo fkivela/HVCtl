@@ -43,7 +43,7 @@ autoclass_content = 'class'
 # instead of in alphabetical order.
 autodoc_member_order = 'bysource'
 
-# :special-members: prints __weakref__ by default; this disables that. 
+# :special-members: prints __weakref__ by default; this disables that.
 autodoc_default_options = {
 	# Print members (i.e. attributes, methods, classes etc.) when documenting a module or an object.
 	'members': True,
@@ -59,7 +59,7 @@ autodoc_default_options = {
 intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
 					   'serial': ('https://pyserial.readthedocs.io/en/latest', None),
 					   'urwid': ('http://urwid.org', None),}
-                       
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

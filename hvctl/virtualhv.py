@@ -9,7 +9,7 @@ from .virtualconnection import VirtualConnection
 
 class VirtualHV():
     """A virtual high voltage generator.
-    
+
     This class simulates a HV generator that can be communicated with
     through  a serial connection. This makes it possible to test
     HVCtl without access to a physical device.
@@ -17,16 +17,16 @@ class VirtualHV():
     Attributes:
         connection (VirtualConnection):
             A simulated serial connection.
-            
+
         status (Status):
             The status of the virtual HV generator.
-            
+
         time_of_last_command (float):
             This is initialized to :func:`time.time` when a
             :class:`VirtualHV` object is created,
             and updated to the current time every time a command is
             sent to the virtual HV.
-            
+
             See :attr:`refresh_watchdog` for further details.
 
     ..
@@ -34,8 +34,8 @@ class VirtualHV():
         |attribute| shows up in the final documentaton as
         status.attribute,
         with 'status' linking to VirtualHV.status and
-        '.attribute' linking to api.Status.attribute.     
-        
+        '.attribute' linking to api.Status.attribute.
+
     .. |voltage| replace::
         :attr:`status`:attr:`.voltage
         <hvctl.api.Status.voltage>`
@@ -86,12 +86,15 @@ class VirtualHV():
         <hvctl.virtualconnection.VirtualConnection.close>`.
         """
         self.connection.close()
-        
-    def get_voltage(self, *args):
+
+    def get_voltage(self, _=None):
         """Handle a ``'get voltage'`` command.
-        
+
         Args:
-            args: These are ignored.
+            _:
+                This is ignored.
+                A dummy argument is needed because :meth:`process`
+                calls all methods with a single argument.
 
         Returns:
             |voltage|, or 0 if |hv_on_status| is ``False`` or
@@ -100,11 +103,14 @@ class VirtualHV():
         output_active = self.status.hv_on_status and not self.status.inhibition
         return self.status.voltage if output_active else 0
 
-    def get_current(self, *args):
+    def get_current(self, _=None):
         """Handle a ``'get current'`` command.
 
         Args:
-            args: These are ignored.
+            _:
+                This is ignored.
+                A dummy argument is needed because :meth:`process`
+                calls all methods with a single argument.
 
         Returns:
             |current|, or 0 if |hv_on_status| is ``False`` or
@@ -143,7 +149,7 @@ class VirtualHV():
         This method first sets |hv_on_command| to ``bool(value)``.
         |hv_on_status| is then set to ``True``,
         if the following conditions are met:
-            
+
         - The old value of |hv_on_command| was ``True``.
         - The new value of |hv_on_command| is ``False``.
         - |inhibition| is ``False``.
@@ -154,10 +160,10 @@ class VirtualHV():
         """
         old_value = self.status.hv_on_command
         self.status.hv_on_command = bool(value)
-        
+
         should_turn_on = old_value == 1 and value == 0
         can_turn_on = not (self.status.fault or self.status.mode == 'local')
-        
+
         if should_turn_on and can_turn_on:
             self.status.hv_on_status = True
 
@@ -169,7 +175,7 @@ class VirtualHV():
         This method first sets |hv_off_command| to ``bool(value)``.
         |hv_on_status| is then set to ``False``,
         if the following conditions are met:
-            
+
         - The old value of |hv_off_command| was ``True``.
         - The new value of |hv_off_command| is ``False``.
 
@@ -178,9 +184,9 @@ class VirtualHV():
         """
         old_value = self.status.hv_off_command
         self.status.hv_off_command = bool(value)
-        
+
         should_turn_off = old_value == 1 and value == 0
-        
+
         if should_turn_off:
             self.status.hv_on_status = False
 
@@ -192,7 +198,7 @@ class VirtualHV():
         If ``bool(value)`` is ``True``,
         |mode| is set to ``'local'``;
         otherwise it is set to ``'remote'``.
-        
+
         Setting the mode to ``'local'`` also sets
         |hv_on_status| to ``False``,
         if it is not already.
@@ -205,14 +211,14 @@ class VirtualHV():
             self.status.hv_on_status = False
         else:
             self.status.mode = 'remote'
-        
+
         return value
 
     def set_inhibition(self, value):
         """Handle a ``'set inhibition'`` command.
 
         Sets |inhibition| to ``bool(value)``.
-        
+
         Returns:
            *value*.
         """
@@ -260,12 +266,12 @@ class VirtualHV():
             self.status.regulation == 'voltage']
         bits = ''.join([str(int(v)) for v in values])
         return int(bits, 2)
-    
+
     def process(self, input_):
         """Parse *input_* into a command and execute it.
 
         This method executes the following steps:
-        
+
         1. Call :meth:`refresh_watchdog`.
         2. Turn *input_* into a :class:`~hvctl.message.Message`
            object with :meth:`Message.from_bytes()
@@ -293,9 +299,9 @@ class VirtualHV():
             A :class:`bytes` object that can be passed to
             :meth:`Message.from_bytes()
             <hvctl.message.Message.from_bytes>`.
-        """        
+        """
         self.refresh_watchdog()
-        
+
         message = Message.from_bytes(input_, is_answer=False)
         command = message.command
         method = getattr(self, command.replace(' ', '_'))
@@ -305,25 +311,25 @@ class VirtualHV():
 
     def open_interlock(self):
         """Simulate opening the interlock.
-        
+
         Sets |interlock| to ``'open'``, |fault| to ``True``
         and |hv_on_status| to ``False``.
         """
         self.status.interlock = 'open'
         self.status.fault = True
         self.status.hv_on_status = False
-        
+
     def close_interlock(self):
         """Simulate closing the interlock.
-        
+
         Sets |interlock| to ``'closed'``.
         """
         self.status.interlock = 'closed'
-        
+
     def reset_fault(self):
         """Simulate resetting the fault state through the HV off button
         on the front panel of the HV generator.
-        
+
         Sets |Fault| to ``'False'``, if |interlock| is ``'closed'``.
         """
         if self.status.interlock == 'closed':
@@ -332,11 +338,11 @@ class VirtualHV():
     def refresh_watchdog(self):
         """Switch to local mode if over 5 seconds has elapsed since
         the last command was sent.
-        
+
         The HV generator contains a watchdog device that automatically
         turns the HV off and switches the generator to local mode if
         the generator doesn't receive any commands for 5 seconds.
-        
+
         VirtualHV emulates this functionality with this method,
         which compares :attr:`time_of_last_command` to the current
         time. If the difference between these two times is more than 5

@@ -20,7 +20,7 @@ class CommandLineUI:
     or using a ``with`` block. Otherwise the parallel thread created by
     :attr:`api` may continue to run in the background and consume
     resources.
-    
+
     This class contains several methods with names following the pattern
     ``cmd_<command>``.
     These methods correspond to the commands a user can give to the
@@ -194,22 +194,22 @@ class CommandLineUI:
         """Set the current to *value* (in mA)."""
         current = self.api.set_current(value)
         self.print(f'Current set to {current} mA')
-        
+
     def cmd_hv(self, value):
         """Turn the HV on or off.
-        
+
         Values of '1', 'True' and 'on' turn the HV on;
-        '0', 'False' and 'off' turn it off. 
+        '0', 'False' and 'off' turn it off.
         """
         # 1 == True and 0 == False.
         if value in [True, 'on']:
             self.api.hv_on()
             self.print('HV on command sent')
-        
+
         elif value in [False, 'off']:
             self.api.hv_off()
             self.print('HV off command sent')
-        
+
         else:
             raise ValueError('invalid value')
 
@@ -222,11 +222,11 @@ class CommandLineUI:
         if value in ['local', 'l']:
             self.api.set_mode('local')
             self.print('Local mode activated')
-        
+
         elif value in ['remote', 'r']:
             self.api.set_mode('remote')
             self.print('Remote mode activated')
-        
+
         else:
             raise ValueError('invalid value')
 
@@ -234,13 +234,13 @@ class CommandLineUI:
         """Activate or deactivate inhibition.
 
         Values of '1', 'True' and 'on' activate inhibition;
-        '0', 'False' and 'off' deactivate it. 
+        '0', 'False' and 'off' deactivate it.
         """
         # 1 == True and 0 == False.
         if value in [True, 'on']:
             self.api.set_inhibition(True)
             self.print('HV inhibition activated')
-        
+
         elif value in [False, 'off']:
             self.api.set_inhibition(False)
             self.print('HV inhibition deactivated')
@@ -291,9 +291,9 @@ class CommandLineUI:
 
     def cmd_debug(self, value):
         """Activate or deactivate the debug mode.
-        
+
         Values of '1', 'True' and 'on' activate the debug mode;
-        '0', 'False' and 'off' deactivate it. 
+        '0', 'False' and 'off' deactivate it.
 
         In normal operation, TypeErrors and ValueErrors
         raised during the execution of commands are caught to prevent
@@ -305,7 +305,7 @@ class CommandLineUI:
         if value in [True, 'on']:
             self.debug = True
             self.print('Debug mode activated')
-        
+
         elif value in [False, 'off']:
             self.debug = False
             self.print('Debug mode deactivated')

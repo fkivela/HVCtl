@@ -219,11 +219,11 @@ class API():
         """Get the status of the HV generator.
 
         Returns:
-            A :class:`dict` with keys and values corresponding to the 
+            A :class:`dict` with keys and values corresponding to the
             attributes of :attr:`status` and the values of those
             attributes as reported by the HV generator.
             However, :attr:`~Status.voltage` and
-            :attr:`~Status.current` are not included. 
+            :attr:`~Status.current` are not included.
         """
         reply = self._send(Message('get status'))
         return self._parse_status_bits(reply.value)
@@ -380,7 +380,7 @@ class API():
 
 
 @dataclass
-class Status:
+class Status:  # pylint: disable=too-many-instance-attributes
     """This class stores information about the current status of the
     HV generator.
     """
@@ -430,7 +430,7 @@ class Status:
     """
 
     fault: bool = False
-    """``True`` if there the generator is in a fault state, 
+    """``True`` if there the generator is in a fault state,
     ``False`` otherwise.
     """
 
@@ -438,7 +438,7 @@ class Status:
     """A function that is called every time the contents of this object
     are changed. Its signature should be
     ::
-        
+
         callback(status: Status) -> None
     """
 
@@ -448,7 +448,7 @@ class Status:
         """
         super().__setattr__(name, value)
         if self.callback:
-            # *callback* is a function assigned as an attribute to 
+            # *callback* is a function assigned as an attribute to
             # *self* instead of a bound method, so *self* has to be
             # passed as an argument.
             self.callback(self)

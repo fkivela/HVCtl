@@ -102,11 +102,13 @@ returns <em>self</em>.</p>
 
 <dl class="method">
 <dt id="hvctl.virtualhv.VirtualHV.get_voltage">
-<code class="sig-name descname">get_voltage</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_voltage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_voltage</code><span class="sig-paren">(</span><em class="sig-param">_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_voltage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">voltage'</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>args</strong> – These are ignored.</p>
+<dd class="field-odd"><p><strong>_</strong> – This is ignored.
+A dummy argument is needed because <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.process" title="hvctl.virtualhv.VirtualHV.process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">process()</span></code></a>
+calls all methods with a single argument.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.status" title="hvctl.virtualhv.VirtualHV.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a><a class="reference internal" href="api.html#hvctl.api.Status.voltage" title="hvctl.api.Status.voltage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">.voltage</span></code></a>, or 0 if <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.status" title="hvctl.virtualhv.VirtualHV.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a><a class="reference internal" href="api.html#hvctl.api.Status.hv_on_status" title="hvctl.api.Status.hv_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">.hv_on_status</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code> or
@@ -117,11 +119,13 @@ returns <em>self</em>.</p>
 
 <dl class="method">
 <dt id="hvctl.virtualhv.VirtualHV.get_current">
-<code class="sig-name descname">get_current</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_current" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_current</code><span class="sig-paren">(</span><em class="sig-param">_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.virtualhv.VirtualHV.get_current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle a <code class="docutils literal notranslate"><span class="pre">'get</span> <span class="pre">current'</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>args</strong> – These are ignored.</p>
+<dd class="field-odd"><p><strong>_</strong> – This is ignored.
+A dummy argument is needed because <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.process" title="hvctl.virtualhv.VirtualHV.process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">process()</span></code></a>
+calls all methods with a single argument.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#hvctl.virtualhv.VirtualHV.status" title="hvctl.virtualhv.VirtualHV.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a><a class="reference internal" href="api.html#hvctl.api.Status.current" title="hvctl.api.Status.current"><code class="xref py py-attr docutils literal notranslate"><span class="pre">.current</span></code></a>, or 0 if <a class="reference internal" href="#hvctl.virtualhv.VirtualHV.status" title="hvctl.virtualhv.VirtualHV.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a><a class="reference internal" href="api.html#hvctl.api.Status.hv_on_status" title="hvctl.api.Status.hv_on_status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">.hv_on_status</span></code></a> is <code class="docutils literal notranslate"><span class="pre">False</span></code> or

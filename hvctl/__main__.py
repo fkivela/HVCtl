@@ -14,8 +14,11 @@ from hvctl.virtualhv import VirtualHV
 # However, this would cause config to be loaded twice as different
 # module objects: config (by this script) and hvctl.config
 # (by imported modules).
-# Changing the constants in config would then affect 
+# Changing the constants in config would then affect
 # only this script, not imported modules.
+
+# pylint: disable=import-outside-toplevel,invalid-name
+# Pylint doesn't like the name 'ui'.
 
 ### Command line arguments ###
 
@@ -25,7 +28,7 @@ parser = argparse.ArgumentParser(description='This script runs HVCtl.')
 
 # Some options.
 # Help strings are written in lower case and without periods to
-# match the help string automatically created for the -h option. 
+# match the help string automatically created for the -h option.
 
 parser.add_argument(
     '-c', '--config',
@@ -40,8 +43,8 @@ port_options.add_argument(
     nargs='?', default=None)
 
 port_options.add_argument(
-    '-v', '--virtual', 
-    help='use a virtual HV generator', 
+    '-v', '--virtual',
+    help='use a virtual HV generator',
     action='store_true')
 
 parser.add_argument(
@@ -66,26 +69,24 @@ if args.config:
 
 ### The main part of the script ###
 
-def main(args):
-    """Execute the script with the command-line arguments given in
-    *args*.
-    """
+def main():
+    """Execute the script."""
     try:
         # If virtualhv was defined in another function
         # and an error occurred between its creation and the
-        # 'return virtualhv' statement, 
+        # 'return virtualhv' statement,
         # the finally block wouldn't work, because 'virtualhv' wouldn't
         # be included in the namespace of main().
         # This also holds for command_line_ui. Because of this,
-        # both objects are defined directly in main(). 
+        # both objects are defined directly in main().
 
         virtualhv = VirtualHV() if args.virtual else None
-        port = get_port(args, virtualhv)
-        
+        port = get_port(virtualhv)
+
         poll = not args.no_poll
-        inputfile, outputfile = get_io_files(args)
+        inputfile, outputfile = get_io_files()
         command_line_ui = CommandLineUI(port, poll, inputfile, outputfile)
-        
+
         ui = get_ui(command_line_ui)
         ui.run()
     finally:
@@ -97,17 +98,17 @@ def main(args):
             command_line_ui.api.halt()
         except NameError:
             pass
-    
+
         try:
-            # An AttributeError is raised if virtualhv is None. 
+            # An AttributeError is raised if virtualhv is None.
             virtualhv.connection.close()
         except AttributeError:
             pass
 
 
-def get_port(args, virtualhv):
+def get_port(virtualhv):
     """Return the port used for the serial connection.
-    
+
     If a virtual HV isn't used, the *virtualhv* argument is ignored.
     """
     if args.virtual:
@@ -116,13 +117,13 @@ def get_port(args, virtualhv):
         port = args.port
     else:
         port = config.SERIAL_KWARGS['port']
-        
+
     return port
 
 
-def get_io_files(args):
+def get_io_files():
     """Return the input and output files for the UI.
-    
+
     Returns:
         (inputfile, ouptufile)
     """
@@ -133,7 +134,7 @@ def get_io_files(args):
         inputfile = QueueFile(block=True)
         outputfile = QueueFile()
 
-    return inputfile, outputfile    
+    return inputfile, outputfile
 
 
 def get_ui(command_line_ui):
@@ -147,12 +148,14 @@ def get_ui(command_line_ui):
         # it is needed.
         # This makes it possible to run HVCtl without urwid by using
         # CommandLineUI.
+
         from hvctl.advanced_tui import AdvancedTUI
-        advanced_ui = AdvancedTUI(command_line_ui.run, 
-                                  command_line_ui.inputfile, 
+
+        advanced_ui = AdvancedTUI(command_line_ui.run,
+                                  command_line_ui.inputfile,
                                   command_line_ui.outputfile,
                                   status_format.palette)
-        
+
         # Show the status of the HV generator in the UI.
         def callback(status):
             text = status_format.status_screen(status)
@@ -163,4 +166,4 @@ def get_ui(command_line_ui):
     return ui
 
 
-main(args)
+main()

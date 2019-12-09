@@ -1,14 +1,14 @@
 TODO:
 
 ### Now ###
+- Check if plotlib would be better than sys for handling paths.
 
 ### Soon ###
-- Run Pylint and Pycodestyle
 
 ### Test with HV generator ###
 - Test the timeout option in the configuration file.
   Does specifying a timeout get rid of all blocking commands?
-- Make sure API.halt() works correctly if HVCtl is stopped while it is 
+- Make sure API.halt() works correctly if HVCtl is stopped while it is
   connected to the HV
 - Test whether opening the interlock in the HV off state causes a fault
   condition
@@ -16,7 +16,7 @@ TODO:
 ### Maybe later ###
 - Test the program. unittest.mock and/or the Hypothesis library should be
   looked into
-- Message.from_bytes() could be replaced by overloading Message.__init__ with 
+- Message.from_bytes() could be replaced by overloading Message.__init__ with
   @singledispatchmethod. However, this would need Python 3.8 so it might not
   be practical even in the future (HVCtl might need to run on machines which
-  don't have Python 3.8) 
+  don't have Python 3.8)

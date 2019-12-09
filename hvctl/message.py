@@ -24,23 +24,23 @@ _PATTERN_TO_COMMAND = {p: c for c, p
 class Message():
     """This class represents a message sent to or received from the HV
     generator.
-    
+
     All of the following attributes are defined as read-only
     properties to prevent changing them after an object is instantiated.
 
     Attributes:
         command (string):
-            The command that is sent to the HV generator, 
+            The command that is sent to the HV generator,
             or the command to which this object is an answer.
             The following values are accepted:
-            
+
                 | ``'set voltage'``
                 | ``'set current'``
                 | ``'get voltage'``
                 | ``'get current'``
-                | ``'hv on'``      
-                | ``'hv off'``     
-                | ``'set mode'``   
+                | ``'hv on'``
+                | ``'hv off'``
+                | ``'set mode'``
                 | ``'set inhibition'``
                 | ``'get status'``
 
@@ -68,7 +68,7 @@ class Message():
     def __init__(self, command, value=None, is_answer=False):
         """Create a new :class:`Message` and set its attributes
         to the values given as arguments.
-        
+
         Raises:
             ValueError:
                 If *command* is not recognized or *value* is not valid.
@@ -81,20 +81,23 @@ class Message():
         self._command = command
         self._value = value
         self._is_answer = is_answer
-        
+
         self._check_value()
 
+    # pylint: disable=missing-function-docstring
+    # These are documented in the class docstring.
     @property
     def command(self):
         return self._command
-        
+
     @property
     def value(self):
         return self._value
-    
+
     @property
     def is_answer(self):
         return self._is_answer
+    # pylint: enable=missing-function-docstring
 
     @classmethod
     def from_bytes(cls, bytes_, is_answer=True):
@@ -112,12 +115,12 @@ class Message():
     @classmethod
     def _pattern_match(cls, string):
         """Return the command and value encoded in *string*.
-        
+
         Args:
             string:
                 A string in the format used by the HV generator for
                 communication; e.g. 'd1,1000\r'.
-                
+
         Returns:
             A tuple containing a command string and a value;
             e.g. ('set voltage', 100)
@@ -161,16 +164,16 @@ class Message():
 
         if self.command in ['set voltage', 'set current']:
             self._check_setter_value()
-    
+
         elif self.command in ['get voltage', 'get current']:
             self._check_getter_value()
-        
+
         elif self.command in ['hv on', 'hv off', 'set mode', 'set inhibition']:
             self._check_parameter_value()
-        
+
         elif self.command == 'get status':
             self._check_status_value()
-        
+
         else:
             raise ValueError('invalid command: {self.command}')
 

@@ -34,7 +34,7 @@ Attributes:
 
     DELTA_I
         The smallest amount by which the value of the current can be
-        changed, in mA. This is computed analogously to 
+        changed, in mA. This is computed analogously to
         :const:`DELTA_U`.
 """
 
@@ -44,8 +44,10 @@ from typing import Union
 
 import serial
 
+# pylint: disable=global-statement
+
 # Defining the constants at the module level helps automatic tools
-# such as IDEs and Pylint. 
+# such as IDEs and Pylint.
 SERIAL_KWARGS = None
 VOLTAGE_LIMIT = None
 CURRENT_LIMIT = None
@@ -56,12 +58,12 @@ DELTA_I = None
 
 def load(filename=None):
     """Parse the configuration file and define the constants.
-    
+
     This function is called automatically with the default argument
     when the module is imported. If a different configuration file
     should be used, the constants should be reloaded by calling this
     function manually with the correct argument.
-    
+
     Args:
         filename:
             The path to the configuration file.
@@ -73,7 +75,7 @@ def load(filename=None):
         FileNotFoundError: If the configuration file cannot be found.
         RuntimeError: If the configuration file is found but cannot be
             parsed.
-    """    
+    """
     if not filename:
         configfile = 'default.conf'
         dirpath = os.path.dirname(__file__)

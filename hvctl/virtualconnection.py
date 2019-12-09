@@ -11,21 +11,21 @@ import time
 
 class VirtualConnection():
     """A virtual serial connection.
-    
+
     Data can be sent through a :class:`VirtualConnection` object by
     accessing the :attr:`user_end` and :attr:`virtual_end` attributes.
     The :attr:`port` property is a device name which can be given to
     the initializer of :class:`serial.Serial` as an argument.
 
     A :class:`VirtualConnection` object runs code in a parallel thread,
-    which will continue running until it is closed or the Python 
+    which will continue running until it is closed or the Python
     interpreter exits.
-    A parallel thread can be closed by calling the :func:`close` 
+    A parallel thread can be closed by calling the :func:`close`
     method of the :class:`VirtualConnection` object that created it.
-    This also closes :attr:`user_end` and :attr:`virtual_end`, 
+    This also closes :attr:`user_end` and :attr:`virtual_end`,
     and frees their file descriptors.
 
-    If a :class:`VirtualConnection` object is used in a ``with`` 
+    If a :class:`VirtualConnection` object is used in a ``with``
     block in the following manner:
 
     .. code-block:: python
@@ -36,9 +36,9 @@ class VirtualConnection():
     :meth:`close` will be called automatically when the ``with`` block
     is exited.
 
-    If all variables referring to a :class:`VirtualConnection` 
+    If all variables referring to a :class:`VirtualConnection`
     object are removed with ``del`` or by reassigning them,
-    the parallel thread will continue to run without a possibility of 
+    the parallel thread will continue to run without a possibility of
     closing it with :meth:`close`.
     In this case, all running instances of the
     :class:`VirtualConnection` class can be closed with
@@ -60,25 +60,25 @@ class VirtualConnection():
             ::
 
                 process(self, input_: bytes) -> output: bytes
-                
+
             A machine or other device that communicates with its user
             can be simulated by assigning a suitable method to the
             :attr:`process` attribute.
 
         virtual_end (file-like object):
-             This end of the connection is used by :meth:`process` to 
-             read and write data. It can be written to and read from with 
-             :func:`os.read` and :func:`os.write`.
-             
+             This end of the connection is used by :meth:`process` to
+             read and write data. It can be written to and read from
+             with :func:`os.read` and :func:`os.write`.
+
         user_end (file-like object):
             This end of the connection is meant to be used by a user to
             send commands to and read data from a simulated device.
             :func:`os.read` doesn't seem to work with it,
-            and the `serial <https://pypi.org/project/pyserial/>`_ 
-            module should be used instead.            
+            and the `serial <https://pypi.org/project/pyserial/>`_
+            module should be used instead.
 
         thread (:class:`threading.Thread`):
-            The parallel thread that runs most functionality in a 
+            The parallel thread that runs most functionality in a
             :class:`VirtualConnection` object.
 
         running_instances:
