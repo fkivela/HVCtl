@@ -1,11 +1,6 @@
 TODO:
 
-### Now ###
-- Check if plotlib would be better than sys for handling paths.
-
-### Soon ###
-
-### Test with HV generator ###
+### Test with the HV generator ###
 - Test the timeout option in the configuration file.
   Does specifying a timeout get rid of all blocking commands?
 - Make sure API.halt() works correctly if HVCtl is stopped while it is
