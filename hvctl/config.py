@@ -39,7 +39,7 @@ Attributes:
 """
 
 import configparser
-import os
+import pathlib
 from typing import Union
 
 import serial
@@ -78,8 +78,8 @@ def load(filename=None):
     """
     if not filename:
         configfile = 'default.conf'
-        dirpath = os.path.dirname(__file__)
-        path = os.path.join(dirpath, configfile)
+        directory = pathlib.Path(__file__).resolve().parent
+        path = directory.joinpath(configfile)
     else:
         path = filename
 

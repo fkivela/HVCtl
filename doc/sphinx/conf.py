@@ -14,9 +14,7 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-import os
-import sys
-sys.path.insert(0, os.path.abspath('../../')) # Add the HVCtl directory
+# The HVCtl directory should already be in $PATH.
 
 # -- Project information -----------------------------------------------------
 
