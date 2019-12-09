@@ -91,8 +91,10 @@ The UI imports the :mod:`readline` module, which enables command editing and bro
 
     $ hvctl-run -s
     Welcome to HVCtl! Type 'help' for a list of commands.
-    >> hvon
-    HV turned on
+    >> mode remote
+    Remote mode activated
+    >> hv on
+    HV on command sent
     >> getvoltage
     The voltage is 0.0 V
     >> setvoltage 5000
@@ -108,33 +110,9 @@ Interactive mode without ``-s``
 Here the ``-s`` argument hasn't been given, and HVCtl uses a more advanced UI. 
 The bottom of the UI is an interactive command-line interface similar to the one above, but the top part contains a screen showing the current status of the HV generator. 
 The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.
+This example also demonstrates how the commands can be written more quickly by using aliases.
 
-::
-
-    Voltage: 5006.11 V
-    Current: 0.00 mA
-    Regulation mode: voltage
-
-    HV power: on
-    HV on command given: False
-    HV off command given: False
-
-    Mode: remote
-    Interlock: open
-    No faults present
-    ─────────────────────────────────────────────────────────
-    Welcome to HVCtl! Type 'help' for a list of commands.  ▲
-    >> hvon                                                ██
-    HV turned on                                           ██
-    >> getvoltage                                          ██
-    The voltage is 0.0 V                                   ██
-    >> setvoltage 5000                                     ██
-    Voltage set to 5006.1050061050055 V                    ██
-    >> getvoltage                                          ██
-    The voltage is 5006.1050061050055 V                    ██
-    >> exit                                                ██
-    PRESS 'q' TO EXIT                                      ██
-                                                           ▼
+.. image:: example.png
 
 Using the API
 .............
@@ -144,10 +122,12 @@ The last call to :meth:`~hvctl.api.API.halt()` closes the serial connection and 
 
 >>> import hvctl
 >>> api = hvctl.API()
->>> api.get_voltage()
--0.0
+>>> api.set_mode('remote')
 >>> api.set_voltage(-5000)
 -5006.1050061050055
+>>> api.get_voltage()
+-0.0
+>>> api.hv_on()
 >>> api.get_voltage()
 -5006.1050061050055
 >>> api.halt()
@@ -165,5 +145,5 @@ The script uses ``with`` blocks to ensure that both the :class:`~hvctl.api.API` 
 
     with VirtualHV as vhv:
         with API(port=vhv.connection.port) as api:
-            api.set_voltage(-5000)
+            api.set_mode('remote')
             # More code here...

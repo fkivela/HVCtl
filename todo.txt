@@ -3,7 +3,6 @@ TODO:
 ### Now ###
 
 ### Soon ###
-- Make sure the examples in usage.rst are correct and up-to-date
 - Investigate: HVCtl with test-interlock sometimes starts in local mode
 
 ### Before this is ready ###
