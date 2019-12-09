@@ -415,7 +415,7 @@ class Status:
     boolean.
     """
 
-    mode: str = 'remote'
+    mode: str = 'local'
     """The control mode of the generator:
     ``'remote'`` or ``'local'``.
     """
