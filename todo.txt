@@ -3,17 +3,15 @@ TODO:
 ### Now ###
 
 ### Soon ###
-
-### Before this is ready ###
-- Test the timeout option in the configuration file;
-  does specifying a timeout get rid of all blocking commands
-- Make sure the settings in the configuration file are correct
 - Run Pylint and Pycodestyle
+
+### Test with HV generator ###
+- Test the timeout option in the configuration file.
+  Does specifying a timeout get rid of all blocking commands?
 - Make sure API.halt() works correctly if HVCtl is stopped while it is 
   connected to the HV
 - Test whether opening the interlock in the HV off state causes a fault
   condition
-- Make sure all multi-part references (e.g. package.module.class) are OK.
 
 ### Maybe later ###
 - Test the program. unittest.mock and/or the Hypothesis library should be

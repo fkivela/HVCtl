@@ -42,8 +42,8 @@ HVCtl.</p>
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.command_line_ui.</code><code class="sig-name descname">CommandLineUI</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">poll=True</em>, <em class="sig-param">inputfile=None</em>, <em class="sig-param">outputfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.command_line_ui.CommandLineUI" title="Permalink to this definition">¶</a></dt>
 <dd><p>A simple command-line UI.</p>
 <p>Instances of this class should be closed after they are no longer
-needed by calling <a class="reference internal" href="api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">api.halt()</span></code></a> or
-using a <code class="docutils literal notranslate"><span class="pre">with</span></code> block. Otherwise the parallel thread created by
+needed by calling <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a><a class="reference internal" href="api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">.halt()</span></code></a>
+or using a <code class="docutils literal notranslate"><span class="pre">with</span></code> block. Otherwise the parallel thread created by
 <a class="reference internal" href="#hvctl.command_line_ui.CommandLineUI.api" title="hvctl.command_line_ui.CommandLineUI.api"><code class="xref py py-attr docutils literal notranslate"><span class="pre">api</span></code></a> may continue to run in the background and consume
 resources.</p>
 <p>This class contains several methods with names following the pattern

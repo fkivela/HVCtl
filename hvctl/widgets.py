@@ -579,7 +579,8 @@ class ScrollBar(urwid.WidgetWrap):
 
         Mouse button 1 moves the scroller so that clicking the scroll
         bar at a point *X* % from its top will set
-        :attr:`position.relative <Position.relative>` to  ``X / 100``.
+        :attr:`position`:attr:`.relative <Position.relative>`
+        to ``X / 100``.
 
         Returns:
             ``True`` if the event was handled by this widget,

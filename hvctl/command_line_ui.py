@@ -16,8 +16,8 @@ class CommandLineUI:
     """A simple command-line UI.
 
     Instances of this class should be closed after they are no longer
-    needed by calling :meth:`api.halt() <hvctl.api.API.halt()>` or
-    using a ``with`` block. Otherwise the parallel thread created by
+    needed by calling :attr:`api`:meth:`.halt() <hvctl.api.API.halt()>`
+    or using a ``with`` block. Otherwise the parallel thread created by
     :attr:`api` may continue to run in the background and consume
     resources.
     

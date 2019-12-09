@@ -238,7 +238,7 @@ are skipped.</p>
 
 <dl class="class">
 <dt id="hvctl.api.Status">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0.0</em>, <em class="sig-param">current: float = 0.0</em>, <em class="sig-param">regulation: str = 'voltage'</em>, <em class="sig-param">hv_on_status: bool = False</em>, <em class="sig-param">hv_on_command: bool = False</em>, <em class="sig-param">hv_off_command: bool = False</em>, <em class="sig-param">mode: str = 'remote'</em>, <em class="sig-param">inhibition: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">callback: Callable = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0.0</em>, <em class="sig-param">current: float = 0.0</em>, <em class="sig-param">regulation: str = 'voltage'</em>, <em class="sig-param">hv_on_status: bool = False</em>, <em class="sig-param">hv_on_command: bool = False</em>, <em class="sig-param">hv_off_command: bool = False</em>, <em class="sig-param">mode: str = 'local'</em>, <em class="sig-param">inhibition: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">callback: Callable = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class stores information about the current status of the
 HV generator.</p>
 <dl class="attribute">
@@ -287,7 +287,7 @@ boolean.</p>
 
 <dl class="attribute">
 <dt id="hvctl.api.Status.mode">
-<code class="sig-name descname">mode</code><em class="property"> = 'remote'</em><a class="headerlink" href="#hvctl.api.Status.mode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mode</code><em class="property"> = 'local'</em><a class="headerlink" href="#hvctl.api.Status.mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>The control mode of the generator:
 <code class="docutils literal notranslate"><span class="pre">'remote'</span></code> or <code class="docutils literal notranslate"><span class="pre">'local'</span></code>.</p>
 </dd></dl>

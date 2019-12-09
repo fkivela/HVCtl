@@ -17,8 +17,8 @@ class AdvancedTUI(urwid.WidgetWrap):
     Attributes:
         display (:class:`urwid.Text`):
             A text field for presenting information to the user.
-            Use :meth:`display.set_text() <urwid.Text.set_text>` to
-            change its contents.
+            Use :attr:`display`:meth:`.set_text()
+            <urwid.Text.set_text>` to change its contents.
 
         command_line_interface(:class:`~hvctl.widgets.ScrollableCommandLines`):
             A command-line interface for issuing commands, located
