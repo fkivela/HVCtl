@@ -1,5 +1,7 @@
 TODO:
 
+- Fix duplicate current string in AdvancedUI
+
 ### Test with the HV generator ###
 - Test the timeout option in the configuration file.
   Does specifying a timeout get rid of all blocking commands?

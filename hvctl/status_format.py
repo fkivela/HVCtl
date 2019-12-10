@@ -110,7 +110,7 @@ def _output_text(status):
     if status.regulation == 'voltage':
         voltage_str = voltage_str.ljust(width) + regulation_str
     else:
-        current_str += current_str.ljust(width) + regulation_str
+        current_str = current_str.ljust(width) + regulation_str
 
     return voltage_str + '\n' + current_str
 
