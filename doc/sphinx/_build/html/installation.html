@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Installation &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage" href="usage.html" />
@@ -37,14 +37,22 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="dependencies">
 <span id="id1"></span><h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>HVCtl was written and tested in Python 3.7.5, so that or another relatively new Python version should be installed.
-It is intended to be used on a Linux operating system, and probably won’t work on other systems such as Windows without some tweaks.</p>
-<p>In addition to the Python standard library, HVCtl uses <a class="reference external" href="https://pypi.org/project/pyserial/">pySerial</a> (tested with version 3.4) and <a class="reference external" href="http://urwid.org/">urwid</a> (tested with version 2.0.1). pySerial must be installed for HVCtl to work, but HVCtl can run without urwid by using an alternative user interface (see <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a> for details).</p>
+<p>HVCtl was written and tested in Python 3.8.5, but it may also work with some
+older versions, such as Python 3.7.
+It is intended to be used on a Linux operating system, and probably won’t work
+on other systems such as Windows without some tweaks.</p>
+<p>In addition to the Python standard library, HVCtl uses <a class="reference external" href="https://pypi.org/project/pyserial/">pySerial</a> (tested with
+version 3.5) and <a class="reference external" href="http://urwid.org/">Urwid</a> (tested with version 2.1.2).
+pySerial must be installed for HVCtl to work, but HVCtl can run without Urwid
+by using an alternative user interface (see <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a> for details).</p>
 </div>
 <div class="section" id="the-hvctl-directory">
 <h2>The HVCtl directory<a class="headerlink" href="#the-hvctl-directory" title="Permalink to this headline">¶</a></h2>
-<p>HVCtl doesn’t include an installation script; simply download the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory to a location of your choosing.
-In order to access the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package and the <code class="docutils literal notranslate"><span class="pre">hvctl-run</span></code> script, the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory  should be added to <code class="docutils literal notranslate"><span class="pre">$PYTHONPATH</span></code> and <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> or made the working directory.</p>
+<p>HVCtl doesn’t include an installation script; simply download the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code>
+directory to a location of your choosing.
+In order to access the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package and the <code class="docutils literal notranslate"><span class="pre">hvctl-run</span></code> script, the
+<code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory  should be added to <code class="docutils literal notranslate"><span class="pre">$PYTHONPATH</span></code> and <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> or made
+the working directory.</p>
 </div>
 </div>
 
@@ -94,7 +102,7 @@ In order to access the <code class="docutils literal notranslate"><span class="p
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -111,7 +119,7 @@ In order to access the <code class="docutils literal notranslate"><span class="p
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

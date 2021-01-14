@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>advanced_tui &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="status_format" href="status_format.html" />
@@ -39,12 +39,12 @@
 <p><a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a> uses <a class="reference external" href="http://urwid.org/">urwid</a>.
 If urwid hasn’t been installed,
 <a class="reference internal" href="command_line_ui.html#hvctl.command_line_ui.CommandLineUI" title="hvctl.command_line_ui.CommandLineUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandLineUI</span></code></a> should be used instead.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.advanced_tui.AdvancedTUI">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.advanced_tui.</code><code class="sig-name descname">AdvancedTUI</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em>, <em class="sig-param">palette=()</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.advanced_tui.</code><code class="sig-name descname">AdvancedTUI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">script</span></em>, <em class="sig-param"><span class="n">inputfile</span></em>, <em class="sig-param"><span class="n">outputfile</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI" title="Permalink to this definition">¶</a></dt>
 <dd><p>A text-based user interface combining a terminal-style
 command line interface and a text screen.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.advanced_tui.AdvancedTUI.display">
 <code class="sig-name descname">display</code><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>A text field for presenting information to the user.
@@ -56,7 +56,7 @@ Use <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI.display"
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.advanced_tui.AdvancedTUI.command_line_interface">
 <code class="sig-name descname">command_line_interface</code><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.command_line_interface" title="Permalink to this definition">¶</a></dt>
 <dd><p>A command-line interface for issuing commands, located
@@ -68,9 +68,9 @@ below <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI.displa
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.advanced_tui.AdvancedTUI.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">script</em>, <em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em>, <em class="sig-param">palette=()</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">script</span></em>, <em class="sig-param"><span class="n">inputfile</span></em>, <em class="sig-param"><span class="n">outputfile</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -97,7 +97,7 @@ documentation of
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.advanced_tui.AdvancedTUI.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.advanced_tui.AdvancedTUI.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the program and the UI loop in parallel threads.
@@ -151,6 +151,7 @@ exited.</p>
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
@@ -176,7 +177,7 @@ exited.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -193,7 +194,7 @@ exited.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

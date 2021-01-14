@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>widgets &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="command_line_ui" href="command_line_ui.html" />
@@ -41,13 +41,13 @@ containing a scrollable command line interface below a text screen.</p>
 <p>The docstring of each widget defined here tells whether it is a box,
 flow or fixed widget. The differences between these widget types are
 explained <a class="reference external" href="http://urwid.org/manual/widgets.html#box-flow-and-fixed-widgets">here</a>.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.widgets.ScrollableCommandLines">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">ScrollableCommandLines</code><span class="sig-paren">(</span><em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">ScrollableCommandLines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputfile</span></em>, <em class="sig-param"><span class="n">outputfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines" title="Permalink to this definition">¶</a></dt>
 <dd><p>A widget consisting of a scrollable command line interface and
 a scroll bar with two arrow buttons for scrolling it.</p>
 <p>This is a box widget; its container sets it height and width.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollableCommandLines.position">
 <code class="sig-name descname">position</code><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps track of how far the screen is scrolled.</p>
@@ -58,7 +58,7 @@ a scroll bar with two arrow buttons for scrolling it.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollableCommandLines.command_lines">
 <code class="sig-name descname">command_lines</code><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.command_lines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides the command line interface.</p>
@@ -69,7 +69,7 @@ a scroll bar with two arrow buttons for scrolling it.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollableCommandLines.scroller">
 <code class="sig-name descname">scroller</code><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.scroller" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds scrolling functionality to <a class="reference internal" href="#hvctl.widgets.ScrollableCommandLines.command_lines" title="hvctl.widgets.ScrollableCommandLines.command_lines"><code class="xref py py-attr docutils literal notranslate"><span class="pre">command_lines</span></code></a>.</p>
@@ -80,7 +80,7 @@ a scroll bar with two arrow buttons for scrolling it.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollableCommandLines.scrollbar">
 <code class="sig-name descname">scrollbar</code><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.scrollbar" title="Permalink to this definition">¶</a></dt>
 <dd><p>The scroll bar.</p>
@@ -91,7 +91,7 @@ a scroll bar with two arrow buttons for scrolling it.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollableCommandLines.arrow_up">
 <code class="sig-name descname">arrow_up</code><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.arrow_up" title="Permalink to this definition">¶</a></dt>
 <dd><p>An arrow button that can be clicked to scroll the screen
@@ -103,7 +103,7 @@ up.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollableCommandLines.arrow_down">
 <code class="sig-name descname">arrow_down</code><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.arrow_down" title="Permalink to this definition">¶</a></dt>
 <dd><p>An arrow button that can be clicked to scroll the screen
@@ -115,9 +115,9 @@ down.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.ScrollableCommandLines.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputfile</span></em>, <em class="sig-param"><span class="n">outputfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollableCommandLines.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.widgets.ScrollableCommandLines" title="hvctl.widgets.ScrollableCommandLines"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScrollableCommandLines</span></code></a>.</p>
 <p>The arguments are passed to the initializer of
 <a class="reference internal" href="#hvctl.widgets.ScrollableCommandLines.command_lines" title="hvctl.widgets.ScrollableCommandLines.command_lines"><code class="xref py py-attr docutils literal notranslate"><span class="pre">command_lines</span></code></a>.</p>
@@ -125,16 +125,16 @@ down.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.widgets.CommandLines">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">CommandLines</code><span class="sig-paren">(</span><em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">CommandLines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputfile</span></em>, <em class="sig-param"><span class="n">outputfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines" title="Permalink to this definition">¶</a></dt>
 <dd><p>This widget provides a terminal-like command line interface.</p>
 <p>Entering commands scrolls the screen automatically so that the
 latest command is always visible on the screen, but the
 functionality to scroll up to view old commands is provided by the
 <a class="reference internal" href="#hvctl.widgets.Scroller" title="hvctl.widgets.Scroller"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scroller</span></code></a> class instead of this class.</p>
 <p>This is a flow widget; its container sets it height but not width.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.CommandLines.inputfile">
 <code class="sig-name descname">inputfile</code><a class="headerlink" href="#hvctl.widgets.CommandLines.inputfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Input entered into the command-line interface by the user
@@ -146,7 +146,7 @@ is written to this object.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.CommandLines.outputfile">
 <code class="sig-name descname">outputfile</code><a class="headerlink" href="#hvctl.widgets.CommandLines.outputfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>The command-line interface reads its output from this
@@ -158,7 +158,7 @@ object and prints it on the screen.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.CommandLines.history">
 <code class="sig-name descname">history</code><a class="headerlink" href="#hvctl.widgets.CommandLines.history" title="Permalink to this definition">¶</a></dt>
 <dd><p>This object stores previously given commands.</p>
@@ -169,7 +169,7 @@ object and prints it on the screen.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.CommandLines.edit">
 <code class="sig-name descname">edit</code><a class="headerlink" href="#hvctl.widgets.CommandLines.edit" title="Permalink to this definition">¶</a></dt>
 <dd><p>This widget provides the functionality for displaying and
@@ -181,28 +181,28 @@ editing text.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandLines.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">inputfile</em>, <em class="sig-param">outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputfile</span></em>, <em class="sig-param"><span class="n">outputfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.widgets.CommandLines" title="hvctl.widgets.CommandLines"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandLines</span></code></a> object.</p>
 <p>The arguments set the values of <a class="reference internal" href="#hvctl.widgets.CommandLines.inputfile" title="hvctl.widgets.CommandLines.inputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputfile</span></code></a> and
 <a class="reference internal" href="#hvctl.widgets.CommandLines.outputfile" title="hvctl.widgets.CommandLines.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandLines.move_cursor_to_end">
 <code class="sig-name descname">move_cursor_to_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.move_cursor_to_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the cursor to the end of the editable string.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandLines.update">
 <code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the string returned by
 <a class="reference internal" href="#hvctl.widgets.CommandLines.outputfile" title="hvctl.widgets.CommandLines.outputfile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputfile.read()</span></code></a> to the screen.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandLines.history_up">
 <code class="sig-name descname">history_up</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.history_up" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scroll command history up one step.</p>
@@ -210,7 +210,7 @@ editing text.</p>
 pressing the up arrow button in a Linux terminal.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandLines.history_down">
 <code class="sig-name descname">history_down</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.history_down" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scroll command history down one step.</p>
@@ -218,15 +218,15 @@ pressing the up arrow button in a Linux terminal.</p>
 pressing the down arrow button in a Linux terminal.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandLines.enter">
 <code class="sig-name descname">enter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.enter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enter the current editable string as a command.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandLines.keypress">
-<code class="sig-name descname">keypress</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.keypress" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">keypress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandLines.keypress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle key presses.</p>
 <p>The up and down arrow keys are used to browse command history.
 Enter enters a command.</p>
@@ -240,13 +240,13 @@ Enter enters a command.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.widgets.CommandHistory">
 <em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">CommandHistory</code><a class="headerlink" href="#hvctl.widgets.CommandHistory" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class to store command history.</p>
 <p>This class emulates the command history browsing behaviour of a
 typical Linux terminal.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.CommandHistory.history">
 <code class="sig-name descname">history</code><a class="headerlink" href="#hvctl.widgets.CommandHistory.history" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of previously entered commands.
@@ -254,7 +254,7 @@ Index 0 is set to <code class="docutils literal notranslate"><span class="pre">N
 and <a class="reference internal" href="#hvctl.widgets.CommandHistory.temp_history" title="hvctl.widgets.CommandHistory.temp_history"><code class="xref py py-attr docutils literal notranslate"><span class="pre">temp_history</span></code></a> the same length.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.CommandHistory.temp_history">
 <code class="sig-name descname">temp_history</code><a class="headerlink" href="#hvctl.widgets.CommandHistory.temp_history" title="Permalink to this definition">¶</a></dt>
 <dd><p>The same as <a class="reference internal" href="#hvctl.widgets.CommandHistory.history" title="hvctl.widgets.CommandHistory.history"><code class="xref py py-attr docutils literal notranslate"><span class="pre">history</span></code></a>, but includes the newest
@@ -266,7 +266,7 @@ are saved here, while <a class="reference internal" href="#hvctl.widgets.Command
 original ones.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.CommandHistory.index">
 <code class="sig-name descname">index</code><a class="headerlink" href="#hvctl.widgets.CommandHistory.index" title="Permalink to this definition">¶</a></dt>
 <dd><p>The index of the currently selected command.
@@ -274,7 +274,7 @@ original ones.</p>
 <code class="docutils literal notranslate"><span class="pre">1</span></code> is the previous one etc.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandHistory.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandHistory.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize <a class="reference internal" href="#hvctl.widgets.CommandHistory.history" title="hvctl.widgets.CommandHistory.history"><code class="xref py py-attr docutils literal notranslate"><span class="pre">history</span></code></a> to <code class="docutils literal notranslate"><span class="pre">[]</span></code>,
@@ -282,7 +282,7 @@ original ones.</p>
 <a class="reference internal" href="#hvctl.widgets.CommandHistory.index" title="hvctl.widgets.CommandHistory.index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">index</span></code></a> to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandHistory.up">
 <code class="sig-name descname">up</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandHistory.up" title="Permalink to this definition">¶</a></dt>
 <dd><p>Increase <a class="reference internal" href="#hvctl.widgets.CommandHistory.index" title="hvctl.widgets.CommandHistory.index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">index</span></code></a> by 1 (i.e. select a command that is
@@ -290,7 +290,7 @@ older than the current one).</p>
 <p>If the current command is the oldest one, nothing is done.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandHistory.down">
 <code class="sig-name descname">down</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandHistory.down" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decrease <a class="reference internal" href="#hvctl.widgets.CommandHistory.index" title="hvctl.widgets.CommandHistory.index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">index</span></code></a> by 1 (i.e. select a command that is
@@ -298,19 +298,19 @@ newer than the current one).</p>
 <p>If the current command is the newest one, nothing is done.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandHistory.get_command">
 <code class="sig-name descname">get_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandHistory.get_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the currently selected command as a string.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandHistory.update_command">
-<code class="sig-name descname">update_command</code><span class="sig-paren">(</span><em class="sig-param">string</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandHistory.update_command" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandHistory.update_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change the currently selected command into <em>string</em>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.CommandHistory.enter_command">
 <code class="sig-name descname">enter_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.CommandHistory.enter_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enter the currently selected command.</p>
@@ -324,12 +324,12 @@ are not saved at all.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.widgets.Scroller">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">Scroller</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">position</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">Scroller</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">widget</span></em>, <em class="sig-param"><span class="n">position</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller" title="Permalink to this definition">¶</a></dt>
 <dd><p>A container widget that makes a flow widget scrollable.</p>
 <p>This is a box widget; its container sets it height and width.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.Scroller.widget">
 <code class="sig-name descname">widget</code><a class="headerlink" href="#hvctl.widgets.Scroller.widget" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widget to be made scrollable. This should be a flow
@@ -341,7 +341,7 @@ widget.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.Scroller.position">
 <code class="sig-name descname">position</code><a class="headerlink" href="#hvctl.widgets.Scroller.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>An object to keep track of how far the widget is scrolled.
@@ -354,25 +354,25 @@ objects that can scroll the widget (e.g. the scroll bar).</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.Scroller.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">position</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">widget</span></em>, <em class="sig-param"><span class="n">position</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.widgets.Scroller" title="hvctl.widgets.Scroller"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scroller</span></code></a>.</p>
 <p>The arguments set the values of <a class="reference internal" href="#hvctl.widgets.Scroller.widget" title="hvctl.widgets.Scroller.widget"><code class="xref py py-attr docutils literal notranslate"><span class="pre">widget</span></code></a> and
 <a class="reference internal" href="#hvctl.widgets.Scroller.position" title="hvctl.widgets.Scroller.position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">position</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.Scroller.render">
-<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">focus=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.render" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">focus</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.render" title="Permalink to this definition">¶</a></dt>
 <dd><p>Render the visible portion of the scrollable widget,
 update <a class="reference internal" href="#hvctl.widgets.Scroller.position" title="hvctl.widgets.Scroller.position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">position</span></code></a> and
 return an <a class="reference external" href="http://urwid.org/reference/canvas.html#urwid.Canvas" title="(in Urwid v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">urwid.Canvas</span></code></a> object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.Scroller.mouse_event">
-<code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">event</em>, <em class="sig-param">button</em>, <em class="sig-param">col</em>, <em class="sig-param">row</em>, <em class="sig-param">focus</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.mouse_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">event</span></em>, <em class="sig-param"><span class="n">button</span></em>, <em class="sig-param"><span class="n">col</span></em>, <em class="sig-param"><span class="n">row</span></em>, <em class="sig-param"><span class="n">focus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.mouse_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle mouse events.</p>
 <p>The mouse wheel scrolls the terminal up and down.</p>
 <dl class="field-list simple">
@@ -383,9 +383,9 @@ return an <a class="reference external" href="http://urwid.org/reference/canvas.
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.Scroller.keypress">
-<code class="sig-name descname">keypress</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.keypress" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">keypress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Scroller.keypress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle key presses.</p>
 <p>Pressing any key scrolls the terminal to the bottom so that
 the current command can be edited.</p>
@@ -399,12 +399,12 @@ the current command can be edited.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.widgets.Position">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">Position</code><span class="sig-paren">(</span><em class="sig-param">listeners=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Position" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">Position</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">listeners</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Position" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class to keep track of the position to which a widget made
 scrollable with <a class="reference internal" href="#hvctl.widgets.Scroller" title="hvctl.widgets.Scroller"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scroller</span></code></a> has been scrolled.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.Position.listeners">
 <code class="sig-name descname">listeners</code><a class="headerlink" href="#hvctl.widgets.Position.listeners" title="Permalink to this definition">¶</a></dt>
 <dd><p>The widgets that should be re-rendered whenever
@@ -416,7 +416,7 @@ scrollable with <a class="reference internal" href="#hvctl.widgets.Scroller" tit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.Position.total_rows">
 <code class="sig-name descname">total_rows</code><a class="headerlink" href="#hvctl.widgets.Position.total_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>The height of the scrollable widget in rows,
@@ -427,53 +427,57 @@ The <a class="reference internal" href="#hvctl.widgets.Scroller" title="hvctl.wi
 whenever it is rendered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.Position.visible_rows">
 <code class="sig-name descname">visible_rows</code><a class="headerlink" href="#hvctl.widgets.Position.visible_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Like <a class="reference internal" href="#hvctl.widgets.Position.total_rows" title="hvctl.widgets.Position.total_rows"><code class="xref py py-attr docutils literal notranslate"><span class="pre">total_rows</span></code></a>, but only counts the rows visible
 on the screen.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.Position.relative">
 <code class="sig-name descname">relative</code><a class="headerlink" href="#hvctl.widgets.Position.relative" title="Permalink to this definition">¶</a></dt>
 <dd><p>A relative scroll position between <code class="docutils literal notranslate"><span class="pre">0</span></code> (scrolled to the
 top) and <code class="docutils literal notranslate"><span class="pre">1</span></code> (scrolled to the bottom).
-Changing this also changes the value of <a class="reference internal" href="#hvctl.widgets.Position.absolute" title="hvctl.widgets.Position.absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">absolute</span></code></a>.</p>
+Changing this also changes the value of <a class="reference internal" href="#hvctl.widgets.Position.absolute" title="hvctl.widgets.Position.absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">absolute</span></code></a>.
+Values below <code class="docutils literal notranslate"><span class="pre">0</span></code> are set to <code class="docutils literal notranslate"><span class="pre">0</span></code> and values above <code class="docutils literal notranslate"><span class="pre">1</span></code>
+to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.Position.absolute">
 <code class="sig-name descname">absolute</code><a class="headerlink" href="#hvctl.widgets.Position.absolute" title="Permalink to this definition">¶</a></dt>
 <dd><p>An absolute scroll position given as the number of
 invisible rows that are located above the top edge of the
 widget.
-Changing this also changes the value of <a class="reference internal" href="#hvctl.widgets.Position.relative" title="hvctl.widgets.Position.relative"><code class="xref py py-attr docutils literal notranslate"><span class="pre">relative</span></code></a>.</p>
+Changing this also changes the value of <a class="reference internal" href="#hvctl.widgets.Position.relative" title="hvctl.widgets.Position.relative"><code class="xref py py-attr docutils literal notranslate"><span class="pre">relative</span></code></a>.
+Values below <code class="docutils literal notranslate"><span class="pre">0</span></code> are set to <code class="docutils literal notranslate"><span class="pre">0</span></code> and values above
+<a class="reference internal" href="#hvctl.widgets.Position.max_absolute" title="hvctl.widgets.Position.max_absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_absolute</span></code></a> to <a class="reference internal" href="#hvctl.widgets.Position.max_absolute" title="hvctl.widgets.Position.max_absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_absolute</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.Position.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">listeners=None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Position.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">listeners</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.Position.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.widgets.Position" title="hvctl.widgets.Position"><code class="xref py py-class docutils literal notranslate"><span class="pre">Position</span></code></a> object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -484,37 +488,21 @@ This may be changed later. If no value is given,
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.Position.max_absolute">
 <em class="property">property </em><code class="sig-name descname">max_absolute</code><a class="headerlink" href="#hvctl.widgets.Position.max_absolute" title="Permalink to this definition">¶</a></dt>
 <dd><p>The maximum value of <a class="reference internal" href="#hvctl.widgets.Position.absolute" title="hvctl.widgets.Position.absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">absolute</span></code></a>, equal to
 <code class="docutils literal notranslate"><span class="pre">total_rows</span> <span class="pre">-</span> <span class="pre">visible_rows</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt>
-<em class="property">property </em><code class="sig-name descname">relative</code></dt>
-<dd><p>Get or set <a class="reference internal" href="#hvctl.widgets.Position.relative" title="hvctl.widgets.Position.relative"><code class="xref py py-attr docutils literal notranslate"><span class="pre">relative</span></code></a>.
-Values below <code class="docutils literal notranslate"><span class="pre">0</span></code> are set to <code class="docutils literal notranslate"><span class="pre">0</span></code> and values above <code class="docutils literal notranslate"><span class="pre">1</span></code>
-to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt>
-<em class="property">property </em><code class="sig-name descname">absolute</code></dt>
-<dd><p>Get or set <a class="reference internal" href="#hvctl.widgets.Position.absolute" title="hvctl.widgets.Position.absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">absolute</span></code></a>.
-Values below <code class="docutils literal notranslate"><span class="pre">0</span></code> are set to <code class="docutils literal notranslate"><span class="pre">0</span></code> and values above
-<a class="reference internal" href="#hvctl.widgets.Position.max_absolute" title="hvctl.widgets.Position.max_absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_absolute</span></code></a> to <a class="reference internal" href="#hvctl.widgets.Position.max_absolute" title="hvctl.widgets.Position.max_absolute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_absolute</span></code></a>.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.widgets.ScrollBar">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">ScrollBar</code><span class="sig-paren">(</span><em class="sig-param">position</em>, <em class="sig-param">scroller_char='█'</em>, <em class="sig-param">background_char='░'</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">ScrollBar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span></em>, <em class="sig-param"><span class="n">scroller_char</span><span class="o">=</span><span class="default_value">'█'</span></em>, <em class="sig-param"><span class="n">background_char</span><span class="o">=</span><span class="default_value">'░'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar" title="Permalink to this definition">¶</a></dt>
 <dd><p>A widget that provides a vertical scroll bar.</p>
 <p>This is a box widget; its container sets it height and width.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollBar.position">
 <code class="sig-name descname">position</code><a class="headerlink" href="#hvctl.widgets.ScrollBar.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>An object used to keep track of how far the screen is
@@ -526,47 +514,47 @@ scrolled.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollBar.scroller_char">
 <code class="sig-name descname">scroller_char</code><a class="headerlink" href="#hvctl.widgets.ScrollBar.scroller_char" title="Permalink to this definition">¶</a></dt>
 <dd><p>The character used to draw the moving part of the scroll
 bar.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>single-character <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p>single-character <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollBar.background_char">
 <code class="sig-name descname">background_char</code><a class="headerlink" href="#hvctl.widgets.ScrollBar.background_char" title="Permalink to this definition">¶</a></dt>
 <dd><p>The character used to draw the other parts of the scroll
 bar.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>single-character <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p>single-character <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.ScrollBar.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">position</em>, <em class="sig-param">scroller_char='█'</em>, <em class="sig-param">background_char='░'</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">position</span></em>, <em class="sig-param"><span class="n">scroller_char</span><span class="o">=</span><span class="default_value">'█'</span></em>, <em class="sig-param"><span class="n">background_char</span><span class="o">=</span><span class="default_value">'░'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new scrollbar.</p>
 <p>The arguments set the values of <a class="reference internal" href="#hvctl.widgets.ScrollBar.position" title="hvctl.widgets.ScrollBar.position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">position</span></code></a>,
 <a class="reference internal" href="#hvctl.widgets.ScrollBar.scroller_char" title="hvctl.widgets.ScrollBar.scroller_char"><code class="xref py py-attr docutils literal notranslate"><span class="pre">scroller_char</span></code></a> and <a class="reference internal" href="#hvctl.widgets.ScrollBar.background_char" title="hvctl.widgets.ScrollBar.background_char"><code class="xref py py-attr docutils literal notranslate"><span class="pre">background_char</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.ScrollBar.render">
-<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">focus=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar.render" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">focus</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar.render" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate the scroll bar and render it.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.ScrollBar.mouse_event">
-<code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">event</em>, <em class="sig-param">button</em>, <em class="sig-param">col</em>, <em class="sig-param">row</em>, <em class="sig-param">focus</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar.mouse_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">event</span></em>, <em class="sig-param"><span class="n">button</span></em>, <em class="sig-param"><span class="n">col</span></em>, <em class="sig-param"><span class="n">row</span></em>, <em class="sig-param"><span class="n">focus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollBar.mouse_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle mouse events.</p>
 <p>Mouse button 1 moves the scroller so that clicking the scroll
 bar at a point <em>X</em> % from its top will set
@@ -582,13 +570,13 @@ to <code class="docutils literal notranslate"><span class="pre">X</span> <span c
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.widgets.ScrollButton">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">ScrollButton</code><span class="sig-paren">(</span><em class="sig-param">symbol</em>, <em class="sig-param">step</em>, <em class="sig-param">position</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollButton" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.widgets.</code><code class="sig-name descname">ScrollButton</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">symbol</span></em>, <em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">position</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollButton" title="Permalink to this definition">¶</a></dt>
 <dd><p>A widget that can be clicked with the mouse to scroll another
 widget.</p>
 <p>This is a box widget; its container sets it height and width.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollButton.step">
 <code class="sig-name descname">step</code><a class="headerlink" href="#hvctl.widgets.ScrollButton.step" title="Permalink to this definition">¶</a></dt>
 <dd><p>The amount of rows scrolled when this widget is clicked.
@@ -596,12 +584,12 @@ Negative values are used to scroll towards the top of the
 scrollable widget, positive values towards the bottom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.widgets.ScrollButton.position">
 <code class="sig-name descname">position</code><a class="headerlink" href="#hvctl.widgets.ScrollButton.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>An object used to keep track of how far the scrollable
@@ -613,14 +601,14 @@ widget is scrolled.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.ScrollButton.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">symbol</em>, <em class="sig-param">step</em>, <em class="sig-param">position</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollButton.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">symbol</span></em>, <em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">position</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollButton.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new <a class="reference internal" href="#hvctl.widgets.ScrollButton" title="hvctl.widgets.ScrollButton"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScrollButton</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The character or string that is displayed on the
+<li><p><strong>symbol</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The character or string that is displayed on the
 button.</p></li>
 <li><p><strong>step</strong> – The value of <a class="reference internal" href="#hvctl.widgets.ScrollButton.step" title="hvctl.widgets.ScrollButton.step"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step</span></code></a>.</p></li>
 <li><p><strong>position</strong> – The value of <a class="reference internal" href="#hvctl.widgets.ScrollButton.position" title="hvctl.widgets.ScrollButton.position"><code class="xref py py-attr docutils literal notranslate"><span class="pre">position</span></code></a>.</p></li>
@@ -629,9 +617,9 @@ button.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.widgets.ScrollButton.mouse_event">
-<code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param">size</em>, <em class="sig-param">event</em>, <em class="sig-param">button</em>, <em class="sig-param">col</em>, <em class="sig-param">row</em>, <em class="sig-param">focus</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollButton.mouse_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mouse_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">event</span></em>, <em class="sig-param"><span class="n">button</span></em>, <em class="sig-param"><span class="n">col</span></em>, <em class="sig-param"><span class="n">row</span></em>, <em class="sig-param"><span class="n">focus</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.widgets.ScrollButton.mouse_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle mouse events.</p>
 <p>A left click scrolls the scrollable widget by <a class="reference internal" href="#hvctl.widgets.ScrollButton.step" title="hvctl.widgets.ScrollButton.step"><code class="xref py py-attr docutils literal notranslate"><span class="pre">step</span></code></a>
 rows.</p>
@@ -678,6 +666,7 @@ rows.</p>
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
@@ -703,7 +692,7 @@ rows.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -720,7 +709,7 @@ rows.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

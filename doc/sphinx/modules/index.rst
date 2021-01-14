@@ -19,3 +19,5 @@ This page lists all importable Python modules in the ``hvctl`` package.
    queuefile.rst
    virtualconnection.rst
    virtualhv.rst
+   hacks.rst
+   main.rst

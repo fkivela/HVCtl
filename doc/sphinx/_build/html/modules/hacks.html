@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modules &#8212; HVCtl  documentation</title>
+    <title>hacks &#8212; HVCtl  documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="config" href="config.html" />
-    <link rel="prev" title="Usage" href="../usage.html" />
+    <link rel="next" title="RS-232 control protocol" href="../protocol.html" />
+    <link rel="prev" title="virtualhv" href="virtualhv.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,26 +33,17 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="modules">
-<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
-<p>This page lists all importable Python modules in the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package.
-<code class="docutils literal notranslate"><span class="pre">hvctl.__init__</span></code> also imports the classes <a class="reference internal" href="api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> and <a class="reference internal" href="virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> to the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> namespace, since they are the classes most likely to be needed by a user.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="widgets.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">widgets</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="command_line_ui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">command_line_ui</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_tui.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">advanced_tui</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="status_format.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">status_format</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="main.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a></li>
-</ul>
-</div>
+  <div class="section" id="module-hvctl.hacks">
+<span id="hacks"></span><h1><a class="reference internal" href="#module-hvctl.hacks" title="hvctl.hacks"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a><a class="headerlink" href="#module-hvctl.hacks" title="Permalink to this headline">¶</a></h1>
+<p>This module contains some temporary inelegant fixes that hopefully can be
+removed later.</p>
+<dl class="py function">
+<dt id="hvctl.hacks.monkeypatch_urwid">
+<code class="sig-prename descclassname">hvctl.hacks.</code><code class="sig-name descname">monkeypatch_urwid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.hacks.monkeypatch_urwid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Urwid seems to have a bug that causes a memory leak.
+This function monkey-patches that leak.</p>
+</dd></dl>
+
 </div>
 
 
@@ -75,7 +66,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Modules</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="config.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="message.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a></li>
@@ -86,8 +77,7 @@
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="main.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
@@ -97,8 +87,10 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../usage.html" title="previous chapter">Usage</a></li>
-      <li>Next: <a href="config.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">config</span></code></a></li>
+  <li><a href="index.html">Modules</a><ul>
+      <li>Previous: <a href="virtualhv.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+      <li>Next: <a href="../protocol.html" title="next chapter">RS-232 control protocol</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -132,7 +124,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/modules/index.rst.txt"
+      <a href="../_sources/modules/hacks.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

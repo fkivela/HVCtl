@@ -149,6 +149,10 @@ def get_ui(command_line_ui):
         # This makes it possible to run HVCtl without urwid by using
         # CommandLineUI.
 
+        # Monkey-patch a bug in Urwid before using it anywhere else.
+        from hvctl.hacks import monkeypatch_urwid
+        monkeypatch_urwid()
+
         from hvctl.advanced_tui import AdvancedTUI
 
         advanced_ui = AdvancedTUI(command_line_ui.run,

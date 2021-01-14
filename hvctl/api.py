@@ -289,7 +289,7 @@ class API():
             # This may raise a serial.SerialException.
             self._connection.write(bytes(query))
 
-            reply_bytes = self._connection.read_until(terminator=b'\r')
+            reply_bytes = self._connection.read_until(expected=b'\r')
             reply = Message.from_bytes(reply_bytes)
 
             self._check_reply(query, reply)

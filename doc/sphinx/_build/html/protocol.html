@@ -1,21 +1,21 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RS-232 control protocol &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="virtualhv" href="modules/virtualhv.html" />
+    <link rel="prev" title="__main__" href="modules/main.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,10 +35,14 @@
   <div class="section" id="rs-232-control-protocol">
 <h1>RS-232 control protocol<a class="headerlink" href="#rs-232-control-protocol" title="Permalink to this headline">¶</a></h1>
 <p>Communication with the HV generator is based on command-answer pairs.
-Both commands and answers consist of a string of ASCII characters ending with the carriage return character (ASCII character number 13).
-Carriage return is displayed here as <code class="docutils literal notranslate"><span class="pre">\r</span></code>, since that is the representation used by Python.</p>
-<p>Command strings start with a letter denoting the given command, followed by one or more function parameters separated by commas.
-Answers copy the command string, and may append a return value to its end (without a separating comma).</p>
+Both commands and answers consist of a string of ASCII characters ending with
+the carriage return character (ASCII character number 13).
+Carriage return is displayed here as <code class="docutils literal notranslate"><span class="pre">\r</span></code>, since that is the representation
+used by Python.</p>
+<p>Command strings start with a letter denoting the given command, followed by one
+or more function parameters separated by commas.
+Answers copy the command string, and may append a return value to its end
+(without a separating comma).</p>
 <p>The RS-232 connection has the following specifications:</p>
 <ul class="simple">
 <li><p>1 start bit</p></li>
@@ -50,15 +54,21 @@ Answers copy the command string, and may append a return value to its end (witho
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the HV generator doesn’t receive any instructions for 5 seconds, it will automatically turn the HV <a class="reference internal" href="#hv-off">off</a> and enter <a class="reference internal" href="#mode">local mode</a>.</p>
+<p>If the HV generator doesn’t receive any instructions for 5 seconds, it will
+automatically turn the HV <a class="reference internal" href="#hv-off">off</a> and enter <a class="reference internal" href="#mode">local mode</a>.</p>
 </div>
 <div class="section" id="list-of-commands-and-answers">
 <h2>List of commands and answers<a class="headerlink" href="#list-of-commands-and-answers" title="Permalink to this headline">¶</a></h2>
-<p>This section lists all commands recognized by the HV generator and the answers to them.
+<p>This section lists all commands recognized by the HV generator and the answers
+to them.
 An <em>X</em> denotes a numerical value.
-Unless otherwise signified, it is a 12-bit unsigned integer (i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>),
+Unless otherwise signified, it is a 12-bit unsigned integer
+(i.e. <span class="math notranslate nohighlight">\(X \in \left[0, 4095 \right]\)</span>),
 linearly scaled to cover the entire voltage or current range of the generator.
-For example, with a SR100KV-5KW generator with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code> sets the voltage to 0 V (i.e. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it to -100 kV, which is the highest (by absolute value) voltage the generator can produce.</p>
+For example, with a SR100KV-5KW generator with negative polarity, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code>
+sets the voltage to 0 V (i.e. the ground potential), and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">4095</span></code> sets it
+to -100 kV, which is the highest (by absolute value) voltage the generator can
+produce.</p>
 <div class="section" id="set-output-voltage">
 <span id="set-voltage"></span><h3>1. Set output voltage<a class="headerlink" href="#set-output-voltage" title="Permalink to this headline">¶</a></h3>
 <dl class="field-list simple">
@@ -70,8 +80,10 @@ For example, with a SR100KV-5KW generator with negative polarity, <code class="d
 </dd>
 </dl>
 <p>This command sets the voltage produced by the HV generator to the given value.
-If the command is sent while the generator is currently in the <a class="reference internal" href="#hv-off">HV off</a> state or <a class="reference internal" href="#inhibition">inhibition</a> has been activated,
-the new value will be applied when the pump is switched to a HV on/inhibition off state.</p>
+If the command is sent while the generator is currently in the
+<a class="reference internal" href="#hv-off">HV off</a> state or <a class="reference internal" href="#inhibition">inhibition</a> has been activated,
+the new value will be applied when the pump is switched to a HV on/inhibition
+off state.</p>
 </div>
 <div class="section" id="set-output-current">
 <span id="set-current"></span><h3>2. Set output current<a class="headerlink" href="#set-output-current" title="Permalink to this headline">¶</a></h3>
@@ -83,7 +95,8 @@ the new value will be applied when the pump is switched to a HV on/inhibition of
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">d2,X\r</span></code></p>
 </dd>
 </dl>
-<p>This command works just like <a class="reference internal" href="#set-voltage">the previous one</a>, but sets the output current instead of the output voltage.</p>
+<p>This command works just like <a class="reference internal" href="#set-voltage">the previous one</a>, but sets the
+output current instead of the output voltage.</p>
 </div>
 <div class="section" id="get-output-voltage">
 <span id="get-voltage"></span><h3>3. Get output voltage<a class="headerlink" href="#get-output-voltage" title="Permalink to this headline">¶</a></h3>
@@ -96,8 +109,8 @@ the new value will be applied when the pump is switched to a HV on/inhibition of
 </dd>
 </dl>
 <p>This command returns the voltage produced by the HV generator.
-If the generator is in the <a class="reference internal" href="#hv-off">HV off</a> state or <a class="reference internal" href="#inhibition">inhibition</a> has been activated,
-the returned value will be zero.</p>
+If the generator is in the <a class="reference internal" href="#hv-off">HV off</a> state or <a class="reference internal" href="#inhibition">inhibition</a> has been
+activated, the returned value will be zero.</p>
 </div>
 <div class="section" id="get-output-current">
 <span id="get-current"></span><h3>4. Get output current<a class="headerlink" href="#get-output-current" title="Permalink to this headline">¶</a></h3>
@@ -109,7 +122,8 @@ the returned value will be zero.</p>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">a2X\r</span></code></p>
 </dd>
 </dl>
-<p>This command works just like <a class="reference internal" href="#get-voltage">the previous one</a>, but returns the output current instead of the output voltage.</p>
+<p>This command works just like <a class="reference internal" href="#get-voltage">the previous one</a>, but returns
+the output current instead of the output voltage.</p>
 </div>
 <div class="section" id="turn-the-hv-on">
 <span id="hv-on"></span><h3>5. Turn the HV on<a class="headerlink" href="#turn-the-hv-on" title="Permalink to this headline">¶</a></h3>
@@ -132,12 +146,14 @@ the returned value will be zero.</p>
 </dl>
 <p>This command is used to switch the generator to the HV on state.
 The command is actually a sequence of two different commands,
-which are sent with a 100 ms delay between receiving the answer to the first command and sending the second one.</p>
+which are sent with a 100 ms delay between receiving the answer to the first
+command and sending the second one.</p>
 <p>The HV generator has two states: HV on and HV off.
-In the HV off state the generator doesn’t produce any output (i.e. the voltage and the current are 0),
-while in the HV on state output is produced normally.</p>
-<p>Note that the HV on and HV off states are a different thing than the HV generator itself being on or off;
-the generator is powered on and can respond to commands in both the HV on and the HV off state.</p>
+In the HV off state the generator doesn’t produce any output (i.e. the voltage
+and the current are 0), while in the HV on state output is produced normally.</p>
+<p>Note that the HV on and HV off states are a different thing than the HV
+generator itself being on or off; the generator is powered on and can respond
+to commands in both the HV on and the HV off state.</p>
 </div>
 <div class="section" id="turn-the-hv-off">
 <span id="hv-off"></span><h3>6. Turn the HV off<a class="headerlink" href="#turn-the-hv-off" title="Permalink to this headline">¶</a></h3>
@@ -158,7 +174,8 @@ the generator is powered on and can respond to commands in both the HV on and th
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">P6,0\r</span></code></p>
 </dd>
 </dl>
-<p>This command works just like <a class="reference internal" href="#hv-on">the previous one</a>, but switches the HV generator to the HV off state instead of the HV on state.</p>
+<p>This command works just like <a class="reference internal" href="#hv-on">the previous one</a>, but switches the HV
+generator to the HV off state instead of the HV on state.</p>
 </div>
 <div class="section" id="switch-between-local-and-remote-mode">
 <span id="mode"></span><h3>7. Switch between local and remote mode<a class="headerlink" href="#switch-between-local-and-remote-mode" title="Permalink to this headline">¶</a></h3>
@@ -182,16 +199,22 @@ the generator is powered on and can respond to commands in both the HV on and th
 </dl>
 <p>This command switches the HV generator to the local mode or the remote mode.</p>
 <p>The HV generator can be operated in two modes: local and remote.
-In the remote mode, the generator is controlled through a remote connection, such as the RS-232 connection described here,
-while in the local mode it is controlled through the buttons located on its front panel.</p>
+In the remote mode, the generator is controlled through a remote connection,
+such as the RS-232 connection described here,
+while in the local mode it is controlled through the buttons located on its
+front panel.</p>
 <p>In the local mode, the <a class="reference internal" href="#hv-on">HV on</a> command cannot be sent remotely,
-and switching the generator to the local mode in the HV on state will automatically set it to the HV off state.
-However, the command to switch to remote mode and the <a class="reference internal" href="#inhibition">inhibition</a> command can be sent remotely even in the local mode.</p>
+and switching the generator to the local mode in the HV on state will
+automatically set it to the HV off state.
+However, the command to switch to remote mode and the
+<a class="reference internal" href="#inhibition">inhibition</a> command can be sent remotely even in the local
+mode.</p>
 </div>
 <div class="section" id="activate-or-deactivate-inhibition">
 <span id="inhibition"></span><h3>8. Activate or deactivate inhibition<a class="headerlink" href="#activate-or-deactivate-inhibition" title="Permalink to this headline">¶</a></h3>
 <p>This command is used to activate or deactivate output inhibition.
-While inhibition is activated, the HV generator doesn’t produce output even in the <a class="reference internal" href="#hv-on">HV on</a> state.</p>
+While inhibition is activated, the HV generator doesn’t produce output even in
+the <a class="reference internal" href="#hv-on">HV on</a> state.</p>
 <p>Activate inhibition:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Command</dt>
@@ -221,7 +244,8 @@ While inhibition is activated, the HV generator doesn’t produce output even in
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">EX\r</span></code>, <span class="math notranslate nohighlight">\(X \in \left[0, 255 \right]\)</span></p>
 </dd>
 </dl>
-<p>This command returns the status of the HV generator, excluding the values of the voltage and the current.
+<p>This command returns the status of the HV generator, excluding the values of
+the voltage and the current.
 The returned value is the decimal representation of an 8-bit unsigned integer,
 where each bit signifies a single status condition.</p>
 <p>The bits are numbered in the following manner,
@@ -311,41 +335,56 @@ Bits 5-8 directly correspond to the parameter values (1 or 0) of commands 5-8.</
 </div>
 <div class="section" id="bit-6-hv-off">
 <h4>Bit 6: HV off<a class="headerlink" href="#bit-6-hv-off" title="Permalink to this headline">¶</a></h4>
-<p>The value of this bit is 1 if the first <a class="reference internal" href="#hv-off">HV off</a> command has been sent and the second one hasn’t.</p>
+<p>The value of this bit is 1 if the first <a class="reference internal" href="#hv-off">HV off</a> command has been
+sent and the second one hasn’t.</p>
 </div>
 <div class="section" id="bit-5-hv-on">
 <h4>Bit 5: HV on<a class="headerlink" href="#bit-5-hv-on" title="Permalink to this headline">¶</a></h4>
-<p>The value of this bit is 1 if the first <a class="reference internal" href="#hv-on">HV on</a> command has been sent and the second one hasn’t.</p>
+<p>The value of this bit is 1 if the first <a class="reference internal" href="#hv-on">HV on</a> command has been sent
+and the second one hasn’t.</p>
 </div>
 <div class="section" id="bit-4-hv-status">
 <h4>Bit 4: HV status<a class="headerlink" href="#bit-4-hv-status" title="Permalink to this headline">¶</a></h4>
-<p>This bit tells whether the HV generator is in the <a class="reference internal" href="#hv-on">HV on</a> state or the <a class="reference internal" href="#hv-off">HV off</a> state.</p>
+<p>This bit tells whether the HV generator is in the <a class="reference internal" href="#hv-on">HV on</a> state or
+the <a class="reference internal" href="#hv-off">HV off</a> state.</p>
 </div>
 <div class="section" id="bit-3-interlock">
 <span id="interlock"></span><h4>Bit 3: interlock<a class="headerlink" href="#bit-3-interlock" title="Permalink to this headline">¶</a></h4>
 <p>This bit tells whether the interlock is closed or open.</p>
-<p>The interlock is a physical safety device consisting of two pins on the rear panel of the HV generator.
-In some generator models the interlock is a Lemo-type 2-pin connector; in others, pins 16 and 24 of a 25-pin D-subminiature remote connector serve as the interlock.
-In both cases, the interlock must be closed by connecting the two pins to one another for the generator to produce output.
-Opening the interlock will switch the generator to the <a class="reference internal" href="#hv-off">HV off</a> state and activate the <a class="reference internal" href="#fault">fault</a> state.</p>
+<p>The interlock is a physical safety device consisting of two pins on the rear
+panel of the HV generator.
+In some generator models the interlock is a Lemo-type 2-pin connector; in
+others, pins 16 and 24 of a 25-pin D-subminiature remote connector serve as the
+interlock.
+In both cases, the interlock must be closed by connecting the two pins to one
+another for the generator to produce output.
+Opening the interlock will switch the generator to the <a class="reference internal" href="#hv-off">HV off</a>
+state and activate the <a class="reference internal" href="#fault">fault</a> state.</p>
 </div>
 <div class="section" id="bit-2-fault">
 <span id="fault"></span><h4>Bit 2: fault<a class="headerlink" href="#bit-2-fault" title="Permalink to this headline">¶</a></h4>
 <p>This bit tells whether the fault state is active or not.</p>
 <p>The fault state is activated whenever some error condition happens.
-This turns the HV <a class="reference internal" href="#hv-off">off</a> and prevents it from being turned back <a class="reference internal" href="#hv-on">on</a>.
-The fault state can be activated e.g. if the interlock is opened, the key lock is turned on before powering on the generator,
-or if there is a  hardware problem inside the generator.
-After the cause of the error condition is removed, the fault state can be reset by pressing the HV off button on the front panel of the generator.</p>
+This turns the HV <a class="reference internal" href="#hv-off">off</a> and prevents it from being turned back
+<a class="reference internal" href="#hv-on">on</a>.
+The fault state can be activated e.g. if the interlock is opened, the key lock
+is turned on before powering on the generator, or if there is a  hardware
+problem inside the generator.
+After the cause of the error condition is removed, the fault state can be reset
+by pressing the HV off button on the front panel of the generator.</p>
 </div>
 <div class="section" id="bit-1-regulation">
 <h4>Bit 1: regulation<a class="headerlink" href="#bit-1-regulation" title="Permalink to this headline">¶</a></h4>
-<p>This bit tells whether the generator is currently regulating voltage or current.</p>
-<p>The <a class="reference internal" href="#set-voltage">set voltage</a> command activates the voltage regulation mode,
-where the generator sets its output voltage to the desired value and keeps it there.
-The output current is then determined by the output voltage and the resistance of the circuit the generator is connected to.</p>
-<p>Conversely, the <a class="reference internal" href="#set-current">set current</a> command sets the current to the desired value
-and the voltage to whatever value is needed to generate that current; this is the current regulation mode.</p>
+<p>This bit tells whether the generator is currently regulating voltage or
+current.</p>
+<p>The <a class="reference internal" href="#set-voltage">set voltage</a> command activates the voltage regulation
+mode, where the generator sets its output voltage to the desired value and
+keeps it there.
+The output current is then determined by the output voltage and the resistance
+of the circuit the generator is connected to.</p>
+<p>Conversely, the <a class="reference internal" href="#set-current">set current</a> command sets the current to the
+desired value and the voltage to whatever value is needed to generate that
+current; this is the current regulation mode.</p>
 </div>
 </div>
 </div>
@@ -382,7 +421,7 @@ and the voltage to whatever value is needed to generate that current; this is th
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="modules/virtualhv.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+      <li>Previous: <a href="modules/main.html" title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -395,7 +434,7 @@ and the voltage to whatever value is needed to generate that current; this is th
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -412,7 +451,7 @@ and the voltage to whatever value is needed to generate that current; this is th
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

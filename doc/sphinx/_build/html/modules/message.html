@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>message &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="api" href="api.html" />
@@ -37,14 +37,14 @@
 <span id="message"></span><h1><a class="reference internal" href="#module-hvctl.message" title="hvctl.message"><code class="xref py py-mod docutils literal notranslate"><span class="pre">message</span></code></a><a class="headerlink" href="#module-hvctl.message" title="Permalink to this headline">¶</a></h1>
 <p>This module defines the <a class="reference internal" href="#hvctl.message.Message" title="hvctl.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> class for communicating with
 the HV generator.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.message.Message">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.message.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.message.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">is_answer</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents a message sent to or received from the HV
 generator.</p>
 <p>All of the following attributes are defined as read-only
 properties to prevent changing them after an object is instantiated.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.message.Message.command">
 <code class="sig-name descname">command</code><a class="headerlink" href="#hvctl.message.Message.command" title="Permalink to this definition">¶</a></dt>
 <dd><p>The command that is sent to the HV generator,
@@ -70,7 +70,7 @@ The following values are accepted:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.message.Message.value">
 <code class="sig-name descname">value</code><a class="headerlink" href="#hvctl.message.Message.value" title="Permalink to this definition">¶</a></dt>
 <dd><p>A value associated with the command, e.g. the value to
@@ -84,57 +84,57 @@ multiplying <em>value</em> with <a class="reference internal" href="config.html#
 or <a class="reference internal" href="config.html#hvctl.config.DELTA_I" title="hvctl.config.DELTA_I"><code class="xref py py-const docutils literal notranslate"><span class="pre">DELTA_I</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a> or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.message.Message.is_answer">
 <code class="sig-name descname">is_answer</code><a class="headerlink" href="#hvctl.message.Message.is_answer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines whether <em>self</em> represents a message to the
 HV generator or a response from it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.message.Message.ENCODING">
 <code class="sig-name descname">ENCODING</code><em class="property"> = 'UTF-8'</em><a class="headerlink" href="#hvctl.message.Message.ENCODING" title="Permalink to this definition">¶</a></dt>
 <dd><p>The encoding used for conversions between strings and
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects.</p>
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.message.Message.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">value=None</em>, <em class="sig-param">is_answer=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">is_answer</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new <a class="reference internal" href="#hvctl.message.Message" title="hvctl.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> and set its attributes
 to the values given as arguments.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <em>command</em> is not recognized or <em>value</em> is not valid.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <em>command</em> is not recognized or <em>value</em> is not valid.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.message.Message.from_bytes">
-<em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param">bytes_</em>, <em class="sig-param">is_answer=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.from_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new <a class="reference internal" href="#hvctl.message.Message" title="hvctl.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>
+<em class="property">classmethod </em><code class="sig-name descname">from_bytes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bytes_</span></em>, <em class="sig-param"><span class="n">is_answer</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.from_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new <a class="reference internal" href="#hvctl.message.Message" title="hvctl.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>
 object received through the serial connection.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.message.Message.__bytes__">
 <code class="sig-name descname">__bytes__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__bytes__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert <em>self</em> to a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> object, which can then be
+<dd><p>Convert <em>self</em> to a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> object, which can then be
 sent to the HV generator through the serial connection.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.message.Message.__repr__">
 <code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.message.Message.__repr__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string with the format
@@ -177,6 +177,7 @@ sent to the HV generator through the serial connection.</p>
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
@@ -202,7 +203,7 @@ sent to the HV generator through the serial connection.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -219,7 +220,7 @@ sent to the HV generator through the serial connection.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

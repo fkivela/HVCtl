@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>api &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="widgets" href="widgets.html" />
@@ -37,9 +37,9 @@
 <span id="api"></span><h1><a class="reference internal" href="#module-hvctl.api" title="hvctl.api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">api</span></code></a><a class="headerlink" href="#module-hvctl.api" title="Permalink to this headline">¶</a></h1>
 <p>This module defines a set of methods for controlling the HV
 generator.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.api.API">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">API</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">poll</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class defines an API for communicating with a
 Technix SR100KV-5KW high voltage generator.</p>
 <p>Creating an instance of this class forms a serial connection to
@@ -58,7 +58,7 @@ closed after the API is no lenger needed.
 This can be done by calling <a class="reference internal" href="#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> or running the API in a
 <code class="docutils literal notranslate"><span class="pre">with</span></code> block. Both of these closing methods also close the
 serial connection.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.API.status">
 <code class="sig-name descname">status</code><a class="headerlink" href="#hvctl.api.API.status" title="Permalink to this definition">¶</a></dt>
 <dd><p>An object storing the current status of the generator.
@@ -71,7 +71,7 @@ back a reply.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.API.timestep">
 <code class="sig-name descname">timestep</code><a class="headerlink" href="#hvctl.api.API.timestep" title="Permalink to this definition">¶</a></dt>
 <dd><p>If <em>self</em> was initialized with <code class="docutils literal notranslate"><span class="pre">poll=True</span></code>, this
@@ -79,46 +79,46 @@ determines the time (in seconds) between polling messages.
 The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">poll=True</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">poll</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance of this class and form a serial
 connection to the HV generator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The serial port device name. If a value is not given,
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The serial port device name. If a value is not given,
 it will be set to <a class="reference internal" href="config.html#hvctl.config.SERIAL_KWARGS" title="hvctl.config.SERIAL_KWARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">SERIAL_KWARGS['port']</span></code></a>.</p></li>
-<li><p><strong>poll</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Determines whether automatic polling should be used
+<li><p><strong>poll</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Determines whether automatic polling should be used
 or not (see the class docstring for more details.)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><strong>RuntimeError</strong></a> – If a serial connection cannot be formed.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.9)"><strong>RuntimeError</strong></a> – If a serial connection cannot be formed.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.__enter__">
 <code class="sig-name descname">__enter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__enter__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called upon entering a <code class="docutils literal notranslate"><span class="pre">with</span></code> block; returns <em>self</em>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.__exit__">
-<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param">exc_type</em>, <em class="sig-param">exc_value</em>, <em class="sig-param">traceback</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__exit__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exc_type</span></em>, <em class="sig-param"><span class="n">exc_value</span></em>, <em class="sig-param"><span class="n">traceback</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.__exit__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called upon exiting a <code class="docutils literal notranslate"><span class="pre">with</span></code> block; calls <a class="reference internal" href="#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.set_voltage">
-<code class="sig-name descname">set_voltage</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_voltage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_voltage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_voltage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the voltage to <em>value</em> (in V).</p>
 <p>The sign of <em>value</em> doesn’t matter, since it is automatically
 changed to match the polarity of the HV generator.</p>
@@ -131,14 +131,14 @@ of the generator.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.set_current">
-<code class="sig-name descname">set_current</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_current" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_current</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the current to <em>value</em> (in mA).</p>
 <p>Returns: The current value sent back by the HV generator.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.get_voltage">
 <code class="sig-name descname">get_voltage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.get_voltage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the voltage (in V).</p>
@@ -151,7 +151,7 @@ of the generator.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.get_current">
 <code class="sig-name descname">get_current</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.get_current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the current (in mA).</p>
@@ -162,21 +162,21 @@ of the generator.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.hv_on">
 <code class="sig-name descname">hv_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.hv_on" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn the HV generator on.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.hv_off">
 <code class="sig-name descname">hv_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.hv_off" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn the HV generator off.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.set_mode">
-<code class="sig-name descname">set_mode</code><span class="sig-paren">(</span><em class="sig-param">mode</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_mode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_mode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the HV generator to remote or local mode.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -184,14 +184,14 @@ of the generator.</p>
 <code class="docutils literal notranslate"><span class="pre">'remote'</span></code>, <code class="docutils literal notranslate"><span class="pre">'r'</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code> for remote mode.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <em>mode</em> is not a valid value.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <em>mode</em> is not a valid value.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.set_inhibition">
-<code class="sig-name descname">set_inhibition</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_inhibition" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_inhibition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.set_inhibition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate or deactivate inhibition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -201,13 +201,13 @@ inhibition is activated; otherwise it is deactivated.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.get_status">
 <code class="sig-name descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.get_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the status of the HV generator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> with keys and values corresponding to the
+<dd class="field-odd"><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> with keys and values corresponding to the
 attributes of <a class="reference internal" href="#hvctl.api.API.status" title="hvctl.api.API.status"><code class="xref py py-attr docutils literal notranslate"><span class="pre">status</span></code></a> and the values of those
 attributes as reported by the HV generator.
 However, <a class="reference internal" href="#hvctl.api.Status.voltage" title="hvctl.api.Status.voltage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">voltage</span></code></a> and
@@ -216,14 +216,14 @@ However, <a class="reference internal" href="#hvctl.api.Status.voltage" title="h
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.full_status">
 <code class="sig-name descname">full_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.full_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>The same as <a class="reference internal" href="#hvctl.api.API.get_status" title="hvctl.api.API.get_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_status()</span></code></a>, but also includes
 <a class="reference internal" href="#hvctl.api.Status.voltage" title="hvctl.api.Status.voltage"><code class="xref py py-attr docutils literal notranslate"><span class="pre">voltage</span></code></a> and <a class="reference internal" href="#hvctl.api.Status.current" title="hvctl.api.Status.current"><code class="xref py py-attr docutils literal notranslate"><span class="pre">current</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.API.halt">
 <code class="sig-name descname">halt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.API.halt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close the connection.</p>
@@ -236,84 +236,84 @@ are skipped.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="hvctl.api.Status">
-<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">voltage: float = 0.0</em>, <em class="sig-param">current: float = 0.0</em>, <em class="sig-param">regulation: str = 'voltage'</em>, <em class="sig-param">hv_on_status: bool = False</em>, <em class="sig-param">hv_on_command: bool = False</em>, <em class="sig-param">hv_off_command: bool = False</em>, <em class="sig-param">mode: str = 'local'</em>, <em class="sig-param">inhibition: bool = False</em>, <em class="sig-param">interlock: str = 'closed'</em>, <em class="sig-param">fault: bool = False</em>, <em class="sig-param">callback: Callable = None</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hvctl.api.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">voltage</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">current</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">regulation</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'voltage'</span></em>, <em class="sig-param"><span class="n">hv_on_status</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">hv_on_command</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">hv_off_command</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'local'</span></em>, <em class="sig-param"><span class="n">inhibition</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">interlock</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'closed'</span></em>, <em class="sig-param"><span class="n">fault</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">callback</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Callable<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class stores information about the current status of the
 HV generator.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.voltage">
-<code class="sig-name descname">voltage</code><em class="property"> = 0.0</em><a class="headerlink" href="#hvctl.api.Status.voltage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">voltage</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></em><em class="property"> = 0.0</em><a class="headerlink" href="#hvctl.api.Status.voltage" title="Permalink to this definition">¶</a></dt>
 <dd><p>The voltage produced by the generator in V.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.current">
-<code class="sig-name descname">current</code><em class="property"> = 0.0</em><a class="headerlink" href="#hvctl.api.Status.current" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">current</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></em><em class="property"> = 0.0</em><a class="headerlink" href="#hvctl.api.Status.current" title="Permalink to this definition">¶</a></dt>
 <dd><p>The current produced by the generator in mA.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.regulation">
-<code class="sig-name descname">regulation</code><em class="property"> = 'voltage'</em><a class="headerlink" href="#hvctl.api.Status.regulation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">regulation</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><em class="property"> = 'voltage'</em><a class="headerlink" href="#hvctl.api.Status.regulation" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">'voltage'</span></code> or <code class="docutils literal notranslate"><span class="pre">'current'</span></code> depending on whether voltage or
 current regulation is being used.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.hv_on_status">
-<code class="sig-name descname">hv_on_status</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_status" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hv_on_status</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_status" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the generator is currently on, <code class="docutils literal notranslate"><span class="pre">False</span></code> if it’s
 off.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.hv_on_command">
-<code class="sig-name descname">hv_on_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_command" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hv_on_command</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_on_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>The generator is turned on by setting the “hv on” parameter
 to 1 and then back to 0.
 This attribute displays the current value of that parameter as a
 boolean.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.hv_off_command">
-<code class="sig-name descname">hv_off_command</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_off_command" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hv_off_command</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.hv_off_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>The generator is turned on by setting the “hv off” parameter
 to 1 and then back to 0.
 This attribute displays the current value of that parameter as a
 boolean.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.mode">
-<code class="sig-name descname">mode</code><em class="property"> = 'local'</em><a class="headerlink" href="#hvctl.api.Status.mode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mode</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><em class="property"> = 'local'</em><a class="headerlink" href="#hvctl.api.Status.mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>The control mode of the generator:
 <code class="docutils literal notranslate"><span class="pre">'remote'</span></code> or <code class="docutils literal notranslate"><span class="pre">'local'</span></code>.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.inhibition">
-<code class="sig-name descname">inhibition</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.inhibition" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inhibition</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.inhibition" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if inhibition is turned on, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.interlock">
-<code class="sig-name descname">interlock</code><em class="property"> = 'closed'</em><a class="headerlink" href="#hvctl.api.Status.interlock" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">interlock</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><em class="property"> = 'closed'</em><a class="headerlink" href="#hvctl.api.Status.interlock" title="Permalink to this definition">¶</a></dt>
 <dd><p>The status of the interlock; <code class="docutils literal notranslate"><span class="pre">open</span></code> or <code class="docutils literal notranslate"><span class="pre">closed</span></code>.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.fault">
-<code class="sig-name descname">fault</code><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.fault" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fault</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#hvctl.api.Status.fault" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if there the generator is in a fault state,
 <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.api.Status.callback">
-<code class="sig-name descname">callback</code><em class="property"> = None</em><a class="headerlink" href="#hvctl.api.Status.callback" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">callback</code><em class="property">: Callable</em><em class="property"> = None</em><a class="headerlink" href="#hvctl.api.Status.callback" title="Permalink to this definition">¶</a></dt>
 <dd><p>A function that is called every time the contents of this object
 are changed. Its signature should be</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">callback</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">Status</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
@@ -321,9 +321,9 @@ are changed. Its signature should be</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="hvctl.api.Status.__setattr__">
-<code class="sig-name descname">__setattr__</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status.__setattr__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__setattr__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.api.Status.__setattr__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call <a class="reference internal" href="#hvctl.api.Status.callback" title="hvctl.api.Status.callback"><code class="xref py py-attr docutils literal notranslate"><span class="pre">callback(self)</span></code></a> whenever an attribute
 is set.</p>
 </dd></dl>
@@ -363,6 +363,7 @@ is set.</p>
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
@@ -388,7 +389,7 @@ is set.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -405,7 +406,7 @@ is set.</p>
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Usage &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Modules" href="modules/index.html" />
@@ -37,80 +37,127 @@
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="interactive-mode">
 <h2>Interactive mode<a class="headerlink" href="#interactive-mode" title="Permalink to this headline">¶</a></h2>
-<p>HVCtl may be launched in an interactive mode by running the <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> script inside the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package.
+<p>HVCtl may be launched in an interactive mode by running the
+<a class="reference internal" href="modules/main.html"><span class="doc">__main__.py</span></a> script inside the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package.
 This is done with the command</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python path/to/hvctl -args
 </pre></div>
 </div>
-<p>Because this command requires providing the relative or absolute path to the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package every time it is used,
-HVCtl also provides a shell script which automatically fills in the path before calling the command.
-If the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory is added to <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, the shell script can be run from any directory with</p>
+<p>This only works if the <code class="docutils literal notranslate"><span class="pre">python</span></code> command is set to run a Python version that
+HVCtl is compatible with (mainly Python 3.8 or newer, though it might work with
+older versions).
+If this is not the case, substitute <code class="docutils literal notranslate"><span class="pre">python</span></code> for a command that runs a
+compatible version of Python, e.g. <code class="docutils literal notranslate"><span class="pre">python3</span></code> or <code class="docutils literal notranslate"><span class="pre">python3.8</span></code>.</p>
+<p>Because this command requires providing the relative or absolute path to the
+<code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package every time it is used, HVCtl also provides a shell script
+which automatically fills in the path before calling the command.
+If the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory is added to <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, the shell script can be run
+from any directory with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hvctl-run -args
 </pre></div>
 </div>
+<p>The script uses the <code class="docutils literal notranslate"><span class="pre">/usr/bin/env</span> <span class="pre">python3</span></code> command to run the program. If
+the <code class="docutils literal notranslate"><span class="pre">python3</span></code> command is set to use an older Python 3 version that isn’t
+compatible with TurboCtl, the script should be edited to use a specific newer
+version (e.g. <code class="docutils literal notranslate"><span class="pre">python3.8</span></code>) instead. The script is located in
+<code class="docutils literal notranslate"><span class="pre">TurboCtl/turboctl-run</span></code>.</p>
 <p>Both of these commands accept the following command-line arguments:</p>
 <dl class="option-list">
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>Show a help message that lists all command-line arguments.</p>
+<dd><p>Show a help message that lists all command-line arguments.
+See the <a class="reference internal" href="protocol.html"><span class="doc">RS-232 control protocol</span></a> section for further details on what
+these commands do.</p>
 </dd>
 <dt><kbd><span class="option">-c</span>, <span class="option">--config <var>path</var></span></kbd></dt>
-<dd><p>Define a configuration file. If this argument isn’t defined, the default file <code class="docutils literal notranslate"><span class="pre">HVCtl/hvctl/default.conf</span></code> is used instead.
-The default file contains the documentation for all configuration options.</p>
+<dd><p>Define a configuration file. If this argument isn’t
+defined, the default file <code class="docutils literal notranslate"><span class="pre">HVCtl/hvctl/default.conf</span></code> is
+used instead.
+The default file contains the documentation for all
+configuration options.</p>
 </dd>
 <dt><kbd><span class="option">-p</span>, <span class="option">--port <var>port</var></span></kbd></dt>
-<dd><p>Define the port (e.g. <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code>) used for the serial connection.
-If this argument is defined, it overrides the port defined in the configuration file.</p>
+<dd><p>Define the port (e.g. <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code>) used for the serial
+connection.
+If this argument is defined, it overrides the port defined
+in the configuration file.</p>
 </dd>
 <dt><kbd><span class="option">-v</span>, <span class="option">--virtual</span></kbd></dt>
 <dd><p>Run HVCtl with a virtual HV generator.
-If this argument is included, instead of sending messages to a real HV generator, HVCtl creates a simulated, virtual one and sends messages to that.
-This makes it possible to test HVCtl easily without having to connect to an actual HV generator.
+If this argument is included, instead of sending messages
+to a real HV generator, HVCtl creates a simulated, virtual
+one and sends messages to that.
+This makes it possible to test HVCtl easily without having
+to connect to an actual HV generator.
 This option is incompatible with <code class="docutils literal notranslate"><span class="pre">-p</span></code>.</p>
 </dd>
 <dt><kbd><span class="option">-s</span>, <span class="option">--simple</span></kbd></dt>
-<dd><p>Run HVCtl with a simple command-line interface that doesn’t require <a class="reference internal" href="installation.html#dependencies"><span class="std std-ref">urwid</span></a>.
-If HVCtl is run without the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, a more advanced UI will be used (see below for  an example).</p>
+<dd><p>Run HVCtl with a simple command-line interface that doesn’t
+require <a class="reference internal" href="installation.html#dependencies"><span class="std std-ref">Urwid</span></a>.
+If HVCtl is run without the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, a more
+advanced UI will be used (see below for  an example).</p>
 </dd>
 <dt><kbd><span class="option">-n</span>, <span class="option">--no-poll</span></kbd></dt>
-<dd><p>Disable automatic polling. If automatic polling is enabled, HVCtl automatically sends messages to the HV generator at regular intervals.
-Disabling this functionality makes the generator automatically turn the HV off if the user doesn’t send it a command for 5 seconds.
-Additionally, each status variable displayed by the UI will only be updated whenever the generator sends back the value of the variable as a response to a command sent by the user.</p>
+<dd><p>Disable automatic polling. If automatic polling is enabled,
+HVCtl automatically sends messages to the HV generator at
+regular intervals.
+Disabling this functionality makes the generator
+automatically turn the HV off if the user doesn’t send it a
+command for 5 seconds.
+Additionally, each status variable displayed by the UI will
+only be updated whenever the generator sends back the value
+of the variable as a response to a command sent by the
+user.</p>
 </dd>
 </dl>
 <div class="section" id="testing-the-interlock">
 <h3>Testing the interlock<a class="headerlink" href="#testing-the-interlock" title="Permalink to this headline">¶</a></h3>
-<p>When HVCtl is run with the <code class="docutils literal notranslate"><span class="pre">-v</span></code> argument, it communicates with the virtual HV generator only by sending messages through the virtual serial connection.
-Because of this, in this mode it is impossible to test actions that require physical access to the HV generator, such as opening the <a class="reference internal" href="protocol.html#interlock"><span class="std std-ref">interlock</span></a>.</p>
-<p>However, physical access to the generator can be simulated with the <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code> script (located in the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory).
-Running the script in a terminal creates a virtual HV generator, prints the name of its port, and starts a simple command-line UI.
-The virtual HV generator can then be controlled with HVCtl by launching HVCtl in another terminal window with the <code class="docutils literal notranslate"><span class="pre">-p</span></code> argument and supplying the port name printed by <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code>.
-The interlock of the virtual HV generator can be opened and closed through the UI of <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code>, and these actions affect HVCtl session running in the other window.</p>
+<p>When HVCtl is run with the <code class="docutils literal notranslate"><span class="pre">-v</span></code> argument, it communicates with the virtual HV
+generator only by sending messages through the virtual serial connection.
+Because of this, in this mode it is impossible to test actions that require
+physical access to the HV generator, such as opening the
+<a class="reference internal" href="protocol.html#interlock"><span class="std std-ref">interlock</span></a>.</p>
+<p>However, physical access to the generator can be simulated with the
+<code class="docutils literal notranslate"><span class="pre">test-interlock</span></code> script (located in the <code class="docutils literal notranslate"><span class="pre">HVCtl</span></code> directory).
+Running the script in a terminal creates a virtual HV generator, prints the
+name of its port, and starts a simple command-line UI.
+The virtual HV generator can then be controlled with HVCtl by launching HVCtl
+in another terminal window with the <code class="docutils literal notranslate"><span class="pre">-p</span></code> argument and supplying the port name
+printed by <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code>.
+The interlock of the virtual HV generator can be opened and closed through the
+UI of <code class="docutils literal notranslate"><span class="pre">test-interlock</span></code>, and these actions affect HVCtl session running in the
+other window.</p>
 </div>
 </div>
 <div class="section" id="importing">
 <h2>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h2>
-<p>HVCtl also includes an importable API for controlling the HV generator programmatically.
-The API is used by creating an instance of the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> class and calling its methods,
-and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> class allows it to be tested without access to a physical HV generator.
-These two classes are members of the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> namespace as well as the namespaces of their own modules,
-so they can be imported with</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="kn">import</span> <span class="n">API</span><span class="p">,</span> <span class="n">VirtualHV</span>
+<p>HVCtl also includes an importable API for controlling the HV generator
+programmatically.
+The API is used by creating an instance of the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> class
+and calling its methods, and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> class
+allows it to be tested without access to a physical HV generator.
+These two classes are members of the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> namespace as well as the
+namespaces of their own modules, so they can be imported with</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="kn">import</span> <span class="n">API</span><span class="p">,</span> <span class="n">VirtualHV</span>
 </pre></div>
 </div>
 <p>as well as</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl.api</span> <span class="kn">import</span> <span class="n">API</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl.api</span> <span class="kn">import</span> <span class="n">API</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hvctl.virtualhv</span> <span class="kn">import</span> <span class="n">VirtualHV</span>
 </pre></div>
 </div>
-<p>All importable modules in the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package are listed in the <a class="reference internal" href="modules/index.html"><span class="doc">Modules</span></a> page.</p>
+<p>All importable modules in the <code class="docutils literal notranslate"><span class="pre">hvctl</span></code> package are listed in the
+<a class="reference internal" href="modules/index.html"><span class="doc">Modules</span></a> page.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>The following examples demonstrate reading and setting the voltage by using the different interfaces provided by HVCtl.</p>
+<p>The following examples demonstrate reading and setting the voltage by using the
+different interfaces provided by HVCtl.</p>
 <div class="section" id="interactive-mode-with-s">
 <h3>Interactive mode with <code class="docutils literal notranslate"><span class="pre">-s</span></code><a class="headerlink" href="#interactive-mode-with-s" title="Permalink to this headline">¶</a></h3>
-<p>HVCtl is run in interactive mode with the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, resulting in a simple command-line ui.
-The UI imports the <a class="reference external" href="https://docs.python.org/3/library/readline.html#module-readline" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code></a> module, which enables command editing and browsing command history with the up and down arrows.</p>
+<p>HVCtl is run in interactive mode with the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument, resulting in a
+simple command-line ui.
+The UI imports the <a class="reference external" href="https://docs.python.org/3/library/readline.html#module-readline" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code></a> module, which enables command editing and
+browsing command history with the up and down arrows.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hvctl-run -s
 Welcome to HVCtl! Type &#39;help&#39; for a list of commands.
 &gt;&gt; mode remote
@@ -130,16 +177,24 @@ The voltage is 5006.1050061050055 V
 <div class="section" id="interactive-mode-without-s">
 <h3>Interactive mode without <code class="docutils literal notranslate"><span class="pre">-s</span></code><a class="headerlink" href="#interactive-mode-without-s" title="Permalink to this headline">¶</a></h3>
 <p>Here the <code class="docutils literal notranslate"><span class="pre">-s</span></code> argument hasn’t been given, and HVCtl uses a more advanced UI.
-The bottom of the UI is an interactive command-line interface similar to the one above, but the top part contains a screen showing the current status of the HV generator.
-The command-line interface can be scrolled using the mouse wheel, clicking the scroll bar next to the command-line interface, or clicking the arrow buttons above and below the scroll bar.
-This example also demonstrates how the commands can be written more quickly by using aliases.</p>
+The bottom of the UI is an interactive command-line interface similar to the
+one above, but the top part contains a screen showing the current status of the
+HV generator.
+The command-line interface can be scrolled using the mouse wheel, clicking the
+scroll bar next to the command-line interface, or clicking the arrow buttons
+above and below the scroll bar.
+This example also demonstrates how the commands can be written more quickly by
+using aliases.</p>
 <img alt="_images/example.png" src="_images/example.png" />
 </div>
 <div class="section" id="using-the-api">
 <h3>Using the API<a class="headerlink" href="#using-the-api" title="Permalink to this headline">¶</a></h3>
-<p>This example demonstrates using HVCtl in an interactive Python interpreter with an <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object.
-The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and the parallel thread that is used to poll the HV generator to keep it from switching to local mode.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl</span>
+<p>This example demonstrates using HVCtl in an interactive Python interpreter with
+an <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> object.
+The last call to <a class="reference internal" href="modules/api.html#hvctl.api.API.halt" title="hvctl.api.API.halt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">halt()</span></code></a> closes the serial connection and
+the parallel thread that is used to poll the HV generator to keep it from
+switching to local mode.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hvctl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">hvctl</span><span class="o">.</span><span class="n">API</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="s1">&#39;remote&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">set_voltage</span><span class="p">(</span><span class="o">-</span><span class="mi">5000</span><span class="p">)</span>
@@ -156,7 +211,8 @@ The last call to <a class="reference internal" href="modules/api.html#hvctl.api.
 <div class="section" id="using-the-api-with-a-virtual-hv-generator">
 <h3>Using the API with a virtual HV generator<a class="headerlink" href="#using-the-api-with-a-virtual-hv-generator" title="Permalink to this headline">¶</a></h3>
 <p>This is an example of a Python script that uses a virtual HV generator.
-The script uses <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks to ensure that both the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a> and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> are closed properly at the end.</p>
+The script uses <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks to ensure that both the <a class="reference internal" href="modules/api.html#hvctl.api.API" title="hvctl.api.API"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span></code></a>
+and the <a class="reference internal" href="modules/virtualhv.html#hvctl.virtualhv.VirtualHV" title="hvctl.virtualhv.VirtualHV"><code class="xref py py-class docutils literal notranslate"><span class="pre">VirtualHV</span></code></a> are closed properly at the end.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hvctl</span> <span class="kn">import</span> <span class="n">API</span><span class="p">,</span> <span class="n">VirtualHV</span>
 
 <span class="k">with</span> <span class="n">VirtualHV</span> <span class="k">as</span> <span class="n">vhv</span><span class="p">:</span>
@@ -216,7 +272,7 @@ The script uses <code class="docutils literal notranslate"><span class="pre">wit
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -233,7 +289,7 @@ The script uses <code class="docutils literal notranslate"><span class="pre">wit
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

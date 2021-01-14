@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HVCtl &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="installation.html" />
@@ -35,11 +35,7 @@
   <div class="section" id="hvctl">
 <h1>HVCtl<a class="headerlink" href="#hvctl" title="Permalink to this headline">¶</a></h1>
 <p>HVCtl is a RS-232 controller for a Technix SR100KV-5KW high voltage generator.
-It is written in Python and intended for Linux operating systems.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>While HVCtl is currently completely functional and has been proven to work with the HV generator, it hasn’t been tested properly yet.</p>
-</div>
+It was written in Python 3.8 and is intended for Linux operating systems.</p>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -66,6 +62,8 @@ It is written in Python and intended for Linux operating systems.</p>
 <li class="toctree-l2"><a class="reference internal" href="modules/queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules/virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules/virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/main.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="protocol.html">RS-232 control protocol</a><ul>
@@ -80,13 +78,15 @@ It is written in Python and intended for Linux operating systems.</p>
 <p>HVCtl is based on information provided in the SR100KV-5KW user manual,
 which only describes that specific model.
 It might also work with other Technix SR series models,
-since it seems likely that those models use the same or a very similar control protocol.</p>
+since it seems likely that those models use the same or a very similar control
+protocol.</p>
 </div>
 <div class="section" id="author">
 <h2>Author<a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h2>
 <p>HVCtl was written by Feliks Kivelä based on an earlier work by Pekko Metsä.
-The author can be contacted at <a class="reference external" href="mailto:firstname&#46;lastname&#37;&#52;&#48;helsinki&#46;fi">firstname<span>&#46;</span>lastname<span>&#64;</span>helsinki<span>&#46;</span>fi</a>.</p>
-<p>Copyright © 2019 University of Helsinki Fusor Team.</p>
+The author can be contacted at <a class="reference external" href="mailto:firstname&#46;lastname&#37;&#52;&#48;helsinki&#46;fi">firstname<span>&#46;</span>lastname<span>&#64;</span>helsinki<span>&#46;</span>fi</a>
+(with the “ä” replaced by an “a”).</p>
+<p>Copyright © 2019 - 2021 University of Helsinki Fusor Team.</p>
 </div>
 <div class="section" id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
@@ -144,7 +144,7 @@ along with this program.  If not, see <a class="reference external" href="https:
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -161,7 +161,7 @@ along with this program.  If not, see <a class="reference external" href="https:
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

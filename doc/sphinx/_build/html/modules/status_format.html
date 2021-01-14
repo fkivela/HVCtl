@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>status_format &#8212; HVCtl  documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="queuefile" href="queuefile.html" />
@@ -37,14 +37,14 @@
 <span id="status-format"></span><h1><a class="reference internal" href="#module-hvctl.status_format" title="hvctl.status_format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">status_format</span></code></a><a class="headerlink" href="#module-hvctl.status_format" title="Permalink to this headline">¶</a></h1>
 <p>This module controls how the status of the HV generator is presented
 to the user in the UIs.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.status_format.palette">
 <code class="sig-prename descclassname">hvctl.status_format.</code><code class="sig-name descname">palette</code><a class="headerlink" href="#hvctl.status_format.palette" title="Permalink to this definition">¶</a></dt>
 <dd><p>A colour palette for an
 <a class="reference internal" href="advanced_tui.html#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a>.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.status_format.red_button">
 <code class="sig-prename descclassname">hvctl.status_format.</code><code class="sig-name descname">red_button</code><a class="headerlink" href="#hvctl.status_format.red_button" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is displayed by <a class="reference external" href="http://urwid.org/reference/widget.html#urwid.Text" title="(in Urwid v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">urwid.Text</span></code></a> widgets as a red
@@ -53,15 +53,15 @@ circle, if the widgets are used in an
 initialized with <a class="reference internal" href="#hvctl.status_format.palette" title="hvctl.status_format.palette"><code class="xref py py-attr docutils literal notranslate"><span class="pre">palette</span></code></a>.</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="hvctl.status_format.green_button">
 <code class="sig-prename descclassname">hvctl.status_format.</code><code class="sig-name descname">green_button</code><a class="headerlink" href="#hvctl.status_format.green_button" title="Permalink to this definition">¶</a></dt>
 <dd><p>Similar to <a class="reference internal" href="#hvctl.status_format.red_button" title="hvctl.status_format.red_button"><code class="xref py py-attr docutils literal notranslate"><span class="pre">red_button</span></code></a>, but green instead of red.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="hvctl.status_format.status_string">
-<code class="sig-prename descclassname">hvctl.status_format.</code><code class="sig-name descname">status_string</code><span class="sig-paren">(</span><em class="sig-param">statusdict</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.status_format.status_string" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">hvctl.status_format.</code><code class="sig-name descname">status_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">statusdict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.status_format.status_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a formatted string displaying the data returned
 by <a class="reference internal" href="api.html#hvctl.api.API.get_status" title="hvctl.api.API.get_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">API.get_status</span></code></a> or
 <a class="reference internal" href="api.html#hvctl.api.API.full_status" title="hvctl.api.API.full_status"><code class="xref py py-meth docutils literal notranslate"><span class="pre">API.full_status</span></code></a>.</p>
@@ -74,9 +74,9 @@ by <a class="reference internal" href="api.html#hvctl.api.API.get_status" title=
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="hvctl.status_format.status_screen">
-<code class="sig-prename descclassname">hvctl.status_format.</code><code class="sig-name descname">status_screen</code><span class="sig-paren">(</span><em class="sig-param">status</em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.status_format.status_screen" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">hvctl.status_format.</code><code class="sig-name descname">status_screen</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">status</span></em><span class="sig-paren">)</span><a class="headerlink" href="#hvctl.status_format.status_screen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a status screen for the
 <a class="reference internal" href="advanced_tui.html#hvctl.advanced_tui.AdvancedTUI.display" title="hvctl.advanced_tui.AdvancedTUI.display"><code class="xref py py-attr docutils literal notranslate"><span class="pre">display</span></code></a>
 of an <a class="reference internal" href="advanced_tui.html#hvctl.advanced_tui.AdvancedTUI" title="hvctl.advanced_tui.AdvancedTUI"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvancedTUI</span></code></a>.</p>
@@ -127,6 +127,7 @@ The format is explained
 <li class="toctree-l2"><a class="reference internal" href="queuefile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">queuefile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualconnection.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualconnection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtualhv.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">virtualhv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacks.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hacks</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../protocol.html">RS-232 control protocol</a></li>
@@ -152,7 +153,7 @@ The format is explained
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
 
 
 
@@ -169,7 +170,7 @@ The format is explained
       &copy;2019, University of Helsinki Fusor Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
